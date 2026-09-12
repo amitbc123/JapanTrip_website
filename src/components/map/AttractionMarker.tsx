@@ -1,10 +1,16 @@
+import type L from "leaflet"
 import { Marker, Popup } from "react-leaflet"
 import { createAttractionIcon } from "@/components/map/icons"
 import { formatHebrewDate } from "@/lib/format"
 import { translateCity } from "@/lib/translations"
 import type { Attraction } from "@/types/trip"
 
-export function AttractionMarker({ attraction }: { attraction: Attraction }) {
+interface AttractionMarkerProps {
+  attraction: Attraction
+  registerRef?: (name: string, marker: L.Marker | null) => void
+}
+
+export function AttractionMarker({ attraction, registerRef }: AttractionMarkerProps) {
   if (attraction.lat === null || attraction.lon === null) return null
 
   const srLabel = `אטרקציה: ${attraction.name}, ${attraction.city}`
@@ -13,6 +19,7 @@ export function AttractionMarker({ attraction }: { attraction: Attraction }) {
     <Marker
       position={[attraction.lat, attraction.lon]}
       icon={createAttractionIcon(srLabel)}
+      ref={(marker) => registerRef?.(attraction.name, marker)}
     >
       <Popup className="trip-map-popup">
         <div className="flex min-w-40 flex-col gap-1 text-end">

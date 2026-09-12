@@ -1,3 +1,5 @@
+import { useRouteColorStore } from "@/stores/route-color-store"
+
 const LEGEND_ITEMS: { style: "solid" | "dashed" | "dotted"; label: string }[] = [
   { style: "solid", label: "רכבת / תחבורה ציבורית" },
   { style: "dashed", label: "רכב" },
@@ -5,13 +7,16 @@ const LEGEND_ITEMS: { style: "solid" | "dashed" | "dotted"; label: string }[] = 
 ]
 
 export function MapLegend() {
+  const color = useRouteColorStore((s) => s.color)
+  const setColor = useRouteColorStore((s) => s.setColor)
+
   return (
-    <div className="flex flex-wrap gap-x-6 gap-y-2 rounded-lg border border-border bg-card px-4 py-3">
+    <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg border border-border bg-card px-4 py-3">
       {LEGEND_ITEMS.map(({ style, label }) => (
         <div key={style} className="flex items-center gap-2 text-sm">
           <span
             className="inline-block w-8 border-t-[3px]"
-            style={{ borderTopStyle: style, borderTopColor: "#d9622b" }}
+            style={{ borderTopStyle: style, borderTopColor: color }}
             aria-hidden
           />
           {label}
@@ -21,6 +26,16 @@ export function MapLegend() {
         <span className="trip-attraction-marker" aria-hidden />
         אטרקציה
       </div>
+      <label className="flex items-center gap-2 text-sm">
+        צבע המסלול
+        <input
+          type="color"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+          className="h-8 w-10 cursor-pointer rounded border border-input bg-transparent p-0.5"
+          aria-label="בחירת צבע המסלול"
+        />
+      </label>
     </div>
   )
 }

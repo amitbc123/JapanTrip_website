@@ -1,6 +1,8 @@
 import { useEffect } from "react"
 import { Polyline } from "react-leaflet"
 import { LEAFLET_DASH_ARRAY, lineStyleForTransport } from "@/lib/geo"
+import { useRouteColorStore } from "@/stores/route-color-store"
+import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import type { CarLeg, FlightLeg, Hotel } from "@/types/trip"
 
 interface RouteSegmentsProps {
@@ -9,8 +11,32 @@ interface RouteSegmentsProps {
   flights: FlightLeg[]
 }
 
+const HIGHLIGHT_COLOR = "#DC2626"
+
+/** coversHotelLegOrders like [4,5,6] covers legs 4->5 and 5->6 — every order
+ *  except the last is a "from" hotel of one of those legs. */
+function highlightedFromOrders(
+  cars: CarLeg[],
+  flights: FlightLeg[],
+  highlighted: Set<string>
+): Set<number> {
+  const orders = new Set<number>()
+  for (const car of cars) {
+    if (!highlighted.has(car.bookingNumber)) continue
+    for (const order of car.coversHotelLegOrders.slice(0, -1)) orders.add(order)
+  }
+  for (const flight of flights) {
+    if (!highlighted.has(flight.flightNumber)) continue
+    for (const order of flight.coversHotelLegOrders.slice(0, -1)) orders.add(order)
+  }
+  return orders
+}
+
 export function RouteSegments({ hotels, cars, flights }: RouteSegmentsProps) {
   const hotelsInOrder = [...hotels].sort((a, b) => a.order - b.order)
+  const routeColor = useRouteColorStore((s) => s.color)
+  const highlighted = useRouteHighlightStore((s) => s.highlighted)
+  const highlightedFrom = highlightedFromOrders(cars, flights, highlighted)
 
   useEffect(() => {
     // Dev-time cross-check: coversHotelLegOrders on cars/flights should line
@@ -40,6 +66,7 @@ export function RouteSegments({ hotels, cars, flights }: RouteSegmentsProps) {
         }
 
         const style = lineStyleForTransport(hotel.transportToNext)
+        const isHighlighted = highlightedFrom.has(hotel.order)
         return (
           <Polyline
             key={hotel.order}
@@ -48,10 +75,10 @@ export function RouteSegments({ hotels, cars, flights }: RouteSegmentsProps) {
               [next.lat, next.lon],
             ]}
             pathOptions={{
-              color: "#d9622b",
-              weight: 3,
+              color: isHighlighted ? HIGHLIGHT_COLOR : routeColor,
+              weight: isHighlighted ? 6 : 3,
               dashArray: LEAFLET_DASH_ARRAY[style],
-              opacity: 0.85,
+              opacity: isHighlighted ? 1 : 0.85,
             }}
           />
         )

@@ -1,9 +1,10 @@
 import L from "leaflet"
 import { useEffect, useMemo, useRef } from "react"
-import { MapContainer, TileLayer, useMap } from "react-leaflet"
+import { LayersControl, MapContainer, TileLayer, useMap } from "react-leaflet"
 import { AttractionMarker } from "@/components/map/AttractionMarker"
 import { HotelMarker } from "@/components/map/HotelMarker"
 import { RouteSegments } from "@/components/map/RouteSegments"
+import { useMapFitStore } from "@/stores/map-fit-store"
 import type { Attraction, CarLeg, FlightLeg, Hotel } from "@/types/trip"
 
 interface TripMapProps {
@@ -12,14 +13,29 @@ interface TripMapProps {
   cars: CarLeg[]
   flights: FlightLeg[]
   targetHotelOrder?: number
+  targetAttractionName?: string
 }
 
-function FitBounds({ points }: { points: [number, number][] }) {
+function FitBounds({
+  points,
+  skipInitialFit,
+}: {
+  points: [number, number][]
+  skipInitialFit: boolean
+}) {
   const map = useMap()
+  const requestId = useMapFitStore((s) => s.requestId)
+  const isFirstRun = useRef(true)
+
   useEffect(() => {
     if (points.length === 0) return
+    if (isFirstRun.current) {
+      isFirstRun.current = false
+      if (skipInitialFit) return
+    }
     map.fitBounds(L.latLngBounds(points), { padding: [24, 24] })
-  }, [map, points])
+  }, [map, points, requestId, skipInitialFit])
+
   return null
 }
 
@@ -41,8 +57,34 @@ function FocusHotel({
   return null
 }
 
-export function TripMap({ hotels, attractions, cars, flights, targetHotelOrder }: TripMapProps) {
-  const markerRefs = useRef(new Map<number, L.Marker>())
+function FocusAttraction({
+  targetName,
+  markerRefs,
+}: {
+  targetName: string | undefined
+  markerRefs: React.RefObject<Map<string, L.Marker>>
+}) {
+  const map = useMap()
+  useEffect(() => {
+    if (!targetName) return
+    const marker = markerRefs.current.get(targetName)
+    if (!marker) return
+    map.setView(marker.getLatLng(), Math.max(map.getZoom(), 12), { animate: true })
+    marker.openPopup()
+  }, [map, markerRefs, targetName])
+  return null
+}
+
+export function TripMap({
+  hotels,
+  attractions,
+  cars,
+  flights,
+  targetHotelOrder,
+  targetAttractionName,
+}: TripMapProps) {
+  const hotelMarkerRefs = useRef(new Map<number, L.Marker>())
+  const attractionMarkerRefs = useRef(new Map<string, L.Marker>())
 
   const plottedPoints = useMemo<[number, number][]>(() => {
     const hotelPoints = hotels
@@ -69,31 +111,60 @@ export function TripMap({ hotels, attractions, cars, flights, targetHotelOrder }
       className="isolate h-[60vh] w-full rounded-lg"
       scrollWheelZoom
     >
-      <TileLayer
-        attribution='Tiles &copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors'
-        url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
-      />
+      <LayersControl position="topright">
+        <LayersControl.BaseLayer checked name="מפת רחובות (Esri)">
+          <TileLayer
+            attribution='Tiles &copy; <a href="https://www.esri.com/">Esri</a> &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="לוויין (Esri)">
+          <TileLayer
+            attribution='Tiles &copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="OpenStreetMap">
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+        </LayersControl.BaseLayer>
+        <LayersControl.BaseLayer name="CartoDB Positron">
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          />
+        </LayersControl.BaseLayer>
+      </LayersControl>
       <RouteSegments hotels={hotels} cars={cars} flights={flights} />
       {hotels.map((hotel) => (
         <HotelMarker
           key={hotel.order}
           hotel={hotel}
           registerRef={(order, marker) => {
-            if (marker) markerRefs.current.set(order, marker)
-            else markerRefs.current.delete(order)
+            if (marker) hotelMarkerRefs.current.set(order, marker)
+            else hotelMarkerRefs.current.delete(order)
           }}
         />
       ))}
       {attractions.map((attraction) => (
-        <AttractionMarker key={attraction.name} attraction={attraction} />
+        <AttractionMarker
+          key={attraction.name}
+          attraction={attraction}
+          registerRef={(name, marker) => {
+            if (marker) attractionMarkerRefs.current.set(name, marker)
+            else attractionMarkerRefs.current.delete(name)
+          }}
+        />
       ))}
       {/* Rendered after the markers so their popup-binding effects run first
           (effects commit bottom-up in JSX order) — otherwise openPopup()
           below can fire before react-leaflet has bound the popup. */}
-      {targetHotelOrder ? (
-        <FocusHotel targetOrder={targetHotelOrder} markerRefs={markerRefs} />
-      ) : (
-        <FitBounds points={plottedPoints} />
+      <FitBounds points={plottedPoints} skipInitialFit={Boolean(targetHotelOrder || targetAttractionName)} />
+      {targetHotelOrder && <FocusHotel targetOrder={targetHotelOrder} markerRefs={hotelMarkerRefs} />}
+      {targetAttractionName && (
+        <FocusAttraction targetName={targetAttractionName} markerRefs={attractionMarkerRefs} />
       )}
     </MapContainer>
   )
