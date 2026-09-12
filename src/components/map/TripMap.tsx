@@ -89,7 +89,7 @@ function FitHighlightedSegment({ hotels, cars, flights }: { hotels: Hotel[]; car
   return null
 }
 
-const FLYTHROUGH_ZOOM = 13
+const FLYTHROUGH_ZOOM = 10
 const MIN_LEG_MS = 400
 const MAX_LEG_MS = 3000
 /** ms per degree of lat/lon travelled — tuned so typical inter-city hops
@@ -106,14 +106,23 @@ function legDurationMs(a: [number, number], b: [number, number]): number {
 }
 
 /** Animates a single marker along the full route (stop 1 -> 20 -> back to 1)
- *  at a fixed zoom, panning to keep it in view. Any new runId cancels the
- *  previous animation (via this effect's cleanup) and starts fresh from
- *  stop 1 — the same mechanism serves both "play" and "restart". */
-function RouteFlythrough({ hotels, runId }: { hotels: Hotel[]; runId: number }) {
+ *  at a fixed zoom, panning to keep it in view.
+ *
+ *  Play/stop, not restart: stopping (isPlaying -> false) only cancels the
+ *  animation frame — the marker is left frozen exactly where it was, not
+ *  removed. Playing again (isPlaying -> false -> true) removes that frozen
+ *  marker first and starts fresh from stop 1; it never resumes mid-route.
+ *  Reaching the end naturally calls the store's stop() itself so the button
+ *  resets on its own instead of looping. */
+function RouteFlythrough({ hotels, isPlaying }: { hotels: Hotel[]; isPlaying: boolean }) {
   const map = useMap()
+  const markerRef = useRef<L.Marker | null>(null)
 
   useEffect(() => {
-    if (runId === 0) return
+    if (!isPlaying) return
+
+    markerRef.current?.remove()
+    markerRef.current = null
 
     const waypoints: [number, number][] = hotels
       .filter((h): h is Hotel & { lat: number; lon: number } => h.lat !== null && h.lon !== null)
@@ -129,6 +138,7 @@ function RouteFlythrough({ hotels, runId }: { hotels: Hotel[]; runId: number }) 
 
     map.setView(first, FLYTHROUGH_ZOOM, { animate: false })
     const marker = L.marker(first, { icon: createFlythroughIcon(), interactive: false }).addTo(map)
+    markerRef.current = marker
 
     let frameId: number
     let cancelled = false
@@ -137,7 +147,11 @@ function RouteFlythrough({ hotels, runId }: { hotels: Hotel[]; runId: number }) 
       if (cancelled) return
       const legStart = path[index]
       const legEnd = path[index + 1]
-      if (!legStart || !legEnd) return
+      if (!legStart || !legEnd) {
+        // Reached the end naturally — stop on our own, don't loop.
+        useRouteFlythroughStore.getState().stop()
+        return
+      }
       const start: [number, number] = legStart
       const end: [number, number] = legEnd
       const duration = legDurationMs(start, end)
@@ -167,9 +181,10 @@ function RouteFlythrough({ hotels, runId }: { hotels: Hotel[]; runId: number }) 
     return () => {
       cancelled = true
       cancelAnimationFrame(frameId)
-      marker.remove()
+      // Deliberately not removing the marker here — stopping mid-tour
+      // freezes it in place; the next play removes it before starting fresh.
     }
-  }, [map, runId, hotels])
+  }, [map, isPlaying, hotels])
 
   return null
 }
@@ -184,7 +199,7 @@ export function TripMap({
 }: TripMapProps) {
   const hotelMarkerRefs = useRef(new Map<number, L.Marker>())
   const attractionMarkerRefs = useRef(new Map<string, L.Marker>())
-  const flythroughRunId = useRouteFlythroughStore((s) => s.runId)
+  const isFlythroughPlaying = useRouteFlythroughStore((s) => s.isPlaying)
 
   const plottedPoints = useMemo<[number, number][]>(() => {
     const hotelPoints = hotels
@@ -267,7 +282,7 @@ export function TripMap({
         <FocusAttraction targetName={targetAttractionName} markerRefs={attractionMarkerRefs} />
       )}
       <FitHighlightedSegment hotels={hotels} cars={cars} flights={flights} />
-      <RouteFlythrough hotels={hotels} runId={flythroughRunId} />
+      <RouteFlythrough hotels={hotels} isPlaying={isFlythroughPlaying} />
     </MapContainer>
   )
 }

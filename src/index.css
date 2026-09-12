@@ -162,6 +162,20 @@
   font-size: 12px;
 }
 
+.trip-segment-emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: #fdfbf8;
+  border: 1px solid rgb(0 0 0 / 0.1);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+  font-size: 13px;
+  line-height: 1;
+}
+
 .trip-flythrough-marker {
   width: 18px;
   height: 18px;

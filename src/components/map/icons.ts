@@ -28,3 +28,12 @@ export function createFlythroughIcon(): L.DivIcon {
     iconAnchor: [9, 9],
   })
 }
+
+export function createSegmentEmojiIcon(emoji: string): L.DivIcon {
+  return L.divIcon({
+    className: "trip-segment-emoji",
+    html: `<span aria-hidden="true">${emoji}</span>`,
+    iconSize: [22, 22],
+    iconAnchor: [11, 11],
+  })
+}

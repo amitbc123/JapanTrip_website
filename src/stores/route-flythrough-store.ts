@@ -1,14 +1,16 @@
 import { create } from "zustand"
 
 interface RouteFlythroughState {
-  /** Incremented on every play request. A new value both interrupts any
-   *  in-progress animation (via the watching effect's cleanup) and starts a
-   *  fresh one from stop 1 — the same action serves "play" and "restart". */
-  runId: number
-  play: () => void
+  isPlaying: boolean
+  /** Start/stop toggle for the button. */
+  toggle: () => void
+  /** Called by the animation itself on natural completion, so the button's
+   *  state resets without requiring another click. */
+  stop: () => void
 }
 
-export const useRouteFlythroughStore = create<RouteFlythroughState>((set) => ({
-  runId: 0,
-  play: () => set((s) => ({ runId: s.runId + 1 })),
+export const useRouteFlythroughStore = create<RouteFlythroughState>((set, get) => ({
+  isPlaying: false,
+  toggle: () => set({ isPlaying: !get().isPlaying }),
+  stop: () => set({ isPlaying: false }),
 }))

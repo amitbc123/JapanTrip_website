@@ -1,9 +1,15 @@
-import { useEffect } from "react"
-import { Polyline } from "react-leaflet"
+import { Fragment, useEffect } from "react"
+import { Marker, Polyline } from "react-leaflet"
+import { createSegmentEmojiIcon } from "@/components/map/icons"
 import { LEAFLET_DASH_ARRAY, lineStyleForTransport } from "@/lib/geo"
 import { useRouteColorStore } from "@/stores/route-color-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
-import type { CarLeg, FlightLeg, Hotel } from "@/types/trip"
+import type { CarLeg, FlightLeg, Hotel, TransportMode } from "@/types/trip"
+
+const SEGMENT_EMOJI: Partial<Record<TransportMode, string>> = {
+  car: "🚗",
+  flight: "✈️",
+}
 
 interface RouteSegmentsProps {
   hotels: Hotel[]
@@ -68,20 +74,25 @@ export function RouteSegments({ hotels, cars, flights }: RouteSegmentsProps) {
 
         const style = lineStyleForTransport(hotel.transportToNext)
         const isHighlighted = highlightedFrom.has(hotel.order)
+        const emoji = SEGMENT_EMOJI[hotel.transportToNext]
+        const midpoint: [number, number] = [(hotel.lat + next.lat) / 2, (hotel.lon + next.lon) / 2]
+
         return (
-          <Polyline
-            key={hotel.order}
-            positions={[
-              [hotel.lat, hotel.lon],
-              [next.lat, next.lon],
-            ]}
-            pathOptions={{
-              color: isHighlighted ? HIGHLIGHT_COLOR : routeColor,
-              weight: isHighlighted ? 6 : 3,
-              dashArray: LEAFLET_DASH_ARRAY[style],
-              opacity: isHighlighted ? 1 : 0.85,
-            }}
-          />
+          <Fragment key={hotel.order}>
+            <Polyline
+              positions={[
+                [hotel.lat, hotel.lon],
+                [next.lat, next.lon],
+              ]}
+              pathOptions={{
+                color: isHighlighted ? HIGHLIGHT_COLOR : routeColor,
+                weight: isHighlighted ? 6 : 3,
+                dashArray: LEAFLET_DASH_ARRAY[style],
+                opacity: isHighlighted ? 1 : 0.85,
+              }}
+            />
+            {emoji && <Marker position={midpoint} icon={createSegmentEmojiIcon(emoji)} interactive={false} />}
+          </Fragment>
         )
       })}
     </>
