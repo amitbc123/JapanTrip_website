@@ -18,15 +18,16 @@ const HIGHLIGHT_COLOR = "#DC2626"
 function highlightedFromOrders(
   cars: CarLeg[],
   flights: FlightLeg[],
-  highlighted: Set<string>
+  highlightedKey: string | null
 ): Set<number> {
   const orders = new Set<number>()
+  if (!highlightedKey) return orders
   for (const car of cars) {
-    if (!highlighted.has(car.bookingNumber)) continue
+    if (car.bookingNumber !== highlightedKey) continue
     for (const order of car.coversHotelLegOrders.slice(0, -1)) orders.add(order)
   }
   for (const flight of flights) {
-    if (!highlighted.has(flight.flightNumber)) continue
+    if (flight.flightNumber !== highlightedKey) continue
     for (const order of flight.coversHotelLegOrders.slice(0, -1)) orders.add(order)
   }
   return orders
@@ -35,8 +36,8 @@ function highlightedFromOrders(
 export function RouteSegments({ hotels, cars, flights }: RouteSegmentsProps) {
   const hotelsInOrder = [...hotels].sort((a, b) => a.order - b.order)
   const routeColor = useRouteColorStore((s) => s.color)
-  const highlighted = useRouteHighlightStore((s) => s.highlighted)
-  const highlightedFrom = highlightedFromOrders(cars, flights, highlighted)
+  const highlightedKey = useRouteHighlightStore((s) => s.highlightedKey)
+  const highlightedFrom = highlightedFromOrders(cars, flights, highlightedKey)
 
   useEffect(() => {
     // Dev-time cross-check: coversHotelLegOrders on cars/flights should line

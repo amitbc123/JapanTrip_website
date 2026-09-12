@@ -19,3 +19,12 @@ export function createAttractionIcon(srLabel: string): L.DivIcon {
     popupAnchor: [0, -14],
   })
 }
+
+export function createFlythroughIcon(): L.DivIcon {
+  return L.divIcon({
+    className: "trip-flythrough-marker",
+    html: `<span class="sr-only">מיקום נוכחי בסיור</span>`,
+    iconSize: [18, 18],
+    iconAnchor: [9, 9],
+  })
+}

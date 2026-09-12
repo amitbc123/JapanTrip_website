@@ -14,7 +14,7 @@ function scrollMapIntoView() {
 }
 
 export function TransportSummary({ cars, flights }: { cars: CarLeg[]; flights: FlightLeg[] }) {
-  const highlighted = useRouteHighlightStore((s) => s.highlighted)
+  const highlightedKey = useRouteHighlightStore((s) => s.highlightedKey)
   const toggle = useRouteHighlightStore((s) => s.toggle)
 
   function handleToggle(key: string) {
@@ -25,7 +25,7 @@ export function TransportSummary({ cars, flights }: { cars: CarLeg[]; flights: F
   return (
     <div className="flex flex-col gap-3">
       {cars.map((car) => {
-        const isOn = highlighted.has(car.bookingNumber)
+        const isOn = highlightedKey === car.bookingNumber
         return (
           <button
             key={car.bookingNumber}
@@ -54,7 +54,7 @@ export function TransportSummary({ cars, flights }: { cars: CarLeg[]; flights: F
         )
       })}
       {flights.map((flight) => {
-        const isOn = highlighted.has(flight.flightNumber)
+        const isOn = highlightedKey === flight.flightNumber
         return (
           <button
             key={flight.flightNumber}
