@@ -1,4 +1,13 @@
-import { BedDoubleIcon, MapIcon, RefreshCwIcon, TicketIcon, Trash2Icon, XIcon } from "lucide-react"
+import {
+  BedDoubleIcon,
+  MapIcon,
+  PaletteIcon,
+  RefreshCwIcon,
+  TicketIcon,
+  Trash2Icon,
+  XIcon,
+} from "lucide-react"
+import { Popover } from "radix-ui"
 import { type ChangeEvent, useRef } from "react"
 import { NavLink } from "react-router"
 import { Drawer as DrawerPrimitive } from "vaul"
@@ -11,6 +20,7 @@ import {
 } from "@/components/ui/drawer"
 import { useTripDataContext } from "@/data/useTripData"
 import { cn } from "@/lib/utils"
+import { useBackgroundColorStore } from "@/stores/background-color-store"
 import { useDrawerStore } from "@/stores/drawer-store"
 
 const NAV_ITEMS = [
@@ -28,6 +38,8 @@ export function NavDrawer() {
   const setOpen = useDrawerStore((s) => s.close)
   const open = useDrawerStore((s) => s.open)
   const { importFile, importViaFilePicker, clear } = useTripDataContext()
+  const backgroundColor = useBackgroundColorStore((s) => s.color)
+  const setBackgroundColor = useBackgroundColorStore((s) => s.setColor)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   async function handleFileInputChange(e: ChangeEvent<HTMLInputElement>) {
@@ -69,10 +81,37 @@ export function NavDrawer() {
         >
           <div className="flex items-center justify-between border-b border-border p-4">
             <DrawerTitle className="text-base font-semibold">תפריט</DrawerTitle>
-            <DrawerClose className="flex h-11 w-11 items-center justify-center rounded-md text-ink-muted hover:bg-accent">
-              <span className="sr-only">סגירה</span>
-              <XIcon className="size-5" aria-hidden />
-            </DrawerClose>
+            <div className="flex items-center gap-1">
+              <Popover.Root>
+                <Popover.Trigger
+                  aria-label="שינוי צבע רקע האפליקציה"
+                  className="flex h-11 w-11 items-center justify-center rounded-md text-ink-muted hover:bg-accent"
+                >
+                  <PaletteIcon className="size-5" aria-hidden />
+                </Popover.Trigger>
+                <Popover.Portal>
+                  <Popover.Content
+                    sideOffset={8}
+                    className="z-50 flex flex-col gap-2 rounded-lg border border-border bg-popover p-3 text-popover-foreground shadow-lg outline-none"
+                  >
+                    <label className="flex items-center justify-between gap-3 text-sm">
+                      צבע רקע האפליקציה
+                      <input
+                        type="color"
+                        value={backgroundColor}
+                        onChange={(e) => setBackgroundColor(e.target.value)}
+                        className="h-8 w-10 cursor-pointer rounded border border-input bg-transparent p-0.5"
+                        aria-label="בחירת צבע רקע"
+                      />
+                    </label>
+                  </Popover.Content>
+                </Popover.Portal>
+              </Popover.Root>
+              <DrawerClose className="flex h-11 w-11 items-center justify-center rounded-md text-ink-muted hover:bg-accent">
+                <span className="sr-only">סגירה</span>
+                <XIcon className="size-5" aria-hidden />
+              </DrawerClose>
+            </div>
           </div>
           <nav className="flex flex-col gap-1 p-3">
             {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
