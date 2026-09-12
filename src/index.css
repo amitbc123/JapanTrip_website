@@ -1,0 +1,172 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/assistant";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Japandi palette: warm sand + terracotta accent, muted moss for the secondary
+   (attraction) accent. Mapped onto shadcn's semantic tokens below. */
+@theme {
+  --color-sand: #faf6ee;
+  --color-sand-raised: #fffdf9;
+  --color-ink: #3a342c;
+  --color-ink-muted: #6b6255;
+  --color-accent: #c4956a;
+  --color-accent-soft: #e7d3bf;
+  --color-moss: #7c8b6f;
+  --color-moss-soft: #dce3d6;
+  --color-line: #e6dcc7;
+  --color-map-hotel: #d9622b;
+  --color-map-attraction: #b6357a;
+}
+
+:root {
+  color-scheme: light;
+  --background: #faf6ee;
+  --foreground: #3a342c;
+  --card: #fffdf9;
+  --card-foreground: #3a342c;
+  --popover: #fffdf9;
+  --popover-foreground: #3a342c;
+  --primary: #c4956a;
+  --primary-foreground: #fdfbf8;
+  --secondary: #e7d3bf;
+  --secondary-foreground: #3a342c;
+  --muted: #f1ead9;
+  --muted-foreground: #6b6255;
+  --accent: #dce3d6;
+  --accent-foreground: #3a342c;
+  --destructive: #b3452f;
+  --border: #e6dcc7;
+  --input: #e6dcc7;
+  --ring: #c4956a;
+  --chart-1: #c4956a;
+  --chart-2: #7c8b6f;
+  --chart-3: #a5406e;
+  --chart-4: #3e6b52;
+  --chart-5: #6b6255;
+  --radius: 0.75rem;
+  --sidebar: #fffdf9;
+  --sidebar-foreground: #3a342c;
+  --sidebar-primary: #c4956a;
+  --sidebar-primary-foreground: #fdfbf8;
+  --sidebar-accent: #dce3d6;
+  --sidebar-accent-foreground: #3a342c;
+  --sidebar-border: #e6dcc7;
+  --sidebar-ring: #c4956a;
+}
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Assistant Variable', ui-sans-serif, system-ui, sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* Leaflet's own container defaults to a flat #ddd gray (visible while
+   tiles load or past the map's edge) — override to match the app's palette
+   instead of showing raw gray. */
+.leaflet-container {
+  background: var(--color-sand);
+}
+
+/* Leaflet renders marker icons as raw injected HTML outside the React tree,
+   so these are plain CSS classes (not Tailwind utilities) referencing the
+   same theme colors. Marker colors are intentionally more saturated than
+   the app's muted UI palette, for clear contrast against the map tiles. */
+.trip-hotel-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: var(--color-map-hotel);
+  color: #fdfbf8;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  border: 2px solid #fdfbf8;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}
+.trip-hotel-marker:focus-visible,
+.trip-hotel-marker.is-focused {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+.trip-attraction-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  transform: rotate(45deg);
+  background: var(--color-map-attraction);
+  border: 2px solid #fdfbf8;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}
+.trip-attraction-marker > span {
+  transform: rotate(-45deg);
+  color: #fdfbf8;
+  font-size: 12px;
+}
+
+.trip-map-popup .leaflet-popup-content-wrapper {
+  background: var(--color-sand-raised);
+  color: var(--color-ink);
+  border-radius: var(--radius-md);
+}
+.trip-map-popup .leaflet-popup-tip {
+  background: var(--color-sand-raised);
+}

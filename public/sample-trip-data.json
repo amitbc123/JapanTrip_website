@@ -1,0 +1,68 @@
+{
+  "tripDates": { "start": "2026-10-07", "end": "2026-12-06" },
+  "travelers": ["Sample Traveler 1", "Sample Traveler 2", "Sample Traveler 3"],
+  "hotels": [
+    {
+      "order": 1,
+      "name": "Sample Hotel Sakura",
+      "city": "Tokyo (Yotsuya)",
+      "checkIn": "2026-10-07T15:00:00",
+      "checkOut": "2026-10-10T11:00:00",
+      "nights": 3,
+      "address": "1-2-3 Fake Street, Shinjuku, Tokyo, Japan",
+      "phone": "+81 3 0000 0000",
+      "confirmationNumber": "SAMPLE-0001",
+      "pinCode": "0000",
+      "price": { "amount": 90000, "currency": "JPY" },
+      "lat": 35.6895,
+      "lon": 139.6917,
+      "geocode": false,
+      "transportToNext": "car",
+      "notes": "נתוני דוגמה - לא אמיתיים"
+    },
+    {
+      "order": 2,
+      "name": "Sample Ryokan Fuji",
+      "city": "Hakone",
+      "checkIn": "2026-10-10T15:00:00",
+      "checkOut": "2026-10-13T11:00:00",
+      "nights": 3,
+      "address": null,
+      "phone": null,
+      "confirmationNumber": "SAMPLE-0002",
+      "price": { "amount": 60000, "currency": "JPY", "approxILS": 1100 },
+      "lat": 35.2323,
+      "lon": 139.1069,
+      "geocode": false,
+      "transportToNext": null,
+      "notes": "נתוני דוגמה - לא אמיתיים"
+    }
+  ],
+  "attractions": [
+    {
+      "name": "Sample Ghibli-Style Park",
+      "city": "Nagoya",
+      "date": "2026-10-11",
+      "entryTime": "11:00",
+      "confirmationNumber": "SAMPLE-ATT-01",
+      "price": { "amount": 5000, "currency": "JPY", "note": "2 tickets, sample" },
+      "address": null,
+      "lat": 35.1815,
+      "lon": 136.9066,
+      "geocode": false,
+      "notes": "נתוני דוגמה - לא אמיתיים"
+    }
+  ],
+  "cars": [
+    {
+      "label": "Car 1",
+      "model": "Sample Compact Car",
+      "bookingNumber": "SAMPLE-CAR-01",
+      "pickup": { "location": "Tokyo, sample exit", "date": "2026-10-10", "time": "11:00" },
+      "dropoff": { "location": "Hakone", "date": "2026-10-13", "time": "10:00" },
+      "coversHotelLegOrders": [1, 2],
+      "notes": "נתוני דוגמה - לא אמיתיים"
+    }
+  ],
+  "flights": []
+}
