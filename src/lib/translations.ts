@@ -26,6 +26,7 @@ const CITY_HE: Record<string, string> = {
   "Uji, near Kyoto": "אוג'י, ליד קיוטו",
   "Tokyo (Toyosu)": "טוקיו (טויוסו)",
   "Tokyo (Azabudai Hills)": "טוקיו (אזבודאי הילס)",
+  Odawara: "אודוארה",
 }
 
 export function translateCity(city: string): string {
@@ -70,4 +71,16 @@ export function translateCarDropoffLocation(bookingNumber: string, fallback: str
 export function translateFlightRoute(flightNumber: string, fallback: string): string {
   if (flightNumber === "JAL630") return "קומאמוטו לטוקיו (הנדה)"
   return fallback
+}
+
+// route-public.json's car `label` ("Car 1"/"Car 2") is the only identifier
+// available before the private file is loaded — unlike CAR_HE above, this is
+// safe to key off since it carries no booking information.
+const CAR_LABEL_HE: Record<string, string> = {
+  "Car 1": "רכב 1",
+  "Car 2": "רכב 2",
+}
+
+export function translateCarLabelByName(label: string): string {
+  return CAR_LABEL_HE[label] ?? label
 }

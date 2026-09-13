@@ -2,9 +2,10 @@ import { Fragment, useEffect } from "react"
 import { Marker, Polyline } from "react-leaflet"
 import { createSegmentEmojiIcon } from "@/components/map/icons"
 import { LEAFLET_DASH_ARRAY, lineStyleForTransport } from "@/lib/geo"
+import type { CarSummaryRow, FlightSummaryRow } from "@/lib/routeSummary"
 import { useRouteColorStore } from "@/stores/route-color-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
-import type { CarLeg, FlightLeg, Hotel, TransportMode } from "@/types/trip"
+import type { RouteStop, TransportMode } from "@/types/trip"
 
 const SEGMENT_EMOJI: Partial<Record<TransportMode, string>> = {
   car: "🚗",
@@ -12,9 +13,9 @@ const SEGMENT_EMOJI: Partial<Record<TransportMode, string>> = {
 }
 
 interface RouteSegmentsProps {
-  hotels: Hotel[]
-  cars: CarLeg[]
-  flights: FlightLeg[]
+  hotels: RouteStop[]
+  cars: CarSummaryRow[]
+  flights: FlightSummaryRow[]
 }
 
 const HIGHLIGHT_COLOR = "#DC2626"
@@ -22,18 +23,18 @@ const HIGHLIGHT_COLOR = "#DC2626"
 /** coversHotelLegOrders like [4,5,6] covers legs 4->5 and 5->6 — every order
  *  except the last is a "from" hotel of one of those legs. */
 function highlightedFromOrders(
-  cars: CarLeg[],
-  flights: FlightLeg[],
+  cars: CarSummaryRow[],
+  flights: FlightSummaryRow[],
   highlightedKey: string | null
 ): Set<number> {
   const orders = new Set<number>()
   if (!highlightedKey) return orders
   for (const car of cars) {
-    if (car.bookingNumber !== highlightedKey) continue
+    if (car.key !== highlightedKey) continue
     for (const order of car.coversHotelLegOrders.slice(0, -1)) orders.add(order)
   }
   for (const flight of flights) {
-    if (flight.flightNumber !== highlightedKey) continue
+    if (flight.key !== highlightedKey) continue
     for (const order of flight.coversHotelLegOrders.slice(0, -1)) orders.add(order)
   }
   return orders

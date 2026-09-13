@@ -2,7 +2,6 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { RouterProvider } from "react-router"
 import { router } from "@/app/router"
-import { ImportScreen } from "@/components/data/ImportScreen"
 import { TripDataProvider } from "@/data/TripDataProvider"
 import { useTripDataContext } from "@/data/useTripData"
 import "leaflet/dist/leaflet.css"
@@ -11,8 +10,10 @@ import "@/index.css"
 function Root() {
   const { status } = useTripDataContext()
 
+  // The home/map screen works from the committed route-public.json alone —
+  // only /hotels, /attractions, /recommendations require the private file,
+  // and they gate themselves via PrivateDataGate.
   if (status === "loading") return null
-  if (status !== "ready") return <ImportScreen />
   return <RouterProvider router={router} />
 }
 

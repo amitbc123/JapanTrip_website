@@ -77,6 +77,47 @@ export interface TripData {
   flights: FlightLeg[]
 }
 
+/** The subset of a route stop that's safe to show without the private trip
+ *  file loaded — order/coordinates/transport mode only, no name or dates.
+ *  `Hotel` already structurally satisfies this. */
+export interface RouteStop {
+  order: number
+  lat: number | null
+  lon: number | null
+  transportToNext: TransportMode | null
+}
+
+/** route-public.json's car shape — city-level pickup/dropoff only, no
+ *  booking number, phone, or model. */
+export interface PublicCarLeg {
+  label: string
+  pickupCity: string
+  pickupDate: string
+  pickupTime: string
+  dropoffCity: string
+  dropoffDate: string
+  dropoffTime: string
+  coversHotelLegOrders: number[]
+}
+
+/** route-public.json's flight shape — same fields as FlightLeg minus
+ *  bookingReference/seats. */
+export interface PublicFlightLeg {
+  label: string
+  flightNumber: string
+  route: string
+  date: string
+  departTime: string
+  arriveTime: string
+  coversHotelLegOrders: number[]
+}
+
+export interface RoutePublicData {
+  hotels: RouteStop[]
+  cars: PublicCarLeg[]
+  flights: PublicFlightLeg[]
+}
+
 export type RecommendationCategory = "food" | "sight" | "activity" | "nature" | "shopping"
 
 export interface Recommendation {

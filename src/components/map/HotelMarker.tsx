@@ -4,43 +4,57 @@ import { Link } from "react-router"
 import { createHotelIcon } from "@/components/map/icons"
 import { formatHebrewDateRange } from "@/lib/format"
 import { translateCity } from "@/lib/translations"
-import type { Hotel } from "@/types/trip"
+import type { Hotel, RouteStop } from "@/types/trip"
 
 interface HotelMarkerProps {
-  hotel: Hotel
+  stop: RouteStop
+  /** Full private hotel details for this stop's order, when the private
+   *  trip file has been loaded — upgrades the popup from a bare stop number
+   *  to the name/city/date range. */
+  details?: Hotel
   registerRef?: (order: number, marker: L.Marker | null) => void
 }
 
-export function HotelMarker({ hotel, registerRef }: HotelMarkerProps) {
-  if (hotel.lat === null || hotel.lon === null) return null
+export function HotelMarker({ stop, details, registerRef }: HotelMarkerProps) {
+  if (stop.lat === null || stop.lon === null) return null
 
   const dateRange =
-    hotel.checkIn && hotel.checkOut ? formatHebrewDateRange(hotel.checkIn, hotel.checkOut) : null
-  const srLabel = `מלון ${hotel.order}: ${hotel.name}, ${hotel.city}`
+    details?.checkIn && details?.checkOut
+      ? formatHebrewDateRange(details.checkIn, details.checkOut)
+      : null
+  const srLabel = details
+    ? `מלון ${stop.order}: ${details.name}, ${details.city}`
+    : `תחנה ${stop.order}`
 
   return (
     <Marker
-      position={[hotel.lat, hotel.lon]}
-      icon={createHotelIcon(hotel.order, srLabel)}
-      ref={(marker) => registerRef?.(hotel.order, marker)}
+      position={[stop.lat, stop.lon]}
+      icon={createHotelIcon(stop.order, srLabel)}
+      ref={(marker) => registerRef?.(stop.order, marker)}
     >
       <Popup className="trip-map-popup">
-        <div className="flex min-w-40 flex-col gap-1 text-end">
-          <div className="flex items-center justify-end gap-2">
-            <span className="font-semibold">{hotel.name}</span>
-            <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary text-[11px] font-semibold text-primary-foreground">
-              {hotel.order}
-            </span>
+        {details ? (
+          <div className="flex min-w-40 flex-col gap-1 text-end">
+            <div className="flex items-center justify-end gap-2">
+              <span className="font-semibold">{details.name}</span>
+              <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary text-[11px] font-semibold text-primary-foreground">
+                {stop.order}
+              </span>
+            </div>
+            <span className="text-xs text-muted-foreground">{translateCity(details.city)}</span>
+            {dateRange && <span className="text-xs">{dateRange}</span>}
+            <Link
+              to={`/hotels?open=${stop.order}`}
+              className="mt-1 text-xs font-medium text-primary underline underline-offset-2"
+            >
+              פרטי המלון
+            </Link>
           </div>
-          <span className="text-xs text-muted-foreground">{translateCity(hotel.city)}</span>
-          {dateRange && <span className="text-xs">{dateRange}</span>}
-          <Link
-            to={`/hotels?open=${hotel.order}`}
-            className="mt-1 text-xs font-medium text-primary underline underline-offset-2"
-          >
-            פרטי המלון
-          </Link>
-        </div>
+        ) : (
+          <div className="flex min-w-24 flex-col items-end gap-1 text-end">
+            <span className="font-semibold">תחנה {stop.order}</span>
+          </div>
+        )}
       </Popup>
     </Marker>
   )

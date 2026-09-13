@@ -1,0 +1,57 @@
+{
+  "hotels": [
+    { "order": 1, "lat": 35.6864, "lon": 139.7300, "transportToNext": "train", "coordConfidence": "approximate, Yotsuya station area" },
+    { "order": 2, "lat": 36.74782, "lon": 139.61693, "transportToNext": "train", "coordConfidence": "exact, from booking document" },
+    { "order": 3, "lat": 38.5697, "lon": 140.5311, "transportToNext": "train", "coordConfidence": "exact, Ginzan Onsen town center" },
+    { "order": 4, "lat": 35.4555, "lon": 139.6317, "transportToNext": "car", "coordConfidence": "approximate, Minatomirai district area" },
+    { "order": 5, "lat": 35.51327, "lon": 138.77345, "transportToNext": "car", "coordConfidence": "exact, from booking document" },
+    { "order": 6, "lat": 35.24563, "lon": 139.00675, "transportToNext": "train", "coordConfidence": "exact, from booking document" },
+    { "order": 7, "lat": 36.5780, "lon": 136.6485, "transportToNext": "car", "coordConfidence": "approximate, near Kanazawa station" },
+    { "order": 8, "lat": 36.26645, "lon": 136.90162, "transportToNext": "car", "coordConfidence": "exact, from booking document" },
+    { "order": 9, "lat": 36.1385, "lon": 137.25532, "transportToNext": "car", "coordConfidence": "exact, from booking document" },
+    { "order": 10, "lat": 36.19197, "lon": 137.55165, "transportToNext": "car", "coordConfidence": "exact, from booking document" },
+    { "order": 11, "lat": 36.23267, "lon": 137.97147, "transportToNext": "car", "coordConfidence": "exact, from booking document" },
+    { "order": 12, "lat": 35.85928, "lon": 137.70502, "transportToNext": "car", "coordConfidence": "exact, from booking document" },
+    { "order": 13, "lat": 35.49438, "lon": 137.50113, "transportToNext": "train", "coordConfidence": "exact, from booking document" },
+    { "order": 14, "lat": 35.1709, "lon": 136.8815, "transportToNext": "train", "coordConfidence": "low confidence, Nagoya station area, no address was available to geocode against, verify before relying on this one" },
+    { "order": 15, "lat": 35.00253, "lon": 135.7691, "transportToNext": "train", "coordConfidence": "exact, from booking document" },
+    { "order": 16, "lat": 34.6725, "lon": 135.5013, "transportToNext": "train", "coordConfidence": "approximate, Shinsaibashi district area" },
+    { "order": 17, "lat": 34.3894, "lon": 132.45533, "transportToNext": "train", "coordConfidence": "exact, from booking document" },
+    { "order": 18, "lat": 32.79858, "lon": 130.70613, "transportToNext": "flight", "coordConfidence": "exact, from booking document" },
+    { "order": 19, "lat": 35.71613, "lon": 139.79795, "transportToNext": "train", "coordConfidence": "exact, from booking document" },
+    { "order": 20, "lat": 35.69702, "lon": 139.7021, "transportToNext": null, "coordConfidence": "exact, from booking document" }
+  ],
+  "cars": [
+    {
+      "label": "Car 1",
+      "pickupCity": "Yokohama",
+      "pickupDate": "2026-10-19",
+      "pickupTime": "11:30",
+      "dropoffCity": "Odawara",
+      "dropoffDate": "2026-10-24",
+      "dropoffTime": "11:30",
+      "coversHotelLegOrders": [4, 5, 6]
+    },
+    {
+      "label": "Car 2",
+      "pickupCity": "Kanazawa",
+      "pickupDate": "2026-10-27",
+      "pickupTime": "10:00",
+      "dropoffCity": "Nagoya",
+      "dropoffDate": "2026-11-04",
+      "dropoffTime": "10:00",
+      "coversHotelLegOrders": [7, 8, 9, 10, 11, 12, 13]
+    }
+  ],
+  "flights": [
+    {
+      "label": "Domestic flight",
+      "flightNumber": "JAL630",
+      "route": "Kumamoto to Tokyo Haneda",
+      "date": "2026-11-22",
+      "departTime": "14:15",
+      "arriveTime": "15:45",
+      "coversHotelLegOrders": [18, 19]
+    }
+  ]
+}

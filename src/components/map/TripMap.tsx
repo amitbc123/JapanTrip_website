@@ -6,15 +6,19 @@ import { createFlythroughIcon } from "@/components/map/icons"
 import { HotelMarker } from "@/components/map/HotelMarker"
 import { RecommendationMarker } from "@/components/map/RecommendationMarker"
 import { RouteSegments } from "@/components/map/RouteSegments"
+import type { CarSummaryRow, FlightSummaryRow } from "@/lib/routeSummary"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import { useRouteFlythroughStore } from "@/stores/route-flythrough-store"
-import type { Attraction, CarLeg, FlightLeg, Hotel, Recommendation } from "@/types/trip"
+import type { Attraction, Hotel, Recommendation, RouteStop } from "@/types/trip"
 
 interface TripMapProps {
-  hotels: Hotel[]
+  hotels: RouteStop[]
+  /** Full private hotel details keyed by stop order, when the private trip
+   *  file has been loaded — empty when running off route-public.json alone. */
+  hotelDetailsByOrder: Map<number, Hotel>
   attractions: Attraction[]
-  cars: CarLeg[]
-  flights: FlightLeg[]
+  carSummaries: CarSummaryRow[]
+  flightSummaries: FlightSummaryRow[]
   targetHotelOrder?: number
   targetAttractionName?: string
   targetRecommendation?: Recommendation
@@ -86,20 +90,28 @@ function FocusRecommendation({
 /** Zooms/pans to fit exactly the currently-highlighted car/flight's covered
  *  stops (all of coversHotelLegOrders, not just endpoints) — leaves the view
  *  untouched on deselect, per spec. */
-function FitHighlightedSegment({ hotels, cars, flights }: { hotels: Hotel[]; cars: CarLeg[]; flights: FlightLeg[] }) {
+function FitHighlightedSegment({
+  hotels,
+  cars,
+  flights,
+}: {
+  hotels: RouteStop[]
+  cars: CarSummaryRow[]
+  flights: FlightSummaryRow[]
+}) {
   const map = useMap()
   const highlightedKey = useRouteHighlightStore((s) => s.highlightedKey)
 
   useEffect(() => {
     if (!highlightedKey) return
     const covering =
-      cars.find((c) => c.bookingNumber === highlightedKey)?.coversHotelLegOrders ??
-      flights.find((f) => f.flightNumber === highlightedKey)?.coversHotelLegOrders
+      cars.find((c) => c.key === highlightedKey)?.coversHotelLegOrders ??
+      flights.find((f) => f.key === highlightedKey)?.coversHotelLegOrders
     if (!covering) return
 
     const points: [number, number][] = covering
       .map((order) => hotels.find((h) => h.order === order))
-      .filter((h): h is Hotel & { lat: number; lon: number } => Boolean(h && h.lat !== null && h.lon !== null))
+      .filter((h): h is RouteStop & { lat: number; lon: number } => Boolean(h && h.lat !== null && h.lon !== null))
       .map((h) => [h.lat, h.lon])
 
     if (points.length === 0) return
@@ -125,16 +137,16 @@ function legDurationMs(a: [number, number], b: [number, number]): number {
   return Math.min(MAX_LEG_MS, Math.max(MIN_LEG_MS, distance * MS_PER_DEGREE))
 }
 
-/** Animates a single marker along the full route (stop 1 -> 20 -> back to 1)
- *  at a fixed zoom, panning to keep it in view.
+/** Animates a single marker along the full route (stop 1 -> last stop, one
+ *  way) at a fixed zoom, panning to keep it in view.
  *
  *  Play/stop, not restart: stopping (isPlaying -> false) only cancels the
  *  animation frame — the marker is left frozen exactly where it was, not
  *  removed. Playing again (isPlaying -> false -> true) removes that frozen
  *  marker first and starts fresh from stop 1; it never resumes mid-route.
  *  Reaching the end naturally calls the store's stop() itself so the button
- *  resets on its own instead of looping. */
-function RouteFlythrough({ hotels, isPlaying }: { hotels: Hotel[]; isPlaying: boolean }) {
+ *  resets on its own instead of looping or reversing. */
+function RouteFlythrough({ hotels, isPlaying }: { hotels: RouteStop[]; isPlaying: boolean }) {
   const map = useMap()
   const markerRef = useRef<L.Marker | null>(null)
 
@@ -145,14 +157,13 @@ function RouteFlythrough({ hotels, isPlaying }: { hotels: Hotel[]; isPlaying: bo
     markerRef.current = null
 
     const waypoints: [number, number][] = hotels
-      .filter((h): h is Hotel & { lat: number; lon: number } => h.lat !== null && h.lon !== null)
+      .filter((h): h is RouteStop & { lat: number; lon: number } => h.lat !== null && h.lon !== null)
       .sort((a, b) => a.order - b.order)
       .map((h) => [h.lat, h.lon])
 
     if (waypoints.length < 2) return
 
-    const forward = waypoints
-    const path = forward.concat([...forward].reverse().slice(1))
+    const path = waypoints
     const first = path[0]
     if (!first) return
 
@@ -211,9 +222,10 @@ function RouteFlythrough({ hotels, isPlaying }: { hotels: Hotel[]; isPlaying: bo
 
 export function TripMap({
   hotels,
+  hotelDetailsByOrder,
   attractions,
-  cars,
-  flights,
+  carSummaries,
+  flightSummaries,
   targetHotelOrder,
   targetAttractionName,
   targetRecommendation,
@@ -225,7 +237,7 @@ export function TripMap({
 
   const plottedPoints = useMemo<[number, number][]>(() => {
     const hotelPoints = hotels
-      .filter((h): h is Hotel & { lat: number; lon: number } => h.lat !== null && h.lon !== null)
+      .filter((h): h is RouteStop & { lat: number; lon: number } => h.lat !== null && h.lon !== null)
       .map((h): [number, number] => [h.lat, h.lon])
     const attractionPoints = attractions
       .filter((a): a is Attraction & { lat: number; lon: number } => a.lat !== null && a.lon !== null)
@@ -274,11 +286,12 @@ export function TripMap({
           />
         </LayersControl.BaseLayer>
       </LayersControl>
-      <RouteSegments hotels={hotels} cars={cars} flights={flights} />
-      {hotels.map((hotel) => (
+      <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} />
+      {hotels.map((stop) => (
         <HotelMarker
-          key={hotel.order}
-          hotel={hotel}
+          key={stop.order}
+          stop={stop}
+          details={hotelDetailsByOrder.get(stop.order)}
           registerRef={(order, marker) => {
             if (marker) hotelMarkerRefs.current.set(order, marker)
             else hotelMarkerRefs.current.delete(order)
@@ -318,7 +331,7 @@ export function TripMap({
       {targetRecommendation && (
         <FocusRecommendation targetId={targetRecommendation.id} markerRefs={recommendationMarkerRefs} />
       )}
-      <FitHighlightedSegment hotels={hotels} cars={cars} flights={flights} />
+      <FitHighlightedSegment hotels={hotels} cars={carSummaries} flights={flightSummaries} />
       <RouteFlythrough hotels={hotels} isPlaying={isFlythroughPlaying} />
     </MapContainer>
   )
