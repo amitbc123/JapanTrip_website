@@ -89,7 +89,7 @@ function FitHighlightedSegment({ hotels, cars, flights }: { hotels: Hotel[]; car
   return null
 }
 
-const FLYTHROUGH_ZOOM = 10
+const FLYTHROUGH_ZOOM = 8
 const MIN_LEG_MS = 400
 const MAX_LEG_MS = 3000
 /** ms per degree of lat/lon travelled — tuned so typical inter-city hops
