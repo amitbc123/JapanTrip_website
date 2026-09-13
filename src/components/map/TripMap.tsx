@@ -4,10 +4,11 @@ import { LayersControl, MapContainer, TileLayer, useMap } from "react-leaflet"
 import { AttractionMarker } from "@/components/map/AttractionMarker"
 import { createFlythroughIcon } from "@/components/map/icons"
 import { HotelMarker } from "@/components/map/HotelMarker"
+import { RecommendationMarker } from "@/components/map/RecommendationMarker"
 import { RouteSegments } from "@/components/map/RouteSegments"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import { useRouteFlythroughStore } from "@/stores/route-flythrough-store"
-import type { Attraction, CarLeg, FlightLeg, Hotel } from "@/types/trip"
+import type { Attraction, CarLeg, FlightLeg, Hotel, Recommendation } from "@/types/trip"
 
 interface TripMapProps {
   hotels: Hotel[]
@@ -16,6 +17,7 @@ interface TripMapProps {
   flights: FlightLeg[]
   targetHotelOrder?: number
   targetAttractionName?: string
+  targetRecommendation?: Recommendation
 }
 
 function FitBounds({ points, skip }: { points: [number, number][]; skip: boolean }) {
@@ -60,6 +62,24 @@ function FocusAttraction({
     map.setView(marker.getLatLng(), Math.max(map.getZoom(), 12), { animate: true })
     marker.openPopup()
   }, [map, markerRefs, targetName])
+  return null
+}
+
+function FocusRecommendation({
+  targetId,
+  markerRefs,
+}: {
+  targetId: string | undefined
+  markerRefs: React.RefObject<Map<string, L.Marker>>
+}) {
+  const map = useMap()
+  useEffect(() => {
+    if (!targetId) return
+    const marker = markerRefs.current.get(targetId)
+    if (!marker) return
+    map.setView(marker.getLatLng(), Math.max(map.getZoom(), 12), { animate: true })
+    marker.openPopup()
+  }, [map, markerRefs, targetId])
   return null
 }
 
@@ -196,9 +216,11 @@ export function TripMap({
   flights,
   targetHotelOrder,
   targetAttractionName,
+  targetRecommendation,
 }: TripMapProps) {
   const hotelMarkerRefs = useRef(new Map<number, L.Marker>())
   const attractionMarkerRefs = useRef(new Map<string, L.Marker>())
+  const recommendationMarkerRefs = useRef(new Map<string, L.Marker>())
   const isFlythroughPlaying = useRouteFlythroughStore((s) => s.isPlaying)
 
   const plottedPoints = useMemo<[number, number][]>(() => {
@@ -273,13 +295,28 @@ export function TripMap({
           }}
         />
       ))}
+      {targetRecommendation && (
+        <RecommendationMarker
+          recommendation={targetRecommendation}
+          registerRef={(id, marker) => {
+            if (marker) recommendationMarkerRefs.current.set(id, marker)
+            else recommendationMarkerRefs.current.delete(id)
+          }}
+        />
+      )}
       {/* Rendered after the markers so their popup-binding effects run first
           (effects commit bottom-up in JSX order) — otherwise openPopup()
           below can fire before react-leaflet has bound the popup. */}
-      <FitBounds points={plottedPoints} skip={Boolean(targetHotelOrder || targetAttractionName)} />
+      <FitBounds
+        points={plottedPoints}
+        skip={Boolean(targetHotelOrder || targetAttractionName || targetRecommendation)}
+      />
       {targetHotelOrder && <FocusHotel targetOrder={targetHotelOrder} markerRefs={hotelMarkerRefs} />}
       {targetAttractionName && (
         <FocusAttraction targetName={targetAttractionName} markerRefs={attractionMarkerRefs} />
+      )}
+      {targetRecommendation && (
+        <FocusRecommendation targetId={targetRecommendation.id} markerRefs={recommendationMarkerRefs} />
       )}
       <FitHighlightedSegment hotels={hotels} cars={cars} flights={flights} />
       <RouteFlythrough hotels={hotels} isPlaying={isFlythroughPlaying} />

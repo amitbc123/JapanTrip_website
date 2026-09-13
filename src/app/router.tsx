@@ -7,6 +7,9 @@ const HotelsPage = lazy(() => import("@/pages/HotelsPage").then((m) => ({ defaul
 const AttractionsPage = lazy(() =>
   import("@/pages/AttractionsPage").then((m) => ({ default: m.AttractionsPage }))
 )
+const RecommendationsPage = lazy(() =>
+  import("@/pages/RecommendationsPage").then((m) => ({ default: m.RecommendationsPage }))
+)
 
 export const router = createBrowserRouter(
   [
@@ -16,6 +19,7 @@ export const router = createBrowserRouter(
         { path: "/", element: <HomeMapPage /> },
         { path: "/hotels", element: <HotelsPage /> },
         { path: "/attractions", element: <AttractionsPage /> },
+        { path: "/recommendations", element: <RecommendationsPage /> },
       ],
     },
   ],

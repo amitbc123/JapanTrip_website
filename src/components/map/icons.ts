@@ -29,6 +29,16 @@ export function createFlythroughIcon(): L.DivIcon {
   })
 }
 
+export function createRecommendationIcon(emoji: string, srLabel: string): L.DivIcon {
+  return L.divIcon({
+    className: "trip-recommendation-marker",
+    html: `<span aria-hidden="true">${emoji}</span><span class="sr-only">${srLabel}</span>`,
+    iconSize: [22, 22],
+    iconAnchor: [11, 11],
+    popupAnchor: [0, -13],
+  })
+}
+
 export function createSegmentEmojiIcon(emoji: string): L.DivIcon {
   return L.divIcon({
     className: "trip-segment-emoji",

@@ -64,6 +64,21 @@ export function formatPrice(price: Price | null | undefined): string {
   return label
 }
 
+export function formatCostPerPerson(
+  cost: { amount: number; currency: string } | null | undefined
+): string {
+  if (!cost) return NOT_AVAILABLE
+  try {
+    return new Intl.NumberFormat("he-IL", {
+      style: "currency",
+      currency: cost.currency,
+      maximumFractionDigits: cost.currency === "JPY" ? 0 : 2,
+    }).format(cost.amount)
+  } catch {
+    return `${cost.amount} ${cost.currency}`
+  }
+}
+
 export function orNotAvailable(value: string | null | undefined): string {
   return value && value.trim().length > 0 ? value : NOT_AVAILABLE
 }

@@ -76,3 +76,22 @@ export interface TripData {
   cars: CarLeg[]
   flights: FlightLeg[]
 }
+
+export type RecommendationCategory = "food" | "sight" | "activity" | "nature" | "shopping"
+
+export interface Recommendation {
+  id: string
+  name: string
+  nameOriginal: string
+  category: RecommendationCategory
+  /** Hotel `order` this place is nearest to — the join key back into trip-data.json's hotels. */
+  region: number
+  description: string
+  address: string | null
+  lat: number
+  lon: number
+  costPerPerson: { amount: number; currency: string } | null
+  websiteUrl: string | null
+  photoUrl?: string
+  notes: string | null
+}

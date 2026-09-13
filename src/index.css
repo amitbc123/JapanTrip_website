@@ -19,6 +19,7 @@
   --color-line: #e6dcc7;
   --color-map-hotel: #d9622b;
   --color-map-attraction: #b6357a;
+  --color-map-recommendation: #3f7d4a;
 }
 
 :root {
@@ -159,6 +160,19 @@
 .trip-attraction-marker > span {
   transform: rotate(-45deg);
   color: #fdfbf8;
+  font-size: 12px;
+}
+
+.trip-recommendation-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--color-map-recommendation);
+  border: 2px solid #fdfbf8;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
   font-size: 12px;
 }
 
