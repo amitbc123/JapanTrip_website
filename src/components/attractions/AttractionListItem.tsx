@@ -13,8 +13,8 @@ export function AttractionListItem({ attraction }: { attraction: Attraction }) {
       <AccordionPrimitive.Header className="flex items-center gap-1">
         <AccordionPrimitive.Trigger className="group/accordion-trigger relative flex flex-1 items-start justify-between rounded-lg border border-transparent py-2.5 text-start text-sm font-medium outline-none hover:underline focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 **:data-[slot=accordion-trigger-icon]:ms-auto **:data-[slot=accordion-trigger-icon]:size-4 **:data-[slot=accordion-trigger-icon]:text-muted-foreground">
           <div className="flex w-full flex-col gap-1">
-            <span className="font-semibold">{attraction.name}</span>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-[15px] font-semibold">{attraction.name}</span>
+            <span className="text-[13px] text-muted-foreground">
               {translateCity(attraction.city)} · {formatHebrewDate(attraction.date, true)} ·{" "}
               {attraction.entryTime}
             </span>

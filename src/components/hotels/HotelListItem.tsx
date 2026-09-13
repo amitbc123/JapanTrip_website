@@ -26,9 +26,9 @@ export function HotelListItem({ hotel }: { hotel: Hotel }) {
               <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
                 {hotel.order}
               </span>
-              <span className="font-semibold">{hotel.name}</span>
+              <span className="text-[15px] font-semibold">{hotel.name}</span>
             </div>
-            <span className="text-xs text-muted-foreground">
+            <span className="text-[13px] text-muted-foreground">
               {translateCity(hotel.city)} · {dateRange} · {hotel.nights} לילות · {formatPrice(hotel.price)}
             </span>
           </div>

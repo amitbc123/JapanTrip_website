@@ -10,7 +10,7 @@ import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import type { CarLeg, FlightLeg } from "@/types/trip"
 
 function scrollMapIntoView() {
-  document.getElementById("home-map")?.scrollIntoView({ behavior: "smooth", block: "start" })
+  window.scrollTo({ top: 0, behavior: "smooth" })
 }
 
 export function TransportSummary({ cars, flights }: { cars: CarLeg[]; flights: FlightLeg[] }) {
@@ -37,15 +37,15 @@ export function TransportSummary({ cars, flights }: { cars: CarLeg[]; flights: F
             }`}
           >
             <CarIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-            <div className="flex flex-col gap-0.5 text-sm">
-              <span className="font-medium">
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[15px] font-medium">
                 {translateCarLabel(car.bookingNumber)} · {car.model}
               </span>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-[13px] text-muted-foreground">
                 איסוף: {translateCarPickupLocation(car.bookingNumber, car.pickup.location)},{" "}
                 {formatHebrewDate(car.pickup.date)} {car.pickup.time}
               </span>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-[13px] text-muted-foreground">
                 החזרה: {translateCarDropoffLocation(car.bookingNumber, car.dropoff.location)},{" "}
                 {formatHebrewDate(car.dropoff.date)} {car.dropoff.time}
               </span>
@@ -66,12 +66,12 @@ export function TransportSummary({ cars, flights }: { cars: CarLeg[]; flights: F
             }`}
           >
             <PlaneIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-            <div className="flex flex-col gap-0.5 text-sm">
-              <span className="font-medium">
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[15px] font-medium">
                 טיסה פנימית · {flight.flightNumber} ·{" "}
                 {translateFlightRoute(flight.flightNumber, flight.route)}
               </span>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-[13px] text-muted-foreground">
                 המראה: {formatHebrewDate(flight.date)} {flight.departTime} · נחיתה: {flight.arriveTime}
               </span>
             </div>
