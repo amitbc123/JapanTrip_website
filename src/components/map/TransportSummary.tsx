@@ -41,7 +41,10 @@ export function TransportSummary({
             <div className="flex flex-col gap-0.5">
               <span className="text-[15px] font-medium">{train.label}</span>
               <span className="text-[13px] text-muted-foreground">{train.timeLine}</span>
-              <span className="text-[13px] text-muted-foreground">{train.paidByLine}</span>
+              {train.paidByLine && (
+                <span className="text-[13px] text-muted-foreground">{train.paidByLine}</span>
+              )}
+              {train.notes && <span className="text-[13px] text-destructive">{train.notes}</span>}
             </div>
           </button>
         )
@@ -63,6 +66,7 @@ export function TransportSummary({
               <span className="text-[15px] font-medium">{car.label}</span>
               <span className="text-[13px] text-muted-foreground">{car.pickupLine}</span>
               <span className="text-[13px] text-muted-foreground">{car.dropoffLine}</span>
+              {car.notes && <span className="text-[13px] text-destructive">{car.notes}</span>}
             </div>
           </button>
         )
@@ -83,6 +87,7 @@ export function TransportSummary({
             <div className="flex flex-col gap-0.5">
               <span className="text-[15px] font-medium">{flight.label}</span>
               <span className="text-[13px] text-muted-foreground">{flight.timeLine}</span>
+              {flight.notes && <span className="text-[13px] text-destructive">{flight.notes}</span>}
             </div>
           </button>
         )

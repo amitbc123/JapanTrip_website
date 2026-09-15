@@ -22,6 +22,9 @@ export function isTripData(value: unknown): value is TripData {
   if (!isArray(value.attractions) || !value.attractions.every(isValidAttraction)) return false
   if (!isArray(value.cars) || !value.cars.every(isValidCar)) return false
   if (!isArray(value.flights) || !value.flights.every(isValidFlight)) return false
+  if (value.trains !== undefined && (!isArray(value.trains) || !value.trains.every(isValidPrivateTrain))) {
+    return false
+  }
   return true
 }
 
@@ -64,4 +67,9 @@ function isValidFlight(value: unknown): boolean {
     typeof value.flightNumber === "string" &&
     isArray(value.coversHotelLegOrders)
   )
+}
+
+function isValidPrivateTrain(value: unknown): boolean {
+  if (!isRecord(value)) return false
+  return typeof value.trainNumber === "string"
 }

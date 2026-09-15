@@ -1,4 +1,4 @@
-import { formatHebrewDate, formatPrice } from "@/lib/format"
+import { formatHebrewDate, formatPrice, NOT_AVAILABLE } from "@/lib/format"
 import {
   translateCarLabel,
   translateCarLabelByName,
@@ -8,7 +8,7 @@ import {
   translateFlightRoute,
   translateTrainRoute,
 } from "@/lib/translations"
-import type { CarLeg, PublicCarLeg, TrainLeg } from "@/types/trip"
+import type { CarLeg, PrivateTrainInfo, PublicCarLeg, TrainLeg } from "@/types/trip"
 
 export interface CarSummaryRow {
   key: string
@@ -16,6 +16,7 @@ export interface CarSummaryRow {
   pickupLine: string
   dropoffLine: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 export interface FlightSummaryRow {
@@ -23,6 +24,7 @@ export interface FlightSummaryRow {
   label: string
   timeLine: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 interface FlightLegLike {
@@ -32,6 +34,7 @@ interface FlightLegLike {
   departTime: string
   arriveTime: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 export function carSummaryFromPrivate(car: CarLeg): CarSummaryRow {
@@ -51,6 +54,7 @@ export function carSummaryFromPublic(car: PublicCarLeg): CarSummaryRow {
     pickupLine: `איסוף: ${translateCity(car.pickupCity)}, ${formatHebrewDate(car.pickupDate)} ${car.pickupTime}`,
     dropoffLine: `החזרה: ${translateCity(car.dropoffCity)}, ${formatHebrewDate(car.dropoffDate)} ${car.dropoffTime}`,
     coversHotelLegOrders: car.coversHotelLegOrders,
+    notes: car.notes,
   }
 }
 
@@ -60,6 +64,7 @@ export function flightSummary(flight: FlightLegLike): FlightSummaryRow {
     label: `טיסה פנימית · ${flight.flightNumber} · ${translateFlightRoute(flight.flightNumber, flight.route)}`,
     timeLine: `המראה: ${formatHebrewDate(flight.date)} ${flight.departTime} · נחיתה: ${flight.arriveTime}`,
     coversHotelLegOrders: flight.coversHotelLegOrders,
+    notes: flight.notes,
   }
 }
 
@@ -67,16 +72,29 @@ export interface TrainSummaryRow {
   key: string
   label: string
   timeLine: string
-  paidByLine: string
+  paidByLine?: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
-export function trainSummary(train: TrainLeg): TrainSummaryRow {
+/** `privateInfo` (price/paidBy/seats) only exists once the private trip
+ *  file is loaded and carries a matching `trainNumber` — without it the
+ *  card just shows the public route/schedule, no financial line. */
+export function trainSummary(train: TrainLeg, privateInfo?: PrivateTrainInfo): TrainSummaryRow {
+  const isBooked = train.departTime !== null && train.arriveTime !== null
+  const paidByLine = privateInfo
+    ? `${formatPrice(privateInfo.price)} · שולם על ידי: ${privateInfo.paidBy ?? NOT_AVAILABLE}${
+        privateInfo.seats?.length ? ` · מושבים: ${privateInfo.seats.join(", ")}` : ""
+      }`
+    : undefined
   return {
-    key: train.trainNumber,
+    key: train.label,
     label: `רכבת · ${train.trainNumber} · ${translateTrainRoute(train.trainNumber, train.route)}`,
-    timeLine: `יציאה: ${formatHebrewDate(train.date)} ${train.departTime} · הגעה: ${train.arriveTime} · ${formatPrice(train.price)}`,
-    paidByLine: `שולם על ידי: ${train.paidBy}`,
+    timeLine: isBooked
+      ? `יציאה: ${formatHebrewDate(train.date)} ${train.departTime} · הגעה: ${train.arriveTime}`
+      : `${formatHebrewDate(train.date)} · טרם הוזמן`,
+    paidByLine,
     coversHotelLegOrders: train.coversHotelLegOrders,
+    notes: train.notes,
   }
 }

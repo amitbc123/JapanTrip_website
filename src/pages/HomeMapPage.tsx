@@ -51,8 +51,14 @@ export function HomeMapPage() {
     ? privateData.flights.map(flightSummary)
     : routePublic.flights.map(flightSummary)
   // Unlike cars/flights, trains always come from route-public.json — never
-  // from the private trip file, loaded or not.
-  const trainSummaries = routePublic.trains.map(trainSummary)
+  // from the private trip file, loaded or not. Price/paid-by is the one
+  // exception: when the private file is loaded, it's merged in by trainNumber.
+  const privateTrainInfoByNumber = new Map(
+    (privateData?.trains ?? []).map((t) => [t.trainNumber, t])
+  )
+  const trainSummaries = routePublic.trains.map((train) =>
+    trainSummary(train, privateTrainInfoByNumber.get(train.trainNumber))
+  )
   const attractions = privateData?.attractions ?? []
   // Only known once the private trip file is loaded — route-public.json
   // deliberately carries no check-in dates.
