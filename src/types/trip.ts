@@ -68,6 +68,21 @@ export interface FlightLeg {
   coversHotelLegOrders: number[]
 }
 
+/** Trains carry no sensitive booking details (no PNR, no phone) beyond
+ *  what's already shown on the public homepage, so unlike cars/flights
+ *  there's no separate private/public variant. */
+export interface TrainLeg {
+  label: string
+  trainNumber: string
+  route: string
+  date: string
+  departTime: string
+  arriveTime: string
+  price: Price | null
+  paidBy: string
+  coversHotelLegOrders: number[]
+}
+
 export interface TripData {
   tripDates: { start: string; end: string }
   travelers: string[]
@@ -75,6 +90,9 @@ export interface TripData {
   attractions: Attraction[]
   cars: CarLeg[]
   flights: FlightLeg[]
+  /** Optional so existing trip-data.json files without a trains section
+   *  keep validating. */
+  trains?: TrainLeg[]
 }
 
 /** The subset of a route stop that's safe to show without the private trip
@@ -116,6 +134,7 @@ export interface RoutePublicData {
   hotels: RouteStop[]
   cars: PublicCarLeg[]
   flights: PublicFlightLeg[]
+  trains: TrainLeg[]
 }
 
 export type RecommendationCategory = "food" | "sight" | "activity" | "nature" | "shopping"

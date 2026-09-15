@@ -73,6 +73,12 @@ export function translateFlightRoute(flightNumber: string, fallback: string): st
   return fallback
 }
 
+export function translateTrainRoute(trainNumber: string, fallback: string): string {
+  if (trainNumber === "Revaty Kegon 19") return "אסאקוסה לטובו ניקו"
+  if (trainNumber === "Tsubasa 133") return "אוצונומיה לאוישידה"
+  return fallback
+}
+
 // route-public.json's car `label` ("Car 1"/"Car 2") is the only identifier
 // available before the private file is loaded — unlike CAR_HE above, this is
 // safe to key off since it carries no booking information.

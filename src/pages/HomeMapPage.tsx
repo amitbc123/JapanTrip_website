@@ -6,7 +6,7 @@ import { TransportSummary } from "@/components/map/TransportSummary"
 import recommendations from "@/data/recommendations.json"
 import routePublicRaw from "@/data/route-public.json"
 import { useTripDataContext } from "@/data/useTripData"
-import { carSummaryFromPrivate, carSummaryFromPublic, flightSummary } from "@/lib/routeSummary"
+import { carSummaryFromPrivate, carSummaryFromPublic, flightSummary, trainSummary } from "@/lib/routeSummary"
 import type { Hotel, Recommendation, RoutePublicData } from "@/types/trip"
 
 const routePublic = routePublicRaw as RoutePublicData
@@ -49,6 +49,9 @@ export function HomeMapPage() {
   const flightSummaries = privateData
     ? privateData.flights.map(flightSummary)
     : routePublic.flights.map(flightSummary)
+  const trainSummaries = privateData
+    ? (privateData.trains ?? []).map(trainSummary)
+    : routePublic.trains.map(trainSummary)
   const attractions = privateData?.attractions ?? []
 
   return (
@@ -61,6 +64,7 @@ export function HomeMapPage() {
             attractions={attractions}
             carSummaries={carSummaries}
             flightSummaries={flightSummaries}
+            trainSummaries={trainSummaries}
             targetHotelOrder={targetHotelOrder}
             targetAttractionName={targetAttractionName}
             targetRecommendation={targetRecommendation}
@@ -69,7 +73,7 @@ export function HomeMapPage() {
       </div>
       <MapLegend />
       <MapControlsRow />
-      <TransportSummary cars={carSummaries} flights={flightSummaries} />
+      <TransportSummary cars={carSummaries} flights={flightSummaries} trains={trainSummaries} />
     </div>
   )
 }

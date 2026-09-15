@@ -6,7 +6,7 @@ import { createFlythroughIcon } from "@/components/map/icons"
 import { HotelMarker } from "@/components/map/HotelMarker"
 import { RecommendationMarker } from "@/components/map/RecommendationMarker"
 import { RouteSegments } from "@/components/map/RouteSegments"
-import type { CarSummaryRow, FlightSummaryRow } from "@/lib/routeSummary"
+import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import { useRouteFlythroughStore } from "@/stores/route-flythrough-store"
 import type { Attraction, Hotel, Recommendation, RouteStop } from "@/types/trip"
@@ -19,6 +19,7 @@ interface TripMapProps {
   attractions: Attraction[]
   carSummaries: CarSummaryRow[]
   flightSummaries: FlightSummaryRow[]
+  trainSummaries: TrainSummaryRow[]
   targetHotelOrder?: number
   targetAttractionName?: string
   targetRecommendation?: Recommendation
@@ -94,10 +95,12 @@ function FitHighlightedSegment({
   hotels,
   cars,
   flights,
+  trains,
 }: {
   hotels: RouteStop[]
   cars: CarSummaryRow[]
   flights: FlightSummaryRow[]
+  trains: TrainSummaryRow[]
 }) {
   const map = useMap()
   const highlightedKey = useRouteHighlightStore((s) => s.highlightedKey)
@@ -106,7 +109,8 @@ function FitHighlightedSegment({
     if (!highlightedKey) return
     const covering =
       cars.find((c) => c.key === highlightedKey)?.coversHotelLegOrders ??
-      flights.find((f) => f.key === highlightedKey)?.coversHotelLegOrders
+      flights.find((f) => f.key === highlightedKey)?.coversHotelLegOrders ??
+      trains.find((t) => t.key === highlightedKey)?.coversHotelLegOrders
     if (!covering) return
 
     const points: [number, number][] = covering
@@ -116,7 +120,7 @@ function FitHighlightedSegment({
 
     if (points.length === 0) return
     map.fitBounds(L.latLngBounds(points), { padding: [40, 40] })
-  }, [map, highlightedKey, hotels, cars, flights])
+  }, [map, highlightedKey, hotels, cars, flights, trains])
 
   return null
 }
@@ -226,6 +230,7 @@ export function TripMap({
   attractions,
   carSummaries,
   flightSummaries,
+  trainSummaries,
   targetHotelOrder,
   targetAttractionName,
   targetRecommendation,
@@ -286,7 +291,7 @@ export function TripMap({
           />
         </LayersControl.BaseLayer>
       </LayersControl>
-      <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} />
+      <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} trains={trainSummaries} />
       {hotels.map((stop) => (
         <HotelMarker
           key={stop.order}
@@ -331,7 +336,12 @@ export function TripMap({
       {targetRecommendation && (
         <FocusRecommendation targetId={targetRecommendation.id} markerRefs={recommendationMarkerRefs} />
       )}
-      <FitHighlightedSegment hotels={hotels} cars={carSummaries} flights={flightSummaries} />
+      <FitHighlightedSegment
+        hotels={hotels}
+        cars={carSummaries}
+        flights={flightSummaries}
+        trains={trainSummaries}
+      />
       <RouteFlythrough hotels={hotels} isPlaying={isFlythroughPlaying} />
     </MapContainer>
   )

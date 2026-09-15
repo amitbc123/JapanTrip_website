@@ -2,7 +2,7 @@ import { Fragment, useEffect } from "react"
 import { Marker, Polyline } from "react-leaflet"
 import { createSegmentEmojiIcon } from "@/components/map/icons"
 import { LEAFLET_DASH_ARRAY, lineStyleForTransport } from "@/lib/geo"
-import type { CarSummaryRow, FlightSummaryRow } from "@/lib/routeSummary"
+import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
 import { useRouteColorStore } from "@/stores/route-color-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import type { RouteStop, TransportMode } from "@/types/trip"
@@ -10,12 +10,14 @@ import type { RouteStop, TransportMode } from "@/types/trip"
 const SEGMENT_EMOJI: Partial<Record<TransportMode, string>> = {
   car: "🚗",
   flight: "✈️",
+  train: "🚄",
 }
 
 interface RouteSegmentsProps {
   hotels: RouteStop[]
   cars: CarSummaryRow[]
   flights: FlightSummaryRow[]
+  trains: TrainSummaryRow[]
 }
 
 const HIGHLIGHT_COLOR = "#DC2626"
@@ -25,6 +27,7 @@ const HIGHLIGHT_COLOR = "#DC2626"
 function highlightedFromOrders(
   cars: CarSummaryRow[],
   flights: FlightSummaryRow[],
+  trains: TrainSummaryRow[],
   highlightedKey: string | null
 ): Set<number> {
   const orders = new Set<number>()
@@ -37,20 +40,24 @@ function highlightedFromOrders(
     if (flight.key !== highlightedKey) continue
     for (const order of flight.coversHotelLegOrders.slice(0, -1)) orders.add(order)
   }
+  for (const train of trains) {
+    if (train.key !== highlightedKey) continue
+    for (const order of train.coversHotelLegOrders.slice(0, -1)) orders.add(order)
+  }
   return orders
 }
 
-export function RouteSegments({ hotels, cars, flights }: RouteSegmentsProps) {
+export function RouteSegments({ hotels, cars, flights, trains }: RouteSegmentsProps) {
   const hotelsInOrder = [...hotels].sort((a, b) => a.order - b.order)
   const routeColor = useRouteColorStore((s) => s.color)
   const highlightedKey = useRouteHighlightStore((s) => s.highlightedKey)
-  const highlightedFrom = highlightedFromOrders(cars, flights, highlightedKey)
+  const highlightedFrom = highlightedFromOrders(cars, flights, trains, highlightedKey)
 
   useEffect(() => {
     // Dev-time cross-check: coversHotelLegOrders on cars/flights should line
     // up with the transportToNext-driven segments actually drawn below.
     // transportToNext remains the source of truth for drawing either way.
-    const checkLegs = (label: string, orders: number[], expectedMode: "car" | "flight") => {
+    const checkLegs = (label: string, orders: number[], expectedMode: "car" | "flight" | "train") => {
       for (let i = 0; i < orders.length - 1; i++) {
         const from = hotelsInOrder.find((h) => h.order === orders[i])
         if (from && from.transportToNext !== expectedMode) {
@@ -62,7 +69,8 @@ export function RouteSegments({ hotels, cars, flights }: RouteSegmentsProps) {
     }
     for (const car of cars) checkLegs(car.label, car.coversHotelLegOrders, "car")
     for (const flight of flights) checkLegs(flight.label, flight.coversHotelLegOrders, "flight")
-  }, [hotelsInOrder, cars, flights])
+    for (const train of trains) checkLegs(train.label, train.coversHotelLegOrders, "train")
+  }, [hotelsInOrder, cars, flights, trains])
 
   return (
     <>

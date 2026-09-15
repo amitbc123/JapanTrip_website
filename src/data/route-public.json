@@ -53,5 +53,29 @@
       "arriveTime": "15:45",
       "coversHotelLegOrders": [18, 19]
     }
+  ],
+  "trains": [
+    {
+      "label": "Train 1",
+      "trainNumber": "Revaty Kegon 19",
+      "route": "Asakusa to Tobu Nikko",
+      "date": "2026-10-10",
+      "departTime": "11:00",
+      "arriveTime": "12:51",
+      "price": { "amount": 41.22, "currency": "USD" },
+      "paidBy": "משה חסיד",
+      "coversHotelLegOrders": [1, 2]
+    },
+    {
+      "label": "Train 2",
+      "trainNumber": "Tsubasa 133",
+      "route": "Utsunomiya to Oishida",
+      "date": "2026-10-14",
+      "departTime": "10:51",
+      "arriveTime": "13:16",
+      "price": { "amount": 30420, "currency": "JPY" },
+      "paidBy": "משה חסיד",
+      "coversHotelLegOrders": [2, 3]
+    }
   ]
 }
