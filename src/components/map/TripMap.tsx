@@ -20,6 +20,9 @@ interface TripMapProps {
   carSummaries: CarSummaryRow[]
   flightSummaries: FlightSummaryRow[]
   trainSummaries: TrainSummaryRow[]
+  /** Stop we're currently at per today's date, when known (private trip
+   *  file loaded) — highlights that hotel marker as "we are here". */
+  currentHotelOrder?: number | null
   targetHotelOrder?: number
   targetAttractionName?: string
   targetRecommendation?: Recommendation
@@ -231,6 +234,7 @@ export function TripMap({
   carSummaries,
   flightSummaries,
   trainSummaries,
+  currentHotelOrder,
   targetHotelOrder,
   targetAttractionName,
   targetRecommendation,
@@ -297,6 +301,7 @@ export function TripMap({
           key={stop.order}
           stop={stop}
           details={hotelDetailsByOrder.get(stop.order)}
+          isCurrent={stop.order === currentHotelOrder}
           registerRef={(order, marker) => {
             if (marker) hotelMarkerRefs.current.set(order, marker)
             else hotelMarkerRefs.current.delete(order)

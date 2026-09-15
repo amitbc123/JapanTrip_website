@@ -12,10 +12,13 @@ interface HotelMarkerProps {
    *  trip file has been loaded — upgrades the popup from a bare stop number
    *  to the name/city/date range. */
   details?: Hotel
+  /** Whether this is the stop we're currently at, per today's date —
+   *  only known once the private trip file is loaded. */
+  isCurrent?: boolean
   registerRef?: (order: number, marker: L.Marker | null) => void
 }
 
-export function HotelMarker({ stop, details, registerRef }: HotelMarkerProps) {
+export function HotelMarker({ stop, details, isCurrent, registerRef }: HotelMarkerProps) {
   if (stop.lat === null || stop.lon === null) return null
 
   const dateRange =
@@ -29,7 +32,7 @@ export function HotelMarker({ stop, details, registerRef }: HotelMarkerProps) {
   return (
     <Marker
       position={[stop.lat, stop.lon]}
-      icon={createHotelIcon(stop.order, srLabel)}
+      icon={createHotelIcon(stop.order, srLabel, isCurrent)}
       ref={(marker) => registerRef?.(stop.order, marker)}
     >
       <Popup className="trip-map-popup">
@@ -43,6 +46,9 @@ export function HotelMarker({ stop, details, registerRef }: HotelMarkerProps) {
             </div>
             <span className="text-xs text-muted-foreground">{translateCity(details.city)}</span>
             {dateRange && <span className="text-xs">{dateRange}</span>}
+            {isCurrent && (
+              <span className="text-xs font-semibold text-emerald-600">📍 נמצאים כאן עכשיו</span>
+            )}
             <Link
               to={`/hotels?open=${stop.order}`}
               className="mt-1 text-xs font-medium text-primary underline underline-offset-2"

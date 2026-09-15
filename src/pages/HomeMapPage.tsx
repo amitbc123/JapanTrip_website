@@ -7,6 +7,7 @@ import recommendations from "@/data/recommendations.json"
 import routePublicRaw from "@/data/route-public.json"
 import { useTripDataContext } from "@/data/useTripData"
 import { carSummaryFromPrivate, carSummaryFromPublic, flightSummary, trainSummary } from "@/lib/routeSummary"
+import { getCurrentHotelOrder } from "@/lib/tripProgress"
 import type { Hotel, Recommendation, RoutePublicData } from "@/types/trip"
 
 const routePublic = routePublicRaw as RoutePublicData
@@ -53,6 +54,9 @@ export function HomeMapPage() {
     ? (privateData.trains ?? []).map(trainSummary)
     : routePublic.trains.map(trainSummary)
   const attractions = privateData?.attractions ?? []
+  // Only known once the private trip file is loaded — route-public.json
+  // deliberately carries no check-in dates.
+  const currentHotelOrder = privateData ? getCurrentHotelOrder(privateData.hotels) : null
 
   return (
     <div className="flex flex-col gap-4 p-3">
@@ -65,6 +69,7 @@ export function HomeMapPage() {
             carSummaries={carSummaries}
             flightSummaries={flightSummaries}
             trainSummaries={trainSummaries}
+            currentHotelOrder={currentHotelOrder}
             targetHotelOrder={targetHotelOrder}
             targetAttractionName={targetAttractionName}
             targetRecommendation={targetRecommendation}
