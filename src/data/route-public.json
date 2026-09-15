@@ -49,9 +49,10 @@
       "flightNumber": "JAL630",
       "route": "Kumamoto to Tokyo Haneda",
       "date": "2026-11-22",
-      "departTime": "14:15",
-      "arriveTime": "15:45",
-      "coversHotelLegOrders": [18, 19]
+      "departTime": "13:55",
+      "arriveTime": "15:25",
+      "coversHotelLegOrders": [18, 19],
+      "notes": "21-23.11 הוא סוף שבוע ארוך ביפן, צפוי עומס בשדה התעופה."
     }
   ],
   "trains": [
@@ -64,7 +65,8 @@
       "arriveTime": "12:51",
       "price": { "amount": 41.22, "currency": "USD" },
       "paidBy": "עמרי קדרון",
-      "coversHotelLegOrders": [1, 2]
+      "coversHotelLegOrders": [1, 2],
+      "notes": "מסלול פתוח, כמעט ללא מנהרות."
     },
     {
       "label": "Train 2",
@@ -75,7 +77,116 @@
       "arriveTime": "13:16",
       "price": { "amount": 30420, "currency": "JPY" },
       "paidBy": "משה חסיד",
-      "coversHotelLegOrders": [2, 3]
+      "coversHotelLegOrders": [2, 3],
+      "notes": "לפני כן: מ-JR Nikko (לא Tobu-Nikko!) לאוצונומיה ברכבת מקומית ללא הזמנה. מעבר איטאיה (פוקושימה-יונזאווה) הוא הקטע המנהרתי ביותר בנסיעה זו, כ-15 דקות. הרכבת חייבת יעד Shinjo (新庄) אחרת לא עוצרת באוישידה. בתחנת אוישידה אי אפשר להשתמש ב-Suica, מזומן בלבד."
+    },
+    {
+      "label": "Train 3",
+      "trainNumber": "Tsubasa",
+      "route": "אוישידה לטוקיו",
+      "date": "2026-10-16",
+      "departTime": null,
+      "arriveTime": null,
+      "price": null,
+      "paidBy": null,
+      "coversHotelLegOrders": [3, 4],
+      "notes": "טרם הוזמן — eki-net. מעבר איטאיה (מנהרות) בכיוון הפוך מנסיעת ה-14.10. מטוקיו להמשך ליוקוהמה ברכבת JR ללא הזמנה."
+    },
+    {
+      "label": "Train 4",
+      "trainNumber": "Kodama / Hikari",
+      "route": "אודוארה לטוקיו",
+      "date": "2026-10-24",
+      "departTime": null,
+      "arriveTime": null,
+      "price": null,
+      "paidBy": null,
+      "coversHotelLegOrders": [6, 7],
+      "notes": "טרם הוזמן — SmartEX. קטע פתוח, ללא מנהרות משמעותיות."
+    },
+    {
+      "label": "Train 5",
+      "trainNumber": "Kagayaki / Hakutaka",
+      "route": "טוקיו לקנזאווה",
+      "date": "2026-10-24",
+      "departTime": null,
+      "arriveTime": null,
+      "price": null,
+      "paidBy": null,
+      "coversHotelLegOrders": [6, 7],
+      "notes": "טרם הוזמן — eki-net. 24.10 הוא יום שבת, ל-Kagayaki אין קרון חופשי בכלל — לבדוק חלופת Hakutaka. כולל מנהרת אייאמה (22.2 ק\"מ, כ-8 דקות רצוף) ועשרות מנהרות נוספות בהרי האלפים — הקטע המנהרתי ביותר בטיול."
+    },
+    {
+      "label": "Train 6",
+      "trainNumber": "Nozomi / Hikari",
+      "route": "נגויה לקיוטו",
+      "date": "2026-11-05",
+      "departTime": null,
+      "arriveTime": null,
+      "price": null,
+      "paidBy": null,
+      "coversHotelLegOrders": [14, 15],
+      "notes": "טרם הוזמן — SmartEX. מעט מנהרות קצרות באזור סקיגהארה. ב-Nozomi נשארו רק 2 קרונות ללא הזמנת מקום מאז מרץ 2025."
+    },
+    {
+      "label": "Train 7",
+      "trainNumber": "Nozomi / Sakura",
+      "route": "שין-אוסקה להירושימה",
+      "date": "2026-11-17",
+      "departTime": null,
+      "arriveTime": null,
+      "price": null,
+      "paidBy": null,
+      "coversHotelLegOrders": [16, 17],
+      "notes": "טרם הוזמן — SmartEX. יוצא מתחנת Shin-Osaka, לא מתחנת Osaka! כולל מנהרת רוקו (16.25 ק\"מ, כ-6 דקות רצוף) — קו סאניו מהמנהרתיים ביפן."
+    },
+    {
+      "label": "Train 8",
+      "trainNumber": "Sakura / Mizuho",
+      "route": "הירושימה לקומאמוטו",
+      "date": "2026-11-19",
+      "departTime": null,
+      "arriveTime": null,
+      "price": null,
+      "paidBy": null,
+      "coversHotelLegOrders": [17, 18],
+      "notes": "טרם הוזמן — SmartEX. נסיעה ישירה בלי החלפה, כוללת מנהרת שין-קאנמון מתחת לים בין הונשו לקיושו. במחוז קומאמוטו Suica לא עובד, מזומן בלבד."
+    },
+    {
+      "label": "Train 9",
+      "trainNumber": "Laview",
+      "route": "אייקבוקורו לסייבו-צ'יצ'יבו",
+      "date": "2026-12-03",
+      "departTime": null,
+      "arriveTime": null,
+      "price": null,
+      "paidBy": null,
+      "coversHotelLegOrders": [],
+      "notes": "טרם הוזמן — אתר/אפליקציית Seibu (Smooz), מ-3.11 בשעה 07:00 שעון יפן (00:00 בישראל). נסיעה לפסטיבל יומאטסורי, כמה מנהרות קצרות בהרים לקראת הסוף."
+    },
+    {
+      "label": "Train 10",
+      "trainNumber": "Laview",
+      "route": "סייבו-צ'יצ'יבו לאייקבוקורו",
+      "date": "2026-12-03",
+      "departTime": null,
+      "arriveTime": null,
+      "price": null,
+      "paidBy": null,
+      "coversHotelLegOrders": [],
+      "notes": "טרם הוזמן — חובה להזמין! הזיקוקים נגמרים 21:55 ואז עשרות אלפי אנשים בתחנה בבת אחת, רכבות החזרה נמכרות ראשונות."
+    },
+    {
+      "label": "Train 11",
+      "trainNumber": "N'EX",
+      "route": "שינג'וקו לנריטה",
+      "date": "2026-12-06",
+      "departTime": null,
+      "arriveTime": null,
+      "price": null,
+      "paidBy": null,
+      "coversHotelLegOrders": [],
+      "notes": "טרם הוזמן — eki-net, מ-6.11 בשעה 10:30 שעון ישראל. 6.12 הוא יום ראשון, צפוי עומס לכיוון השדה. יוצאים בסביבות 13:30 לקראת טיסה LY92 ב-18:35."
     }
   ]
 }

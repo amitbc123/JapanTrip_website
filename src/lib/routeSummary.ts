@@ -16,6 +16,7 @@ export interface CarSummaryRow {
   pickupLine: string
   dropoffLine: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 export interface FlightSummaryRow {
@@ -23,6 +24,7 @@ export interface FlightSummaryRow {
   label: string
   timeLine: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 interface FlightLegLike {
@@ -32,6 +34,7 @@ interface FlightLegLike {
   departTime: string
   arriveTime: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 export function carSummaryFromPrivate(car: CarLeg): CarSummaryRow {
@@ -51,6 +54,7 @@ export function carSummaryFromPublic(car: PublicCarLeg): CarSummaryRow {
     pickupLine: `איסוף: ${translateCity(car.pickupCity)}, ${formatHebrewDate(car.pickupDate)} ${car.pickupTime}`,
     dropoffLine: `החזרה: ${translateCity(car.dropoffCity)}, ${formatHebrewDate(car.dropoffDate)} ${car.dropoffTime}`,
     coversHotelLegOrders: car.coversHotelLegOrders,
+    notes: car.notes,
   }
 }
 
@@ -60,6 +64,7 @@ export function flightSummary(flight: FlightLegLike): FlightSummaryRow {
     label: `טיסה פנימית · ${flight.flightNumber} · ${translateFlightRoute(flight.flightNumber, flight.route)}`,
     timeLine: `המראה: ${formatHebrewDate(flight.date)} ${flight.departTime} · נחיתה: ${flight.arriveTime}`,
     coversHotelLegOrders: flight.coversHotelLegOrders,
+    notes: flight.notes,
   }
 }
 
@@ -69,14 +74,19 @@ export interface TrainSummaryRow {
   timeLine: string
   paidByLine: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 export function trainSummary(train: TrainLeg): TrainSummaryRow {
+  const isBooked = train.departTime !== null && train.arriveTime !== null
   return {
-    key: train.trainNumber,
+    key: train.label,
     label: `רכבת · ${train.trainNumber} · ${translateTrainRoute(train.trainNumber, train.route)}`,
-    timeLine: `יציאה: ${formatHebrewDate(train.date)} ${train.departTime} · הגעה: ${train.arriveTime} · ${formatPrice(train.price)}`,
-    paidByLine: `שולם על ידי: ${train.paidBy}`,
+    timeLine: isBooked
+      ? `יציאה: ${formatHebrewDate(train.date)} ${train.departTime} · הגעה: ${train.arriveTime} · ${formatPrice(train.price)}`
+      : `${formatHebrewDate(train.date)} · טרם הוזמן`,
+    paidByLine: train.paidBy ? `שולם על ידי: ${train.paidBy}` : "עדיין לא הוזמן",
     coversHotelLegOrders: train.coversHotelLegOrders,
+    notes: train.notes,
   }
 }

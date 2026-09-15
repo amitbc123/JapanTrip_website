@@ -1,6 +1,7 @@
 import {
   BedDoubleIcon,
   CompassIcon,
+  InfoIcon,
   MapIcon,
   PaletteIcon,
   RefreshCwIcon,
@@ -29,6 +30,7 @@ const NAV_ITEMS = [
   { to: "/hotels", label: "מלונות", icon: BedDoubleIcon },
   { to: "/attractions", label: "אטרקציות", icon: TicketIcon },
   { to: "/recommendations", label: "המלצות", icon: CompassIcon },
+  { to: "/tips", label: "מידע וטיפים", icon: InfoIcon },
 ] as const
 
 function hasFileSystemAccess(): boolean {

@@ -70,17 +70,22 @@ export interface FlightLeg {
 
 /** route-public.json's train shape — trains are sourced from the site's
  *  own data only, never from the private trip file, so there's no separate
- *  private variant the way cars/flights have. */
+ *  private variant the way cars/flights have.
+ *
+ *  departTime/arriveTime/price/paidBy are null for a leg that's on the
+ *  itinerary but not booked yet — the date/route/candidate service are
+ *  still known and worth showing, just not the concrete schedule. */
 export interface TrainLeg {
   label: string
   trainNumber: string
   route: string
   date: string
-  departTime: string
-  arriveTime: string
+  departTime: string | null
+  arriveTime: string | null
   price: Price | null
-  paidBy: string
+  paidBy: string | null
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 export interface TripData {
@@ -113,6 +118,7 @@ export interface PublicCarLeg {
   dropoffDate: string
   dropoffTime: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 /** route-public.json's flight shape — same fields as FlightLeg minus
@@ -125,6 +131,7 @@ export interface PublicFlightLeg {
   departTime: string
   arriveTime: string
   coversHotelLegOrders: number[]
+  notes?: string
 }
 
 export interface RoutePublicData {
