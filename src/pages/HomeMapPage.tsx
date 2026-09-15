@@ -50,8 +50,11 @@ export function HomeMapPage() {
   const flightSummaries = privateData
     ? privateData.flights.map(flightSummary)
     : routePublic.flights.map(flightSummary)
-  const trainSummaries = privateData
-    ? (privateData.trains ?? []).map(trainSummary)
+  // Unlike cars/flights, trains may be absent from an already-imported
+  // private file that predates this field — fall back to the public route
+  // data in that case instead of showing an empty list.
+  const trainSummaries = privateData?.trains?.length
+    ? privateData.trains.map(trainSummary)
     : routePublic.trains.map(trainSummary)
   const attractions = privateData?.attractions ?? []
   // Only known once the private trip file is loaded — route-public.json
