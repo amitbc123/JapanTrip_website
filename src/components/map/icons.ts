@@ -1,9 +1,11 @@
 import L from "leaflet"
 
-export function createHotelIcon(order: number, srLabel: string): L.DivIcon {
+export function createHotelIcon(order: number, srLabel: string, isCurrent = false): L.DivIcon {
+  const className = isCurrent ? "trip-hotel-marker trip-hotel-marker--current" : "trip-hotel-marker"
+  const fullLabel = isCurrent ? `${srLabel} (המיקום הנוכחי שלנו)` : srLabel
   return L.divIcon({
-    className: "trip-hotel-marker",
-    html: `<span aria-hidden="true">${order}</span><span class="sr-only">${srLabel}</span>`,
+    className,
+    html: `<span aria-hidden="true">${order}</span><span class="sr-only">${fullLabel}</span>`,
     iconSize: [28, 28],
     iconAnchor: [14, 14],
     popupAnchor: [0, -16],

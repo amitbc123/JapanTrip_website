@@ -25,6 +25,10 @@ export function MapLegend() {
         <span className="trip-attraction-marker" aria-hidden />
         אטרקציה
       </div>
+      <div className="flex items-center gap-2 text-sm">
+        <span className="inline-block size-4 rounded-full bg-[#16a34a] shadow-[0_0_0_3px_rgb(22_163_74_/_0.35)]" aria-hidden />
+        המיקום שלנו עכשיו
+      </div>
     </div>
   )
 }

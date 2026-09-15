@@ -145,6 +145,34 @@
   outline-offset: 2px;
 }
 
+/* "We are here" — the stop matching today's date per the loaded trip data. */
+.trip-hotel-marker--current {
+  background: #16a34a;
+  border-color: #16a34a;
+  box-shadow:
+    0 0 0 4px rgb(22 163 74 / 0.35),
+    0 1px 4px rgb(0 0 0 / 0.35);
+  animation: current-stop-pulse 2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .trip-hotel-marker--current {
+    animation: none;
+  }
+}
+@keyframes current-stop-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 4px rgb(22 163 74 / 0.35),
+      0 1px 4px rgb(0 0 0 / 0.35);
+  }
+  50% {
+    box-shadow:
+      0 0 0 9px rgb(22 163 74 / 0.12),
+      0 1px 4px rgb(0 0 0 / 0.35);
+  }
+}
+
 .trip-attraction-marker {
   display: flex;
   align-items: center;

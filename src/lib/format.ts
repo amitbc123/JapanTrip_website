@@ -5,7 +5,7 @@ export const NOT_AVAILABLE = "לא זמין"
 /** Parses the date-only part of an ISO-ish "YYYY-MM-DD[THH:mm:ss]" string as
  *  a UTC-anchored Date, so formatting never shifts by a day due to the
  *  viewer's local timezone (the source strings are JST wall-clock times). */
-function parseDateOnly(isoLike: string): Date {
+export function parseDateOnly(isoLike: string): Date {
   const [datePart] = isoLike.split("T")
   const parts = (datePart ?? isoLike).split("-").map(Number)
   const year = parts[0] ?? 0

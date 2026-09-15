@@ -1,4 +1,4 @@
-import { formatHebrewDate } from "@/lib/format"
+import { formatHebrewDate, formatPrice } from "@/lib/format"
 import {
   translateCarLabel,
   translateCarLabelByName,
@@ -6,8 +6,9 @@ import {
   translateCarDropoffLocation,
   translateCity,
   translateFlightRoute,
+  translateTrainRoute,
 } from "@/lib/translations"
-import type { CarLeg, PublicCarLeg } from "@/types/trip"
+import type { CarLeg, PublicCarLeg, TrainLeg } from "@/types/trip"
 
 export interface CarSummaryRow {
   key: string
@@ -59,5 +60,23 @@ export function flightSummary(flight: FlightLegLike): FlightSummaryRow {
     label: `טיסה פנימית · ${flight.flightNumber} · ${translateFlightRoute(flight.flightNumber, flight.route)}`,
     timeLine: `המראה: ${formatHebrewDate(flight.date)} ${flight.departTime} · נחיתה: ${flight.arriveTime}`,
     coversHotelLegOrders: flight.coversHotelLegOrders,
+  }
+}
+
+export interface TrainSummaryRow {
+  key: string
+  label: string
+  timeLine: string
+  paidByLine: string
+  coversHotelLegOrders: number[]
+}
+
+export function trainSummary(train: TrainLeg): TrainSummaryRow {
+  return {
+    key: train.trainNumber,
+    label: `רכבת · ${train.trainNumber} · ${translateTrainRoute(train.trainNumber, train.route)}`,
+    timeLine: `יציאה: ${formatHebrewDate(train.date)} ${train.departTime} · הגעה: ${train.arriveTime} · ${formatPrice(train.price)}`,
+    paidByLine: `שולם על ידי: ${train.paidBy}`,
+    coversHotelLegOrders: train.coversHotelLegOrders,
   }
 }

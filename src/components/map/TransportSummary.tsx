@@ -1,5 +1,5 @@
-import { CarIcon, PlaneIcon } from "lucide-react"
-import type { CarSummaryRow, FlightSummaryRow } from "@/lib/routeSummary"
+import { CarIcon, PlaneIcon, TrainFrontIcon } from "lucide-react"
+import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 
 function scrollMapIntoView() {
@@ -9,9 +9,11 @@ function scrollMapIntoView() {
 export function TransportSummary({
   cars,
   flights,
+  trains,
 }: {
   cars: CarSummaryRow[]
   flights: FlightSummaryRow[]
+  trains: TrainSummaryRow[]
 }) {
   const highlightedKey = useRouteHighlightStore((s) => s.highlightedKey)
   const toggle = useRouteHighlightStore((s) => s.toggle)
@@ -23,6 +25,27 @@ export function TransportSummary({
 
   return (
     <div className="flex flex-col gap-3">
+      {trains.map((train) => {
+        const isOn = highlightedKey === train.key
+        return (
+          <button
+            key={train.key}
+            type="button"
+            aria-pressed={isOn}
+            onClick={() => handleToggle(train.key)}
+            className={`flex gap-3 rounded-lg border p-3 text-start transition-colors ${
+              isOn ? "border-destructive bg-destructive/5" : "border-border bg-card hover:bg-accent/40"
+            }`}
+          >
+            <TrainFrontIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[15px] font-medium">{train.label}</span>
+              <span className="text-[13px] text-muted-foreground">{train.timeLine}</span>
+              <span className="text-[13px] text-muted-foreground">{train.paidByLine}</span>
+            </div>
+          </button>
+        )
+      })}
       {cars.map((car) => {
         const isOn = highlightedKey === car.key
         return (
