@@ -63,7 +63,7 @@
       "departTime": "11:00",
       "arriveTime": "12:51",
       "price": { "amount": 41.22, "currency": "USD" },
-      "paidBy": "משה חסיד",
+      "paidBy": "עמרי קדרון",
       "coversHotelLegOrders": [1, 2]
     },
     {
