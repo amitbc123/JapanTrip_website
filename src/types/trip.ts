@@ -69,12 +69,13 @@ export interface FlightLeg {
 }
 
 /** route-public.json's train shape — trains are sourced from the site's
- *  own data only, never from the private trip file, so there's no separate
- *  private variant the way cars/flights have.
+ *  own data only, never from the private trip file. Deliberately carries
+ *  no price/paidBy: those are financial/personal details that don't belong
+ *  in the committed public file, see `PrivateTrainInfo` below.
  *
- *  departTime/arriveTime/price/paidBy are null for a leg that's on the
- *  itinerary but not booked yet — the date/route/candidate service are
- *  still known and worth showing, just not the concrete schedule. */
+ *  departTime/arriveTime are null for a leg that's on the itinerary but
+ *  not booked yet — the date/route/candidate service are still known and
+ *  worth showing, just not the concrete schedule. */
 export interface TrainLeg {
   label: string
   trainNumber: string
@@ -82,10 +83,18 @@ export interface TrainLeg {
   date: string
   departTime: string | null
   arriveTime: string | null
-  price: Price | null
-  paidBy: string | null
   coversHotelLegOrders: number[]
   notes?: string
+}
+
+/** Private-only financial details for a route-public.json train leg,
+ *  matched back to it by `trainNumber` — lives only in the private trip
+ *  file so price and who-paid never end up in the repo. */
+export interface PrivateTrainInfo {
+  trainNumber: string
+  price: Price | null
+  paidBy: string | null
+  seats?: string[]
 }
 
 export interface TripData {
@@ -95,6 +104,7 @@ export interface TripData {
   attractions: Attraction[]
   cars: CarLeg[]
   flights: FlightLeg[]
+  trains?: PrivateTrainInfo[]
 }
 
 /** The subset of a route stop that's safe to show without the private trip

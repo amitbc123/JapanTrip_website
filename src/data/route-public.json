@@ -49,8 +49,8 @@
       "flightNumber": "JAL630",
       "route": "Kumamoto to Tokyo Haneda",
       "date": "2026-11-22",
-      "departTime": "13:55",
-      "arriveTime": "15:25",
+      "departTime": "14:15",
+      "arriveTime": "15:45",
       "coversHotelLegOrders": [18, 19],
       "notes": "21-23.11 הוא סוף שבוע ארוך ביפן, צפוי עומס בשדה התעופה."
     }
@@ -63,8 +63,6 @@
       "date": "2026-10-10",
       "departTime": "11:00",
       "arriveTime": "12:51",
-      "price": { "amount": 41.22, "currency": "USD" },
-      "paidBy": "עמרי קדרון",
       "coversHotelLegOrders": [1, 2],
       "notes": "מסלול פתוח, כמעט ללא מנהרות."
     },
@@ -75,8 +73,6 @@
       "date": "2026-10-14",
       "departTime": "10:51",
       "arriveTime": "13:16",
-      "price": { "amount": 30420, "currency": "JPY" },
-      "paidBy": "משה חסיד",
       "coversHotelLegOrders": [2, 3],
       "notes": "לפני כן: מ-JR Nikko (לא Tobu-Nikko!) לאוצונומיה ברכבת מקומית ללא הזמנה. מעבר איטאיה (פוקושימה-יונזאווה) הוא הקטע המנהרתי ביותר בנסיעה זו, כ-15 דקות. הרכבת חייבת יעד Shinjo (新庄) אחרת לא עוצרת באוישידה. בתחנת אוישידה אי אפשר להשתמש ב-Suica, מזומן בלבד."
     },
@@ -87,8 +83,6 @@
       "date": "2026-10-16",
       "departTime": null,
       "arriveTime": null,
-      "price": null,
-      "paidBy": null,
       "coversHotelLegOrders": [3, 4],
       "notes": "טרם הוזמן — eki-net. מעבר איטאיה (מנהרות) בכיוון הפוך מנסיעת ה-14.10. מטוקיו להמשך ליוקוהמה ברכבת JR ללא הזמנה."
     },
@@ -99,8 +93,6 @@
       "date": "2026-10-24",
       "departTime": null,
       "arriveTime": null,
-      "price": null,
-      "paidBy": null,
       "coversHotelLegOrders": [6, 7],
       "notes": "טרם הוזמן — SmartEX. קטע פתוח, ללא מנהרות משמעותיות."
     },
@@ -111,8 +103,6 @@
       "date": "2026-10-24",
       "departTime": null,
       "arriveTime": null,
-      "price": null,
-      "paidBy": null,
       "coversHotelLegOrders": [6, 7],
       "notes": "טרם הוזמן — eki-net. 24.10 הוא יום שבת, ל-Kagayaki אין קרון חופשי בכלל — לבדוק חלופת Hakutaka. כולל מנהרת אייאמה (22.2 ק\"מ, כ-8 דקות רצוף) ועשרות מנהרות נוספות בהרי האלפים — הקטע המנהרתי ביותר בטיול."
     },
@@ -123,8 +113,6 @@
       "date": "2026-11-05",
       "departTime": null,
       "arriveTime": null,
-      "price": null,
-      "paidBy": null,
       "coversHotelLegOrders": [14, 15],
       "notes": "טרם הוזמן — SmartEX. מעט מנהרות קצרות באזור סקיגהארה. ב-Nozomi נשארו רק 2 קרונות ללא הזמנת מקום מאז מרץ 2025."
     },
@@ -135,8 +123,6 @@
       "date": "2026-11-17",
       "departTime": null,
       "arriveTime": null,
-      "price": null,
-      "paidBy": null,
       "coversHotelLegOrders": [16, 17],
       "notes": "טרם הוזמן — SmartEX. יוצא מתחנת Shin-Osaka, לא מתחנת Osaka! כולל מנהרת רוקו (16.25 ק\"מ, כ-6 דקות רצוף) — קו סאניו מהמנהרתיים ביפן."
     },
@@ -147,8 +133,6 @@
       "date": "2026-11-19",
       "departTime": null,
       "arriveTime": null,
-      "price": null,
-      "paidBy": null,
       "coversHotelLegOrders": [17, 18],
       "notes": "טרם הוזמן — SmartEX. נסיעה ישירה בלי החלפה, כוללת מנהרת שין-קאנמון מתחת לים בין הונשו לקיושו. במחוז קומאמוטו Suica לא עובד, מזומן בלבד."
     },
@@ -159,8 +143,6 @@
       "date": "2026-12-03",
       "departTime": null,
       "arriveTime": null,
-      "price": null,
-      "paidBy": null,
       "coversHotelLegOrders": [],
       "notes": "טרם הוזמן — אתר/אפליקציית Seibu (Smooz), מ-3.11 בשעה 07:00 שעון יפן (00:00 בישראל). נסיעה לפסטיבל יומאטסורי, כמה מנהרות קצרות בהרים לקראת הסוף."
     },
@@ -171,8 +153,6 @@
       "date": "2026-12-03",
       "departTime": null,
       "arriveTime": null,
-      "price": null,
-      "paidBy": null,
       "coversHotelLegOrders": [],
       "notes": "טרם הוזמן — חובה להזמין! הזיקוקים נגמרים 21:55 ואז עשרות אלפי אנשים בתחנה בבת אחת, רכבות החזרה נמכרות ראשונות."
     },
@@ -183,8 +163,6 @@
       "date": "2026-12-06",
       "departTime": null,
       "arriveTime": null,
-      "price": null,
-      "paidBy": null,
       "coversHotelLegOrders": [],
       "notes": "טרם הוזמן — eki-net, מ-6.11 בשעה 10:30 שעון ישראל. 6.12 הוא יום ראשון, צפוי עומס לכיוון השדה. יוצאים בסביבות 13:30 לקראת טיסה LY92 ב-18:35."
     }

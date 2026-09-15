@@ -41,7 +41,9 @@ export function TransportSummary({
             <div className="flex flex-col gap-0.5">
               <span className="text-[15px] font-medium">{train.label}</span>
               <span className="text-[13px] text-muted-foreground">{train.timeLine}</span>
-              <span className="text-[13px] text-muted-foreground">{train.paidByLine}</span>
+              {train.paidByLine && (
+                <span className="text-[13px] text-muted-foreground">{train.paidByLine}</span>
+              )}
               {train.notes && <span className="text-[13px] text-destructive">{train.notes}</span>}
             </div>
           </button>
