@@ -3,6 +3,7 @@ import { Marker, Popup } from "react-leaflet"
 import { Link } from "react-router"
 import { createHotelIcon } from "@/components/map/icons"
 import { formatHebrewDateRange } from "@/lib/format"
+import { MARKER_Z_HOTEL } from "@/lib/mapZIndex"
 import { translateCity } from "@/lib/translations"
 import type { Hotel, RouteStop } from "@/types/trip"
 
@@ -33,6 +34,7 @@ export function HotelMarker({ stop, details, isCurrent, registerRef }: HotelMark
     <Marker
       position={[stop.lat, stop.lon]}
       icon={createHotelIcon(stop.order, srLabel, isCurrent)}
+      zIndexOffset={MARKER_Z_HOTEL}
       ref={(marker) => registerRef?.(stop.order, marker)}
     >
       <Popup className="trip-map-popup">

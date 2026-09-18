@@ -7,6 +7,7 @@ import { HotelMarker } from "@/components/map/HotelMarker"
 import { RecommendationMarker } from "@/components/map/RecommendationMarker"
 import { RouteSegments } from "@/components/map/RouteSegments"
 import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
+import { useMapLayersStore } from "@/stores/map-layers-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import { useRouteFlythroughStore } from "@/stores/route-flythrough-store"
 import type { Attraction, Hotel, Leg, Recommendation, RouteStop } from "@/types/trip"
@@ -245,6 +246,8 @@ export function TripMap({
   const attractionMarkerRefs = useRef(new Map<string, L.Marker>())
   const recommendationMarkerRefs = useRef(new Map<string, L.Marker>())
   const isFlythroughPlaying = useRouteFlythroughStore((s) => s.isPlaying)
+  const showHotels = useMapLayersStore((s) => s.hotels)
+  const showAttractions = useMapLayersStore((s) => s.attractions)
 
   const plottedPoints = useMemo<[number, number][]>(() => {
     const hotelPoints = hotels
@@ -298,28 +301,30 @@ export function TripMap({
         </LayersControl.BaseLayer>
       </LayersControl>
       <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} trains={trainSummaries} legs={legs} />
-      {hotels.map((stop) => (
-        <HotelMarker
-          key={stop.order}
-          stop={stop}
-          details={hotelDetailsByOrder.get(stop.order)}
-          isCurrent={stop.order === currentHotelOrder}
-          registerRef={(order, marker) => {
-            if (marker) hotelMarkerRefs.current.set(order, marker)
-            else hotelMarkerRefs.current.delete(order)
-          }}
-        />
-      ))}
-      {attractions.map((attraction) => (
-        <AttractionMarker
-          key={attraction.name}
-          attraction={attraction}
-          registerRef={(name, marker) => {
-            if (marker) attractionMarkerRefs.current.set(name, marker)
-            else attractionMarkerRefs.current.delete(name)
-          }}
-        />
-      ))}
+      {showHotels &&
+        hotels.map((stop) => (
+          <HotelMarker
+            key={stop.order}
+            stop={stop}
+            details={hotelDetailsByOrder.get(stop.order)}
+            isCurrent={stop.order === currentHotelOrder}
+            registerRef={(order, marker) => {
+              if (marker) hotelMarkerRefs.current.set(order, marker)
+              else hotelMarkerRefs.current.delete(order)
+            }}
+          />
+        ))}
+      {showAttractions &&
+        attractions.map((attraction) => (
+          <AttractionMarker
+            key={attraction.name}
+            attraction={attraction}
+            registerRef={(name, marker) => {
+              if (marker) attractionMarkerRefs.current.set(name, marker)
+              else attractionMarkerRefs.current.delete(name)
+            }}
+          />
+        ))}
       {targetRecommendation && (
         <RecommendationMarker
           recommendation={targetRecommendation}

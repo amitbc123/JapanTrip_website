@@ -7,10 +7,11 @@ import { LEAFLET_DASH_ARRAY, lineStyleForTransport } from "@/lib/geo"
 import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
 import { groupWaypoints } from "@/lib/waypointGroups"
 import { waypointModeForHotelTransport, WAYPOINT_MODE_STYLE } from "@/lib/waypointStyle"
+import { MARKER_Z_TRANSPORT_ICON } from "@/lib/mapZIndex"
 import { useBookingStatusStore, effectiveStatus } from "@/stores/booking-status-store"
+import { useMapLayersStore } from "@/stores/map-layers-store"
 import { useRouteColorStore } from "@/stores/route-color-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
-import { useWaypointsVisibilityStore } from "@/stores/waypoints-visibility-store"
 import type { Leg, LegWaypoint, RouteStop, TransportMode } from "@/types/trip"
 
 const SEGMENT_EMOJI: Partial<Record<TransportMode, string>> = {
@@ -59,7 +60,8 @@ export function RouteSegments({ hotels, cars, flights, trains, legs }: RouteSegm
   const routeColor = useRouteColorStore((s) => s.color)
   const highlightedKey = useRouteHighlightStore((s) => s.highlightedKey)
   const highlightedFrom = highlightedFromOrders(cars, flights, trains, highlightedKey)
-  const showWaypoints = useWaypointsVisibilityStore((s) => s.showWaypoints)
+  const showWaypoints = useMapLayersStore((s) => s.waypoints)
+  const showTransportIcons = useMapLayersStore((s) => s.transportIcons)
   const statusEntries = useBookingStatusStore((s) => s.entries)
 
   const legByHotelPair = useMemo(() => {
@@ -178,7 +180,14 @@ export function RouteSegments({ hotels, cars, flights, trains, legs }: RouteSegm
                 opacity: isHighlighted ? 1 : 0.85,
               }}
             />
-            {emoji && <Marker position={midpoint} icon={createSegmentEmojiIcon(emoji, isDone)} interactive={false} />}
+            {emoji && showTransportIcons && (
+              <Marker
+                position={midpoint}
+                icon={createSegmentEmojiIcon(emoji, isDone)}
+                interactive={false}
+                zIndexOffset={MARKER_Z_TRANSPORT_ICON}
+              />
+            )}
           </Fragment>
         )
       })}

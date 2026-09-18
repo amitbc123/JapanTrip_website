@@ -1,3 +1,5 @@
+import type { BookingStatusMap } from "@/types/bookingStatus"
+
 export type TransportMode = "train" | "car" | "flight"
 
 export interface Price {
@@ -107,6 +109,10 @@ export interface TripData {
   cars: CarLeg[]
   flights: FlightLeg[]
   trains?: PrivateTrainInfo[]
+  /** Booking-status-store's state, folded into the same file on export so a
+   *  single "טעינת קובץ חדש" restores both the trip data and every
+   *  status/price/note — never round-tripped as a separate file. */
+  bookingStatus?: BookingStatusMap
 }
 
 /** The subset of a route stop that's safe to show without the private trip
