@@ -1,18 +1,17 @@
-import { Fragment, useEffect, useMemo } from "react"
+import { Fragment, useMemo, useEffect } from "react"
 import { Marker, Polyline } from "react-leaflet"
 import { createSegmentEmojiIcon } from "@/components/map/icons"
-import { WaypointMarker } from "@/components/map/WaypointMarker"
 import { carBookingId, flightBookingId, trainBookingId } from "@/components/map/TransportSummary"
+import { WaypointMarker } from "@/components/map/WaypointMarker"
 import { LEAFLET_DASH_ARRAY, lineStyleForTransport } from "@/lib/geo"
+import { MARKER_Z_TRANSPORT_ICON } from "@/lib/mapZIndex"
 import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
 import { groupWaypoints } from "@/lib/waypointGroups"
-import { waypointModeForHotelTransport, WAYPOINT_MODE_STYLE } from "@/lib/waypointStyle"
-import { MARKER_Z_TRANSPORT_ICON } from "@/lib/mapZIndex"
 import { useBookingStatusStore, effectiveStatus } from "@/stores/booking-status-store"
 import { useMapLayersStore } from "@/stores/map-layers-store"
 import { useRouteColorStore } from "@/stores/route-color-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
-import type { Leg, LegWaypoint, RouteStop, TransportMode } from "@/types/trip"
+import type { Leg, RouteStop, TransportMode } from "@/types/trip"
 
 const SEGMENT_EMOJI: Partial<Record<TransportMode, string>> = {
   car: "🚗",
@@ -55,6 +54,15 @@ function highlightedFromOrders(
   return orders
 }
 
+/** The main hotel-to-hotel route is always drawn as a single straight line
+ *  per pair, styled only by the coarse transportToNext mode — this never
+ *  changes shape or color when waypoints are toggled. Leg/waypoint data
+ *  (real intermediate stations, often well off the straight line) is shown
+ *  purely as an additional marker layer on top, never by reshaping or
+ *  recoloring the route itself — otherwise the route visibly jumps between
+ *  two different paths depending on a display toggle, and the many short,
+ *  oddly-angled segments a station detour produces at country-wide zoom
+ *  read as a broken/glitchy line rather than a route. */
 export function RouteSegments({ hotels, cars, flights, trains, legs }: RouteSegmentsProps) {
   const hotelsInOrder = [...hotels].sort((a, b) => a.order - b.order)
   const routeColor = useRouteColorStore((s) => s.color)
@@ -63,15 +71,6 @@ export function RouteSegments({ hotels, cars, flights, trains, legs }: RouteSegm
   const showWaypoints = useMapLayersStore((s) => s.waypoints)
   const showTransportIcons = useMapLayersStore((s) => s.transportIcons)
   const statusEntries = useBookingStatusStore((s) => s.entries)
-
-  const legByHotelPair = useMemo(() => {
-    const map = new Map<string, Leg>()
-    for (const leg of legs) {
-      if (leg.from === leg.to) continue
-      map.set(`${leg.from}-${leg.to}`, leg)
-    }
-    return map
-  }, [legs])
 
   const waypointGroups = useMemo(() => groupWaypoints(legs), [legs])
 
@@ -122,46 +121,6 @@ export function RouteSegments({ hotels, cars, flights, trains, legs }: RouteSegm
 
         const isHighlighted = highlightedFrom.has(hotel.order)
         const isDone = doneOrders.has(hotel.order)
-        const leg = legByHotelPair.get(`${hotel.order}-${next.order}`)
-
-        if (showWaypoints && leg && leg.waypoints.length > 0) {
-          const resolvedWaypoints = leg.waypoints.filter(
-            (w): w is LegWaypoint & { lat: number; lon: number } => w.lat !== null && w.lon !== null
-          )
-          if (resolvedWaypoints.length === leg.waypoints.length) {
-            const points: [number, number][] = [
-              [hotel.lat, hotel.lon],
-              ...resolvedWaypoints.map((w): [number, number] => [w.lat, w.lon]),
-              [next.lat, next.lon],
-            ]
-            const firstMode = waypointModeForHotelTransport(hotel.transportToNext)
-            const modes = [firstMode, ...resolvedWaypoints.map((w) => w.mode)]
-
-            return (
-              <Fragment key={hotel.order}>
-                {points.slice(0, -1).map((point, segIndex) => {
-                  const segEnd = points[segIndex + 1]
-                  if (!segEnd) return null
-                  const mode = modes[segIndex] ?? firstMode
-                  const style = WAYPOINT_MODE_STYLE[mode]
-                  return (
-                    <Polyline
-                      key={segIndex}
-                      positions={[point, segEnd]}
-                      pathOptions={{
-                        color: isHighlighted ? HIGHLIGHT_COLOR : style.color,
-                        weight: isHighlighted ? 6 : style.weight,
-                        dashArray: style.dashArray,
-                        opacity: isHighlighted ? 1 : 0.9,
-                      }}
-                    />
-                  )
-                })}
-              </Fragment>
-            )
-          }
-        }
-
         const style = lineStyleForTransport(hotel.transportToNext)
         const emoji = SEGMENT_EMOJI[hotel.transportToNext]
         const midpoint: [number, number] = [(hotel.lat + next.lat) / 2, (hotel.lon + next.lon) / 2]
