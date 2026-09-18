@@ -27,14 +27,3 @@ export const WAYPOINT_MODE_ORDER: WaypointMode[] = [
   "bus",
   "metro",
 ]
-
-/** The mode of the segment from a hotel stop to the first waypoint of its
- *  leg isn't carried by any waypoint (waypoint.mode describes the segment
- *  *departing* that waypoint) — derived from the hotel's own coarse
- *  transportToNext instead, defaulting to a short local hop. */
-export function waypointModeForHotelTransport(mode: "train" | "car" | "flight" | null): WaypointMode {
-  if (mode === "car") return "car"
-  if (mode === "flight") return "flight"
-  if (mode === "train") return "local_train"
-  return "metro"
-}
