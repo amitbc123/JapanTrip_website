@@ -7,6 +7,8 @@ import {
   writeStoredTripData,
 } from "@/data/db"
 import { isTripData } from "@/data/validateTripData"
+import { sanitizeBookingStatusMap } from "@/lib/bookingStatus"
+import { useBookingStatusStore } from "@/stores/booking-status-store"
 import type { TripData } from "@/types/trip"
 
 export type TripDataStatus = "loading" | "empty" | "ready" | "error"
@@ -75,6 +77,12 @@ export function TripDataProvider({ children }: { children: ReactNode }) {
     setData(parsed)
     setError(null)
     setStatus("ready")
+    // A file previously exported via "ייצוא קובץ מעודכן" carries its own
+    // booking-status snapshot alongside the trip data — restore it so the
+    // status store never needs a separate import step.
+    if (parsed.bookingStatus) {
+      useBookingStatusStore.getState().importEntries(sanitizeBookingStatusMap(parsed.bookingStatus))
+    }
   }
 
   async function importFile(file: File): Promise<void> {

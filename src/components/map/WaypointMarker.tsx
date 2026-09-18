@@ -1,6 +1,7 @@
 import { Marker, Popup } from "react-leaflet"
 import { createWaypointIcon } from "@/components/map/icons"
 import { formatHebrewDate } from "@/lib/format"
+import { MARKER_Z_WAYPOINT } from "@/lib/mapZIndex"
 import { waypointGroupLabel, type WaypointGroup } from "@/lib/waypointGroups"
 import { WAYPOINT_MODE_STYLE } from "@/lib/waypointStyle"
 
@@ -10,7 +11,11 @@ export function WaypointMarker({ group }: { group: WaypointGroup }) {
   const srLabel = `תחנת ביניים ${label}: ${group.entries.map((e) => e.waypoint.nameHe ?? e.waypoint.name).join(", ")}`
 
   return (
-    <Marker position={[group.lat, group.lon]} icon={createWaypointIcon(label, ringColor, srLabel)}>
+    <Marker
+      position={[group.lat, group.lon]}
+      icon={createWaypointIcon(label, ringColor, srLabel)}
+      zIndexOffset={MARKER_Z_WAYPOINT}
+    >
       <Popup className="trip-map-popup">
         <div className="flex min-w-44 flex-col gap-2 text-end">
           {group.entries.map(({ leg, waypoint }) => {

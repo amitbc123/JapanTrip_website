@@ -16,9 +16,9 @@ export function createAttractionIcon(srLabel: string): L.DivIcon {
   return L.divIcon({
     className: "trip-attraction-marker",
     html: `<span aria-hidden="true">★</span><span class="sr-only">${srLabel}</span>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
-    popupAnchor: [0, -14],
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+    popupAnchor: [0, -12],
   })
 }
 
