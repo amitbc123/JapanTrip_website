@@ -1,26 +1,25 @@
-import { useRouteColorStore } from "@/stores/route-color-store"
-
-const LEGEND_ITEMS: { style: "solid" | "dashed" | "dotted"; label: string }[] = [
-  { style: "solid", label: "רכבת / תחבורה ציבורית" },
-  { style: "dashed", label: "רכב" },
-  { style: "dotted", label: "טיסה" },
-]
+import { WAYPOINT_MODE_ORDER, WAYPOINT_MODE_STYLE } from "@/lib/waypointStyle"
 
 export function MapLegend() {
-  const color = useRouteColorStore((s) => s.color)
-
   return (
     <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg border border-border bg-card px-4 py-3">
-      {LEGEND_ITEMS.map(({ style, label }) => (
-        <div key={style} className="flex items-center gap-2 text-sm">
-          <span
-            className="inline-block w-8 border-t-[3px]"
-            style={{ borderTopStyle: style, borderTopColor: color }}
-            aria-hidden
-          />
-          {label}
-        </div>
-      ))}
+      {WAYPOINT_MODE_ORDER.map((mode) => {
+        const style = WAYPOINT_MODE_STYLE[mode]
+        return (
+          <div key={mode} className="flex items-center gap-2 text-sm">
+            <span
+              className="inline-block w-8 border-t-[3px]"
+              style={{
+                borderTopStyle: style.dashArray ? "dashed" : "solid",
+                borderTopColor: style.color,
+                borderTopWidth: `${style.weight}px`,
+              }}
+              aria-hidden
+            />
+            {style.emoji} {style.labelHe}
+          </div>
+        )
+      })}
       <div className="flex items-center gap-2 text-sm">
         <span className="trip-attraction-marker" aria-hidden />
         אטרקציה

@@ -5,57 +5,96 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Japandi palette: warm sand + terracotta accent, muted moss for the secondary
-   (attraction) accent. Mapped onto shadcn's semantic tokens below. */
+/* Neutral palette with a Japanese-red leading accent and an indigo secondary
+   accent. Mapped onto shadcn's semantic tokens below. */
 @theme {
-  --color-sand: #faf6ee;
-  --color-sand-raised: #fffdf9;
-  --color-ink: #3a342c;
-  --color-ink-muted: #6b6255;
-  --color-accent: #c4956a;
-  --color-accent-soft: #e7d3bf;
-  --color-moss: #7c8b6f;
-  --color-moss-soft: #dce3d6;
-  --color-line: #e6dcc7;
-  --color-map-hotel: #d9622b;
-  --color-map-attraction: #b6357a;
-  --color-map-recommendation: #3f7d4a;
+  --color-sand: #f7f7f5;
+  --color-sand-raised: #ffffff;
+  --color-ink: #1c1917;
+  --color-ink-muted: #57534e;
+  --color-accent: #b3452f;
+  --color-accent-soft: #f3ddd6;
+  --color-moss: #2e7d5b;
+  --color-moss-soft: #d9ece3;
+  --color-line: #e5e4e1;
+  --color-map-hotel: #b3452f;
+  --color-map-attraction: #1f3a5f;
+  --color-map-recommendation: #2e7d5b;
 }
 
 :root {
   color-scheme: light;
-  --background: #faf6ee;
-  --foreground: #3a342c;
-  --card: #fffdf9;
-  --card-foreground: #3a342c;
-  --popover: #fffdf9;
-  --popover-foreground: #3a342c;
-  --primary: #c4956a;
-  --primary-foreground: #fdfbf8;
-  --secondary: #e7d3bf;
-  --secondary-foreground: #3a342c;
-  --muted: #f1ead9;
-  --muted-foreground: #6b6255;
-  --accent: #dce3d6;
-  --accent-foreground: #3a342c;
-  --destructive: #b3452f;
-  --border: #e6dcc7;
-  --input: #e6dcc7;
-  --ring: #c4956a;
-  --chart-1: #c4956a;
-  --chart-2: #7c8b6f;
-  --chart-3: #a5406e;
-  --chart-4: #3e6b52;
-  --chart-5: #6b6255;
+  --background: #f7f7f5;
+  --foreground: #1c1917;
+  --card: #ffffff;
+  --card-foreground: #1c1917;
+  --popover: #ffffff;
+  --popover-foreground: #1c1917;
+  --primary: #b3452f;
+  --primary-foreground: #ffffff;
+  --secondary: #e3e8ef;
+  --secondary-foreground: #1f3a5f;
+  --muted: #efefed;
+  --muted-foreground: #57534e;
+  --accent: #ececea;
+  --accent-foreground: #1c1917;
+  --destructive: #b3261e;
+  --success: #2e7d5b;
+  --success-foreground: #ffffff;
+  --warning: #c77d24;
+  --warning-foreground: #ffffff;
+  --border: #e5e4e1;
+  --input: #e5e4e1;
+  --ring: #b3452f;
+  --chart-1: #b3452f;
+  --chart-2: #1f3a5f;
+  --chart-3: #2e7d5b;
+  --chart-4: #c77d24;
+  --chart-5: #57534e;
   --radius: 0.75rem;
-  --sidebar: #fffdf9;
-  --sidebar-foreground: #3a342c;
-  --sidebar-primary: #c4956a;
-  --sidebar-primary-foreground: #fdfbf8;
-  --sidebar-accent: #dce3d6;
-  --sidebar-accent-foreground: #3a342c;
-  --sidebar-border: #e6dcc7;
-  --sidebar-ring: #c4956a;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #1c1917;
+  --sidebar-primary: #b3452f;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ececea;
+  --sidebar-accent-foreground: #1c1917;
+  --sidebar-border: #e5e4e1;
+  --sidebar-ring: #b3452f;
+}
+
+/* Optional dark mode — not yet wired to a UI toggle, defined for future use. */
+:root.dark {
+  color-scheme: dark;
+  --background: #1a1918;
+  --foreground: #f5f5f4;
+  --card: #262422;
+  --card-foreground: #f5f5f4;
+  --popover: #262422;
+  --popover-foreground: #f5f5f4;
+  --primary: #e06b4f;
+  --primary-foreground: #1a1918;
+  --secondary: #2a3644;
+  --secondary-foreground: #a8c0de;
+  --muted: #2c2a28;
+  --muted-foreground: #a8a29e;
+  --accent: #33302d;
+  --accent-foreground: #f5f5f4;
+  --destructive: #e5847a;
+  --success: #4fa980;
+  --success-foreground: #1a1918;
+  --warning: #e0a154;
+  --warning-foreground: #1a1918;
+  --border: #3a3735;
+  --input: #3a3735;
+  --ring: #e06b4f;
+  --sidebar: #262422;
+  --sidebar-foreground: #f5f5f4;
+  --sidebar-primary: #e06b4f;
+  --sidebar-primary-foreground: #1a1918;
+  --sidebar-accent: #33302d;
+  --sidebar-accent-foreground: #f5f5f4;
+  --sidebar-border: #3a3735;
+  --sidebar-ring: #e06b4f;
 }
 
 @theme inline {
@@ -78,6 +117,10 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-success-foreground: var(--success-foreground);
+  --color-success: var(--success);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning: var(--warning);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -216,6 +259,54 @@
   box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
   font-size: 13px;
   line-height: 1;
+  position: relative;
+}
+/* A booked/paid segment (per the local booking-status store) gets a small
+   green checkmark badge in the corner, in addition to the card's status
+   badge — same "done" signal in both places, per spec. */
+.trip-segment-emoji--done::after {
+  content: "✓";
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 13px;
+  height: 13px;
+  border-radius: 9999px;
+  background: var(--color-moss);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 13px;
+  text-align: center;
+  border: 1.5px solid #fdfbf8;
+}
+
+.trip-waypoint-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trip-waypoint-marker > span {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 3px solid #6b7280;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.3);
+}
+.trip-waypoint-marker:focus-visible > span,
+.trip-waypoint-marker.is-focused > span {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
 }
 
 .trip-flythrough-marker {

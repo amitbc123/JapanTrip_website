@@ -75,6 +75,7 @@ export function HomeMapPage() {
             carSummaries={carSummaries}
             flightSummaries={flightSummaries}
             trainSummaries={trainSummaries}
+            legs={routePublic.legs}
             currentHotelOrder={currentHotelOrder}
             targetHotelOrder={targetHotelOrder}
             targetAttractionName={targetAttractionName}
@@ -84,7 +85,12 @@ export function HomeMapPage() {
       </div>
       <MapLegend />
       <MapControlsRow />
-      <TransportSummary cars={carSummaries} flights={flightSummaries} trains={trainSummaries} />
+      <TransportSummary
+        cars={carSummaries}
+        flights={flightSummaries}
+        trains={trainSummaries}
+        travelers={privateData?.travelers}
+      />
     </div>
   )
 }

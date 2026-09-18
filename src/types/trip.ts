@@ -73,9 +73,10 @@ export interface FlightLeg {
  *  no price/paidBy: those are financial/personal details that don't belong
  *  in the committed public file, see `PrivateTrainInfo` below.
  *
- *  departTime/arriveTime are null for a leg that's on the itinerary but
- *  not booked yet — the date/route/candidate service are still known and
- *  worth showing, just not the concrete schedule. */
+ *  departTime/arriveTime are null only when no candidate schedule is known
+ *  yet at all — once a specific service is identified (even before it's
+ *  actually purchased), the schedule is filled in and `booked` alone tracks
+ *  whether the ticket itself has been bought. */
 export interface TrainLeg {
   label: string
   trainNumber: string
@@ -83,6 +84,7 @@ export interface TrainLeg {
   date: string
   departTime: string | null
   arriveTime: string | null
+  booked: boolean
   coversHotelLegOrders: number[]
   notes?: string
 }
@@ -144,11 +146,54 @@ export interface PublicFlightLeg {
   notes?: string
 }
 
+/** Finer-grained transport mode used on intermediate stops within a `Leg` —
+ *  distinct from the coarse `TransportMode` used for the main hotel-to-hotel
+ *  route, which only distinguishes train/car/flight. */
+export type WaypointMode = "shinkansen" | "local_train" | "car" | "flight" | "bus" | "metro"
+
+/** An intermediate stop between two consecutive hotel stays — a transfer,
+ *  a different-station walk, a bus connection — that the coarse hotel-to-hotel
+ *  polyline can't show on its own. `mode` describes the leg departing this
+ *  waypoint (towards the next waypoint, or the leg's `to` hotel if this is
+ *  the last one). No lat/lon here by design — see `LegWaypoint` below, which
+ *  carries the geocoded coordinate once resolved. */
+export interface Waypoint {
+  id: string
+  name: string
+  nameHe?: string
+  geocodeQuery: string
+  mode: WaypointMode
+  departTime: string | null
+  trainNumber?: string
+  note?: string
+}
+
+/** route-public.json's resolved shape for `Waypoint` — same fields plus the
+ *  geocoded coordinate, analogous to how `RouteStop` carries lat/lon
+ *  alongside a hotel's public fields. */
+export interface LegWaypoint extends Waypoint {
+  lat: number | null
+  lon: number | null
+}
+
+/** The stretch between hotel stop `from` and hotel stop `to` (same order
+ *  values as `Hotel.order`/`RouteStop.order`), broken into its intermediate
+ *  waypoints. A day trip that starts and ends at the same hotel sets
+ *  `from === to`. Non-sensitive (station names, timetables) — lives in
+ *  route-public.json alongside trains, never in the private trip file. */
+export interface Leg {
+  from: number
+  to: number
+  date: string
+  waypoints: LegWaypoint[]
+}
+
 export interface RoutePublicData {
   hotels: RouteStop[]
   cars: PublicCarLeg[]
   flights: PublicFlightLeg[]
   trains: TrainLeg[]
+  legs: Leg[]
 }
 
 export type RecommendationCategory = "food" | "sight" | "activity" | "nature" | "shopping"

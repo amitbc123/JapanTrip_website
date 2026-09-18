@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
-export const DEFAULT_BACKGROUND_COLOR = "#faf6ee"
+export const DEFAULT_BACKGROUND_COLOR = "#f7f7f5"
 
 function applyBackgroundColor(color: string) {
   document.documentElement.style.setProperty("--background", color)

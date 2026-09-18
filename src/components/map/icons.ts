@@ -41,11 +41,26 @@ export function createRecommendationIcon(emoji: string, srLabel: string): L.DivI
   })
 }
 
-export function createSegmentEmojiIcon(emoji: string): L.DivIcon {
+export function createSegmentEmojiIcon(emoji: string, isDone = false): L.DivIcon {
+  const className = isDone ? "trip-segment-emoji trip-segment-emoji--done" : "trip-segment-emoji"
   return L.divIcon({
-    className: "trip-segment-emoji",
+    className,
     html: `<span aria-hidden="true">${emoji}</span>`,
     iconSize: [22, 22],
     iconAnchor: [11, 11],
+  })
+}
+
+/** Small marker for an intermediate stop within a `Leg` — a sub-numbered
+ *  label ("2.1") in a white circle with a ring colored by transport mode.
+ *  `label` can combine ids for two waypoints that share the same real-world
+ *  station ("2.3 / 3.1"). */
+export function createWaypointIcon(label: string, ringColor: string, srLabel: string): L.DivIcon {
+  return L.divIcon({
+    className: "trip-waypoint-marker",
+    html: `<span aria-hidden="true" style="border-color:${ringColor}">${label}</span><span class="sr-only">${srLabel}</span>`,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+    popupAnchor: [0, -12],
   })
 }

@@ -9,7 +9,7 @@ import { RouteSegments } from "@/components/map/RouteSegments"
 import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import { useRouteFlythroughStore } from "@/stores/route-flythrough-store"
-import type { Attraction, Hotel, Recommendation, RouteStop } from "@/types/trip"
+import type { Attraction, Hotel, Leg, Recommendation, RouteStop } from "@/types/trip"
 
 interface TripMapProps {
   hotels: RouteStop[]
@@ -20,6 +20,7 @@ interface TripMapProps {
   carSummaries: CarSummaryRow[]
   flightSummaries: FlightSummaryRow[]
   trainSummaries: TrainSummaryRow[]
+  legs: Leg[]
   /** Stop we're currently at per today's date, when known (private trip
    *  file loaded) — highlights that hotel marker as "we are here". */
   currentHotelOrder?: number | null
@@ -234,6 +235,7 @@ export function TripMap({
   carSummaries,
   flightSummaries,
   trainSummaries,
+  legs,
   currentHotelOrder,
   targetHotelOrder,
   targetAttractionName,
@@ -295,7 +297,7 @@ export function TripMap({
           />
         </LayersControl.BaseLayer>
       </LayersControl>
-      <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} trains={trainSummaries} />
+      <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} trains={trainSummaries} legs={legs} />
       {hotels.map((stop) => (
         <HotelMarker
           key={stop.order}

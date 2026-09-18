@@ -63,6 +63,7 @@
       "date": "2026-10-10",
       "departTime": "11:00",
       "arriveTime": "12:51",
+      "booked": true,
       "coversHotelLegOrders": [1, 2],
       "notes": "מסלול פתוח, כמעט ללא מנהרות."
     },
@@ -73,98 +74,392 @@
       "date": "2026-10-14",
       "departTime": "10:51",
       "arriveTime": "13:16",
+      "booked": true,
       "coversHotelLegOrders": [2, 3],
       "notes": "לפני כן: מ-JR Nikko (לא Tobu-Nikko!) לאוצונומיה ברכבת מקומית ללא הזמנה. מעבר איטאיה (פוקושימה-יונזאווה) הוא הקטע המנהרתי ביותר בנסיעה זו, כ-15 דקות. הרכבת חייבת יעד Shinjo (新庄) אחרת לא עוצרת באוישידה. בתחנת אוישידה אי אפשר להשתמש ב-Suica, מזומן בלבד."
     },
     {
       "label": "Train 3",
-      "trainNumber": "Tsubasa",
-      "route": "אוישידה לטוקיו",
+      "trainNumber": "Tsubasa 144",
+      "route": "Oishida to Tokyo",
       "date": "2026-10-16",
-      "departTime": null,
-      "arriveTime": null,
+      "departTime": "13:33",
+      "arriveTime": "16:48",
+      "booked": false,
       "coversHotelLegOrders": [3, 4],
-      "notes": "טרם הוזמן — eki-net. מעבר איטאיה (מנהרות) בכיוון הפוך מנסיעת ה-14.10. מטוקיו להמשך ליוקוהמה ברכבת JR ללא הזמנה."
+      "notes": "חובה להזמין! נסיונות ב-eki-net נכשלו עקב חסימת אשראי ישראכרט — לנסות Klook. 38,340 ין לשלושה. לפני כן: אוטובוס מגינזן אונסן לאואישידה, כ-40 דקות, ללא הזמנה. אחרי ההגעה לטוקיו: רכבת JR מקומית ליוקוהמה, ללא הזמנה."
     },
     {
       "label": "Train 4",
-      "trainNumber": "Kodama / Hikari",
-      "route": "אודוארה לטוקיו",
+      "trainNumber": "Kodama 812",
+      "route": "Odawara to Tokyo",
       "date": "2026-10-24",
-      "departTime": null,
-      "arriveTime": null,
+      "departTime": "12:14",
+      "arriveTime": "12:48",
+      "booked": false,
       "coversHotelLegOrders": [6, 7],
-      "notes": "טרם הוזמן — SmartEX. קטע פתוח, ללא מנהרות משמעותיות."
+      "notes": "כדאי להזמין — יש קרון חופשי, אך עם מזוודות עדיף מקום שמור. מעבר בין רציפים בתחנת טוקיו לכיוון Kagayaki אורך כ-40-50 דקות."
     },
     {
       "label": "Train 5",
-      "trainNumber": "Kagayaki / Hakutaka",
-      "route": "טוקיו לקנזאווה",
+      "trainNumber": "Kagayaki (חלופה: Hakutaka)",
+      "route": "Tokyo to Kanazawa",
       "date": "2026-10-24",
-      "departTime": null,
-      "arriveTime": null,
+      "departTime": "13:30",
+      "arriveTime": "16:00",
+      "booked": false,
       "coversHotelLegOrders": [6, 7],
-      "notes": "טרם הוזמן — eki-net. 24.10 הוא יום שבת, ל-Kagayaki אין קרון חופשי בכלל — לבדוק חלופת Hakutaka. כולל מנהרת אייאמה (22.2 ק\"מ, כ-8 דקות רצוף) ועשרות מנהרות נוספות בהרי האלפים — הקטע המנהרתי ביותר בטיול."
+      "notes": "ההזמנה הכי חשובה שנשארה — אין ל-Kagayaki קרון חופשי בכלל, 24.10 הוא שבת בעונת השלכת, כ-14,600 ין לאדם. השעות משוערות. אם Kagayaki אזלה: חלופה Hakutaka עם קרונות חופשיים, איטית בכ-30 דקות. כולל מנהרת אייאמה (22.2 ק\"מ, כ-8 דקות רצוף) ועשרות מנהרות נוספות — הקטע המנהרתי ביותר בטיול."
     },
     {
       "label": "Train 6",
-      "trainNumber": "Nozomi / Hikari",
-      "route": "נגויה לקיוטו",
+      "trainNumber": "Nozomi 349",
+      "route": "Nagoya to Kyoto",
       "date": "2026-11-05",
-      "departTime": null,
-      "arriveTime": null,
+      "departTime": "11:24",
+      "arriveTime": "11:57",
+      "booked": false,
       "coversHotelLegOrders": [14, 15],
-      "notes": "טרם הוזמן — SmartEX. מעט מנהרות קצרות באזור סקיגהארה. ב-Nozomi נשארו רק 2 קרונות ללא הזמנת מקום מאז מרץ 2025."
+      "notes": "כדאי להזמין — נשארו רק 2 קרונות ללא הזמנת מקום מאז מרץ 2025. מעט מנהרות קצרות באזור סקיגהארה."
     },
     {
       "label": "Train 7",
       "trainNumber": "Nozomi / Sakura",
-      "route": "שין-אוסקה להירושימה",
+      "route": "Shin-Osaka to Hiroshima",
       "date": "2026-11-17",
       "departTime": null,
       "arriveTime": null,
+      "booked": false,
       "coversHotelLegOrders": [16, 17],
-      "notes": "טרם הוזמן — SmartEX. יוצא מתחנת Shin-Osaka, לא מתחנת Osaka! כולל מנהרת רוקו (16.25 ק\"מ, כ-6 דקות רצוף) — קו סאניו מהמנהרתיים ביפן."
+      "notes": "ממתין להחלטה על רכישת פס JR West לפני הזמנת כרטיס בודד. נסיעה כ-1:25 שעות. יוצא מתחנת Shin-Osaka, לא מתחנת Osaka! כולל מנהרת רוקו (16.25 ק\"מ, כ-6 דקות רצוף) — קו סאניו מהמנהרתיים ביפן."
     },
     {
       "label": "Train 8",
       "trainNumber": "Sakura / Mizuho",
-      "route": "הירושימה לקומאמוטו",
+      "route": "Hiroshima to Kumamoto",
       "date": "2026-11-19",
       "departTime": null,
       "arriveTime": null,
+      "booked": false,
       "coversHotelLegOrders": [17, 18],
-      "notes": "טרם הוזמן — SmartEX. נסיעה ישירה בלי החלפה, כוללת מנהרת שין-קאנמון מתחת לים בין הונשו לקיושו. במחוז קומאמוטו Suica לא עובד, מזומן בלבד."
+      "notes": "ממתין להחלטה על פס JR West. נסיעה ישירה כ-2 שעות, כוללת מנהרת שין-קאנמון מתחת לים בין הונשו לקיושו. במחוז קומאמוטו Suica לא עובד, מזומן בלבד. 20-21.11 פנויים בלוח — החלטה פתוחה אם לצאת ליום בפוקואוקה."
     },
     {
       "label": "Train 9",
       "trainNumber": "Laview",
-      "route": "אייקבוקורו לסייבו-צ'יצ'יבו",
+      "route": "Ikebukuro to Seibu-Chichibu",
       "date": "2026-12-03",
       "departTime": null,
       "arriveTime": null,
+      "booked": false,
       "coversHotelLegOrders": [],
-      "notes": "טרם הוזמן — אתר/אפליקציית Seibu (Smooz), מ-3.11 בשעה 07:00 שעון יפן (00:00 בישראל). נסיעה לפסטיבל יומאטסורי, כמה מנהרות קצרות בהרים לקראת הסוף."
+      "notes": "המכירה נפתחת חודש מראש — 3.11 בשעה 07:00 שעון יפן (00:00 שעון ישראל). נסיעה לפסטיבל יומאטסורי, כ-80 דקות, כמה מנהרות קצרות בהרים לקראת הסוף."
     },
     {
       "label": "Train 10",
       "trainNumber": "Laview",
-      "route": "סייבו-צ'יצ'יבו לאייקבוקורו",
+      "route": "Seibu-Chichibu to Ikebukuro",
       "date": "2026-12-03",
       "departTime": null,
       "arriveTime": null,
+      "booked": false,
       "coversHotelLegOrders": [],
-      "notes": "טרם הוזמן — חובה להזמין! הזיקוקים נגמרים 21:55 ואז עשרות אלפי אנשים בתחנה בבת אחת, רכבות החזרה נמכרות ראשונות."
+      "notes": "חובה להזמין גם כיוון חזרה! הזיקוקים נגמרים 21:55 ואז עשרות אלפי אנשים בתחנה בבת אחת, רכבות החזרה נמכרות ראשונות."
     },
     {
       "label": "Train 11",
       "trainNumber": "N'EX",
-      "route": "שינג'וקו לנריטה",
+      "route": "Shinjuku to Narita",
       "date": "2026-12-06",
       "departTime": null,
       "arriveTime": null,
+      "booked": false,
       "coversHotelLegOrders": [],
-      "notes": "טרם הוזמן — eki-net, מ-6.11 בשעה 10:30 שעון ישראל. 6.12 הוא יום ראשון, צפוי עומס לכיוון השדה. יוצאים בסביבות 13:30 לקראת טיסה LY92 ב-18:35."
+      "notes": "המכירה נפתחת חודש מראש, ב-6.11. יעד יציאה מהמלון סביב 13:30 לקראת טיסת LY92 ב-18:35, נסיעה כ-90 דקות. 6.12 הוא יום ראשון, צפוי עומס לכיוון השדה."
+    }
+  ],
+  "legs": [
+    {
+      "from": 1,
+      "to": 2,
+      "date": "2026-10-10",
+      "waypoints": [
+        {
+          "id": "1.1",
+          "name": "Asakusa Station",
+          "nameHe": "אסאקוסה",
+          "geocodeQuery": "Asakusa Station, Taito, Tokyo, Japan",
+          "mode": "local_train",
+          "departTime": "11:00",
+          "trainNumber": "Revaty Kegon 19",
+          "note": "רכבת Revaty Kegon של טובו, לא שינקנסן. מסלול פתוח כמעט ללא מנהרות.",
+          "lat": 35.7115,
+          "lon": 139.7967
+        }
+      ]
+    },
+    {
+      "from": 2,
+      "to": 3,
+      "date": "2026-10-14",
+      "waypoints": [
+        {
+          "id": "2.1",
+          "name": "JR Nikko",
+          "nameHe": "ג'יי אר ניקו",
+          "geocodeQuery": "JR Nikko Station, Tochigi, Japan",
+          "mode": "local_train",
+          "departTime": null,
+          "note": "תחנה שונה מ-Tobu Nikko! כ-3 דקות הליכה ביניהן. רכבת מקומית ללא הזמנה, כ-45 דקות לאוצונומיה.",
+          "lat": 36.7561,
+          "lon": 139.6136
+        },
+        {
+          "id": "2.2",
+          "name": "Utsunomiya",
+          "nameHe": "אוצונומיה",
+          "geocodeQuery": "Utsunomiya Station, Tochigi, Japan",
+          "mode": "shinkansen",
+          "departTime": "10:51",
+          "trainNumber": "Tsubasa 133",
+          "note": "הוזמן ושולם ב-eki-net. שילם משה, 30,420 ין, קרון 15 מושבים 11A/11B/11C.",
+          "lat": 36.5975,
+          "lon": 139.8983
+        },
+        {
+          "id": "2.3",
+          "name": "Oishida",
+          "nameHe": "אואישידה",
+          "geocodeQuery": "Oishida Station, Yamagata, Japan",
+          "mode": "bus",
+          "departTime": null,
+          "note": "אוטובוס Ginzan Line או הסעת ריוקאן, כ-40 דקות, 1000 ין מזומן — Suica לא עובד כאן.",
+          "lat": 38.5975,
+          "lon": 140.3697
+        }
+      ]
+    },
+    {
+      "from": 3,
+      "to": 4,
+      "date": "2026-10-16",
+      "waypoints": [
+        {
+          "id": "3.1",
+          "name": "Oishida",
+          "nameHe": "אואישידה",
+          "geocodeQuery": "Oishida Station, Yamagata, Japan",
+          "mode": "shinkansen",
+          "departTime": "13:33",
+          "trainNumber": "Tsubasa 144",
+          "note": "חובה להזמין! נסיונות ב-eki-net נכשלו עקב חסימת אשראי — לנסות Klook. 38,340 ין לשלושה.",
+          "lat": 38.5975,
+          "lon": 140.3697
+        },
+        {
+          "id": "3.2",
+          "name": "Tokyo Station",
+          "nameHe": "תחנת טוקיו",
+          "geocodeQuery": "Tokyo Station, Chiyoda, Tokyo, Japan",
+          "mode": "local_train",
+          "departTime": null,
+          "note": "רכבת JR מקומית להמשך ליוקוהמה, כ-30 דקות, ללא הזמנה.",
+          "lat": 35.6812,
+          "lon": 139.7671
+        }
+      ]
+    },
+    {
+      "from": 6,
+      "to": 7,
+      "date": "2026-10-24",
+      "waypoints": [
+        {
+          "id": "6.1",
+          "name": "Odawara",
+          "nameHe": "אודוארה",
+          "geocodeQuery": "Odawara Station, Kanagawa, Japan",
+          "mode": "shinkansen",
+          "departTime": "12:14",
+          "trainNumber": "Kodama 812",
+          "note": "החזרת רכב 1 בסביבות 11:00. יש קרון חופשי, אך עם מזוודות עדיף מקום שמור.",
+          "lat": 35.2564,
+          "lon": 139.1523
+        },
+        {
+          "id": "6.2",
+          "name": "Tokyo Station",
+          "nameHe": "תחנת טוקיו",
+          "geocodeQuery": "Tokyo Station, Chiyoda, Tokyo, Japan",
+          "mode": "shinkansen",
+          "departTime": "13:30",
+          "trainNumber": "Kagayaki (חלופה: Hakutaka)",
+          "note": "מעבר בין רציפים 40-50 דקות. ההזמנה הכי חשובה בטיול — אין קרון חופשי בכלל, כ-14,600 ין לאדם. שעות משוערות.",
+          "lat": 35.6812,
+          "lon": 139.7671
+        }
+      ]
+    },
+    {
+      "from": 14,
+      "to": 15,
+      "date": "2026-11-05",
+      "waypoints": [
+        {
+          "id": "14.1",
+          "name": "Nagoya Station",
+          "nameHe": "תחנת נגויה",
+          "geocodeQuery": "Nagoya Station, Nagoya, Japan",
+          "mode": "shinkansen",
+          "departTime": "11:24",
+          "trainNumber": "Nozomi 349",
+          "note": "כדאי להזמין — נשארו רק 2 קרונות ללא הזמנת מקום.",
+          "lat": 35.1706,
+          "lon": 136.8816
+        }
+      ]
+    },
+    {
+      "from": 15,
+      "to": 16,
+      "date": "2026-11-13",
+      "waypoints": [
+        {
+          "id": "15.1",
+          "name": "Kyoto Station",
+          "nameHe": "תחנת קיוטו",
+          "geocodeQuery": "Kyoto Station, Kyoto, Japan",
+          "mode": "local_train",
+          "departTime": null,
+          "note": "JR Special Rapid, כ-30 דקות, ללא הזמנה. לא שינקנסן! ממשיכים במטרו לשינסאיבאשי.",
+          "lat": 34.9858,
+          "lon": 135.7588
+        }
+      ]
+    },
+    {
+      "from": 16,
+      "to": 17,
+      "date": "2026-11-17",
+      "waypoints": [
+        {
+          "id": "16.1",
+          "name": "Shin-Osaka",
+          "nameHe": "שין-אוסקה",
+          "geocodeQuery": "Shin-Osaka Station, Osaka, Japan",
+          "mode": "shinkansen",
+          "departTime": null,
+          "trainNumber": "Nozomi / Sakura",
+          "note": "לא תחנת Osaka! עולים בשין-אוסקה. ממתין להחלטה על פס JR West. נסיעה כ-1:25 שעות, כולל מנהרת רוקו.",
+          "lat": 34.7338,
+          "lon": 135.5002
+        }
+      ]
+    },
+    {
+      "from": 17,
+      "to": 18,
+      "date": "2026-11-19",
+      "waypoints": [
+        {
+          "id": "17.1",
+          "name": "Hiroshima Station",
+          "nameHe": "תחנת הירושימה",
+          "geocodeQuery": "Hiroshima Station, Hiroshima, Japan",
+          "mode": "shinkansen",
+          "departTime": null,
+          "trainNumber": "Sakura / Mizuho",
+          "note": "ממתין להחלטה על פס JR West. נסיעה ישירה כ-2 שעות, כולל מנהרת שין-קאנמון. Suica לא עובד בקומאמוטו, מזומן בלבד.",
+          "lat": 34.3978,
+          "lon": 132.4753
+        }
+      ]
+    },
+    {
+      "from": 18,
+      "to": 19,
+      "date": "2026-11-22",
+      "waypoints": [
+        {
+          "id": "18.1",
+          "name": "Kumamoto Airport",
+          "nameHe": "שדה קומאמוטו",
+          "geocodeQuery": "Kumamoto Airport, Japan",
+          "mode": "flight",
+          "departTime": "14:15",
+          "trainNumber": "JAL630",
+          "note": "אוטובוס משדה קומאמוטו כ-50 דקות ללא הזמנה. הטיסה מוזמנת ומשולמת, קוד EPVNE2, מושבים 19H/19J/19K.",
+          "lat": 32.8372,
+          "lon": 130.8553
+        },
+        {
+          "id": "18.2",
+          "name": "Haneda Airport",
+          "nameHe": "הנדה",
+          "geocodeQuery": "Haneda Airport, Tokyo, Japan",
+          "mode": "local_train",
+          "departTime": null,
+          "note": "רכבת מקומית מהנדה לאסאקוסה, כ-40 דקות, ללא הזמנה.",
+          "lat": 35.5494,
+          "lon": 139.7798
+        }
+      ]
+    },
+    {
+      "from": 19,
+      "to": 20,
+      "date": "2026-11-29",
+      "waypoints": [
+        {
+          "id": "19.1",
+          "name": "Asakusa Station",
+          "nameHe": "אסאקוסה",
+          "geocodeQuery": "Asakusa Station, Taito, Tokyo, Japan",
+          "mode": "metro",
+          "departTime": null,
+          "note": "מטרו טוקיו, כ-35 דקות, ללא הזמנה.",
+          "lat": 35.7115,
+          "lon": 139.7967
+        }
+      ]
+    },
+    {
+      "from": 20,
+      "to": 20,
+      "date": "2026-12-03",
+      "waypoints": [
+        {
+          "id": "20.1",
+          "name": "Seibu-Chichibu",
+          "nameHe": "סייבו-צ'יצ'יבו",
+          "geocodeQuery": "Seibu-Chichibu Station, Saitama, Japan",
+          "mode": "local_train",
+          "departTime": null,
+          "trainNumber": "Laview",
+          "note": "המכירה נפתחת ב-3.11 בשעה 07:00 שעון יפן (00:00 שעון ישראל). חובה להזמין גם כיוון חזרה — הזיקוקים נגמרים ב-21:55 ורכבות החזרה נמכרות ראשונות. נסיעה מאייקבוקורו כ-80 דקות.",
+          "lat": 35.9928,
+          "lon": 139.0847
+        }
+      ]
+    },
+    {
+      "from": 20,
+      "to": 20,
+      "date": "2026-12-06",
+      "waypoints": [
+        {
+          "id": "20.2",
+          "name": "Narita Airport",
+          "nameHe": "נמל התעופה נריטה",
+          "geocodeQuery": "Narita Airport Terminal 1, Chiba, Japan",
+          "mode": "local_train",
+          "departTime": null,
+          "trainNumber": "N'EX",
+          "note": "המכירה נפתחת ב-6.11. יעד יציאה מהמלון סביב 13:30, נסיעה כ-90 דקות לקראת טיסת LY92 ב-18:35.",
+          "lat": 35.7720,
+          "lon": 140.3929
+        }
+      ]
     }
   ]
 }
