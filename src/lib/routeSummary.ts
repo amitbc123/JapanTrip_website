@@ -75,26 +75,31 @@ export interface TrainSummaryRow {
   paidByLine?: string
   coversHotelLegOrders: number[]
   notes?: string
+  /** Whether the schedule itself is confirmed (departTime/arriveTime known) —
+   *  the default booking status before the rider has touched it locally. */
+  isBooked: boolean
 }
 
 /** `privateInfo` (price/paidBy/seats) only exists once the private trip
  *  file is loaded and carries a matching `trainNumber` — without it the
  *  card just shows the public route/schedule, no financial line. */
 export function trainSummary(train: TrainLeg, privateInfo?: PrivateTrainInfo): TrainSummaryRow {
-  const isBooked = train.departTime !== null && train.arriveTime !== null
+  const hasSchedule = train.departTime !== null && train.arriveTime !== null
   const paidByLine = privateInfo
     ? `${formatPrice(privateInfo.price)} · שולם על ידי: ${privateInfo.paidBy ?? NOT_AVAILABLE}${
         privateInfo.seats?.length ? ` · מושבים: ${privateInfo.seats.join(", ")}` : ""
       }`
     : undefined
+  const scheduleLine = hasSchedule
+    ? `יציאה: ${formatHebrewDate(train.date)} ${train.departTime} · הגעה: ${train.arriveTime}`
+    : `${formatHebrewDate(train.date)} · לוח זמנים סופי טרם ידוע`
   return {
     key: train.label,
     label: `רכבת · ${train.trainNumber} · ${translateTrainRoute(train.trainNumber, train.route)}`,
-    timeLine: isBooked
-      ? `יציאה: ${formatHebrewDate(train.date)} ${train.departTime} · הגעה: ${train.arriveTime}`
-      : `${formatHebrewDate(train.date)} · טרם הוזמן`,
+    timeLine: train.booked ? scheduleLine : `${scheduleLine} · טרם הוזמן`,
     paidByLine,
     coversHotelLegOrders: train.coversHotelLegOrders,
     notes: train.notes,
+    isBooked: train.booked,
   }
 }

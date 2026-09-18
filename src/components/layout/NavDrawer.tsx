@@ -1,12 +1,14 @@
 import {
   BedDoubleIcon,
   CompassIcon,
+  DownloadIcon,
   InfoIcon,
   MapIcon,
   PaletteIcon,
   RefreshCwIcon,
   TicketIcon,
   Trash2Icon,
+  UploadIcon,
   XIcon,
 } from "lucide-react"
 import { Popover } from "radix-ui"
@@ -21,8 +23,10 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer"
 import { useTripDataContext } from "@/data/useTripData"
+import { downloadBookingStatusExport, parseBookingStatusImport } from "@/lib/bookingStatus"
 import { cn } from "@/lib/utils"
 import { useBackgroundColorStore } from "@/stores/background-color-store"
+import { useBookingStatusStore } from "@/stores/booking-status-store"
 import { useDrawerStore } from "@/stores/drawer-store"
 
 const NAV_ITEMS = [
@@ -44,7 +48,20 @@ export function NavDrawer() {
   const { importFile, importViaFilePicker, clear } = useTripDataContext()
   const backgroundColor = useBackgroundColorStore((s) => s.color)
   const setBackgroundColor = useBackgroundColorStore((s) => s.setColor)
+  const statusEntries = useBookingStatusStore((s) => s.entries)
+  const importStatusEntries = useBookingStatusStore((s) => s.importEntries)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const statusFileInputRef = useRef<HTMLInputElement>(null)
+
+  async function handleStatusFileChange(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    e.target.value = ""
+    if (!file) return
+    const text = await file.text()
+    const parsed = parseBookingStatusImport(text)
+    if (parsed) importStatusEntries(parsed)
+    setOpen()
+  }
 
   async function handleFileInputChange(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
@@ -140,6 +157,29 @@ export function NavDrawer() {
           </nav>
 
           <div className="mt-auto flex flex-col gap-1 border-t border-border p-3">
+            <button
+              type="button"
+              onClick={() => downloadBookingStatusExport(statusEntries)}
+              className="flex min-h-11 items-center gap-3 rounded-md px-3 py-2.5 text-start text-sm text-foreground hover:bg-accent/60"
+            >
+              <DownloadIcon className="size-5 shrink-0" aria-hidden />
+              ייצוא סטטוס הזמנות
+            </button>
+            <button
+              type="button"
+              onClick={() => statusFileInputRef.current?.click()}
+              className="flex min-h-11 items-center gap-3 rounded-md px-3 py-2.5 text-start text-sm text-foreground hover:bg-accent/60"
+            >
+              <UploadIcon className="size-5 shrink-0" aria-hidden />
+              ייבוא סטטוס הזמנות
+            </button>
+            <input
+              ref={statusFileInputRef}
+              type="file"
+              accept="application/json"
+              onChange={handleStatusFileChange}
+              className="hidden"
+            />
             <button
               type="button"
               onClick={handleLoadNewFile}

@@ -1,7 +1,7 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
-export const DEFAULT_ROUTE_COLOR = "#1D4ED8"
+export const DEFAULT_ROUTE_COLOR = "#1F3A5F"
 
 interface RouteColorState {
   color: string
