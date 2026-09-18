@@ -259,7 +259,12 @@
   box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
   font-size: 13px;
   line-height: 1;
-  position: relative;
+  /* Must stay "absolute" (matching leaflet.css's own .leaflet-marker-icon
+     rule, same selector specificity) — "relative" would still anchor the
+     ::after badge below, but it also pulls the marker out of Leaflet's
+     transform-only positioning into normal document flow, so each marker
+     after the first stacks further down than Leaflet placed it. */
+  position: absolute;
 }
 /* A booked/paid segment (per the local booking-status store) gets a small
    green checkmark badge in the corner, in addition to the card's status
