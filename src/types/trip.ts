@@ -34,8 +34,9 @@ export interface Hotel {
 export interface Attraction {
   name: string
   city: string
-  date: string
-  entryTime: string
+  /** null when a booking exists but its visit date isn't known yet. */
+  date: string | null
+  entryTime: string | null
   confirmationNumber: string | null
   voucherNumber?: string
   price: Price | null

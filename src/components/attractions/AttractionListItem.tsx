@@ -3,7 +3,7 @@ import { Accordion as AccordionPrimitive } from "radix-ui"
 import { Link } from "react-router"
 import { AccordionContent, AccordionItem } from "@/components/ui/accordion"
 import { FieldRow } from "@/components/common/FieldRow"
-import { formatHebrewDate, formatPrice } from "@/lib/format"
+import { formatAttractionWhen, formatPrice } from "@/lib/format"
 import { translateCity } from "@/lib/translations"
 import type { Attraction } from "@/types/trip"
 
@@ -15,8 +15,8 @@ export function AttractionListItem({ attraction }: { attraction: Attraction }) {
           <div className="flex w-full flex-col gap-1">
             <span className="text-[15px] font-semibold">{attraction.name}</span>
             <span className="text-[13px] text-muted-foreground">
-              {translateCity(attraction.city)} · {formatHebrewDate(attraction.date, true)} ·{" "}
-              {attraction.entryTime}
+              {translateCity(attraction.city)} ·{" "}
+              {formatAttractionWhen(attraction.date, attraction.entryTime)}
             </span>
           </div>
           <ChevronDownIcon

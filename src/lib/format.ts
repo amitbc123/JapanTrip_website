@@ -39,6 +39,15 @@ export function formatHebrewDate(isoLike: string, withYear = false): string {
   return (withYear ? dateFormatterWithYear : dateFormatter).format(date)
 }
 
+export const DATE_NOT_SET = "תאריך טרם נקבע"
+
+/** "date · time" line for an attraction; a missing date shows a placeholder
+ *  rather than dropping out, so an undated booking still reads as such. */
+export function formatAttractionWhen(date: string | null, entryTime: string | null): string {
+  const dateLabel = date ? formatHebrewDate(date, true) : DATE_NOT_SET
+  return entryTime ? `${dateLabel} · ${entryTime}` : dateLabel
+}
+
 export function formatHebrewDateRange(startIso: string, endIso: string): string {
   return `${formatHebrewDate(startIso)} – ${formatHebrewDate(endIso, true)}`
 }

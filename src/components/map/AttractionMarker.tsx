@@ -1,7 +1,7 @@
 import type L from "leaflet"
 import { Marker, Popup } from "react-leaflet"
 import { createAttractionIcon } from "@/components/map/icons"
-import { formatHebrewDate } from "@/lib/format"
+import { formatAttractionWhen } from "@/lib/format"
 import { MARKER_Z_ATTRACTION } from "@/lib/mapZIndex"
 import { translateCity } from "@/lib/translations"
 import type { Attraction } from "@/types/trip"
@@ -28,7 +28,7 @@ export function AttractionMarker({ attraction, registerRef }: AttractionMarkerPr
           <span className="font-semibold">{attraction.name}</span>
           <span className="text-xs text-muted-foreground">{translateCity(attraction.city)}</span>
           <span className="text-xs">
-            {formatHebrewDate(attraction.date, true)} · {attraction.entryTime}
+            {formatAttractionWhen(attraction.date, attraction.entryTime)}
           </span>
         </div>
       </Popup>
