@@ -1,10 +1,15 @@
 import { CarIcon, PlaneIcon, TrainFrontIcon } from "lucide-react"
 import { type KeyboardEvent, useMemo, useState } from "react"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { BookingStatusControl } from "@/components/common/BookingStatusControl"
 import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
 import { effectiveStatus, useBookingStatusStore } from "@/stores/booking-status-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import type { BookingStatusValue } from "@/types/bookingStatus"
+
+function bySortKey<T extends { sortKey: string }>(rows: T[]): T[] {
+  return [...rows].sort((a, b) => a.sortKey.localeCompare(b.sortKey))
+}
 
 function scrollMapIntoView() {
   window.scrollTo({ top: 0, behavior: "smooth" })
@@ -67,6 +72,14 @@ export function TransportSummary({
     return map
   }, [trains, cars, flights, statusEntries])
 
+  // Each category collapses on its own (collapsed by default) and is sorted
+  // by date/time internally — grouping by transport type keeps the list from
+  // growing unwieldy as more legs get added, without losing chronological
+  // order within a category.
+  const sortedTrains = useMemo(() => bySortKey(trains), [trains])
+  const sortedCars = useMemo(() => bySortKey(cars), [cars])
+  const sortedFlights = useMemo(() => bySortKey(flights), [flights])
+
   const total = trains.length + cars.length + flights.length
   const doneCount = [...statuses.values()].filter((s) => s === "done").length
 
@@ -100,90 +113,134 @@ export function TransportSummary({
         </div>
       </div>
 
-      <div className="flex flex-col gap-3">
-        {trains.filter((t) => passesFilter(t.key)).map((train) => {
-          const isOn = highlightedKey === train.key
-          return (
-            <div
-              key={train.key}
-              role="button"
-              tabIndex={0}
-              aria-pressed={isOn}
-              onClick={() => handleToggle(train.key)}
-              onKeyDown={(e) => handleCardKeyDown(e, () => handleToggle(train.key))}
-              className={`flex cursor-pointer gap-3 rounded-lg border p-3 text-start transition-colors ${
-                isOn ? "border-destructive bg-destructive/5" : "border-border bg-card hover:bg-accent/40"
-              }`}
-            >
-              <TrainFrontIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-              <div className="flex flex-1 flex-col gap-0.5">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-[15px] font-medium">{train.label}</span>
-                  <BookingStatusControl id={trainBookingId(train.key)} defaultBooked={train.isBooked} travelers={travelers} />
-                </div>
-                <span className="text-[13px] text-muted-foreground">{train.timeLine}</span>
-                {train.paidByLine && (
-                  <span className="text-[13px] text-muted-foreground">{train.paidByLine}</span>
-                )}
-                {train.notes && <span className="text-[13px] text-destructive">{train.notes}</span>}
+      <Accordion type="multiple" className="flex flex-col gap-3">
+        {sortedTrains.length > 0 && (
+          <AccordionItem value="trains" className="rounded-lg border border-border bg-card px-3">
+            <AccordionTrigger>
+              <span className="flex items-center gap-2">
+                <TrainFrontIcon className="size-4 shrink-0 text-primary" aria-hidden />
+                רכבות · {sortedTrains.filter((t) => passesFilter(t.key)).length}
+              </span>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="flex flex-col gap-3">
+                {sortedTrains.filter((t) => passesFilter(t.key)).map((train) => {
+                  const isOn = highlightedKey === train.key
+                  return (
+                    <div
+                      key={train.key}
+                      role="button"
+                      tabIndex={0}
+                      aria-pressed={isOn}
+                      onClick={() => handleToggle(train.key)}
+                      onKeyDown={(e) => handleCardKeyDown(e, () => handleToggle(train.key))}
+                      className={`flex cursor-pointer gap-3 rounded-lg border p-3 text-start transition-colors ${
+                        isOn ? "border-destructive bg-destructive/5" : "border-border bg-card hover:bg-accent/40"
+                      }`}
+                    >
+                      <TrainFrontIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+                      <div className="flex flex-1 flex-col gap-0.5">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <span className="text-[15px] font-medium">{train.label}</span>
+                          <BookingStatusControl id={trainBookingId(train.key)} defaultBooked={train.isBooked} travelers={travelers} />
+                        </div>
+                        <span className="text-[13px] text-muted-foreground">{train.timeLine}</span>
+                        {train.paidByLine && (
+                          <span className="text-[13px] text-muted-foreground">{train.paidByLine}</span>
+                        )}
+                        {train.notes && <span className="text-[13px] text-destructive">{train.notes}</span>}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
-            </div>
-          )
-        })}
-        {cars.filter((c) => passesFilter(c.key)).map((car) => {
-          const isOn = highlightedKey === car.key
-          return (
-            <div
-              key={car.key}
-              role="button"
-              tabIndex={0}
-              aria-pressed={isOn}
-              onClick={() => handleToggle(car.key)}
-              onKeyDown={(e) => handleCardKeyDown(e, () => handleToggle(car.key))}
-              className={`flex cursor-pointer gap-3 rounded-lg border p-3 text-start transition-colors ${
-                isOn ? "border-destructive bg-destructive/5" : "border-border bg-card hover:bg-accent/40"
-              }`}
-            >
-              <CarIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-              <div className="flex flex-1 flex-col gap-0.5">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-[15px] font-medium">{car.label}</span>
-                  <BookingStatusControl id={carBookingId(car.key)} defaultBooked travelers={travelers} />
-                </div>
-                <span className="text-[13px] text-muted-foreground">{car.pickupLine}</span>
-                <span className="text-[13px] text-muted-foreground">{car.dropoffLine}</span>
-                {car.notes && <span className="text-[13px] text-destructive">{car.notes}</span>}
+            </AccordionContent>
+          </AccordionItem>
+        )}
+
+        {sortedCars.length > 0 && (
+          <AccordionItem value="cars" className="rounded-lg border border-border bg-card px-3">
+            <AccordionTrigger>
+              <span className="flex items-center gap-2">
+                <CarIcon className="size-4 shrink-0 text-primary" aria-hidden />
+                רכבים · {sortedCars.filter((c) => passesFilter(c.key)).length}
+              </span>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="flex flex-col gap-3">
+                {sortedCars.filter((c) => passesFilter(c.key)).map((car) => {
+                  const isOn = highlightedKey === car.key
+                  return (
+                    <div
+                      key={car.key}
+                      role="button"
+                      tabIndex={0}
+                      aria-pressed={isOn}
+                      onClick={() => handleToggle(car.key)}
+                      onKeyDown={(e) => handleCardKeyDown(e, () => handleToggle(car.key))}
+                      className={`flex cursor-pointer gap-3 rounded-lg border p-3 text-start transition-colors ${
+                        isOn ? "border-destructive bg-destructive/5" : "border-border bg-card hover:bg-accent/40"
+                      }`}
+                    >
+                      <CarIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+                      <div className="flex flex-1 flex-col gap-0.5">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <span className="text-[15px] font-medium">{car.label}</span>
+                          <BookingStatusControl id={carBookingId(car.key)} defaultBooked travelers={travelers} />
+                        </div>
+                        <span className="text-[13px] text-muted-foreground">{car.pickupLine}</span>
+                        <span className="text-[13px] text-muted-foreground">{car.dropoffLine}</span>
+                        {car.notes && <span className="text-[13px] text-destructive">{car.notes}</span>}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
-            </div>
-          )
-        })}
-        {flights.filter((f) => passesFilter(f.key)).map((flight) => {
-          const isOn = highlightedKey === flight.key
-          return (
-            <div
-              key={flight.key}
-              role="button"
-              tabIndex={0}
-              aria-pressed={isOn}
-              onClick={() => handleToggle(flight.key)}
-              onKeyDown={(e) => handleCardKeyDown(e, () => handleToggle(flight.key))}
-              className={`flex cursor-pointer gap-3 rounded-lg border p-3 text-start transition-colors ${
-                isOn ? "border-destructive bg-destructive/5" : "border-border bg-card hover:bg-accent/40"
-              }`}
-            >
-              <PlaneIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
-              <div className="flex flex-1 flex-col gap-0.5">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-[15px] font-medium">{flight.label}</span>
-                  <BookingStatusControl id={flightBookingId(flight.key)} defaultBooked travelers={travelers} />
-                </div>
-                <span className="text-[13px] text-muted-foreground">{flight.timeLine}</span>
-                {flight.notes && <span className="text-[13px] text-destructive">{flight.notes}</span>}
+            </AccordionContent>
+          </AccordionItem>
+        )}
+
+        {sortedFlights.length > 0 && (
+          <AccordionItem value="flights" className="rounded-lg border border-border bg-card px-3">
+            <AccordionTrigger>
+              <span className="flex items-center gap-2">
+                <PlaneIcon className="size-4 shrink-0 text-primary" aria-hidden />
+                טיסות · {sortedFlights.filter((f) => passesFilter(f.key)).length}
+              </span>
+            </AccordionTrigger>
+            <AccordionContent>
+              <div className="flex flex-col gap-3">
+                {sortedFlights.filter((f) => passesFilter(f.key)).map((flight) => {
+                  const isOn = highlightedKey === flight.key
+                  return (
+                    <div
+                      key={flight.key}
+                      role="button"
+                      tabIndex={0}
+                      aria-pressed={isOn}
+                      onClick={() => handleToggle(flight.key)}
+                      onKeyDown={(e) => handleCardKeyDown(e, () => handleToggle(flight.key))}
+                      className={`flex cursor-pointer gap-3 rounded-lg border p-3 text-start transition-colors ${
+                        isOn ? "border-destructive bg-destructive/5" : "border-border bg-card hover:bg-accent/40"
+                      }`}
+                    >
+                      <PlaneIcon className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />
+                      <div className="flex flex-1 flex-col gap-0.5">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <span className="text-[15px] font-medium">{flight.label}</span>
+                          <BookingStatusControl id={flightBookingId(flight.key)} defaultBooked travelers={travelers} />
+                        </div>
+                        <span className="text-[13px] text-muted-foreground">{flight.timeLine}</span>
+                        {flight.notes && <span className="text-[13px] text-destructive">{flight.notes}</span>}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
-            </div>
-          )
-        })}
-      </div>
+            </AccordionContent>
+          </AccordionItem>
+        )}
+      </Accordion>
     </div>
   )
 }

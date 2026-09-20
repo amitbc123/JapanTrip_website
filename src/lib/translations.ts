@@ -71,7 +71,19 @@ export function translateCarDropoffLocation(bookingNumber: string, fallback: str
 
 export function translateFlightRoute(flightNumber: string, fallback: string): string {
   if (flightNumber === "JAL630") return "קומאמוטו לטוקיו (הנדה)"
+  if (flightNumber === "LY91") return "תל אביב לטוקיו (נריטה)"
+  if (flightNumber === "LY92") return "טוקיו (נריטה) לתל אביב"
   return fallback
+}
+
+const FLIGHT_LABEL_HE: Record<string, string> = {
+  "Domestic flight": "טיסה פנימית",
+  "Outbound flight": "טיסת הלוך",
+  "Return flight": "טיסת חזור",
+}
+
+export function translateFlightLabel(label: string): string {
+  return FLIGHT_LABEL_HE[label] ?? label
 }
 
 export function translateTrainRoute(trainNumber: string, fallback: string): string {

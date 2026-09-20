@@ -5,6 +5,7 @@ import {
   translateCarPickupLocation,
   translateCarDropoffLocation,
   translateCity,
+  translateFlightLabel,
   translateFlightRoute,
   translateTrainRoute,
 } from "@/lib/translations"
@@ -17,6 +18,10 @@ export interface CarSummaryRow {
   dropoffLine: string
   coversHotelLegOrders: number[]
   notes?: string
+  /** ISO-ish `date + "T" + time` string, sortable lexicographically — lets
+   *  the transport list interleave cars/flights/trains by actual date/time
+   *  instead of grouping by transport type. */
+  sortKey: string
 }
 
 export interface FlightSummaryRow {
@@ -25,9 +30,11 @@ export interface FlightSummaryRow {
   timeLine: string
   coversHotelLegOrders: number[]
   notes?: string
+  sortKey: string
 }
 
 interface FlightLegLike {
+  label: string
   flightNumber: string
   route: string
   date: string
@@ -44,6 +51,7 @@ export function carSummaryFromPrivate(car: CarLeg): CarSummaryRow {
     pickupLine: `איסוף: ${translateCarPickupLocation(car.bookingNumber, car.pickup.location)}, ${formatHebrewDate(car.pickup.date)} ${car.pickup.time}`,
     dropoffLine: `החזרה: ${translateCarDropoffLocation(car.bookingNumber, car.dropoff.location)}, ${formatHebrewDate(car.dropoff.date)} ${car.dropoff.time}`,
     coversHotelLegOrders: car.coversHotelLegOrders,
+    sortKey: `${car.pickup.date}T${car.pickup.time}`,
   }
 }
 
@@ -55,16 +63,18 @@ export function carSummaryFromPublic(car: PublicCarLeg): CarSummaryRow {
     dropoffLine: `החזרה: ${translateCity(car.dropoffCity)}, ${formatHebrewDate(car.dropoffDate)} ${car.dropoffTime}`,
     coversHotelLegOrders: car.coversHotelLegOrders,
     notes: car.notes,
+    sortKey: `${car.pickupDate}T${car.pickupTime}`,
   }
 }
 
 export function flightSummary(flight: FlightLegLike): FlightSummaryRow {
   return {
     key: flight.flightNumber,
-    label: `טיסה פנימית · ${flight.flightNumber} · ${translateFlightRoute(flight.flightNumber, flight.route)}`,
+    label: `${translateFlightLabel(flight.label)} · ${flight.flightNumber} · ${translateFlightRoute(flight.flightNumber, flight.route)}`,
     timeLine: `המראה: ${formatHebrewDate(flight.date)} ${flight.departTime} · נחיתה: ${flight.arriveTime}`,
     coversHotelLegOrders: flight.coversHotelLegOrders,
     notes: flight.notes,
+    sortKey: `${flight.date}T${flight.departTime}`,
   }
 }
 
@@ -78,6 +88,7 @@ export interface TrainSummaryRow {
   /** Whether the schedule itself is confirmed (departTime/arriveTime known) —
    *  the default booking status before the rider has touched it locally. */
   isBooked: boolean
+  sortKey: string
 }
 
 /** `privateInfo` (price/paidBy/seats) only exists once the private trip
@@ -101,5 +112,6 @@ export function trainSummary(train: TrainLeg, privateInfo?: PrivateTrainInfo): T
     coversHotelLegOrders: train.coversHotelLegOrders,
     notes: train.notes,
     isBooked: train.booked,
+    sortKey: `${train.date}T${train.departTime ?? "00:00"}`,
   }
 }
