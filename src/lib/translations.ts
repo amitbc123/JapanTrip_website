@@ -25,6 +25,7 @@ const CITY_HE: Record<string, string> = {
   "Nagakute, Aichi (near Nagoya)": "נגקוטה, אאיצ'י (ליד נגויה)",
   "Uji, near Kyoto": "אוג'י, ליד קיוטו",
   "Tokyo (Toyosu)": "טוקיו (טויוסו)",
+  "Tokyo (Yurakucho)": "טוקיו (יורקוצ'ו)",
   "Tokyo (Azabudai Hills)": "טוקיו (אזבודאי הילס)",
   Odawara: "אודוארה",
 }

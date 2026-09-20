@@ -44,7 +44,7 @@ function isValidAttraction(value: unknown): boolean {
   return (
     typeof value.name === "string" &&
     typeof value.city === "string" &&
-    typeof value.date === "string" &&
+    (typeof value.date === "string" || value.date === null) &&
     typeof value.geocode === "boolean"
   )
 }
