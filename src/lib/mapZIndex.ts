@@ -3,6 +3,9 @@
  *  otherwise stack in arbitrary DOM/creation order and can bury a hotel
  *  number under a waypoint or transport bubble in a dense cluster (e.g. the
  *  Kansai/Chubu leg of a Japan trip). */
+/** The device's own "you are here" dot sits above everything, hotels
+ *  included, so it's never hidden while you're standing at a stop. */
+export const MARKER_Z_MY_LOCATION = 2000
 export const MARKER_Z_HOTEL = 1000
 export const MARKER_Z_ATTRACTION = 500
 export const MARKER_Z_WAYPOINT = 200

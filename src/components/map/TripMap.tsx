@@ -6,6 +6,7 @@ import { createFlythroughIcon } from "@/components/map/icons"
 import { HotelMarker } from "@/components/map/HotelMarker"
 import { RecommendationMarker } from "@/components/map/RecommendationMarker"
 import { RouteSegments } from "@/components/map/RouteSegments"
+import { MARKER_Z_MY_LOCATION } from "@/lib/mapZIndex"
 import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
 import { useMapLayersStore } from "@/stores/map-layers-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
@@ -249,6 +250,100 @@ function FullscreenControl() {
   return null
 }
 
+const MY_LOCATION_ZOOM = 16
+const MY_LOCATION_ICON_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>'
+
+function geolocationErrorMessage(error: GeolocationPositionError): string {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      return "אין הרשאה למיקום. יש לאשר גישה למיקום בהגדרות הדפדפן."
+    case error.TIMEOUT:
+      return "לא הצלחנו לקבל מיקום בזמן. נסו שוב."
+    default:
+      return "המיקום לא זמין כרגע. נסו שוב."
+  }
+}
+
+/** Top-right Leaflet control (added after the zoom-to-today's-stop control,
+ *  so it stacks right under it) that asks the browser for the device's real
+ *  position, drops a "you are here" dot with an accuracy circle, and flies
+ *  in on it. One-shot per click, not continuous tracking, so the GPS isn't
+ *  kept running in the background. */
+function MyLocationControl() {
+  const map = useMap()
+
+  useEffect(() => {
+    let dot: L.Marker | null = null
+    let accuracyCircle: L.Circle | null = null
+    let cancelled = false
+
+    const control = new L.Control({ position: "topright" })
+    control.onAdd = () => {
+      const container = L.DomUtil.create("div", "leaflet-bar leaflet-control")
+      const button = L.DomUtil.create("a", "trip-map-control-button", container)
+      button.href = "#"
+      button.setAttribute("role", "button")
+      button.title = "המיקום שלי"
+      button.setAttribute("aria-label", button.title)
+      button.innerHTML = MY_LOCATION_ICON_SVG
+      L.DomEvent.disableClickPropagation(container)
+      L.DomEvent.on(button, "click", (e) => {
+        L.DomEvent.preventDefault(e)
+        if (button.classList.contains("is-loading")) return
+        if (!("geolocation" in navigator)) {
+          window.alert("הדפדפן הזה לא תומך באיתור מיקום.")
+          return
+        }
+        button.classList.add("is-loading")
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            button.classList.remove("is-loading")
+            if (cancelled) return
+            const latLng: [number, number] = [position.coords.latitude, position.coords.longitude]
+            const accuracy = position.coords.accuracy
+
+            if (accuracyCircle) accuracyCircle.setLatLng(latLng).setRadius(accuracy)
+            else
+              accuracyCircle = L.circle(latLng, {
+                radius: accuracy,
+                className: "trip-my-location-accuracy",
+                interactive: false,
+              }).addTo(map)
+
+            if (dot) dot.setLatLng(latLng)
+            else
+              dot = L.marker(latLng, {
+                icon: L.divIcon({ className: "trip-my-location-dot", iconSize: [18, 18] }),
+                interactive: false,
+                keyboard: false,
+                zIndexOffset: MARKER_Z_MY_LOCATION,
+              }).addTo(map)
+
+            map.flyTo(latLng, Math.max(map.getZoom(), MY_LOCATION_ZOOM), { duration: 1.2 })
+          },
+          (error) => {
+            button.classList.remove("is-loading")
+            if (!cancelled) window.alert(geolocationErrorMessage(error))
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 }
+        )
+      })
+      return container
+    }
+    control.addTo(map)
+
+    return () => {
+      cancelled = true
+      dot?.remove()
+      accuracyCircle?.remove()
+      control.remove()
+    }
+  }, [map])
+
+  return null
+}
+
 const FLYTHROUGH_ZOOM = 8
 const MIN_LEG_MS = 400
 const MAX_LEG_MS = 3000
@@ -425,6 +520,7 @@ export function TripMap({
         currentHotelOrder={currentHotelOrder}
         markerRefs={hotelMarkerRefs}
       />
+      <MyLocationControl />
       <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} trains={trainSummaries} legs={legs} />
       {showHotels &&
         hotels.map((stop) => (
