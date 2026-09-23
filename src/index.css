@@ -163,15 +163,33 @@
   background: var(--color-sand);
 }
 
-/* "Zoom to where we are today" control, stacked under the layers switcher —
-   sized to match its 44px touch target. */
-.leaflet-bar a.trip-map-locate-button {
+/* Custom map controls ("zoom to where we are today" under the layers
+   switcher, fullscreen under +/-) — sized to a 44px touch target. */
+.leaflet-bar a.trip-map-control-button {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
   color: var(--color-ink);
+}
+
+/* Under +/- it matches the zoom buttons' own width instead. */
+.leaflet-left .leaflet-bar a.trip-map-control-button {
+  width: 30px;
+  height: 30px;
+}
+
+/* Map covering the whole viewport (toggled by the fullscreen control).
+   Above the sticky top bar (z-40); !important beats the Tailwind
+   height/rounding utilities on the map container. */
+.leaflet-container.trip-map--fullscreen {
+  position: fixed !important;
+  inset: 0;
+  z-index: 50;
+  width: 100vw !important;
+  height: 100dvh !important;
+  border-radius: 0 !important;
 }
 
 /* Leaflet renders marker icons as raw injected HTML outside the React tree,

@@ -157,7 +157,7 @@ function ZoomToCurrentStopControl({
     const control = new L.Control({ position: "topright" })
     control.onAdd = () => {
       const container = L.DomUtil.create("div", "leaflet-bar leaflet-control")
-      const button = L.DomUtil.create("a", "trip-map-locate-button", container)
+      const button = L.DomUtil.create("a", "trip-map-control-button", container)
       button.href = "#"
       button.setAttribute("role", "button")
       button.title = "זום למיקום שלנו לפי התאריך"
@@ -180,6 +180,71 @@ function ZoomToCurrentStopControl({
       control.remove()
     }
   }, [map, markerRefs])
+
+  return null
+}
+
+const SVG_ATTRS =
+  'xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"'
+const ENTER_FULLSCREEN_ICON_SVG = `<svg ${SVG_ATTRS}><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>`
+const EXIT_FULLSCREEN_ICON_SVG = `<svg ${SVG_ATTRS}><path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/></svg>`
+const FULLSCREEN_CLASS = "trip-map--fullscreen"
+
+/** Top-left Leaflet control (added after the built-in zoom control, so it
+ *  stacks right under +/-) that toggles the map between its normal inline
+ *  size and covering the whole viewport. CSS-based rather than the
+ *  Fullscreen API, which iOS Safari doesn't support for non-video elements.
+ *  Escape also exits. */
+function FullscreenControl() {
+  const map = useMap()
+
+  useEffect(() => {
+    const mapContainer = map.getContainer()
+    let button: HTMLAnchorElement | null = null
+
+    function render(isFullscreen: boolean) {
+      if (!button) return
+      button.title = isFullscreen ? "יציאה ממסך מלא" : "מפה במסך מלא"
+      button.setAttribute("aria-label", button.title)
+      button.setAttribute("aria-pressed", String(isFullscreen))
+      button.innerHTML = isFullscreen ? EXIT_FULLSCREEN_ICON_SVG : ENTER_FULLSCREEN_ICON_SVG
+    }
+
+    function setFullscreen(isFullscreen: boolean) {
+      mapContainer.classList.toggle(FULLSCREEN_CLASS, isFullscreen)
+      document.body.style.overflow = isFullscreen ? "hidden" : ""
+      render(isFullscreen)
+      map.invalidateSize()
+    }
+
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape" && mapContainer.classList.contains(FULLSCREEN_CLASS)) setFullscreen(false)
+    }
+
+    const control = new L.Control({ position: "topleft" })
+    control.onAdd = () => {
+      const container = L.DomUtil.create("div", "leaflet-bar leaflet-control")
+      button = L.DomUtil.create("a", "trip-map-control-button", container)
+      button.href = "#"
+      button.setAttribute("role", "button")
+      render(false)
+      L.DomEvent.disableClickPropagation(container)
+      L.DomEvent.on(button, "click", (e) => {
+        L.DomEvent.preventDefault(e)
+        setFullscreen(!mapContainer.classList.contains(FULLSCREEN_CLASS))
+      })
+      return container
+    }
+    control.addTo(map)
+    document.addEventListener("keydown", onKeyDown)
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown)
+      mapContainer.classList.remove(FULLSCREEN_CLASS)
+      document.body.style.overflow = ""
+      control.remove()
+    }
+  }, [map])
 
   return null
 }
@@ -354,6 +419,7 @@ export function TripMap({
           />
         </LayersControl.BaseLayer>
       </LayersControl>
+      <FullscreenControl />
       <ZoomToCurrentStopControl
         hotels={hotels}
         currentHotelOrder={currentHotelOrder}
