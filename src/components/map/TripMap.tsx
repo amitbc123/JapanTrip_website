@@ -265,78 +265,180 @@ function geolocationErrorMessage(error: GeolocationPositionError): string {
   }
 }
 
+/** iOS Safari's non-standard compass reading, and its permission prompt
+ *  for motion sensors — neither is in lib.dom. */
+type IosDeviceOrientationEvent = DeviceOrientationEvent & { webkitCompassHeading?: number }
+type IosDeviceOrientationEventStatic = typeof DeviceOrientationEvent & {
+  requestPermission?: () => Promise<"granted" | "denied">
+}
+
+/** Compass heading in degrees clockwise from north, or null when the event
+ *  doesn't carry a real (north-referenced) reading. */
+function compassHeading(event: DeviceOrientationEvent): number | null {
+  const iosHeading = (event as IosDeviceOrientationEvent).webkitCompassHeading
+  if (typeof iosHeading === "number" && !Number.isNaN(iosHeading)) return iosHeading
+  if (!event.absolute || event.alpha === null) return null
+  // alpha is counter-clockwise device rotation around the screen's normal;
+  // correct for the screen itself being rotated (landscape).
+  const screenAngle = window.screen.orientation?.angle ?? 0
+  return (360 - event.alpha + screenAngle) % 360
+}
+
+const MY_LOCATION_ICON_HTML = '<div class="trip-my-location-cone"></div><div class="trip-my-location-core"></div>'
+
 /** Top-right Leaflet control (added after the zoom-to-today's-stop control,
- *  so it stacks right under it) that asks the browser for the device's real
- *  position, drops a "you are here" dot with an accuracy circle, and flies
- *  in on it. One-shot per click, not continuous tracking, so the GPS isn't
- *  kept running in the background. */
+ *  so it stacks right under it) toggling live "you are here" tracking, like
+ *  Google Maps: while on, the blue dot and its accuracy circle follow the
+ *  device's position (watchPosition) and a beam on the dot turns with the
+ *  compass. The first fix flies in on the dot; after that the map keeps it
+ *  centered until the map is dragged by hand. Off stops the GPS and compass
+ *  and removes the dot, so a stale position is never shown as current. */
 function MyLocationControl() {
   const map = useMap()
 
   useEffect(() => {
+    let button: HTMLAnchorElement | null = null
     let dot: L.Marker | null = null
     let accuracyCircle: L.Circle | null = null
-    let cancelled = false
+    let watchId: number | null = null
+    let hasFix = false
+    let isFollowing = true
+    /** Unwrapped (continuous) beam angle, so a CSS transition from 359° to
+     *  1° turns 2° forward instead of spinning back around the circle. */
+    let beamAngle: number | null = null
+
+    function render(isActive: boolean, isWaiting: boolean) {
+      if (!button) return
+      button.classList.toggle("is-active", isActive)
+      button.classList.toggle("is-loading", isWaiting)
+      button.title = isActive ? "כיבוי מעקב מיקום" : "הצגת המיקום שלי"
+      button.setAttribute("aria-label", button.title)
+      button.setAttribute("aria-pressed", String(isActive))
+    }
+
+    function onOrientation(event: DeviceOrientationEvent) {
+      const heading = compassHeading(event)
+      const element = dot?.getElement()
+      if (heading === null || !element) return
+      if (beamAngle === null) beamAngle = heading
+      else beamAngle += ((heading - beamAngle + 540) % 360) - 180
+      element.classList.add("has-heading")
+      element.style.setProperty("--heading", `${beamAngle}deg`)
+    }
+
+    // Android Chrome fires compass-referenced readings only on the
+    // "absolute" event; iOS puts webkitCompassHeading on the plain one.
+    const orientationEventName =
+      "ondeviceorientationabsolute" in window ? "deviceorientationabsolute" : "deviceorientation"
+
+    function startCompass() {
+      const Orientation = window.DeviceOrientationEvent as IosDeviceOrientationEventStatic | undefined
+      if (!Orientation) return
+      const listen = () => window.addEventListener(orientationEventName, onOrientation as EventListener)
+      // iOS only grants this from within the tap itself, so it must be
+      // requested synchronously here, before any await.
+      if (typeof Orientation.requestPermission === "function") {
+        Orientation.requestPermission()
+          .then((state) => {
+            if (state === "granted" && watchId !== null) listen()
+          })
+          .catch(() => {})
+      } else {
+        listen()
+      }
+    }
+
+    function onDragStart() {
+      isFollowing = false
+    }
+
+    function stop() {
+      if (watchId !== null) navigator.geolocation.clearWatch(watchId)
+      watchId = null
+      window.removeEventListener(orientationEventName, onOrientation as EventListener)
+      map.off("dragstart", onDragStart)
+      dot?.remove()
+      accuracyCircle?.remove()
+      dot = null
+      accuracyCircle = null
+      beamAngle = null
+      render(false, false)
+    }
+
+    function onPosition(position: GeolocationPosition) {
+      const latLng: [number, number] = [position.coords.latitude, position.coords.longitude]
+      const accuracy = position.coords.accuracy
+
+      if (accuracyCircle) accuracyCircle.setLatLng(latLng).setRadius(accuracy)
+      else
+        accuracyCircle = L.circle(latLng, {
+          radius: accuracy,
+          className: "trip-my-location-accuracy",
+          interactive: false,
+        }).addTo(map)
+
+      if (dot) dot.setLatLng(latLng)
+      else
+        dot = L.marker(latLng, {
+          icon: L.divIcon({ className: "trip-my-location", html: MY_LOCATION_ICON_HTML, iconSize: [18, 18] }),
+          interactive: false,
+          keyboard: false,
+          zIndexOffset: MARKER_Z_MY_LOCATION,
+        }).addTo(map)
+
+      if (!hasFix) {
+        hasFix = true
+        render(true, false)
+        map.flyTo(latLng, Math.max(map.getZoom(), MY_LOCATION_ZOOM), { duration: 1.2 })
+      } else if (isFollowing) {
+        map.panTo(latLng, { animate: true })
+      }
+    }
+
+    function onPositionError(error: GeolocationPositionError) {
+      // Once tracking is running, a transient glitch (e.g. indoors) isn't
+      // worth interrupting for — keep the last dot and wait for the next fix.
+      if (hasFix && error.code !== error.PERMISSION_DENIED) return
+      stop()
+      window.alert(geolocationErrorMessage(error))
+    }
+
+    function start() {
+      if (!("geolocation" in navigator)) {
+        window.alert("הדפדפן הזה לא תומך באיתור מיקום.")
+        return
+      }
+      hasFix = false
+      isFollowing = true
+      render(true, true)
+      watchId = navigator.geolocation.watchPosition(onPosition, onPositionError, {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+      })
+      startCompass()
+      map.on("dragstart", onDragStart)
+    }
 
     const control = new L.Control({ position: "topright" })
     control.onAdd = () => {
       const container = L.DomUtil.create("div", "leaflet-bar leaflet-control")
-      const button = L.DomUtil.create("a", "trip-map-control-button", container)
+      button = L.DomUtil.create("a", "trip-map-control-button", container)
       button.href = "#"
       button.setAttribute("role", "button")
-      button.title = "המיקום שלי"
-      button.setAttribute("aria-label", button.title)
       button.innerHTML = MY_LOCATION_ICON_SVG
+      render(false, false)
       L.DomEvent.disableClickPropagation(container)
       L.DomEvent.on(button, "click", (e) => {
         L.DomEvent.preventDefault(e)
-        if (button.classList.contains("is-loading")) return
-        if (!("geolocation" in navigator)) {
-          window.alert("הדפדפן הזה לא תומך באיתור מיקום.")
-          return
-        }
-        button.classList.add("is-loading")
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            button.classList.remove("is-loading")
-            if (cancelled) return
-            const latLng: [number, number] = [position.coords.latitude, position.coords.longitude]
-            const accuracy = position.coords.accuracy
-
-            if (accuracyCircle) accuracyCircle.setLatLng(latLng).setRadius(accuracy)
-            else
-              accuracyCircle = L.circle(latLng, {
-                radius: accuracy,
-                className: "trip-my-location-accuracy",
-                interactive: false,
-              }).addTo(map)
-
-            if (dot) dot.setLatLng(latLng)
-            else
-              dot = L.marker(latLng, {
-                icon: L.divIcon({ className: "trip-my-location-dot", iconSize: [18, 18] }),
-                interactive: false,
-                keyboard: false,
-                zIndexOffset: MARKER_Z_MY_LOCATION,
-              }).addTo(map)
-
-            map.flyTo(latLng, Math.max(map.getZoom(), MY_LOCATION_ZOOM), { duration: 1.2 })
-          },
-          (error) => {
-            button.classList.remove("is-loading")
-            if (!cancelled) window.alert(geolocationErrorMessage(error))
-          },
-          { enableHighAccuracy: true, timeout: 15000, maximumAge: 30000 }
-        )
+        if (watchId !== null) stop()
+        else start()
       })
       return container
     }
     control.addTo(map)
 
     return () => {
-      cancelled = true
-      dot?.remove()
-      accuracyCircle?.remove()
+      stop()
       control.remove()
     }
   }, [map])

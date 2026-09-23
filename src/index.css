@@ -190,15 +190,47 @@
   }
 }
 
+/* On state of a toggle control (live location tracking): filled blue with
+   a white icon, so it's obvious at a glance that the GPS is running. */
+.leaflet-bar a.trip-map-control-button.is-active,
+.leaflet-bar a.trip-map-control-button.is-active:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
 /* The device's own position (the "my location" control) — the familiar
-   blue dot with a translucent accuracy radius. */
-.trip-my-location-dot {
+   blue dot with a translucent accuracy radius, plus a beam showing which
+   way the phone is pointing once a compass reading arrives. */
+.trip-my-location {
+  position: relative;
+}
+.trip-my-location-core {
+  position: absolute;
+  inset: 0;
   border-radius: 9999px;
   background: #2563eb;
   border: 3px solid #fff;
   box-shadow:
     0 0 0 6px rgb(37 99 235 / 0.25),
     0 1px 4px rgb(0 0 0 / 0.4);
+}
+.trip-my-location-cone {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  background: conic-gradient(from -30deg, rgb(37 99 235 / 0.55) 0deg 60deg, transparent 60deg);
+  -webkit-mask-image: radial-gradient(circle, #000 10%, transparent 70%);
+  mask-image: radial-gradient(circle, #000 10%, transparent 70%);
+  transform: rotate(var(--heading, 0deg));
+  transition: transform 0.2s linear;
+  pointer-events: none;
+}
+.trip-my-location.has-heading .trip-my-location-cone {
+  display: block;
 }
 .trip-my-location-accuracy {
   fill: #2563eb;
