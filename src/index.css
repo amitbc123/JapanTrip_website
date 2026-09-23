@@ -163,6 +163,17 @@
   background: var(--color-sand);
 }
 
+/* "Zoom to where we are today" control, stacked under the layers switcher —
+   sized to match its 44px touch target. */
+.leaflet-bar a.trip-map-locate-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-ink);
+}
+
 /* Leaflet renders marker icons as raw injected HTML outside the React tree,
    so these are plain CSS classes (not Tailwind utilities) referencing the
    same theme colors. Marker colors are intentionally more saturated than

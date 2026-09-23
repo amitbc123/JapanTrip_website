@@ -130,6 +130,60 @@ function FitHighlightedSegment({
   return null
 }
 
+const CURRENT_STOP_ZOOM = 14
+const LOCATE_ICON_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><line x1="12" y1="1" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="23"/><line x1="1" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="23" y2="12"/></svg>'
+
+/** Top-right Leaflet control (added after the LayersControl, so it stacks
+ *  right under it) that zooms in on the stop we're at per today's date.
+ *  Falls back to stop 1 when the date-based stop isn't known (no private
+ *  trip file loaded), matching getCurrentHotelOrder's own default. */
+function ZoomToCurrentStopControl({
+  hotels,
+  currentHotelOrder,
+  markerRefs,
+}: {
+  hotels: RouteStop[]
+  currentHotelOrder: number | null | undefined
+  markerRefs: React.RefObject<Map<number, L.Marker>>
+}) {
+  const map = useMap()
+  const targetRef = useRef<{ hotels: RouteStop[]; order: number }>({ hotels, order: currentHotelOrder ?? 1 })
+  useEffect(() => {
+    targetRef.current = { hotels, order: currentHotelOrder ?? 1 }
+  }, [hotels, currentHotelOrder])
+
+  useEffect(() => {
+    const control = new L.Control({ position: "topright" })
+    control.onAdd = () => {
+      const container = L.DomUtil.create("div", "leaflet-bar leaflet-control")
+      const button = L.DomUtil.create("a", "trip-map-locate-button", container)
+      button.href = "#"
+      button.setAttribute("role", "button")
+      button.title = "זום למיקום שלנו לפי התאריך"
+      button.setAttribute("aria-label", button.title)
+      button.innerHTML = LOCATE_ICON_SVG
+      L.DomEvent.disableClickPropagation(container)
+      L.DomEvent.on(button, "click", (e) => {
+        L.DomEvent.preventDefault(e)
+        const { hotels: stops, order } = targetRef.current
+        const stop = stops.find((h) => h.order === order)
+        if (!stop || stop.lat === null || stop.lon === null) return
+        map.flyTo([stop.lat, stop.lon], CURRENT_STOP_ZOOM, { duration: 1.2 })
+        const marker = markerRefs.current.get(order)
+        if (marker) map.once("moveend", () => marker.openPopup())
+      })
+      return container
+    }
+    control.addTo(map)
+    return () => {
+      control.remove()
+    }
+  }, [map, markerRefs])
+
+  return null
+}
+
 const FLYTHROUGH_ZOOM = 8
 const MIN_LEG_MS = 400
 const MAX_LEG_MS = 3000
@@ -300,6 +354,11 @@ export function TripMap({
           />
         </LayersControl.BaseLayer>
       </LayersControl>
+      <ZoomToCurrentStopControl
+        hotels={hotels}
+        currentHotelOrder={currentHotelOrder}
+        markerRefs={hotelMarkerRefs}
+      />
       <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} trains={trainSummaries} legs={legs} />
       {showHotels &&
         hotels.map((stop) => (
