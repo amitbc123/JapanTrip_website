@@ -180,6 +180,34 @@
   height: 30px;
 }
 
+/* Pulses while waiting for the browser to return a position. */
+.leaflet-bar a.trip-map-control-button.is-loading svg {
+  animation: my-location-wait 1s ease-in-out infinite;
+}
+@keyframes my-location-wait {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* The device's own position (the "my location" control) — the familiar
+   blue dot with a translucent accuracy radius. */
+.trip-my-location-dot {
+  border-radius: 9999px;
+  background: #2563eb;
+  border: 3px solid #fff;
+  box-shadow:
+    0 0 0 6px rgb(37 99 235 / 0.25),
+    0 1px 4px rgb(0 0 0 / 0.4);
+}
+.trip-my-location-accuracy {
+  fill: #2563eb;
+  fill-opacity: 0.12;
+  stroke: #2563eb;
+  stroke-opacity: 0.4;
+  stroke-width: 1;
+}
+
 /* Map covering the whole viewport (toggled by the fullscreen control).
    Above the sticky top bar (z-40); !important beats the Tailwind
    height/rounding utilities on the map container. */
