@@ -102,14 +102,14 @@
     },
     {
       "label": "Train 5",
-      "trainNumber": "Kagayaki (חלופה: Hakutaka)",
+      "trainNumber": "Kagayaki 539",
       "route": "Tokyo to Kanazawa",
       "date": "2026-10-24",
-      "departTime": "13:30",
-      "arriveTime": "16:00",
-      "booked": false,
+      "departTime": "14:52",
+      "arriveTime": "17:23",
+      "booked": true,
       "coversHotelLegOrders": [6, 7],
-      "notes": "ההזמנה הכי חשובה שנשארה — אין ל-Kagayaki קרון חופשי בכלל, 24.10 הוא שבת בעונת השלכת, כ-14,600 ין לאדם. השעות משוערות. אם Kagayaki אזלה: חלופה Hakutaka עם קרונות חופשיים, איטית בכ-30 דקות. כולל מנהרת אייאמה (22.2 ק\"מ, כ-8 דקות רצוף) ועשרות מנהרות נוספות — הקטע המנהרתי ביותר בטיול."
+      "notes": "הוזמן: 3 מקומות שמורים ב-Gran Class. יציאה מרציף 20 בתחנת טוקיו, נסיעה של 2:31 שעות. כולל מנהרת אייאמה (22.2 ק\"מ, כ-8 דקות רצוף) ועשרות מנהרות נוספות, הקטע המנהרתי ביותר בטיול."
     },
     {
       "label": "Train 6",
@@ -292,9 +292,9 @@
           "nameHe": "תחנת טוקיו",
           "geocodeQuery": "Tokyo Station, Chiyoda, Tokyo, Japan",
           "mode": "shinkansen",
-          "departTime": "13:30",
-          "trainNumber": "Kagayaki (חלופה: Hakutaka)",
-          "note": "מעבר בין רציפים 40-50 דקות. ההזמנה הכי חשובה בטיול — אין קרון חופשי בכלל, כ-14,600 ין לאדם. שעות משוערות.",
+          "departTime": "14:52",
+          "trainNumber": "Kagayaki 539",
+          "note": "רציף 20. מעבר בין רציפים 40-50 דקות. הוזמנו 3 מקומות ב-Gran Class.",
           "lat": 35.6812,
           "lon": 139.7671
         }
