@@ -33,10 +33,11 @@ function OpenInGoogleMapsLink({ lat, lon }: { lat: number; lon: number }) {
       href={googleMapsUrl(lat, lon)}
       target="_blank"
       rel="noopener noreferrer"
-      className="mt-1 flex items-center justify-center gap-1.5 rounded-md border border-border bg-card px-2 py-1.5 text-xs font-medium text-foreground! no-underline! hover:bg-accent/40"
+      aria-label="פתיחה ב-Google Maps"
+      className="flex shrink-0 items-center justify-center gap-1.5 rounded-md border border-border bg-card px-2 py-1 text-xs font-medium text-foreground! no-underline! hover:bg-accent/40"
     >
       <MapPinnedIcon className="size-3.5" aria-hidden />
-      פתיחה ב-Google Maps
+      Google Maps
     </a>
   )
 }
@@ -73,20 +74,24 @@ export function HotelMarker({ stop, details, isCurrent, registerRef }: HotelMark
             {isCurrent && (
               <span className="text-xs font-semibold text-emerald-600">📍 נמצאים כאן עכשיו</span>
             )}
-            <Link
-              to={`/hotels?open=${stop.order}`}
-              className="mt-1 text-xs font-medium text-primary underline underline-offset-2"
-            >
-              פרטי המלון
-            </Link>
-            {/* The private file's coordinates are the exact booked address;
-                route-public.json's can be station-area approximations. */}
-            <OpenInGoogleMapsLink lat={details.lat ?? stop.lat} lon={details.lon ?? stop.lon} />
+            <div className="mt-1 flex items-center justify-end gap-3">
+              <Link
+                to={`/hotels?open=${stop.order}`}
+                className="text-xs font-medium text-primary underline underline-offset-2"
+              >
+                פרטי המלון
+              </Link>
+              {/* The private file's coordinates are the exact booked address;
+                  route-public.json's can be station-area approximations. */}
+              <OpenInGoogleMapsLink lat={details.lat ?? stop.lat} lon={details.lon ?? stop.lon} />
+            </div>
           </div>
         ) : (
           <div className="flex min-w-24 flex-col items-end gap-1 text-end">
             <span className="font-semibold">תחנה {stop.order}</span>
-            <OpenInGoogleMapsLink lat={stop.lat} lon={stop.lon} />
+            <div className="mt-1">
+              <OpenInGoogleMapsLink lat={stop.lat} lon={stop.lon} />
+            </div>
           </div>
         )}
       </Popup>
