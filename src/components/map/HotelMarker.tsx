@@ -1,5 +1,6 @@
 import type L from "leaflet"
 import { Marker, Popup } from "react-leaflet"
+import { MapPinnedIcon } from "lucide-react"
 import { Link } from "react-router"
 import { createHotelIcon } from "@/components/map/icons"
 import { formatHebrewDateRange } from "@/lib/format"
@@ -17,6 +18,27 @@ interface HotelMarkerProps {
    *  only known once the private trip file is loaded. */
   isCurrent?: boolean
   registerRef?: (order: number, marker: L.Marker | null) => void
+}
+
+/** Google's cross-platform Maps URL: opens the Google Maps app when it's
+ *  installed (Android/iOS), the website otherwise, with a pin on the exact
+ *  coordinates. */
+function googleMapsUrl(lat: number, lon: number): string {
+  return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`
+}
+
+function OpenInGoogleMapsLink({ lat, lon }: { lat: number; lon: number }) {
+  return (
+    <a
+      href={googleMapsUrl(lat, lon)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="mt-1 flex items-center justify-center gap-1.5 rounded-md border border-border bg-card px-2 py-1.5 text-xs font-medium text-foreground! no-underline! hover:bg-accent/40"
+    >
+      <MapPinnedIcon className="size-3.5" aria-hidden />
+      פתיחה ב-Google Maps
+    </a>
+  )
 }
 
 export function HotelMarker({ stop, details, isCurrent, registerRef }: HotelMarkerProps) {
@@ -57,10 +79,14 @@ export function HotelMarker({ stop, details, isCurrent, registerRef }: HotelMark
             >
               פרטי המלון
             </Link>
+            {/* The private file's coordinates are the exact booked address;
+                route-public.json's can be station-area approximations. */}
+            <OpenInGoogleMapsLink lat={details.lat ?? stop.lat} lon={details.lon ?? stop.lon} />
           </div>
         ) : (
           <div className="flex min-w-24 flex-col items-end gap-1 text-end">
             <span className="font-semibold">תחנה {stop.order}</span>
+            <OpenInGoogleMapsLink lat={stop.lat} lon={stop.lon} />
           </div>
         )}
       </Popup>
