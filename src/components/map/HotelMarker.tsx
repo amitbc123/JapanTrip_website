@@ -4,6 +4,7 @@ import { MapPinnedIcon } from "lucide-react"
 import { Link } from "react-router"
 import { createHotelIcon } from "@/components/map/icons"
 import { formatHebrewDateRange } from "@/lib/format"
+import { formatNights, type HotelStay } from "@/lib/hotelStay"
 import { MARKER_Z_HOTEL } from "@/lib/mapZIndex"
 import { translateCity } from "@/lib/translations"
 import type { Hotel, RouteStop } from "@/types/trip"
@@ -14,6 +15,9 @@ interface HotelMarkerProps {
    *  trip file has been loaded — upgrades the popup from a bare stop number
    *  to the name/city/date range. */
   details?: Hotel
+  /** This stop's dates and night count — own booking dates, or inferred
+   *  from the neighbouring stops when the booking lacks them. */
+  stay?: HotelStay
   /** Whether this is the stop we're currently at, per today's date —
    *  only known once the private trip file is loaded. */
   isCurrent?: boolean
@@ -42,13 +46,11 @@ function OpenInGoogleMapsLink({ lat, lon }: { lat: number; lon: number }) {
   )
 }
 
-export function HotelMarker({ stop, details, isCurrent, registerRef }: HotelMarkerProps) {
+export function HotelMarker({ stop, details, stay, isCurrent, registerRef }: HotelMarkerProps) {
   if (stop.lat === null || stop.lon === null) return null
 
   const dateRange =
-    details?.checkIn && details?.checkOut
-      ? formatHebrewDateRange(details.checkIn, details.checkOut)
-      : null
+    stay?.checkIn && stay.checkOut ? formatHebrewDateRange(stay.checkIn, stay.checkOut) : null
   const srLabel = details
     ? `מלון ${stop.order}: ${details.name}, ${details.city}`
     : `תחנה ${stop.order}`
@@ -70,7 +72,18 @@ export function HotelMarker({ stop, details, isCurrent, registerRef }: HotelMark
               </span>
             </div>
             <span className="text-xs text-muted-foreground">{translateCity(details.city)}</span>
-            {dateRange && <span className="text-xs">{dateRange}</span>}
+            {stay && (
+              <span className="text-xs">
+                <span className="font-semibold">{formatNights(stay.nights)}</span>
+                {" · "}
+                {dateRange ?? "תאריכים טרם נקבעו"}
+              </span>
+            )}
+            {stay?.estimated && dateRange && (
+              <span className="text-[11px] text-muted-foreground">
+                תאריכים משוערים לפי התחנות הסמוכות
+              </span>
+            )}
             {isCurrent && (
               <span className="text-xs font-semibold text-emerald-600">📍 נמצאים כאן עכשיו</span>
             )}
