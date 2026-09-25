@@ -6,6 +6,7 @@ import { createFlythroughIcon } from "@/components/map/icons"
 import { HotelMarker } from "@/components/map/HotelMarker"
 import { RecommendationMarker } from "@/components/map/RecommendationMarker"
 import { RouteSegments } from "@/components/map/RouteSegments"
+import { getHotelStays } from "@/lib/hotelStay"
 import { MARKER_Z_MY_LOCATION } from "@/lib/mapZIndex"
 import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
 import { useMapLayersStore } from "@/stores/map-layers-store"
@@ -565,6 +566,8 @@ export function TripMap({
   const showHotels = useMapLayersStore((s) => s.hotels)
   const showAttractions = useMapLayersStore((s) => s.attractions)
 
+  const staysByOrder = useMemo(() => getHotelStays([...hotelDetailsByOrder.values()]), [hotelDetailsByOrder])
+
   const plottedPoints = useMemo<[number, number][]>(() => {
     const hotelPoints = hotels
       .filter((h): h is RouteStop & { lat: number; lon: number } => h.lat !== null && h.lon !== null)
@@ -630,6 +633,7 @@ export function TripMap({
             key={stop.order}
             stop={stop}
             details={hotelDetailsByOrder.get(stop.order)}
+            stay={staysByOrder.get(stop.order)}
             isCurrent={stop.order === currentHotelOrder}
             registerRef={(order, marker) => {
               if (marker) hotelMarkerRefs.current.set(order, marker)
