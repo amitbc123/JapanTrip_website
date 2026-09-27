@@ -113,14 +113,14 @@
     },
     {
       "label": "Train 6",
-      "trainNumber": "Nozomi 349",
+      "trainNumber": "Nozomi 361",
       "route": "Nagoya to Kyoto",
       "date": "2026-11-05",
-      "departTime": "11:24",
-      "arriveTime": "11:57",
-      "booked": false,
+      "departTime": "12:16",
+      "arriveTime": "12:50",
+      "booked": true,
       "coversHotelLegOrders": [14, 15],
-      "notes": "כדאי להזמין — נשארו רק 2 קרונות ללא הזמנת מקום מאז מרץ 2025. מעט מנהרות קצרות באזור סקיגהארה."
+      "notes": "הוזמן: 3 מקומות שמורים בקרון רגיל. יציאה מרציף 17 בתחנת נגויה. מעט מנהרות קצרות באזור סקיגהארה."
     },
     {
       "label": "Train 7",
@@ -311,9 +311,9 @@
           "nameHe": "תחנת נגויה",
           "geocodeQuery": "Nagoya Station, Nagoya, Japan",
           "mode": "shinkansen",
-          "departTime": "11:24",
-          "trainNumber": "Nozomi 349",
-          "note": "כדאי להזמין — נשארו רק 2 קרונות ללא הזמנת מקום.",
+          "departTime": "12:16",
+          "trainNumber": "Nozomi 361",
+          "note": "רציף 17. הוזמנו 3 מקומות שמורים בקרון רגיל.",
           "lat": 35.1706,
           "lon": 136.8816
         }
