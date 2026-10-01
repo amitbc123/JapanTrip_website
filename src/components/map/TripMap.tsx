@@ -97,25 +97,42 @@ function FocusRecommendation({
   return null
 }
 
+const AIRPORT_FOCUS_ZOOM = 11
+
 /** Zooms/pans to fit exactly the currently-highlighted car/flight's covered
  *  stops (all of coversHotelLegOrders, not just endpoints) — leaves the view
- *  untouched on deselect, per spec. */
+ *  untouched on deselect, per spec. A flight that starts or ends at an
+ *  airport rather than between two hotels (the international flights) goes
+ *  to that airport instead and opens its popup. */
 function FitHighlightedSegment({
   hotels,
   cars,
   flights,
   trains,
+  airports,
+  airportMarkerRefs,
 }: {
   hotels: RouteStop[]
   cars: CarSummaryRow[]
   flights: FlightSummaryRow[]
   trains: TrainSummaryRow[]
+  airports: Airport[]
+  airportMarkerRefs: React.RefObject<Map<string, L.Marker>>
 }) {
   const map = useMap()
   const highlightedKey = useRouteHighlightStore((s) => s.highlightedKey)
 
   useEffect(() => {
     if (!highlightedKey) return
+
+    const isFlight = flights.some((f) => f.key === highlightedKey)
+    const airport = isFlight ? airports.find((a) => a.flightNumbers?.includes(highlightedKey)) : undefined
+    if (airport) {
+      map.setView([airport.lat, airport.lon], AIRPORT_FOCUS_ZOOM, { animate: true })
+      airportMarkerRefs.current.get(airport.id)?.openPopup()
+      return
+    }
+
     const covering =
       cars.find((c) => c.key === highlightedKey)?.coversHotelLegOrders ??
       flights.find((f) => f.key === highlightedKey)?.coversHotelLegOrders ??
@@ -128,8 +145,10 @@ function FitHighlightedSegment({
       .map((h) => [h.lat, h.lon])
 
     if (points.length === 0) return
+    // An airport popup left open by a previous selection isn't this one's.
+    map.closePopup()
     map.fitBounds(L.latLngBounds(points), { padding: [40, 40] })
-  }, [map, highlightedKey, hotels, cars, flights, trains])
+  }, [map, highlightedKey, hotels, cars, flights, trains, airports, airportMarkerRefs])
 
   return null
 }
@@ -565,6 +584,7 @@ export function TripMap({
   const hotelMarkerRefs = useRef(new Map<number, L.Marker>())
   const attractionMarkerRefs = useRef(new Map<string, L.Marker>())
   const recommendationMarkerRefs = useRef(new Map<string, L.Marker>())
+  const airportMarkerRefs = useRef(new Map<string, L.Marker>())
   const isFlythroughPlaying = useRouteFlythroughStore((s) => s.isPlaying)
   const showHotels = useMapLayersStore((s) => s.hotels)
   const showAttractions = useMapLayersStore((s) => s.attractions)
@@ -656,7 +676,17 @@ export function TripMap({
             }}
           />
         ))}
-      {showAirports && airports.map((airport) => <AirportMarker key={airport.id} airport={airport} />)}
+      {showAirports &&
+        airports.map((airport) => (
+          <AirportMarker
+            key={airport.id}
+            airport={airport}
+            registerRef={(id, marker) => {
+              if (marker) airportMarkerRefs.current.set(id, marker)
+              else airportMarkerRefs.current.delete(id)
+            }}
+          />
+        ))}
       {targetRecommendation && (
         <RecommendationMarker
           recommendation={targetRecommendation}
@@ -685,6 +715,8 @@ export function TripMap({
         cars={carSummaries}
         flights={flightSummaries}
         trains={trainSummaries}
+        airports={airports}
+        airportMarkerRefs={airportMarkerRefs}
       />
       <RouteFlythrough hotels={hotels} isPlaying={isFlythroughPlaying} />
     </MapContainer>
