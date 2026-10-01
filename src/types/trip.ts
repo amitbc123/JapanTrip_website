@@ -204,6 +204,9 @@ export interface Airport {
   lat: number
   lon: number
   note?: string
+  /** Flights (by flightNumber) that start or end at this airport rather
+   *  than at a hotel — selecting one on the map zooms here. */
+  flightNumbers?: string[]
 }
 
 export interface RoutePublicData {
