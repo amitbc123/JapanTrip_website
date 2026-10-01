@@ -195,12 +195,24 @@ export interface Leg {
   waypoints: LegWaypoint[]
 }
 
+/** A fixed map point for an airport we fly in or out of — public
+ *  coordinates only, so it lives in route-public.json. */
+export interface Airport {
+  id: string
+  name: string
+  nameHe: string
+  lat: number
+  lon: number
+  note?: string
+}
+
 export interface RoutePublicData {
   hotels: RouteStop[]
   cars: PublicCarLeg[]
   flights: PublicFlightLeg[]
   trains: TrainLeg[]
   legs: Leg[]
+  airports?: Airport[]
 }
 
 export type RecommendationCategory = "food" | "sight" | "activity" | "nature" | "shopping"

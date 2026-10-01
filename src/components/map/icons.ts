@@ -22,6 +22,16 @@ export function createAttractionIcon(srLabel: string): L.DivIcon {
   })
 }
 
+export function createAirportIcon(srLabel: string): L.DivIcon {
+  return L.divIcon({
+    className: "trip-airport-marker",
+    html: `<span aria-hidden="true">✈️</span><span class="sr-only">${srLabel}</span>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+    popupAnchor: [0, -16],
+  })
+}
+
 export function createFlythroughIcon(): L.DivIcon {
   return L.divIcon({
     className: "trip-flythrough-marker",

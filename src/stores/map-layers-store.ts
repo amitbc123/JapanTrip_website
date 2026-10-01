@@ -8,6 +8,8 @@ export interface MapLayers {
   waypoints: boolean
   /** Star-shaped booked-attraction markers. */
   attractions: boolean
+  /** Plane markers for the airports we fly in/out of. */
+  airports: boolean
   /** The little car/train/plane emoji bubble at the midpoint of a coarse
    *  (waypoint-free) hotel-to-hotel segment. */
   transportIcons: boolean
@@ -21,6 +23,7 @@ export const DEFAULT_MAP_LAYERS: MapLayers = {
   hotels: true,
   waypoints: true,
   attractions: true,
+  airports: true,
   transportIcons: true,
 }
 
@@ -28,6 +31,7 @@ export const MAP_LAYER_LABEL_HE: Record<keyof MapLayers, string> = {
   hotels: "מלונות (מספרים)",
   waypoints: "תחנות ביניים",
   attractions: "אטרקציות",
+  airports: "שדות תעופה",
   transportIcons: "סמלי תחבורה",
 }
 

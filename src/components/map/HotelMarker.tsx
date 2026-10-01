@@ -1,8 +1,8 @@
 import type L from "leaflet"
 import { Marker, Popup } from "react-leaflet"
-import { MapPinnedIcon } from "lucide-react"
 import { Link } from "react-router"
 import { createHotelIcon } from "@/components/map/icons"
+import { OpenInGoogleMapsLink } from "@/components/map/OpenInGoogleMapsLink"
 import { formatHebrewDateRange } from "@/lib/format"
 import { formatNights, type HotelStay } from "@/lib/hotelStay"
 import { MARKER_Z_HOTEL } from "@/lib/mapZIndex"
@@ -22,28 +22,6 @@ interface HotelMarkerProps {
    *  only known once the private trip file is loaded. */
   isCurrent?: boolean
   registerRef?: (order: number, marker: L.Marker | null) => void
-}
-
-/** Google's cross-platform Maps URL: opens the Google Maps app when it's
- *  installed (Android/iOS), the website otherwise, with a pin on the exact
- *  coordinates. */
-function googleMapsUrl(lat: number, lon: number): string {
-  return `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`
-}
-
-function OpenInGoogleMapsLink({ lat, lon }: { lat: number; lon: number }) {
-  return (
-    <a
-      href={googleMapsUrl(lat, lon)}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="פתיחה ב-Google Maps"
-      className="flex shrink-0 items-center justify-center gap-1.5 rounded-md border border-border bg-card px-2 py-1 text-xs font-medium text-foreground! no-underline! hover:bg-accent/40"
-    >
-      <MapPinnedIcon className="size-3.5" aria-hidden />
-      Google Maps
-    </a>
-  )
 }
 
 export function HotelMarker({ stop, details, stay, isCurrent, registerRef }: HotelMarkerProps) {

@@ -2,7 +2,7 @@ import { LayersIcon } from "lucide-react"
 import { Popover } from "radix-ui"
 import { MAP_LAYER_LABEL_HE, useMapLayersStore, type MapLayers } from "@/stores/map-layers-store"
 
-const LAYER_ORDER: (keyof MapLayers)[] = ["hotels", "waypoints", "attractions", "transportIcons"]
+const LAYER_ORDER: (keyof MapLayers)[] = ["hotels", "waypoints", "attractions", "airports", "transportIcons"]
 
 const BUTTON_CLASS =
   "flex h-11 flex-1 cursor-pointer items-center justify-center gap-2 rounded-md border border-border bg-card text-sm font-medium hover:bg-accent/40"
