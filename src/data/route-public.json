@@ -461,5 +461,15 @@
         }
       ]
     }
+  ],
+  "airports": [
+    {
+      "id": "NRT",
+      "name": "Narita International Airport",
+      "nameHe": "נמל התעופה נריטה",
+      "lat": 35.7647,
+      "lon": 140.3864,
+      "note": "נחיתה בטיסת LY91 ב-7.10, המראה חזרה בטיסת LY92 ב-6.12"
+    }
   ]
 }

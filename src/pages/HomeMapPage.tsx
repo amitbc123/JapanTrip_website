@@ -72,6 +72,7 @@ export function HomeMapPage() {
             hotels={stops}
             hotelDetailsByOrder={hotelDetailsByOrder}
             attractions={attractions}
+            airports={routePublic.airports ?? []}
             carSummaries={carSummaries}
             flightSummaries={flightSummaries}
             trainSummaries={trainSummaries}

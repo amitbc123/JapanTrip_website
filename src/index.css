@@ -323,6 +323,21 @@
   font-size: 10px;
 }
 
+/* Airports we fly in/out of: a plane in a white circle, outlined dark so it
+   reads apart from hotels (filled) and attractions (stars). */
+.trip-airport-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: #fdfbf8;
+  border: 2px solid var(--color-ink);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+  font-size: 14px;
+}
+
 .trip-recommendation-marker {
   display: flex;
   align-items: center;

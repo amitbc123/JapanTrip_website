@@ -7,6 +7,7 @@
  *  included, so it's never hidden while you're standing at a stop. */
 export const MARKER_Z_MY_LOCATION = 2000
 export const MARKER_Z_HOTEL = 1000
+export const MARKER_Z_AIRPORT = 800
 export const MARKER_Z_ATTRACTION = 500
 export const MARKER_Z_WAYPOINT = 200
 export const MARKER_Z_TRANSPORT_ICON = 100

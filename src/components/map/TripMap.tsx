@@ -1,6 +1,7 @@
 import L from "leaflet"
 import { useEffect, useMemo, useRef } from "react"
 import { LayersControl, MapContainer, TileLayer, useMap } from "react-leaflet"
+import { AirportMarker } from "@/components/map/AirportMarker"
 import { AttractionMarker } from "@/components/map/AttractionMarker"
 import { createFlythroughIcon } from "@/components/map/icons"
 import { HotelMarker } from "@/components/map/HotelMarker"
@@ -12,7 +13,7 @@ import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/rou
 import { useMapLayersStore } from "@/stores/map-layers-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import { useRouteFlythroughStore } from "@/stores/route-flythrough-store"
-import type { Attraction, Hotel, Leg, Recommendation, RouteStop } from "@/types/trip"
+import type { Airport, Attraction, Hotel, Leg, Recommendation, RouteStop } from "@/types/trip"
 
 interface TripMapProps {
   hotels: RouteStop[]
@@ -20,6 +21,7 @@ interface TripMapProps {
    *  file has been loaded — empty when running off route-public.json alone. */
   hotelDetailsByOrder: Map<number, Hotel>
   attractions: Attraction[]
+  airports: Airport[]
   carSummaries: CarSummaryRow[]
   flightSummaries: FlightSummaryRow[]
   trainSummaries: TrainSummaryRow[]
@@ -550,6 +552,7 @@ export function TripMap({
   hotels,
   hotelDetailsByOrder,
   attractions,
+  airports,
   carSummaries,
   flightSummaries,
   trainSummaries,
@@ -565,6 +568,7 @@ export function TripMap({
   const isFlythroughPlaying = useRouteFlythroughStore((s) => s.isPlaying)
   const showHotels = useMapLayersStore((s) => s.hotels)
   const showAttractions = useMapLayersStore((s) => s.attractions)
+  const showAirports = useMapLayersStore((s) => s.airports)
 
   const staysByOrder = useMemo(() => getHotelStays([...hotelDetailsByOrder.values()]), [hotelDetailsByOrder])
 
@@ -652,6 +656,7 @@ export function TripMap({
             }}
           />
         ))}
+      {showAirports && airports.map((airport) => <AirportMarker key={airport.id} airport={airport} />)}
       {targetRecommendation && (
         <RecommendationMarker
           recommendation={targetRecommendation}
