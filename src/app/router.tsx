@@ -11,6 +11,9 @@ const AttractionsPage = lazy(() =>
 const RecommendationsPage = lazy(() =>
   import("@/pages/RecommendationsPage").then((m) => ({ default: m.RecommendationsPage }))
 )
+const DictionaryPage = lazy(() =>
+  import("@/pages/DictionaryPage").then((m) => ({ default: m.DictionaryPage }))
+)
 const TravelTipsPage = lazy(() =>
   import("@/pages/TravelTipsPage").then((m) => ({ default: m.TravelTipsPage }))
 )
@@ -46,6 +49,7 @@ export const router = createBrowserRouter(
           ),
         },
         { path: "/tips", element: <TravelTipsPage /> },
+        { path: "/dictionary", element: <DictionaryPage /> },
       ],
     },
   ],
