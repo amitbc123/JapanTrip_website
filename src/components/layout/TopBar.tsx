@@ -7,6 +7,7 @@ const TITLES: Record<string, string> = {
   "/hotels": "מלונות",
   "/attractions": "אטרקציות",
   "/recommendations": "המלצות",
+  "/dictionary": "המילון של עמרי",
 }
 
 export function TopBar() {

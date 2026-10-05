@@ -3,6 +3,7 @@ import {
   CompassIcon,
   DownloadIcon,
   InfoIcon,
+  LanguagesIcon,
   MapIcon,
   PaletteIcon,
   RefreshCwIcon,
@@ -34,6 +35,7 @@ const NAV_ITEMS = [
   { to: "/attractions", label: "אטרקציות", icon: TicketIcon },
   { to: "/recommendations", label: "המלצות", icon: CompassIcon },
   { to: "/tips", label: "מידע וטיפים", icon: InfoIcon },
+  { to: "/dictionary", label: "המילון של עמרי", icon: LanguagesIcon },
 ] as const
 
 function hasFileSystemAccess(): boolean {
