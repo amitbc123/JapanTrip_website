@@ -1,6 +1,17 @@
-import { Maximize2Icon, SearchIcon, StarIcon, Volume2Icon, XIcon } from "lucide-react"
-import { useEffect, useMemo, useState } from "react"
+import {
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  ChevronUpIcon,
+  Maximize2Icon,
+  SearchIcon,
+  StarIcon,
+  Volume2Icon,
+  XIcon,
+} from "lucide-react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { DICTIONARY, type DictChapter, type DictPhrase, type DictRule, type DictSection } from "@/data/dictionary"
+import { synonymsFor } from "@/data/dictionarySynonyms"
 import { useJapaneseSpeech } from "@/lib/useJapaneseSpeech"
 import { useDictionaryFavoritesStore } from "@/stores/dictionary-favorites-store"
 
@@ -166,37 +177,112 @@ function RuleCard({ rule }: { rule: DictRule }) {
   )
 }
 
+type SlideDirection = "up" | "down" | "left" | "right" | null
+
+const SWIPE_THRESHOLD_PX = 50
+
 /** Full-screen card for showing a phrase to someone (a waiter, a driver) —
- *  the Japanese as large as the screen allows. */
+ *  the Japanese as large as the screen allows. Swiping moves through the
+ *  list the page is currently showing: down = the phrase above, up = the
+ *  phrase below, wrapping around at either end. Swiping sideways cycles
+ *  through synonyms (other ways to say the same thing). Arrow keys do the
+ *  same on a keyboard. */
 function LargeView({
-  phrase,
+  list,
+  startIndex,
   speech,
   onClose,
 }: {
-  phrase: DictPhrase
+  list: DictPhrase[]
+  startIndex: number
   speech: ReturnType<typeof useJapaneseSpeech>
   onClose: () => void
 }) {
+  const [index, setIndex] = useState(startIndex)
+  const [synonymIndex, setSynonymIndex] = useState(0)
+  const [slide, setSlide] = useState<SlideDirection>(null)
+  const touchStart = useRef<{ x: number; y: number } | null>(null)
+
+  const base = list[index] ?? list[0]
+  const synonyms = useMemo(() => (base ? synonymsFor(base) : []), [base])
+  const phrase = synonyms[synonymIndex] ?? base
+
+  const moveVertical = useCallback(
+    (step: 1 | -1) => {
+      if (list.length < 2) return
+      setIndex((i) => (i + step + list.length) % list.length)
+      setSynonymIndex(0)
+      setSlide(step === 1 ? "up" : "down")
+    },
+    [list.length]
+  )
+
+  const moveSynonym = useCallback(
+    (step: 1 | -1) => {
+      if (synonyms.length < 2) return
+      setSynonymIndex((i) => (i + step + synonyms.length) % synonyms.length)
+      setSlide(step === 1 ? "left" : "right")
+    },
+    [synonyms.length]
+  )
+
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose()
+      else if (e.key === "ArrowUp") moveVertical(-1)
+      else if (e.key === "ArrowDown") moveVertical(1)
+      else if (e.key === "ArrowLeft") moveSynonym(1)
+      else if (e.key === "ArrowRight") moveSynonym(-1)
+      else return
+      e.preventDefault()
     }
     document.addEventListener("keydown", onKeyDown)
+    return () => document.removeEventListener("keydown", onKeyDown)
+  }, [onClose, moveVertical, moveSynonym])
+
+  useEffect(() => {
     document.body.style.overflow = "hidden"
     return () => {
-      document.removeEventListener("keydown", onKeyDown)
       document.body.style.overflow = ""
     }
-  }, [onClose])
+  }, [])
+
+  if (!phrase) return null
+
+  function onTouchStart(e: React.TouchEvent) {
+    const t = e.touches[0]
+    if (t) touchStart.current = { x: t.clientX, y: t.clientY }
+  }
+
+  function onTouchEnd(e: React.TouchEvent) {
+    const start = touchStart.current
+    const t = e.changedTouches[0]
+    touchStart.current = null
+    if (!start || !t) return
+    const dx = t.clientX - start.x
+    const dy = t.clientY - start.y
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < SWIPE_THRESHOLD_PX) return
+    if (Math.abs(dy) > Math.abs(dx)) {
+      // Finger moving down (top to bottom) brings in the phrase above.
+      moveVertical(dy > 0 ? -1 : 1)
+    } else {
+      moveSynonym(dx < 0 ? 1 : -1)
+    }
+  }
+
+  const textSize = phrase.ja.length > 16 ? "text-4xl sm:text-5xl" : "text-5xl sm:text-6xl"
+  const slideClass = slide ? `dict-slide-${slide}` : ""
 
   return (
     <div
       role="dialog"
       aria-modal="true"
       aria-label={phrase.he}
-      className="fixed inset-0 z-50 flex flex-col bg-background"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      className="fixed inset-0 z-50 flex touch-none flex-col overflow-hidden bg-background select-none"
     >
-      <div className="flex justify-start p-3">
+      <div className="flex items-center justify-between p-3">
         <button
           type="button"
           onClick={onClose}
@@ -205,19 +291,84 @@ function LargeView({
         >
           <XIcon className="size-6" aria-hidden />
         </button>
+        <span className="text-sm text-muted-foreground" dir="ltr">
+          {index + 1} / {list.length}
+        </span>
+        <div className="flex gap-1">
+          <button
+            type="button"
+            onClick={() => moveVertical(-1)}
+            aria-label="הביטוי הקודם"
+            className="flex size-11 items-center justify-center rounded-full bg-card shadow"
+          >
+            <ChevronUpIcon className="size-6" aria-hidden />
+          </button>
+          <button
+            type="button"
+            onClick={() => moveVertical(1)}
+            aria-label="הביטוי הבא"
+            className="flex size-11 items-center justify-center rounded-full bg-card shadow"
+          >
+            <ChevronDownIcon className="size-6" aria-hidden />
+          </button>
+        </div>
       </div>
-      <div className="flex flex-1 flex-col items-center justify-center gap-6 overflow-y-auto px-6 pb-10 text-center">
+
+      <div
+        key={`${phrase.id}-${index}-${synonymIndex}`}
+        className={`flex flex-1 flex-col items-center justify-center gap-5 px-6 text-center ${slideClass}`}
+      >
         {phrase.image && (
           <img src={`${import.meta.env.BASE_URL}${phrase.image}`} alt="" className="size-40 object-contain" />
         )}
-        <p lang="ja" className="text-5xl leading-tight font-semibold break-words sm:text-6xl">
+        <p lang="ja" className={`${textSize} leading-tight font-semibold break-words`}>
           {phrase.ja}
         </p>
         <p dir="ltr" className="text-xl text-muted-foreground italic">
           {phrase.romaji}
         </p>
         <p className="text-2xl font-semibold">{phrase.he}</p>
+        {phrase.note && <p className="text-sm text-muted-foreground">{phrase.note}</p>}
         <SpeakButton phrase={phrase} speech={speech} large />
+      </div>
+
+      <div className="flex flex-col items-center gap-2 px-4 pb-6">
+        {synonyms.length > 1 ? (
+          <>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => moveSynonym(-1)}
+                aria-label="הניסוח הנרדף הקודם"
+                className="flex size-9 items-center justify-center rounded-full bg-card shadow"
+              >
+                <ChevronRightIcon className="size-5" aria-hidden />
+              </button>
+              <div className="flex gap-1.5" aria-hidden>
+                {synonyms.map((s, i) => (
+                  <span
+                    key={s.id}
+                    className={`size-2 rounded-full ${i === synonymIndex ? "bg-primary" : "bg-muted-foreground/30"}`}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => moveSynonym(1)}
+                aria-label="הניסוח הנרדף הבא"
+                className="flex size-9 items-center justify-center rounded-full bg-card shadow"
+              >
+                <ChevronLeftIcon className="size-5" aria-hidden />
+              </button>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              ↔ {synonyms.length} ניסוחים לאותו דבר - החליקו לצדדים
+            </p>
+          </>
+        ) : (
+          <p className="text-xs text-muted-foreground">אין ניסוחים נרדפים לביטוי הזה</p>
+        )}
+        <p className="text-xs text-muted-foreground">↕ החליקו למעלה / למטה לביטוי הבא / הקודם</p>
       </div>
     </div>
   )
@@ -226,7 +377,7 @@ function LargeView({
 export function DictionaryPage() {
   const [query, setQuery] = useState("")
   const [filter, setFilter] = useState<string>(ALL)
-  const [largePhrase, setLargePhrase] = useState<DictPhrase | null>(null)
+  const [largeIndex, setLargeIndex] = useState<number | null>(null)
   const favoriteIds = useDictionaryFavoritesStore((s) => s.ids)
   const toggleFavorite = useDictionaryFavoritesStore((s) => s.toggle)
   const speech = useJapaneseSpeech()
@@ -259,6 +410,8 @@ export function DictionaryPage() {
   }, [query, filter, favoriteIds])
 
   const resultCount = visible.reduce((n, v) => n + v.phrases.length + v.rules.length, 0)
+  // The large view swipes through exactly what the page is showing now.
+  const visiblePhrases = useMemo(() => visible.flatMap((v) => v.phrases), [visible])
 
   return (
     <div className="mx-auto flex max-w-2xl flex-col pb-10">
@@ -382,7 +535,7 @@ export function DictionaryPage() {
                       speech={speech}
                       isFavorite={favoriteIds.includes(phrase.id)}
                       onToggleFavorite={() => toggleFavorite(phrase.id)}
-                      onShowLarge={() => setLargePhrase(phrase)}
+                      onShowLarge={() => setLargeIndex(visiblePhrases.indexOf(phrase))}
                     />
                   ))}
                 </ul>
@@ -392,7 +545,14 @@ export function DictionaryPage() {
         })}
       </div>
 
-      {largePhrase && <LargeView phrase={largePhrase} speech={speech} onClose={() => setLargePhrase(null)} />}
+      {largeIndex !== null && largeIndex >= 0 && (
+        <LargeView
+          list={visiblePhrases}
+          startIndex={largeIndex}
+          speech={speech}
+          onClose={() => setLargeIndex(null)}
+        />
+      )}
     </div>
   )
 }
