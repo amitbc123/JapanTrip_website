@@ -7,6 +7,7 @@ import { createFlythroughIcon } from "@/components/map/icons"
 import { HotelMarker } from "@/components/map/HotelMarker"
 import { RecommendationMarker } from "@/components/map/RecommendationMarker"
 import { RouteSegments } from "@/components/map/RouteSegments"
+import { copyText, copyTextWhenReady } from "@/lib/clipboard"
 import { getHotelStays } from "@/lib/hotelStay"
 import { MARKER_Z_MY_LOCATION } from "@/lib/mapZIndex"
 import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/routeSummary"
@@ -306,6 +307,20 @@ function compassHeading(event: DeviceOrientationEvent): number | null {
   return (360 - event.alpha + screenAngle) % 360
 }
 
+/** "lat, lon" with 6 decimals (~10 cm) — the form Google Maps, WhatsApp
+ *  and most apps accept when pasted. */
+function formatCoordinates(lat: number, lon: number): string {
+  return `${lat.toFixed(6)}, ${lon.toFixed(6)}`
+}
+
+const TOAST_MS = 3500
+
+/** Keeps "lat, lon" in its own left-to-right order inside a Hebrew line
+ *  (otherwise the bidi algorithm shows "lon ,lat"). */
+function ltr(text: string): string {
+  return `\u2066${text}\u2069`
+}
+
 const MY_LOCATION_ICON_HTML = '<div class="trip-my-location-cone"></div><div class="trip-my-location-core"></div>'
 
 /** Top-right Leaflet control (added after the zoom-to-today's-stop control,
@@ -328,6 +343,58 @@ function MyLocationControl() {
     /** Unwrapped (continuous) beam angle, so a CSS transition from 359° to
      *  1° turns 2° forward instead of spinning back around the circle. */
     let beamAngle: number | null = null
+    let latest: string | null = null
+    let resolveFirstFix: ((coordinates: string) => void) | null = null
+    let rejectFirstFix: (() => void) | null = null
+    let toast: HTMLDivElement | null = null
+    let toastTimer: number | undefined
+
+    /** Small message at the bottom of the map; with `action`, a button too
+     *  (used when the automatic copy was refused and a tap is needed). */
+    function showToast(message: string, action?: { label: string; run: () => void }) {
+      toast?.remove()
+      window.clearTimeout(toastTimer)
+      const el = L.DomUtil.create("div", "trip-map-toast", map.getContainer())
+      el.setAttribute("role", "status")
+      const text = L.DomUtil.create("span", "", el)
+      text.textContent = message
+      if (action) {
+        const btn = L.DomUtil.create("button", "trip-map-toast-action", el)
+        btn.type = "button"
+        btn.textContent = action.label
+        L.DomEvent.on(btn, "click", (e) => {
+          L.DomEvent.stop(e)
+          action.run()
+        })
+      }
+      L.DomEvent.disableClickPropagation(el)
+      toast = el
+      toastTimer = window.setTimeout(() => el.remove(), action ? TOAST_MS * 2 : TOAST_MS)
+    }
+
+    async function copyLatest() {
+      if (!latest) return
+      const ok = await copyText(latest)
+      showToast(ok ? `📋 הנ"צ הועתק: ${ltr(latest)}` : `הנ"צ: ${ltr(latest)} (לא הצלחנו להעתיק)`)
+    }
+
+    function popupContent(): HTMLElement {
+      const el = document.createElement("div")
+      el.className = "flex flex-col items-end gap-1.5 text-end"
+      const title = L.DomUtil.create("span", "font-semibold", el)
+      title.textContent = "המיקום שלי"
+      const coords = L.DomUtil.create("span", "text-xs", el)
+      coords.dir = "ltr"
+      coords.textContent = latest ?? ""
+      const btn = L.DomUtil.create("button", "trip-map-toast-action", el)
+      btn.type = "button"
+      btn.textContent = "📋 העתקת נ\"צ"
+      L.DomEvent.on(btn, "click", (e) => {
+        L.DomEvent.stop(e)
+        void copyLatest()
+      })
+      return el
+    }
 
     function render(isActive: boolean, isWaiting: boolean) {
       if (!button) return
@@ -384,12 +451,20 @@ function MyLocationControl() {
       dot = null
       accuracyCircle = null
       beamAngle = null
+      latest = null
+      rejectFirstFix?.()
+      resolveFirstFix = null
+      rejectFirstFix = null
       render(false, false)
     }
 
     function onPosition(position: GeolocationPosition) {
       const latLng: [number, number] = [position.coords.latitude, position.coords.longitude]
       const accuracy = position.coords.accuracy
+      latest = formatCoordinates(latLng[0], latLng[1])
+      resolveFirstFix?.(latest)
+      resolveFirstFix = null
+      rejectFirstFix = null
 
       if (accuracyCircle) accuracyCircle.setLatLng(latLng).setRadius(accuracy)
       else
@@ -399,14 +474,20 @@ function MyLocationControl() {
           interactive: false,
         }).addTo(map)
 
-      if (dot) dot.setLatLng(latLng)
-      else
+      if (dot) {
+        dot.setLatLng(latLng)
+        if (dot.isPopupOpen()) dot.setPopupContent(popupContent())
+      } else {
+        // Tapping the dot shows the coordinates with a copy button — a
+        // manual way to copy again later, as they change.
         dot = L.marker(latLng, {
           icon: L.divIcon({ className: "trip-my-location", html: MY_LOCATION_ICON_HTML, iconSize: [18, 18] }),
-          interactive: false,
           keyboard: false,
           zIndexOffset: MARKER_Z_MY_LOCATION,
-        }).addTo(map)
+        })
+          .bindPopup(() => popupContent(), { className: "trip-map-popup" })
+          .addTo(map)
+      }
 
       if (!hasFix) {
         hasFix = true
@@ -433,6 +514,18 @@ function MyLocationControl() {
       hasFix = false
       isFollowing = true
       render(true, true)
+      // Copy the coordinates as soon as the first fix arrives. The copy has
+      // to be started right here, inside the tap (see copyTextWhenReady).
+      const firstFix = new Promise<string>((resolve, reject) => {
+        resolveFirstFix = resolve
+        rejectFirstFix = reject
+      })
+      firstFix.catch(() => {})
+      void copyTextWhenReady(firstFix).then((ok) => {
+        if (!latest) return
+        if (ok) showToast(`📋 הנ"צ הועתק: ${ltr(latest)}`)
+        else showToast(`הנ"צ: ${ltr(latest)}`, { label: "📋 העתקה", run: () => void copyLatest() })
+      })
       watchId = navigator.geolocation.watchPosition(onPosition, onPositionError, {
         enableHighAccuracy: true,
         maximumAge: 5000,
@@ -461,6 +554,8 @@ function MyLocationControl() {
 
     return () => {
       stop()
+      toast?.remove()
+      window.clearTimeout(toastTimer)
       control.remove()
     }
   }, [map])
