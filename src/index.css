@@ -457,3 +457,34 @@
 @media (prefers-reduced-motion: reduce) {
   .dict-slide-up, .dict-slide-down, .dict-slide-left, .dict-slide-right { animation: none; }
 }
+
+/* Short message at the bottom of the map (e.g. "coordinates copied"). */
+.trip-map-toast {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100% - 24px);
+  padding: 8px 12px;
+  border-radius: 9999px;
+  background: rgb(28 25 23 / 0.9);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+}
+.trip-map-toast-action {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: #2563eb;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
