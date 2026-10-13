@@ -4,7 +4,8 @@ interface TunnelViewState {
   /** The map's "tunnel view" (made for Omri): only our train routes, with
    *  every tunnel highlighted. Not persisted — a reload is the normal map. */
   active: boolean
-  /** Ride key (see lib/tunnelRides) the map is zoomed to, if any. */
+  /** What the map highlights: a ride key or a journey key (see
+   *  lib/tunnelRides), or null for everything. */
   selectedRide: string | null
   /** Whether the map should zoom to the selected ride (picked from the
    *  panel) or stay put (tapped on the map itself). */

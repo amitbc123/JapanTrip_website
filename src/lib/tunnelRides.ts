@@ -102,10 +102,10 @@ const RIDE_ORDER: {
   local?: string
 }[] = [
   { dataId: "train-1", label: "Train 1", color: "#2563eb", labelAt: 0.55 },
-  { dataId: "nikko-local", label: null, color: "#0891b2", labelAt: 0.5, local: "2026-10-14" },
+  { dataId: "nikko-local", label: null, color: "#f59e0b", labelAt: 0.5, local: "2026-10-14" },
   { dataId: "train-2", label: "Train 2", color: "#16a34a", labelAt: 0.8 },
   { dataId: "train-3", label: "Train 3", color: "#7c3aed", labelAt: 0.9 },
-  { dataId: "train-4", label: "Train 4", color: "#c026d3", labelAt: 0.35 },
+  { dataId: "train-4", label: "Train 4", color: "#0891b2", labelAt: 0.35 },
   { dataId: "train-5", label: "Train 5", color: "#db2777", labelAt: 0.55 },
   { dataId: "train-6", label: "Train 6", color: "#ea580c", labelAt: 0.5 },
   { dataId: "train-7", label: "Train 7", color: "#0d9488", labelAt: 0.5 },
@@ -178,3 +178,112 @@ export function formatLength(meters: number): string {
 
 export const ITAYA_NOTE =
   "מעבר איטאיה (板谷峠): לפי מסמך של JR East, הותקנה קליטה סלולרית במנהרות הקטעים טוגה-איטאיה, איטאיה-אקאיווה ואקאיווה-ניוואסאקה. בקטע אוסאווה-טוגה העבודות היו בביצוע בזמן פרסום המסמך."
+
+/** A door-to-door move between two of our hotels (or a day trip), made of
+ *  one or more of the rides above. */
+export interface JourneyView {
+  key: string
+  number: number
+  title: string
+  when: string
+  rides: RideView[]
+  /** Hotel at each end; `null` order = not a hotel (the airport). */
+  from: { order: number | null; label: string; at: [number, number] }
+  to: { order: number | null; label: string; at: [number, number] }
+  /** Dashed links for the stretches not drawn as a train (hotel to
+   *  station, bus, local train), with what they are. */
+  links: { from: [number, number]; to: [number, number]; note: string }[]
+  tunnelCount: number
+  undergroundKm: number
+  undergroundMinutes: number
+  longest: { ride: RideView; tunnel: TunnelInfo } | null
+}
+
+const NARITA: [number, number] = [35.7647, 140.3864]
+
+function hotelAt(order: number): [number, number] {
+  const stop = routePublic.hotels.find((h) => h.order === order)
+  return [stop?.lat ?? 0, stop?.lon ?? 0]
+}
+
+function rideEnds(ride: RideView): { start: [number, number]; end: [number, number] } {
+  const raw = RAW_RIDES.find((r) => r.id === ride.dataId)!
+  const first = raw.segments[0]!.coords[0]!
+  const lastSeg = raw.segments[raw.segments.length - 1]!
+  const last = lastSeg.coords[lastSeg.coords.length - 1]!
+  return ride.reversed ? { start: last, end: first } : { start: first, end: last }
+}
+
+const JOURNEY_DEFS: {
+  title: string
+  date: string
+  from: number
+  to: number | "airport"
+  rides: string[]
+  startNote: string
+  endNote: string
+}[] = [
+  { title: "טוקיו ← ניקו", date: "2026-10-10", from: 1, to: 2, rides: ["Train 1"], startNote: "מהמלון לאסאקוסה (רכבת תחתית)", endNote: "מטובו-ניקו למלון (הליכה)" },
+  { title: "ניקו ← גינזן אונסן", date: "2026-10-14", from: 2, to: 3, rides: ["nikko-local", "Train 2"], startNote: "מהמלון לתחנת JR ניקו (הליכה)", endNote: "אוטובוס מאואישידה לגינזן אונסן, כ-40 דק'" },
+  { title: "גינזן אונסן ← יוקוהמה", date: "2026-10-16", from: 3, to: 4, rides: ["Train 3"], startNote: "אוטובוס מגינזן אונסן לאואישידה, כ-40 דק'", endNote: "רכבת מקומית JR מטוקיו ליוקוהמה (בלי מנהרות ארוכות)" },
+  { title: "האקונה ← קנאזאווה", date: "2026-10-24", from: 6, to: 7, rides: ["Train 4", "Train 5"], startNote: "ברכב 1 מהאקונה לאודווארה", endNote: "מתחנת קנאזאווה למלון" },
+  { title: "נגויה ← קיוטו", date: "2026-11-05", from: 14, to: 15, rides: ["Train 6"], startNote: "מהמלון לתחנת נגויה", endNote: "מתחנת קיוטו למלון" },
+  { title: "אוסקה ← הירושימה", date: "2026-11-17", from: 16, to: 17, rides: ["Train 7"], startNote: "מהמלון לתחנת שין-אוסקה (רכבת תחתית)", endNote: "מתחנת הירושימה למלון" },
+  { title: "הירושימה ← קומאמוטו", date: "2026-11-19", from: 17, to: 18, rides: ["Train 8"], startNote: "מהמלון לתחנת הירושימה", endNote: "מתחנת קומאמוטו למלון" },
+  { title: "טיול יום לצ'יצ'יבו וחזרה", date: "2026-12-03", from: 20, to: 20, rides: ["Train 9", "Train 10"], startNote: "מהמלון בשינג'וקו לאיקבוקורו", endNote: "מאיקבוקורו חזרה למלון" },
+  { title: "שינג'וקו ← נמל התעופה נריטה", date: "2026-12-06", from: 20, to: "airport", rides: ["Train 11"], startNote: "מהמלון לתחנת שינג'וקו", endNote: "" },
+]
+
+/** Straight-line distance in metres (good enough to skip tiny links). */
+function roughMeters(a: [number, number], b: [number, number]): number {
+  const dLat = (a[0] - b[0]) * 111_000
+  const dLon = (a[1] - b[1]) * 111_000 * Math.cos((a[0] * Math.PI) / 180)
+  return Math.hypot(dLat, dLon)
+}
+
+export const JOURNEYS: JourneyView[] = JOURNEY_DEFS.map((def, i) => {
+  const rides = def.rides.map((key) => RIDES.find((r) => r.key === key)).filter((r): r is RideView => !!r)
+  const fromAt = hotelAt(def.from)
+  const toAt = def.to === "airport" ? NARITA : hotelAt(def.to)
+  const links: JourneyView["links"] = []
+  const firstRide = rides[0]
+  const lastRide = rides[rides.length - 1]
+  if (firstRide) {
+    const { start } = rideEnds(firstRide)
+    if (roughMeters(fromAt, start) > 300) links.push({ from: fromAt, to: start, note: def.startNote })
+  }
+  for (let r = 1; r < rides.length; r++) {
+    const prevEnd = rideEnds(rides[r - 1]!).end
+    const nextStart = rideEnds(rides[r]!).start
+    if (roughMeters(prevEnd, nextStart) > 300) links.push({ from: prevEnd, to: nextStart, note: "מעבר בין רכבות" })
+  }
+  if (lastRide && def.endNote) {
+    const { end } = rideEnds(lastRide)
+    if (roughMeters(end, toAt) > 300) links.push({ from: end, to: toAt, note: def.endNote })
+  }
+  const all = rides.flatMap((ride) => ride.tunnels.filter((t) => t.kind === "tunnel").map((tunnel) => ({ ride, tunnel })))
+  return {
+    key: `journey-${i + 1}`,
+    number: i + 1,
+    title: def.title,
+    when: formatHebrewDate(def.date, true),
+    rides,
+    from: { order: def.from, label: `מלון ${def.from}`, at: fromAt },
+    to:
+      def.to === "airport"
+        ? { order: null, label: "נמל התעופה נריטה", at: toAt }
+        : { order: def.to, label: `מלון ${def.to}`, at: toAt },
+    links,
+    tunnelCount: all.length,
+    undergroundKm: all.reduce((n, x) => n + x.tunnel.lengthM, 0) / 1000,
+    undergroundMinutes: all.reduce((n, x) => n + x.tunnel.minutes, 0),
+    longest: all.reduce<JourneyView["longest"]>(
+      (best, x) => (!best || x.tunnel.lengthM > best.tunnel.lengthM ? x : best),
+      null
+    ),
+  }
+})
+
+export function journeyOf(rideKey: string): JourneyView | undefined {
+  return JOURNEYS.find((j) => j.rides.some((r) => r.key === rideKey))
+}

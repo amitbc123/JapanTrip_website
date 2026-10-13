@@ -1,12 +1,15 @@
 import L from "leaflet"
 import { useEffect, useRef } from "react"
 import { useMap } from "react-leaflet"
+import { createAirportIcon, createHotelIcon } from "@/components/map/icons"
 import {
   ITAYA_NOTE,
+  JOURNEYS,
   RAW_RIDES,
   RIDES,
   formatDuration,
   formatLength,
+  journeyOf,
   type RawRide,
   type RideView,
 } from "@/lib/tunnelRides"
@@ -14,6 +17,17 @@ import { useTunnelViewStore } from "@/stores/tunnel-view-store"
 
 const FADED_OPACITY = 0.12
 const LABEL_NAMES_ZOOM = 9
+// Tunnel badges ("🚇 23.4") appear by size as you zoom in, so the
+// country-wide view isn't buried: 10 km+ from zoom 7, 4 km+ from 9, the
+// rest (1.5 km+) from 11.
+const BADGE_MIN_M = 1500
+const BADGE_BIG_M = 4000
+const BADGE_HUGE_M = 10000
+const BADGE_TIERS = [7, 9, 11]
+
+function haloWeight(zoom: number): number {
+  return zoom < 7 ? 6 : zoom < 9 ? 12 : 22
+}
 
 /** The rides drawn on a given geometry (Train 9 and 10 share one). */
 function ridesFor(dataId: string): RideView[] {
@@ -35,6 +49,15 @@ function popupBox(): HTMLElement {
 
 function ridePopup(rides: RideView[], onDetails: (key: string) => void): HTMLElement {
   const el = popupBox()
+  const journey = journeyOf(rides[0]!.key)
+  if (journey) {
+    const part = journey.rides.findIndex((r) => r.key === rides[0]!.key) + 1
+    addLine(
+      el,
+      "text-xs font-medium text-muted-foreground",
+      `מסע ${journey.number} · ${journey.title}${journey.rides.length > 1 ? ` · רכבת ${part} מתוך ${journey.rides.length}` : ""}`
+    )
+  }
   for (const ride of rides) {
     const title = addLine(el, "flex items-center justify-end gap-2 font-semibold", "")
     const dot = L.DomUtil.create("span", "inline-block size-3 shrink-0 rounded-full", title)
@@ -141,6 +164,8 @@ export function TunnelLayer() {
   const focus = useTunnelViewStore((s) => s.focus)
   const fitSelected = useTunnelViewStore((s) => s.fitSelected)
   const ridesRef = useRef(new Map<string, RideLayers>())
+  const journeyLayersRef = useRef(new Map<string, RideLayers>())
+  const hotelMarkersRef = useRef(new Map<string, { marker: L.Marker; journeys: string[] }>())
 
   useEffect(() => {
     const { selectRide, showRideDetails } = useTunnelViewStore.getState()
@@ -148,6 +173,9 @@ export function TunnelLayer() {
     const savedZoom = map.getZoom()
     const group = L.layerGroup().addTo(map)
     const all = L.latLngBounds([])
+    const journeyLayers = journeyLayersRef.current
+    const halos: L.Polyline[] = []
+    const hotelMarkers = hotelMarkersRef.current
 
     const openDetails = (key: string) => {
       map.closePopup()
@@ -200,12 +228,44 @@ export function TunnelLayer() {
           dashArray: isTunnel ? undefined : "8 5",
         })
         const core = L.polyline(latlngs, { color, weight: 4, opacity: 1, lineCap: "butt", interactive: false })
+        // A wide red halo so a tunnel reads as "this whole area is
+        // underground" even zoomed out, where the line itself is thin.
+        if (isTunnel) {
+          const halo = L.polyline(latlngs, {
+            color: "#ef4444",
+            weight: haloWeight(map.getZoom()),
+            opacity: 0.35,
+            lineCap: "round",
+            interactive: false,
+          })
+          add(halo, 0.35)
+          halos.push(halo)
+        }
         add(casing, 1)
         add(core, 1)
         const rawIndex = tunnelIndex++
         entry.tunnels.set(rawIndex, casing)
         casing.bindPopup(() => tunnelPopup(raw, rawIndex), POPUP_OPTIONS)
         casing.on("click", () => selectRide(view.key, false))
+
+        const lengthM = raw.tunnels[rawIndex]?.lengthM ?? 0
+        if (isTunnel && lengthM >= BADGE_MIN_M) {
+          const size = lengthM >= BADGE_HUGE_M ? "huge" : lengthM >= BADGE_BIG_M ? "big" : "mid"
+          const badge = L.marker(casing.getCenter(), {
+            icon: L.divIcon({
+              className: "trip-tunnel-badge-icon",
+              html: `<span class="trip-tunnel-badge" data-size="${size}" dir="ltr">🚇 ${(lengthM / 1000).toFixed(1)}</span>`,
+              iconSize: [0, 0],
+            }),
+            zIndexOffset: 1400,
+            keyboard: false,
+          }).addTo(group)
+          badge.on("click", () => {
+            selectRide(view.key, false)
+            casing.openPopup()
+          })
+          entry.labels.push(badge)
+        }
       }
 
       // One label per drawn route (Train 9 and 10 share theirs).
@@ -228,19 +288,63 @@ export function TunnelLayer() {
       ridesRef.current.set(raw.id, entry)
       all.extend(entry.bounds)
     }
+    // Journeys: the hotels at each end and dashed links for the parts
+    // that aren't one of our trains (hotel to station, bus, local train).
+    const hotelsDrawn = new Set<string>()
+    for (const journey of JOURNEYS) {
+      const entry: RideLayers = { layers: [], labels: [], tunnels: new Map(), bounds: L.latLngBounds([]) }
+      for (const link of journey.links) {
+        const line = L.polyline([link.from, link.to], {
+          color: "#374151",
+          weight: 3,
+          opacity: 0.9,
+          dashArray: "2 7",
+          lineCap: "round",
+        }).addTo(group)
+        line.bindTooltip(link.note, { sticky: true, direction: "top" })
+        entry.layers.push({ layer: line, opacity: 0.9 })
+        entry.bounds.extend(line.getBounds())
+      }
+      for (const end of [journey.from, journey.to]) {
+        entry.bounds.extend(end.at)
+        const id = `${end.order ?? "airport"}`
+        if (hotelsDrawn.has(id)) continue
+        hotelsDrawn.add(id)
+        const marker = L.marker(end.at, {
+          icon: end.order === null ? createAirportIcon(end.label) : createHotelIcon(end.order, end.label),
+          zIndexOffset: 1200,
+          keyboard: false,
+        }).addTo(group)
+        const journeysHere = JOURNEYS.filter((j) => j.from.order === end.order || j.to.order === end.order)
+        marker.bindTooltip(
+          `${end.label} · ${journeysHere.map((j) => `מסע ${j.number}`).join(", ")}`,
+          { direction: "top", offset: [0, -14] }
+        )
+        hotelMarkers.set(id, { marker, journeys: journeysHere.map((j) => j.key) })
+      }
+      journeyLayers.set(journey.key, entry)
+    }
+
     if (all.isValid()) map.fitBounds(all, { padding: [20, 20] })
 
     // Zoomed out the labels are just numbered dots (the whole country's
     // routes overlap); from city level they also show the train's name.
     const container = map.getContainer()
-    const syncLabelNames = () => container.classList.toggle("show-ride-names", map.getZoom() >= LABEL_NAMES_ZOOM)
+    const syncLabelNames = () => {
+      const zoom = map.getZoom()
+      container.classList.toggle("show-ride-names", zoom >= LABEL_NAMES_ZOOM)
+      BADGE_TIERS.forEach((tier, i) => container.classList.toggle(`show-tunnel-badges-${i}`, zoom >= tier))
+      for (const halo of halos) halo.setStyle({ weight: haloWeight(zoom) })
+    }
     syncLabelNames()
     map.on("zoomend", syncLabelNames)
 
     const rides = ridesRef.current
     return () => {
       map.off("zoomend", syncLabelNames)
-      container.classList.remove("show-ride-names")
+      container.classList.remove("show-ride-names", ...BADGE_TIERS.map((_, i) => `show-tunnel-badges-${i}`))
+      journeyLayers.clear()
+      hotelMarkers.clear()
       group.remove()
       rides.clear()
       map.closePopup()
@@ -248,18 +352,40 @@ export function TunnelLayer() {
     }
   }, [map])
 
-  // Fade the other rides and zoom to the chosen one.
+  // Fade everything outside the chosen ride or journey and zoom to it.
   useEffect(() => {
-    const dataId = RIDES.find((r) => r.key === selectedRide)?.dataId ?? null
+    const journey = JOURNEYS.find((j) => j.key === selectedRide)
+    const ride = RIDES.find((r) => r.key === selectedRide)
+    const ownJourney = journey ?? (ride ? journeyOf(ride.key) : undefined)
+    const litRides = journey
+      ? new Set(journey.rides.map((r) => r.dataId))
+      : ride
+        ? new Set([ride.dataId])
+        : null
     for (const [id, entry] of ridesRef.current) {
-      const dim = dataId !== null && id !== dataId
+      const dim = litRides !== null && !litRides.has(id)
       for (const { layer, opacity } of entry.layers) layer.setStyle({ opacity: dim ? FADED_OPACITY : opacity })
-      for (const label of entry.labels) label.setOpacity(dim ? 0.25 : 1)
-      if (!dim && dataId !== null) for (const { layer } of entry.layers) layer.bringToFront()
+      for (const label of entry.labels) label.setOpacity(dim ? 0.2 : 1)
+      if (!dim && litRides !== null) for (const { layer } of entry.layers) layer.bringToFront()
     }
-    if (dataId && !focus && fitSelected) {
-      const bounds = ridesRef.current.get(dataId)?.bounds
-      if (bounds?.isValid()) map.fitBounds(bounds, { padding: [24, 24] })
+    for (const [key, entry] of journeyLayersRef.current) {
+      const dim = litRides !== null && key !== ownJourney?.key
+      for (const { layer, opacity } of entry.layers) layer.setStyle({ opacity: dim ? FADED_OPACITY : opacity })
+    }
+    for (const { marker, journeys } of hotelMarkersRef.current.values()) {
+      marker.setOpacity(litRides !== null && !journeys.includes(ownJourney?.key ?? "") ? 0.25 : 1)
+    }
+    if (litRides && !focus && fitSelected) {
+      const bounds = L.latLngBounds([])
+      for (const id of litRides) {
+        const b = ridesRef.current.get(id)?.bounds
+        if (b?.isValid()) bounds.extend(b)
+      }
+      if (journey) {
+        const jb = journeyLayersRef.current.get(journey.key)?.bounds
+        if (jb?.isValid()) bounds.extend(jb)
+      }
+      if (bounds.isValid()) map.fitBounds(bounds, { padding: [24, 24] })
     }
   }, [map, selectedRide, focus, fitSelected])
 
