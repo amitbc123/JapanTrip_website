@@ -8,12 +8,17 @@ import routePublicRaw from "@/data/route-public.json"
 import { useTripDataContext } from "@/data/useTripData"
 import { carSummaryFromPrivate, carSummaryFromPublic, flightSummary, trainSummary } from "@/lib/routeSummary"
 import { getCurrentHotelOrder } from "@/lib/tripProgress"
+import { useTunnelViewStore } from "@/stores/tunnel-view-store"
 import type { Hotel, Recommendation, RoutePublicData } from "@/types/trip"
 
 const routePublic = routePublicRaw as RoutePublicData
 
 const TripMap = lazy(() =>
   import("@/components/map/TripMap").then((m) => ({ default: m.TripMap }))
+)
+
+const TunnelPanel = lazy(() =>
+  import("@/components/tunnels/TunnelPanel").then((m) => ({ default: m.TunnelPanel }))
 )
 
 function MapLoading() {
@@ -27,6 +32,7 @@ function MapLoading() {
 export function HomeMapPage() {
   const { data: privateData } = useTripDataContext()
   const [searchParams] = useSearchParams()
+  const tunnelView = useTunnelViewStore((s) => s.active)
   const hotelParam = searchParams.get("hotel")
   const targetHotelOrder = hotelParam ? Number(hotelParam) : undefined
   const attractionParam = searchParams.get("attraction")
@@ -84,14 +90,22 @@ export function HomeMapPage() {
           />
         </Suspense>
       </div>
-      <MapLegend />
-      <MapControlsRow />
-      <TransportSummary
-        cars={carSummaries}
-        flights={flightSummaries}
-        trains={trainSummaries}
-        travelers={privateData?.travelers}
-      />
+      {tunnelView ? (
+        <Suspense fallback={null}>
+          <TunnelPanel />
+        </Suspense>
+      ) : (
+        <>
+          <MapLegend />
+          <MapControlsRow />
+          <TransportSummary
+            cars={carSummaries}
+            flights={flightSummaries}
+            trains={trainSummaries}
+            travelers={privateData?.travelers}
+          />
+        </>
+      )}
     </div>
   )
 }

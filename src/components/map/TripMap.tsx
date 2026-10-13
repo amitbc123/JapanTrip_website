@@ -1,5 +1,5 @@
 import L from "leaflet"
-import { useEffect, useMemo, useRef } from "react"
+import { lazy, Suspense, useEffect, useMemo, useRef } from "react"
 import { LayersControl, MapContainer, TileLayer, useMap } from "react-leaflet"
 import { AirportMarker } from "@/components/map/AirportMarker"
 import { AttractionMarker } from "@/components/map/AttractionMarker"
@@ -14,7 +14,11 @@ import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/rou
 import { useMapLayersStore } from "@/stores/map-layers-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import { useRouteFlythroughStore } from "@/stores/route-flythrough-store"
+import { useTunnelViewStore } from "@/stores/tunnel-view-store"
 import type { Airport, Attraction, Hotel, Leg, Recommendation, RouteStop } from "@/types/trip"
+
+// Loaded on first use: the track geometry is ~140 KB.
+const TunnelLayer = lazy(() => import("@/components/tunnels/TunnelLayer").then((m) => ({ default: m.TunnelLayer })))
 
 interface TripMapProps {
   hotels: RouteStop[]
@@ -563,6 +567,49 @@ function MyLocationControl() {
   return null
 }
 
+const TUNNEL_ICON_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21V11a9 9 0 0 1 18 0v10"/><path d="M7 21v-8a5 5 0 0 1 10 0v8"/><path d="M2 21h20"/></svg>'
+
+/** Top-left Leaflet control (under fullscreen) toggling the tunnel view —
+ *  made for Omri: just our train routes, every tunnel highlighted. */
+function TunnelViewControl() {
+  const map = useMap()
+
+  useEffect(() => {
+    let button: HTMLAnchorElement | null = null
+    function render(active: boolean) {
+      if (!button) return
+      button.classList.toggle("is-active", active)
+      button.title = active ? "חזרה למפה הרגילה" : "מצב מנהרות (רק מסלולי הרכבות)"
+      button.setAttribute("aria-label", button.title)
+      button.setAttribute("aria-pressed", String(active))
+    }
+    const control = new L.Control({ position: "topleft" })
+    control.onAdd = () => {
+      const container = L.DomUtil.create("div", "leaflet-bar leaflet-control")
+      button = L.DomUtil.create("a", "trip-map-control-button", container)
+      button.href = "#"
+      button.setAttribute("role", "button")
+      button.innerHTML = TUNNEL_ICON_SVG
+      render(useTunnelViewStore.getState().active)
+      L.DomEvent.disableClickPropagation(container)
+      L.DomEvent.on(button, "click", (e) => {
+        L.DomEvent.preventDefault(e)
+        useTunnelViewStore.getState().toggle()
+      })
+      return container
+    }
+    control.addTo(map)
+    const unsubscribe = useTunnelViewStore.subscribe((s) => render(s.active))
+    return () => {
+      unsubscribe()
+      control.remove()
+    }
+  }, [map])
+
+  return null
+}
+
 const FLYTHROUGH_ZOOM = 8
 const MIN_LEG_MS = 400
 const MAX_LEG_MS = 3000
@@ -684,6 +731,8 @@ export function TripMap({
   const showHotels = useMapLayersStore((s) => s.hotels)
   const showAttractions = useMapLayersStore((s) => s.attractions)
   const showAirports = useMapLayersStore((s) => s.airports)
+  // Tunnel view replaces the whole normal map content while it's on.
+  const tunnelView = useTunnelViewStore((s) => s.active)
 
   const staysByOrder = useMemo(() => getHotelStays([...hotelDetailsByOrder.values()]), [hotelDetailsByOrder])
 
@@ -739,14 +788,23 @@ export function TripMap({
         </LayersControl.BaseLayer>
       </LayersControl>
       <FullscreenControl />
+      <TunnelViewControl />
       <ZoomToCurrentStopControl
         hotels={hotels}
         currentHotelOrder={currentHotelOrder}
         markerRefs={hotelMarkerRefs}
       />
       <MyLocationControl />
-      <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} trains={trainSummaries} legs={legs} />
-      {showHotels &&
+      {tunnelView && (
+        <Suspense fallback={null}>
+          <TunnelLayer />
+        </Suspense>
+      )}
+      {!tunnelView && (
+        <RouteSegments hotels={hotels} cars={carSummaries} flights={flightSummaries} trains={trainSummaries} legs={legs} />
+      )}
+      {!tunnelView &&
+        showHotels &&
         hotels.map((stop) => (
           <HotelMarker
             key={stop.order}
@@ -760,7 +818,8 @@ export function TripMap({
             }}
           />
         ))}
-      {showAttractions &&
+      {!tunnelView &&
+        showAttractions &&
         attractions.map((attraction) => (
           <AttractionMarker
             key={attraction.name}
@@ -771,7 +830,8 @@ export function TripMap({
             }}
           />
         ))}
-      {showAirports &&
+      {!tunnelView &&
+        showAirports &&
         airports.map((airport) => (
           <AirportMarker
             key={airport.id}
@@ -782,7 +842,7 @@ export function TripMap({
             }}
           />
         ))}
-      {targetRecommendation && (
+      {!tunnelView && targetRecommendation && (
         <RecommendationMarker
           recommendation={targetRecommendation}
           registerRef={(id, marker) => {
