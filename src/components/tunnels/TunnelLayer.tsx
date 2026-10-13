@@ -8,143 +8,267 @@ import {
   formatDuration,
   formatLength,
   type RawRide,
-  type SegmentKind,
+  type RideView,
 } from "@/lib/tunnelRides"
 import { useTunnelViewStore } from "@/stores/tunnel-view-store"
 
-const STYLE: Record<SegmentKind, L.PolylineOptions> = {
-  open: { color: "#475569", weight: 3, opacity: 0.9 },
-  tunnel: { color: "#dc2626", weight: 7, opacity: 1, lineCap: "butt" },
-  covered: { color: "#f59e0b", weight: 6, opacity: 1, dashArray: "6 5", lineCap: "butt" },
-}
-const CASING: L.PolylineOptions = { color: "#ffffff", weight: 11, opacity: 0.95, lineCap: "butt" }
-const FADED_OPACITY = 0.18
+const FADED_OPACITY = 0.12
+const LABEL_NAMES_ZOOM = 9
 
 /** The rides drawn on a given geometry (Train 9 and 10 share one). */
-function ridesFor(dataId: string) {
+function ridesFor(dataId: string): RideView[] {
   return RIDES.filter((r) => r.dataId === dataId)
+}
+
+function addLine(parent: HTMLElement, cls: string, text: string, dir?: string) {
+  const span = L.DomUtil.create("span", cls, parent)
+  span.textContent = text
+  if (dir) span.dir = dir
+  return span
+}
+
+function popupBox(): HTMLElement {
+  const el = document.createElement("div")
+  el.className = "flex min-w-52 flex-col gap-1 text-end"
+  return el
+}
+
+function ridePopup(rides: RideView[], onDetails: (key: string) => void): HTMLElement {
+  const el = popupBox()
+  for (const ride of rides) {
+    const title = addLine(el, "flex items-center justify-end gap-2 font-semibold", "")
+    const dot = L.DomUtil.create("span", "inline-block size-3 shrink-0 rounded-full", title)
+    dot.style.background = ride.color
+    L.DomUtil.create("span", "", title).textContent = ride.title
+    addLine(el, "text-sm", ride.subtitle)
+    if (ride.when) addLine(el, "text-xs text-muted-foreground", ride.when)
+  }
+  const ride = rides[0]!
+  if (ride.tunnelCount === 0) {
+    addLine(el, "text-sm font-medium text-emerald-700", "🎉 אין מנהרות בנסיעה הזו")
+  } else {
+    addLine(
+      el,
+      "text-sm",
+      `${ride.tunnelCount} מנהרות · ${ride.undergroundKm.toFixed(1)} ק"מ בפנים (${ride.undergroundPct}%)`
+    )
+    addLine(el, "text-sm", `סה"כ בתוך מנהרות: ${formatDuration(ride.undergroundMinutes)}`)
+    if (ride.longest) {
+      addLine(
+        el,
+        "text-sm",
+        `הארוכה: ${ride.longest.name ?? "מנהרה"}, ${formatLength(ride.longest.lengthM)}, ${formatDuration(ride.longest.minutes)}`
+      )
+    }
+  }
+  for (const r of rides) {
+    const btn = L.DomUtil.create("button", "trip-map-toast-action mt-1 self-start", el)
+    btn.type = "button"
+    btn.textContent = rides.length > 1 ? `פירוט ${r.shortLabel} ↓` : "רשימת המנהרות ↓"
+    L.DomEvent.on(btn, "click", (e) => {
+      L.DomEvent.stop(e)
+      onDetails(r.key)
+    })
+  }
+  return el
 }
 
 function tunnelPopup(raw: RawRide, rawIndex: number): HTMLElement {
   const t = raw.tunnels[rawIndex]!
   const rides = ridesFor(raw.id)
-  const view = rides[0]!
-  const info = view.tunnels.find((x) => x.rawIndex === rawIndex)!
+  const info = rides[0]!.tunnels.find((x) => x.rawIndex === rawIndex)!
   const real = raw.tunnels.filter((x) => x.kind === "tunnel")
-  const el = document.createElement("div")
-  el.className = "flex min-w-48 flex-col gap-1 text-end"
-
-  const add = (cls: string, text: string, dir?: string) => {
-    const span = L.DomUtil.create("span", cls, el)
-    span.textContent = text
-    if (dir) span.dir = dir
-  }
+  const el = popupBox()
   if (t.kind === "covered") {
-    add("font-semibold text-amber-700", "קטע מקורה (לא מנהרה)")
-    add("text-xs text-muted-foreground", "גגון נגד שלג או קירוי - חשוך חלקית, עם פתחים לאור יום")
+    addLine(el, "font-semibold text-amber-700", "קטע מקורה (לא מנהרה)")
+    addLine(el, "text-xs text-muted-foreground", "גגון נגד שלג או קירוי - חשוך חלקית, עם פתחים לאור יום")
   } else {
-    add("font-semibold text-red-700", t.name ?? "מנהרה")
-    if (t.nameJa) add("text-xs text-muted-foreground", t.nameJa, "ltr")
-    const position = real.indexOf(t)
-    add("text-xs text-muted-foreground", `מנהרה ${position + 1} מתוך ${real.length} בנסיעה`)
+    addLine(el, "font-semibold", `🚇 ${t.name ?? "מנהרה"}`)
+    if (t.nameJa) addLine(el, "text-xs text-muted-foreground", t.nameJa, "ltr")
+    addLine(el, "text-xs text-muted-foreground", `מנהרה ${real.indexOf(t) + 1} מתוך ${real.length} בנסיעה`)
   }
-  add("text-sm", `אורך: ${formatLength(t.lengthM)}`)
-  add("text-sm", `זמן בפנים: ${formatDuration(info.minutes)} (הערכה, לפי ${t.speedKmh} קמ"ש)`)
+  addLine(el, "text-sm", `אורך: ${formatLength(t.lengthM)}`)
+  addLine(el, "text-sm", `זמן בפנים: ${formatDuration(info.minutes)} (הערכה, לפי ${t.speedKmh} קמ"ש)`)
   for (const ride of rides) {
     const own = ride.tunnels.find((x) => x.rawIndex === rawIndex)!
-    add("text-xs", `${ride.title}: בק"מ ${own.fromBoardingKm.toFixed(1)} מהעלייה לרכבת`)
+    addLine(el, "text-xs", `${ride.shortLabel}: ק"מ ${own.fromBoardingKm.toFixed(1)} מהעלייה לרכבת`)
   }
-  if (info.inItayaPass) add("text-xs text-emerald-700", ITAYA_NOTE)
+  if (info.inItayaPass) addLine(el, "text-xs text-emerald-700", ITAYA_NOTE)
   return el
 }
 
-/** Draws our train routes with every tunnel highlighted, over a plain light
- *  base map, and hides nothing itself — the caller stops rendering the
- *  normal markers while this is mounted. Unmounting removes everything and
- *  puts the view back exactly where it was. */
+/** Point at `fraction` of the polyline's length. */
+function pointAlong(coords: [number, number][], fraction: number): L.LatLng {
+  const pts = coords.map(([lat, lon]) => L.latLng(lat, lon))
+  const lengths = pts.slice(1).map((p, i) => pts[i]!.distanceTo(p))
+  const target = lengths.reduce((a, b) => a + b, 0) * fraction
+  let walked = 0
+  for (let i = 0; i < lengths.length; i++) {
+    const d = lengths[i]!
+    if (walked + d >= target && d > 0) {
+      const f = (target - walked) / d
+      const a = pts[i]!
+      const b = pts[i + 1]!
+      return L.latLng(a.lat + (b.lat - a.lat) * f, a.lng + (b.lng - a.lng) * f)
+    }
+    walked += d
+  }
+  return pts[pts.length - 1]!
+}
+
+const POPUP_OPTIONS: L.PopupOptions = {
+  className: "trip-map-popup",
+  maxWidth: 270,
+  autoPanPaddingTopLeft: L.point(56, 16),
+  autoPanPaddingBottomRight: L.point(64, 16),
+}
+
+interface RideLayers {
+  /** Everything drawn for the ride, with its normal opacity. */
+  layers: { layer: L.Path; opacity: number }[]
+  labels: L.Marker[]
+  tunnels: Map<number, L.Polyline>
+  bounds: L.LatLngBounds
+}
+
+/** Our train rides over the normal base map, each in its own colour with a
+ *  label, tunnels as thick black stretches of the ride's line. The caller
+ *  stops rendering the normal markers while this is mounted; unmounting
+ *  removes everything and puts the view back exactly where it was. */
 export function TunnelLayer() {
   const map = useMap()
   const selectedRide = useTunnelViewStore((s) => s.selectedRide)
   const focus = useTunnelViewStore((s) => s.focus)
-  const selectRide = useTunnelViewStore((s) => s.selectRide)
-  const layersRef = useRef(new Map<string, { all: L.Polyline[]; tunnels: Map<number, L.Polyline> }>())
-  const boundsRef = useRef(new Map<string, L.LatLngBounds>())
+  const fitSelected = useTunnelViewStore((s) => s.fitSelected)
+  const ridesRef = useRef(new Map<string, RideLayers>())
 
   useEffect(() => {
+    const { selectRide, showRideDetails } = useTunnelViewStore.getState()
     const savedCenter = map.getCenter()
     const savedZoom = map.getZoom()
-
-    // A quiet, label-light base so the routes stand out; sits above the
-    // normal base layer and goes away with it.
-    const base = L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-      zIndex: 50,
-    }).addTo(map)
     const group = L.layerGroup().addTo(map)
     const all = L.latLngBounds([])
 
+    const openDetails = (key: string) => {
+      map.closePopup()
+      showRideDetails(key)
+      window.setTimeout(
+        () => document.getElementById(`tunnel-ride-${key}`)?.scrollIntoView({ behavior: "smooth", block: "start" }),
+        50
+      )
+    }
+
     for (const raw of RAW_RIDES) {
-      const entry = { all: [] as L.Polyline[], tunnels: new Map<number, L.Polyline>() }
-      const bounds = L.latLngBounds([])
-      let tunnelIndex = 0
+      const views = ridesFor(raw.id)
+      const view = views[0]
+      if (!view) continue
+      const color = view.color
+      const entry: RideLayers = { layers: [], labels: [], tunnels: new Map(), bounds: L.latLngBounds([]) }
+      const add = (layer: L.Path, opacity: number) => {
+        layer.addTo(group)
+        entry.layers.push({ layer, opacity })
+      }
+      const openRide = (latlng: L.LatLng) => {
+        selectRide(view.key, false)
+        L.popup(POPUP_OPTIONS).setLatLng(latlng).setContent(ridePopup(views, openDetails)).openOn(map)
+      }
+
+      // Pass 1: white casing + the ride's coloured line along the whole ride.
       for (const segment of raw.segments) {
         const latlngs = segment.coords as L.LatLngExpression[]
-        if (segment.kind !== "open") {
-          const casing = L.polyline(latlngs, { ...CASING, interactive: false }).addTo(group)
-          entry.all.push(casing)
-        }
-        const line = L.polyline(latlngs, STYLE[segment.kind]).addTo(group)
-        entry.all.push(line)
-        if (segment.kind === "open") {
-          line.on("click", () => selectRide(ridesFor(raw.id)[0]?.key ?? null))
-        } else {
-          const rawIndex = tunnelIndex++
-          entry.tunnels.set(rawIndex, line)
-          line.bindPopup(() => tunnelPopup(raw, rawIndex), {
-            className: "trip-map-popup",
-            maxWidth: 260,
-            autoPanPaddingTopLeft: L.point(56, 16),
-            autoPanPaddingBottomRight: L.point(64, 16),
-          })
-        }
-        bounds.extend(line.getBounds())
+        add(L.polyline(latlngs, { color: "#ffffff", weight: 9, opacity: 0.9, interactive: false }), 0.9)
+        const line = L.polyline(latlngs, { color, weight: 5, opacity: 1 })
+        line.on("click", (e) => {
+          L.DomEvent.stop(e)
+          openRide(e.latlng)
+        })
+        add(line, 1)
+        entry.bounds.extend(line.getBounds())
       }
-      layersRef.current.set(raw.id, entry)
-      boundsRef.current.set(raw.id, bounds)
-      all.extend(bounds)
+      // Pass 2: tunnels / roofed track on top, thick and dark with the ride
+      // colour still showing through the middle.
+      let tunnelIndex = 0
+      for (const segment of raw.segments) {
+        if (segment.kind === "open") continue
+        const latlngs = segment.coords as L.LatLngExpression[]
+        const isTunnel = segment.kind === "tunnel"
+        const casing = L.polyline(latlngs, {
+          color: isTunnel ? "#111827" : "#6b7280",
+          weight: isTunnel ? 12 : 10,
+          opacity: 1,
+          lineCap: "butt",
+          dashArray: isTunnel ? undefined : "8 5",
+        })
+        const core = L.polyline(latlngs, { color, weight: 4, opacity: 1, lineCap: "butt", interactive: false })
+        add(casing, 1)
+        add(core, 1)
+        const rawIndex = tunnelIndex++
+        entry.tunnels.set(rawIndex, casing)
+        casing.bindPopup(() => tunnelPopup(raw, rawIndex), POPUP_OPTIONS)
+        casing.on("click", () => selectRide(view.key, false))
+      }
+
+      // One label per drawn route (Train 9 and 10 share theirs).
+      const coords = raw.segments.flatMap((s, i) => (i === 0 ? s.coords : s.coords.slice(1)))
+      const at = pointAlong(coords, view.labelAt)
+      const numbers = views.map((v) => v.shortLabel.split(" · ")[0]).join("/")
+      const name = view.shortLabel.split(" · ")[1] ?? view.shortLabel
+      const label = L.marker(at, {
+        icon: L.divIcon({
+          className: "trip-ride-label",
+          html: `<span class="trip-ride-pill" dir="ltr" style="--ride-color:${color}"><b>${numbers}</b><i>${name}</i></span>`,
+          iconSize: [0, 0],
+        }),
+        zIndexOffset: 1500,
+        keyboard: false,
+      }).addTo(group)
+      label.on("click", () => openRide(at))
+      entry.labels.push(label)
+
+      ridesRef.current.set(raw.id, entry)
+      all.extend(entry.bounds)
     }
     if (all.isValid()) map.fitBounds(all, { padding: [20, 20] })
 
-    const layers = layersRef.current
-    const allBounds = boundsRef.current
+    // Zoomed out the labels are just numbered dots (the whole country's
+    // routes overlap); from city level they also show the train's name.
+    const container = map.getContainer()
+    const syncLabelNames = () => container.classList.toggle("show-ride-names", map.getZoom() >= LABEL_NAMES_ZOOM)
+    syncLabelNames()
+    map.on("zoomend", syncLabelNames)
+
+    const rides = ridesRef.current
     return () => {
+      map.off("zoomend", syncLabelNames)
+      container.classList.remove("show-ride-names")
       group.remove()
-      base.remove()
-      layers.clear()
-      allBounds.clear()
+      rides.clear()
+      map.closePopup()
       map.setView(savedCenter, savedZoom, { animate: false })
     }
-  }, [map, selectRide])
+  }, [map])
 
-  // Fade the other routes and zoom to the chosen ride.
+  // Fade the other rides and zoom to the chosen one.
   useEffect(() => {
     const dataId = RIDES.find((r) => r.key === selectedRide)?.dataId ?? null
-    for (const [id, entry] of layersRef.current) {
+    for (const [id, entry] of ridesRef.current) {
       const dim = dataId !== null && id !== dataId
-      for (const line of entry.all) line.setStyle({ opacity: dim ? FADED_OPACITY : 1 })
+      for (const { layer, opacity } of entry.layers) layer.setStyle({ opacity: dim ? FADED_OPACITY : opacity })
+      for (const label of entry.labels) label.setOpacity(dim ? 0.25 : 1)
+      if (!dim && dataId !== null) for (const { layer } of entry.layers) layer.bringToFront()
     }
-    if (dataId && !focus) {
-      const bounds = boundsRef.current.get(dataId)
+    if (dataId && !focus && fitSelected) {
+      const bounds = ridesRef.current.get(dataId)?.bounds
       if (bounds?.isValid()) map.fitBounds(bounds, { padding: [24, 24] })
     }
-  }, [map, selectedRide, focus])
+  }, [map, selectedRide, focus, fitSelected])
 
   useEffect(() => {
     if (!focus) return
     const ride = RIDES.find((r) => r.key === focus.rideKey)
     const tunnel = ride?.tunnels[focus.index]
     if (!ride || !tunnel) return
-    const line = layersRef.current.get(ride.dataId)?.tunnels.get(tunnel.rawIndex)
+    const line = ridesRef.current.get(ride.dataId)?.tunnels.get(tunnel.rawIndex)
     if (!line) return
     // Open once the view settles; if the view doesn't change at all no
     // "moveend" comes, hence the timer as well.

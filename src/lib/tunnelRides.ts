@@ -38,6 +38,12 @@ export interface TunnelInfo extends RawTunnel {
 export interface RideView {
   key: string
   dataId: string
+  /** Short map label, e.g. "5 · Kagayaki". */
+  shortLabel: string
+  color: string
+  /** Where along the drawn route (0-1) its map label sits — chosen per ride
+   *  so labels of rides sharing track (2/3, near Tokyo) don't collide. */
+  labelAt: number
   title: string
   subtitle: string
   when: string
@@ -87,19 +93,26 @@ function inItaya([lat, lon]: [number, number]): boolean {
 
 /** Our rides in trip order. Train 10 is Train 9's route driven backwards,
  *  so it reuses that geometry. */
-const RIDE_ORDER: { dataId: string; label: string | null; reversed?: boolean; local?: string }[] = [
-  { dataId: "train-1", label: "Train 1" },
-  { dataId: "nikko-local", label: null, local: "2026-10-14" },
-  { dataId: "train-2", label: "Train 2" },
-  { dataId: "train-3", label: "Train 3" },
-  { dataId: "train-4", label: "Train 4" },
-  { dataId: "train-5", label: "Train 5" },
-  { dataId: "train-6", label: "Train 6" },
-  { dataId: "train-7", label: "Train 7" },
-  { dataId: "train-8", label: "Train 8" },
-  { dataId: "train-9", label: "Train 9" },
-  { dataId: "train-9", label: "Train 10", reversed: true },
-  { dataId: "train-11", label: "Train 11" },
+const RIDE_ORDER: {
+  dataId: string
+  label: string | null
+  color: string
+  labelAt: number
+  reversed?: boolean
+  local?: string
+}[] = [
+  { dataId: "train-1", label: "Train 1", color: "#2563eb", labelAt: 0.55 },
+  { dataId: "nikko-local", label: null, color: "#0891b2", labelAt: 0.5, local: "2026-10-14" },
+  { dataId: "train-2", label: "Train 2", color: "#16a34a", labelAt: 0.8 },
+  { dataId: "train-3", label: "Train 3", color: "#7c3aed", labelAt: 0.9 },
+  { dataId: "train-4", label: "Train 4", color: "#c026d3", labelAt: 0.35 },
+  { dataId: "train-5", label: "Train 5", color: "#db2777", labelAt: 0.55 },
+  { dataId: "train-6", label: "Train 6", color: "#ea580c", labelAt: 0.5 },
+  { dataId: "train-7", label: "Train 7", color: "#0d9488", labelAt: 0.5 },
+  { dataId: "train-8", label: "Train 8", color: "#4f46e5", labelAt: 0.45 },
+  { dataId: "train-9", label: "Train 9", color: "#a16207", labelAt: 0.75 },
+  { dataId: "train-9", label: "Train 10", color: "#a16207", labelAt: 0.75, reversed: true },
+  { dataId: "train-11", label: "Train 11", color: "#0369a1", labelAt: 0.75 },
 ]
 
 function buildRide(entry: (typeof RIDE_ORDER)[number]): RideView | null {
@@ -127,9 +140,13 @@ function buildRide(entry: (typeof RIDE_ORDER)[number]): RideView | null {
 
   const date = train?.date ?? entry.local
   const times = train?.departTime && train.arriveTime ? ` · ${train.departTime}-${train.arriveTime}` : ""
+  const number = entry.label?.replace("Train ", "")
   return {
     key: entry.label ?? entry.dataId,
     dataId: raw.id,
+    shortLabel: train ? `${number} · ${train.trainNumber.split(" (")[0]}` : "JR ניקו",
+    color: entry.color,
+    labelAt: entry.labelAt,
     title: train ? `רכבת ${entry.label!.replace("Train ", "")} · ${train.trainNumber}` : "רכבת מקומית JR (ללא הזמנה)",
     subtitle: `${fromName} ← ${toName}`,
     when: date ? `${formatHebrewDate(date, true)}${times}` : "",
