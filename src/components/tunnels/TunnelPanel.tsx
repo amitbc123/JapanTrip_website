@@ -1,7 +1,14 @@
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 import { useState } from "react"
 import travelTips from "@/data/travel-tips.json"
-import { ITAYA_NOTE, RIDES, formatDuration, formatLength, type RideView } from "@/lib/tunnelRides"
+import {
+  ITAYA_NOTE,
+  JOURNEYS,
+  formatDuration,
+  formatLength,
+  type JourneyView,
+  type RideView,
+} from "@/lib/tunnelRides"
 import { useTunnelViewStore } from "@/stores/tunnel-view-store"
 
 const tunnelTips = (travelTips as { tunnelTips: string[] }).tunnelTips
@@ -156,39 +163,98 @@ function RideCard({ ride }: { ride: RideView }) {
 /** The tunnel view's companion below the map (made for Omri): every train
  *  ride with how much of it runs underground, the longest stretch, and each
  *  tunnel in order. */
-function RideChips() {
-  const selectedRide = useTunnelViewStore((s) => s.selectedRide)
+function JourneyChips() {
+  const selected = useTunnelViewStore((s) => s.selectedRide)
   const selectRide = useTunnelViewStore((s) => s.selectRide)
   return (
     <div className="-mx-3 flex gap-1.5 overflow-x-auto px-3 pb-1 [scrollbar-width:none]">
       <button
         type="button"
         onClick={() => selectRide(null)}
-        aria-pressed={selectedRide === null}
+        aria-pressed={selected === null}
         className={`h-8 shrink-0 rounded-full border px-3 text-[13px] font-medium ${
-          selectedRide === null ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+          selected === null ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
         }`}
       >
-        כל הרכבות
+        כל המסעות
       </button>
-      {RIDES.map((ride) => (
-        <button
-          key={ride.key}
-          type="button"
-          onClick={() => selectRide(ride.key)}
-          aria-pressed={selectedRide === ride.key}
-          className="flex h-8 shrink-0 items-center gap-1.5 rounded-full border px-3 text-[13px] font-medium whitespace-nowrap"
-          style={
-            selectedRide === ride.key
-              ? { background: ride.color, borderColor: ride.color, color: "#fff" }
-              : { borderColor: ride.color }
-          }
-        >
-          <span className="inline-block size-2.5 rounded-full" style={{ background: ride.color }} aria-hidden />
-          {ride.shortLabel}
-        </button>
-      ))}
+      {JOURNEYS.map((journey) => {
+        const isOn = selected === journey.key || journey.rides.some((r) => r.key === selected)
+        return (
+          <button
+            key={journey.key}
+            type="button"
+            onClick={() => selectRide(journey.key)}
+            aria-pressed={isOn}
+            className={`flex h-8 shrink-0 items-center gap-1 rounded-full border px-3 text-[13px] font-medium whitespace-nowrap ${
+              isOn ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+            }`}
+          >
+            {journey.rides.map((r) => (
+              <span key={r.key} className="inline-block size-2.5 rounded-full" style={{ background: r.color }} aria-hidden />
+            ))}
+            <span className="ms-1">
+              {journey.number}. {journey.title}
+            </span>
+          </button>
+        )
+      })}
     </div>
+  )
+}
+
+/** One hotel-to-hotel move: its trains in order (each in its map colour),
+ *  joined by where we change. */
+function JourneyCard({ journey }: { journey: JourneyView }) {
+  const selected = useTunnelViewStore((s) => s.selectedRide)
+  const selectRide = useTunnelViewStore((s) => s.selectRide)
+  const isOn = selected === journey.key
+  return (
+    <li className="flex flex-col gap-2">
+      <button
+        type="button"
+        onClick={() => {
+          selectRide(isOn ? null : journey.key)
+          document.getElementById("home-map")?.scrollIntoView({ behavior: "smooth", block: "start" })
+        }}
+        aria-pressed={isOn}
+        className={`flex flex-col gap-1 rounded-xl border-2 p-3 text-start ${
+          isOn ? "border-primary bg-primary/5" : "border-border bg-muted/40"
+        }`}
+      >
+        <span className="text-xs font-semibold text-muted-foreground">
+          מסע {journey.number} · {journey.when}
+        </span>
+        <span className="text-base font-bold">
+          {journey.from.label} ← {journey.to.label} · {journey.title}
+        </span>
+        <span className="flex flex-wrap items-center gap-1 text-[13px]">
+          {journey.rides.map((r, i) => (
+            <span key={r.key} className="flex items-center gap-1">
+              {i > 0 && <span className="text-muted-foreground">←</span>}
+              <span className="inline-block size-2.5 rounded-full" style={{ background: r.color }} aria-hidden />
+              {r.shortLabel}
+            </span>
+          ))}
+        </span>
+        <span className="text-[13px]">
+          {journey.tunnelCount === 0
+            ? "🎉 בלי מנהרות"
+            : `${journey.tunnelCount} מנהרות · ${journey.undergroundKm.toFixed(1)} ק"מ בפנים · סה"כ ${formatDuration(journey.undergroundMinutes)}`}
+          {journey.longest &&
+            ` · הארוכה: ${journey.longest.tunnel.name ?? "מנהרה"} (${formatDuration(journey.longest.tunnel.minutes)})`}
+        </span>
+      </button>
+      <ul className="flex flex-col gap-2 border-s-2 border-dashed border-border ps-3">
+        {journey.links[0] && <li className="text-xs text-muted-foreground">⋯ {journey.links[0].note}</li>}
+        {journey.rides.map((ride) => (
+          <RideCard key={ride.key} ride={ride} />
+        ))}
+        {journey.links.length > 1 && (
+          <li className="text-xs text-muted-foreground">⋯ {journey.links[journey.links.length - 1]!.note}</li>
+        )}
+      </ul>
+    </li>
   )
 }
 
@@ -198,10 +264,11 @@ export function TunnelPanel() {
       <div className="flex flex-col gap-2 rounded-xl border border-red-600/30 bg-red-600/5 p-3">
         <h2 className="text-base font-bold">🚇 מצב מנהרות - המסלולים המדויקים של הרכבות שלנו</h2>
         <p className="text-[13px]">
-          כל רכבת שלנו מסומנת על המסילה עצמה בצבע משלה, עם תווית. <span className="font-semibold">קטע שחור עבה</span>{" "}
-          על הקו = מנהרה, <span className="font-semibold">אפור מקווקו</span> = קטע מקורה. לחיצה על קו של רכבת מציגה
-          את הפרטים שלה ומעמעמת את השאר, ולחיצה על מנהרה מציגה את האורך ואת הזמן המשוער בפנים. לחיצה נוספת על
-          כפתור המנהרה מחזירה את המפה הרגילה.
+          הרכבות מסודרות לפי <span className="font-semibold">מסעות</span>: כל מסע הוא מעבר ממלון אחד לאחר (עם
+          המספר של המלון על המפה), וכל רכבת בו בצבע משלה. קו מנוקד = קטע שאינו אחת הרכבות (אוטובוס, רכב, הליכה).{" "}
+          <span className="font-semibold">קטע שחור עבה עם הילה אדומה</span> = מנהרה, ותגית 🚇 מציינת את האורך שלה
+          בק"מ. אפור מקווקו = קטע מקורה. המיקום שלך מופיע כנקודה כחולה. לחיצה נוספת על כפתור המנהרה מחזירה את
+          המפה הרגילה.
         </p>
         <p className="text-xs text-muted-foreground">
           הזמנים הם הערכה לפי מהירות אופיינית של כל קו. נתוני המסילות והמנהרות: OpenStreetMap דרך Overture
@@ -209,13 +276,13 @@ export function TunnelPanel() {
         </p>
       </div>
 
-      <RideChips />
+      <JourneyChips />
 
-      <ul className="flex flex-col gap-3">
-        {RIDES.map((ride) => (
-          <RideCard key={ride.key} ride={ride} />
+      <ol className="flex flex-col gap-5">
+        {JOURNEYS.map((journey) => (
+          <JourneyCard key={journey.key} journey={journey} />
         ))}
-      </ul>
+      </ol>
 
       {tunnelTips.length > 0 && (
         <div className="rounded-xl border border-border bg-card p-3">

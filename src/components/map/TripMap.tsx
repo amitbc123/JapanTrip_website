@@ -347,6 +347,9 @@ function MyLocationControl() {
     /** Unwrapped (continuous) beam angle, so a CSS transition from 359° to
      *  1° turns 2° forward instead of spinning back around the circle. */
     let beamAngle: number | null = null
+    let flyOnFirstFix = true
+    /** Tracking that the tunnel view turned on (and so turns off again). */
+    let startedByTunnelView = false
     let latest: string | null = null
     let resolveFirstFix: ((coordinates: string) => void) | null = null
     let rejectFirstFix: (() => void) | null = null
@@ -496,7 +499,7 @@ function MyLocationControl() {
       if (!hasFix) {
         hasFix = true
         render(true, false)
-        map.flyTo(latLng, Math.max(map.getZoom(), MY_LOCATION_ZOOM), { duration: 1.2 })
+        if (flyOnFirstFix) map.flyTo(latLng, Math.max(map.getZoom(), MY_LOCATION_ZOOM), { duration: 1.2 })
       } else if (isFollowing) {
         map.panTo(latLng, { animate: true })
       }
@@ -510,26 +513,32 @@ function MyLocationControl() {
       window.alert(geolocationErrorMessage(error))
     }
 
-    function start() {
+    /** `quiet`: started by the tunnel view — just show the dot, don't
+     *  fly to it, follow it, or copy the coordinates. */
+    function start(quiet = false) {
       if (!("geolocation" in navigator)) {
-        window.alert("הדפדפן הזה לא תומך באיתור מיקום.")
+        if (!quiet) window.alert("הדפדפן הזה לא תומך באיתור מיקום.")
         return
       }
       hasFix = false
-      isFollowing = true
+      isFollowing = !quiet
+      flyOnFirstFix = !quiet
       render(true, true)
-      // Copy the coordinates as soon as the first fix arrives. The copy has
-      // to be started right here, inside the tap (see copyTextWhenReady).
-      const firstFix = new Promise<string>((resolve, reject) => {
-        resolveFirstFix = resolve
-        rejectFirstFix = reject
-      })
-      firstFix.catch(() => {})
-      void copyTextWhenReady(firstFix).then((ok) => {
-        if (!latest) return
-        if (ok) showToast(`📋 הנ"צ הועתק: ${ltr(latest)}`)
-        else showToast(`הנ"צ: ${ltr(latest)}`, { label: "📋 העתקה", run: () => void copyLatest() })
-      })
+      if (!quiet) {
+        // Copy the coordinates as soon as the first fix arrives. The copy
+        // has to be started right here, inside the tap (see
+        // copyTextWhenReady).
+        const firstFix = new Promise<string>((resolve, reject) => {
+          resolveFirstFix = resolve
+          rejectFirstFix = reject
+        })
+        firstFix.catch(() => {})
+        void copyTextWhenReady(firstFix).then((ok) => {
+          if (!latest) return
+          if (ok) showToast(`📋 הנ"צ הועתק: ${ltr(latest)}`)
+          else showToast(`הנ"צ: ${ltr(latest)}`, { label: "📋 העתקה", run: () => void copyLatest() })
+        })
+      }
       watchId = navigator.geolocation.watchPosition(onPosition, onPositionError, {
         enableHighAccuracy: true,
         maximumAge: 5000,
@@ -549,6 +558,7 @@ function MyLocationControl() {
       L.DomEvent.disableClickPropagation(container)
       L.DomEvent.on(button, "click", (e) => {
         L.DomEvent.preventDefault(e)
+        startedByTunnelView = false
         if (watchId !== null) stop()
         else start()
       })
@@ -556,7 +566,21 @@ function MyLocationControl() {
     }
     control.addTo(map)
 
+    // The tunnel view shows where we are too. Its toggle runs inside the
+    // user's tap, so the location (and iOS compass) prompts still work.
+    const unsubscribeTunnelView = useTunnelViewStore.subscribe((state, prev) => {
+      if (state.active === prev.active) return
+      if (state.active && watchId === null) {
+        startedByTunnelView = true
+        start(true)
+      } else if (!state.active && startedByTunnelView) {
+        startedByTunnelView = false
+        stop()
+      }
+    })
+
     return () => {
+      unsubscribeTunnelView()
       stop()
       toast?.remove()
       window.clearTimeout(toastTimer)
