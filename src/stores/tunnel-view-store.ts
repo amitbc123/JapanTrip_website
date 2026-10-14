@@ -14,6 +14,12 @@ interface TunnelViewState {
   focus: { rideKey: string; index: number; nonce: number } | null
   /** Ride whose tunnel list the panel should show opened (set from the map). */
   expandedRide: string | null
+  /** The map is following the live location dot (so the tunnel view
+   *  shouldn't zoom out to its overview). Set by the location control. */
+  followingMe: boolean
+  /** Bumped to ask the tunnel view to show its whole-trip overview. */
+  fitAllNonce: number
+  requestFitAll: () => void
   toggle: () => void
   selectRide: (key: string | null, fit?: boolean) => void
   focusTunnel: (rideKey: string, index: number) => void
@@ -26,7 +32,10 @@ export const useTunnelViewStore = create<TunnelViewState>((set, get) => ({
   fitSelected: true,
   focus: null,
   expandedRide: null,
-  toggle: () => set({ active: !get().active, selectedRide: null, focus: null, expandedRide: null }),
+  followingMe: false,
+  fitAllNonce: 0,
+  requestFitAll: () => set({ fitAllNonce: get().fitAllNonce + 1 }),
+  toggle: () => set({ active: !get().active, selectedRide: null, focus: null, expandedRide: null, fitAllNonce: 0 }),
   selectRide: (key, fit = true) => set({ selectedRide: key, fitSelected: fit, focus: null }),
   focusTunnel: (rideKey, index) =>
     set({

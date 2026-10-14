@@ -279,6 +279,8 @@ function FullscreenControl() {
 }
 
 const MY_LOCATION_ZOOM = 16
+// In the tunnel view, close enough to see the track and tunnels around us.
+const TUNNEL_VIEW_LOCATION_ZOOM = 14
 const MY_LOCATION_ICON_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>'
 
@@ -348,7 +350,9 @@ function MyLocationControl() {
     /** Unwrapped (continuous) beam angle, so a CSS transition from 359° to
      *  1° turns 2° forward instead of spinning back around the circle. */
     let beamAngle: number | null = null
+    /** False when started by the tunnel view (no copy, tunnel zoom). */
     let flyOnFirstFix = true
+    let followZoom = MY_LOCATION_ZOOM
     /** Tracking that the tunnel view turned on (and so turns off again). */
     let startedByTunnelView = false
     let latest: string | null = null
@@ -404,11 +408,17 @@ function MyLocationControl() {
       return el
     }
 
+    function setFollowing(value: boolean) {
+      isFollowing = value
+      useTunnelViewStore.setState({ followingMe: value && watchId !== null })
+      render(watchId !== null, watchId !== null && !hasFix)
+    }
+
     function render(isActive: boolean, isWaiting: boolean) {
       if (!button) return
       button.classList.toggle("is-active", isActive)
       button.classList.toggle("is-loading", isWaiting)
-      button.title = isActive ? "כיבוי מעקב מיקום" : "הצגת המיקום שלי"
+      button.title = !isActive ? "הצגת המיקום שלי" : isFollowing ? "כיבוי מעקב מיקום" : "חזרה למיקום שלי"
       button.setAttribute("aria-label", button.title)
       button.setAttribute("aria-pressed", String(isActive))
     }
@@ -446,7 +456,7 @@ function MyLocationControl() {
     }
 
     function onDragStart() {
-      isFollowing = false
+      setFollowing(false)
     }
 
     function stop() {
@@ -463,6 +473,7 @@ function MyLocationControl() {
       rejectFirstFix?.()
       resolveFirstFix = null
       rejectFirstFix = null
+      useTunnelViewStore.setState({ followingMe: false })
       render(false, false)
     }
 
@@ -500,7 +511,7 @@ function MyLocationControl() {
       if (!hasFix) {
         hasFix = true
         render(true, false)
-        if (flyOnFirstFix) map.flyTo(latLng, Math.max(map.getZoom(), MY_LOCATION_ZOOM), { duration: 1.2 })
+        if (isFollowing) map.flyTo(latLng, Math.max(map.getZoom(), followZoom), { duration: 1.2 })
       } else if (isFollowing) {
         map.panTo(latLng, { animate: true })
       }
@@ -511,23 +522,29 @@ function MyLocationControl() {
       // worth interrupting for — keep the last dot and wait for the next fix.
       if (hasFix && error.code !== error.PERMISSION_DENIED) return
       const quiet = !flyOnFirstFix
+      const neverLocated = !hasFix
       stop()
+      // The tunnel view skipped its overview to wait for our position;
+      // without one, show the overview after all.
+      if (quiet && neverLocated) useTunnelViewStore.getState().requestFitAll()
       // Explain exactly where to turn location on (for this phone and
       // browser), with a retry that starts tracking the same way again.
       useLocationHelpStore.getState().show(locationProblem(error), () => start(quiet))
     }
 
-    /** `quiet`: started by the tunnel view — just show the dot, don't
-     *  fly to it, follow it, or copy the coordinates. */
+    /** `quiet`: started by the tunnel view — fly to the dot and follow it
+     *  (at a zoom that still shows the track around), but don't copy the
+     *  coordinates. */
     function start(quiet = false) {
       if (!("geolocation" in navigator)) {
         useLocationHelpStore.getState().show("unsupported", null)
         return
       }
       hasFix = false
-      isFollowing = !quiet
       flyOnFirstFix = !quiet
-      render(true, true)
+      followZoom = quiet ? TUNNEL_VIEW_LOCATION_ZOOM : MY_LOCATION_ZOOM
+      watchId = -1 // tracking from here on; the real id is set below
+      setFollowing(true)
       if (!quiet) {
         // Copy the coordinates as soon as the first fix arrives. The copy
         // has to be started right here, inside the tap (see
@@ -562,6 +579,14 @@ function MyLocationControl() {
       L.DomEvent.disableClickPropagation(container)
       L.DomEvent.on(button, "click", (e) => {
         L.DomEvent.preventDefault(e)
+        // Tracking but the map was moved away: bring it back and follow
+        // again (like Google Maps) rather than switching off.
+        const at = dot?.getLatLng()
+        if (watchId !== null && at && !isFollowing) {
+          setFollowing(true)
+          map.flyTo(at, Math.max(map.getZoom(), followZoom), { duration: 0.8 })
+          return
+        }
         startedByTunnelView = false
         if (watchId !== null) stop()
         else start()
@@ -573,6 +598,16 @@ function MyLocationControl() {
     // The tunnel view shows where we are too. Its toggle runs inside the
     // user's tap, so the location (and iOS compass) prompts still work.
     const unsubscribeTunnelView = useTunnelViewStore.subscribe((state, prev) => {
+      // Picking a ride, journey or tunnel moves the map there: stop
+      // following until the location button is tapped again.
+      if (
+        (state.selectedRide !== prev.selectedRide || state.focus !== prev.focus) &&
+        watchId !== null &&
+        isFollowing &&
+        hasFix
+      ) {
+        setFollowing(false)
+      }
       if (state.active === prev.active) return
       if (state.active && watchId === null) {
         startedByTunnelView = true

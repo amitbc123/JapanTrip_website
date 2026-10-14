@@ -165,6 +165,8 @@ export function TunnelLayer() {
   const fitSelected = useTunnelViewStore((s) => s.fitSelected)
   const ridesRef = useRef(new Map<string, RideLayers>())
   const showAllRef = useRef<HTMLButtonElement | null>(null)
+  const allBoundsRef = useRef<L.LatLngBounds | null>(null)
+  const fitAllNonce = useTunnelViewStore((s) => s.fitAllNonce)
   const journeyLayersRef = useRef(new Map<string, RideLayers>())
   const hotelMarkersRef = useRef(new Map<string, { marker: L.Marker; journeys: string[] }>())
 
@@ -345,7 +347,9 @@ export function TunnelLayer() {
       journeyLayers.set(journey.key, entry)
     }
 
-    if (all.isValid()) map.fitBounds(all, { padding: [20, 20] })
+    // Following the live location takes priority over the overview.
+    if (all.isValid() && !useTunnelViewStore.getState().followingMe) map.fitBounds(all, { padding: [20, 20] })
+    allBoundsRef.current = all
 
     // "Show all trains" button over the map while one ride/journey is
     // highlighted (shown/hidden by the selection effect below).
@@ -388,6 +392,12 @@ export function TunnelLayer() {
       map.setView(savedCenter, savedZoom, { animate: false })
     }
   }, [map])
+
+  useEffect(() => {
+    if (fitAllNonce === 0) return
+    const all = allBoundsRef.current
+    if (all?.isValid()) map.fitBounds(all, { padding: [20, 20] })
+  }, [map, fitAllNonce])
 
   // Fade everything outside the chosen ride or journey and zoom to it.
   useEffect(() => {
