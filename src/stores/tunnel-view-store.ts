@@ -7,8 +7,8 @@ interface TunnelViewState {
   /** What the map highlights: a ride key or a journey key (see
    *  lib/tunnelRides), or null for everything. */
   selectedRide: string | null
-  /** Whether the map should zoom to the selected ride (picked from the
-   *  panel) or stay put (tapped on the map itself). */
+  /** Whether the selection came from the panel (zoom to it, keep it) or
+   *  from tapping the map (stay put, and undo it when its popup closes). */
   fitSelected: boolean
   /** A tunnel to fly to and open; `nonce` re-triggers the same one. */
   focus: { rideKey: string; index: number; nonce: number } | null
@@ -29,6 +29,10 @@ export const useTunnelViewStore = create<TunnelViewState>((set, get) => ({
   toggle: () => set({ active: !get().active, selectedRide: null, focus: null, expandedRide: null }),
   selectRide: (key, fit = true) => set({ selectedRide: key, fitSelected: fit, focus: null }),
   focusTunnel: (rideKey, index) =>
-    set({ selectedRide: rideKey, focus: { rideKey, index, nonce: (get().focus?.nonce ?? 0) + 1 } }),
+    set({
+      selectedRide: rideKey,
+      fitSelected: true,
+      focus: { rideKey, index, nonce: (get().focus?.nonce ?? 0) + 1 },
+    }),
   showRideDetails: (key) => set({ selectedRide: key, fitSelected: false, focus: null, expandedRide: key }),
 }))
