@@ -101,18 +101,18 @@ const RIDE_ORDER: {
   reversed?: boolean
   local?: string
 }[] = [
-  { dataId: "train-1", label: "Train 1", color: "#2563eb", labelAt: 0.55 },
-  { dataId: "nikko-local", label: null, color: "#f59e0b", labelAt: 0.5, local: "2026-10-14" },
-  { dataId: "train-2", label: "Train 2", color: "#16a34a", labelAt: 0.8 },
-  { dataId: "train-3", label: "Train 3", color: "#7c3aed", labelAt: 0.9 },
-  { dataId: "train-4", label: "Train 4", color: "#0891b2", labelAt: 0.35 },
-  { dataId: "train-5", label: "Train 5", color: "#db2777", labelAt: 0.55 },
-  { dataId: "train-6", label: "Train 6", color: "#ea580c", labelAt: 0.5 },
-  { dataId: "train-7", label: "Train 7", color: "#0d9488", labelAt: 0.5 },
-  { dataId: "train-8", label: "Train 8", color: "#4f46e5", labelAt: 0.45 },
-  { dataId: "train-9", label: "Train 9", color: "#a16207", labelAt: 0.75 },
-  { dataId: "train-9", label: "Train 10", color: "#a16207", labelAt: 0.75, reversed: true },
-  { dataId: "train-11", label: "Train 11", color: "#0369a1", labelAt: 0.75 },
+  { dataId: "train-1", label: "Train 1", color: "#4a6fa5", labelAt: 0.55 },
+  { dataId: "nikko-local", label: null, color: "#b8913f", labelAt: 0.5, local: "2026-10-14" },
+  { dataId: "train-2", label: "Train 2", color: "#5b8c5a", labelAt: 0.8 },
+  { dataId: "train-3", label: "Train 3", color: "#7e6ba6", labelAt: 0.9 },
+  { dataId: "train-4", label: "Train 4", color: "#4e8c98", labelAt: 0.35 },
+  { dataId: "train-5", label: "Train 5", color: "#ad5f7d", labelAt: 0.55 },
+  { dataId: "train-6", label: "Train 6", color: "#b9774b", labelAt: 0.5 },
+  { dataId: "train-7", label: "Train 7", color: "#4d8a80", labelAt: 0.5 },
+  { dataId: "train-8", label: "Train 8", color: "#65679e", labelAt: 0.45 },
+  { dataId: "train-9", label: "Train 9", color: "#8b7349", labelAt: 0.75 },
+  { dataId: "train-9", label: "Train 10", color: "#8b7349", labelAt: 0.75, reversed: true },
+  { dataId: "train-11", label: "Train 11", color: "#4e7591", labelAt: 0.75 },
 ]
 
 function buildRide(entry: (typeof RIDE_ORDER)[number]): RideView | null {

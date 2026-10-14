@@ -16,6 +16,9 @@ import {
 import { useTunnelViewStore } from "@/stores/tunnel-view-store"
 
 const FADED_OPACITY = 0.12
+const TUNNEL_COLOR = "#2b2b2b"
+const COVERED_COLOR = "#9ca3af"
+const PORTALS_ZOOM = 10
 const LABEL_NAMES_ZOOM = 9
 // Tunnel badges ("🚇 23.4") appear by size as you zoom in, so the
 // country-wide view isn't buried: 10 km+ from zoom 7, 4 km+ from 9, the
@@ -25,9 +28,6 @@ const BADGE_BIG_M = 4000
 const BADGE_HUGE_M = 10000
 const BADGE_TIERS = [7, 9, 11]
 
-function haloWeight(zoom: number): number {
-  return zoom < 7 ? 6 : zoom < 9 ? 12 : 22
-}
 
 /** The rides drawn on a given geometry (Train 9 and 10 share one). */
 function ridesFor(dataId: string): RideView[] {
@@ -150,6 +150,7 @@ interface RideLayers {
   /** Everything drawn for the ride, with its normal opacity. */
   layers: { layer: L.Path; opacity: number }[]
   labels: L.Marker[]
+  portals: L.CircleMarker[]
   tunnels: Map<number, L.Polyline>
   bounds: L.LatLngBounds
 }
@@ -177,7 +178,8 @@ export function TunnelLayer() {
     const group = L.layerGroup().addTo(map)
     const all = L.latLngBounds([])
     const journeyLayers = journeyLayersRef.current
-    const halos: L.Polyline[] = []
+    // Portal dots only once zoomed in enough to tell tunnels apart.
+    const portals = L.layerGroup()
     const hotelMarkers = hotelMarkersRef.current
 
     // A ride picked by tapping the map stays highlighted only while its
@@ -208,7 +210,7 @@ export function TunnelLayer() {
       const view = views[0]
       if (!view) continue
       const color = view.color
-      const entry: RideLayers = { layers: [], labels: [], tunnels: new Map(), bounds: L.latLngBounds([]) }
+      const entry: RideLayers = { layers: [], labels: [], portals: [], tunnels: new Map(), bounds: L.latLngBounds([]) }
       const add = (layer: L.Path, opacity: number) => {
         layer.addTo(group)
         entry.layers.push({ layer, opacity })
@@ -221,11 +223,10 @@ export function TunnelLayer() {
         selectRide(view.key, false)
       }
 
-      // Pass 1: white casing + the ride's coloured line along the whole ride.
+      // Pass 1: the ride's own (muted) colour along the whole ride.
       for (const segment of raw.segments) {
         const latlngs = segment.coords as L.LatLngExpression[]
-        add(L.polyline(latlngs, { color: "#ffffff", weight: 9, opacity: 0.9, interactive: false }), 0.9)
-        const line = L.polyline(latlngs, { color, weight: 5, opacity: 1, bubblingMouseEvents: false })
+        const line = L.polyline(latlngs, { color, weight: 4, opacity: 1, bubblingMouseEvents: false })
         line.on("click", (e) => {
           L.DomEvent.stop(e)
           openRide(e.latlng)
@@ -233,37 +234,37 @@ export function TunnelLayer() {
         add(line, 1)
         entry.bounds.extend(line.getBounds())
       }
-      // Pass 2: tunnels / roofed track on top, thick and dark with the ride
-      // colour still showing through the middle.
+      // Pass 2: tunnels as solid, thicker dark stretches on top (roofed
+      // track lighter and dashed); a small dot at each portal keeps two
+      // tunnels close together from reading as one.
       let tunnelIndex = 0
       for (const segment of raw.segments) {
         if (segment.kind === "open") continue
         const latlngs = segment.coords as L.LatLngExpression[]
         const isTunnel = segment.kind === "tunnel"
         const casing = L.polyline(latlngs, {
-          color: isTunnel ? "#111827" : "#6b7280",
-          weight: isTunnel ? 12 : 10,
+          color: isTunnel ? TUNNEL_COLOR : COVERED_COLOR,
+          weight: isTunnel ? 9 : 7,
           opacity: 1,
           lineCap: "butt",
-          dashArray: isTunnel ? undefined : "8 5",
+          dashArray: isTunnel ? undefined : "7 5",
           bubblingMouseEvents: false,
         })
-        const core = L.polyline(latlngs, { color, weight: 4, opacity: 1, lineCap: "butt", interactive: false })
-        // A wide red halo so a tunnel reads as "this whole area is
-        // underground" even zoomed out, where the line itself is thin.
-        if (isTunnel) {
-          const halo = L.polyline(latlngs, {
-            color: "#ef4444",
-            weight: haloWeight(map.getZoom()),
-            opacity: 0.35,
-            lineCap: "round",
-            interactive: false,
-          })
-          add(halo, 0.35)
-          halos.push(halo)
-        }
         add(casing, 1)
-        add(core, 1)
+        if (isTunnel) {
+          for (const end of [latlngs[0]!, latlngs[latlngs.length - 1]!]) {
+            const portal = L.circleMarker(end, {
+              radius: 3.5,
+              color: TUNNEL_COLOR,
+              weight: 2,
+              fillColor: "#ffffff",
+              fillOpacity: 1,
+              interactive: false,
+            })
+            portal.addTo(portals)
+            entry.portals.push(portal)
+          }
+        }
         const rawIndex = tunnelIndex++
         entry.tunnels.set(rawIndex, casing)
         casing.bindPopup(() => tunnelPopup(raw, rawIndex), POPUP_OPTIONS)
@@ -314,7 +315,7 @@ export function TunnelLayer() {
     // that aren't one of our trains (hotel to station, bus, local train).
     const hotelsDrawn = new Set<string>()
     for (const journey of JOURNEYS) {
-      const entry: RideLayers = { layers: [], labels: [], tunnels: new Map(), bounds: L.latLngBounds([]) }
+      const entry: RideLayers = { layers: [], labels: [], portals: [], tunnels: new Map(), bounds: L.latLngBounds([]) }
       for (const link of journey.links) {
         const line = L.polyline([link.from, link.to], {
           color: "#374151",
@@ -372,7 +373,8 @@ export function TunnelLayer() {
       const zoom = map.getZoom()
       container.classList.toggle("show-ride-names", zoom >= LABEL_NAMES_ZOOM)
       BADGE_TIERS.forEach((tier, i) => container.classList.toggle(`show-tunnel-badges-${i}`, zoom >= tier))
-      for (const halo of halos) halo.setStyle({ weight: haloWeight(zoom) })
+      if (zoom >= PORTALS_ZOOM) portals.addTo(map)
+      else portals.remove()
     }
     syncLabelNames()
     map.on("zoomend", syncLabelNames)
@@ -387,6 +389,7 @@ export function TunnelLayer() {
       journeyLayers.clear()
       hotelMarkers.clear()
       group.remove()
+      portals.remove()
       rides.clear()
       map.closePopup()
       map.setView(savedCenter, savedZoom, { animate: false })
@@ -414,6 +417,9 @@ export function TunnelLayer() {
       const dim = litRides !== null && !litRides.has(id)
       for (const { layer, opacity } of entry.layers) layer.setStyle({ opacity: dim ? FADED_OPACITY : opacity })
       for (const label of entry.labels) label.setOpacity(dim ? 0.2 : 1)
+      for (const portal of entry.portals) {
+        portal.setStyle({ opacity: dim ? FADED_OPACITY : 1, fillOpacity: dim ? FADED_OPACITY : 1 })
+      }
       if (!dim && litRides !== null) for (const { layer } of entry.layers) layer.bringToFront()
     }
     for (const [key, entry] of journeyLayersRef.current) {

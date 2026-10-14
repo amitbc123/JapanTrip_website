@@ -27,7 +27,7 @@ function RideStrip({ ride }: { ride: RideView }) {
         {ride.tunnels.map((t) => (
           <span
             key={`${t.rawIndex}`}
-            className={`absolute top-0 h-full ${t.kind === "tunnel" ? "bg-gray-900" : "bg-gray-400"}`}
+            className={`absolute top-0 h-full ${t.kind === "tunnel" ? "bg-[#2b2b2b]" : "bg-gray-400"}`}
             style={{
               right: `${(t.fromBoardingKm / ride.lengthKm) * 100}%`,
               width: `max(2px, ${(t.lengthM / 1000 / ride.lengthKm) * 100}%)`,
@@ -134,7 +134,7 @@ function RideCard({ ride }: { ride: RideView }) {
                     <span className="flex items-center gap-2">
                       <span
                         className={`inline-block size-2.5 shrink-0 rounded-full ${
-                          t.kind === "tunnel" ? "bg-gray-900" : "bg-gray-400"
+                          t.kind === "tunnel" ? "bg-[#2b2b2b]" : "bg-gray-400"
                         }`}
                         aria-hidden
                       />
@@ -266,8 +266,8 @@ export function TunnelPanel() {
         <p className="text-[13px]">
           הרכבות מסודרות לפי <span className="font-semibold">מסעות</span>: כל מסע הוא מעבר ממלון אחד לאחר (עם
           המספר של המלון על המפה), וכל רכבת בו בצבע משלה. קו מנוקד = קטע שאינו אחת הרכבות (אוטובוס, רכב, הליכה).{" "}
-          <span className="font-semibold">קטע שחור עבה עם הילה אדומה</span> = מנהרה, ותגית 🚇 מציינת את האורך שלה
-          בק"מ. אפור מקווקו = קטע מקורה. המיקום שלך מופיע כנקודה כחולה. לחיצה נוספת על כפתור המנהרה מחזירה את
+          <span className="font-semibold">קטע כהה ועבה</span> = מנהרה (נקודה לבנה בכל כניסה ויציאה), ותגית 🚇
+          מציינת את האורך שלה בק"מ. אפור בהיר מקווקו = קטע מקורה. המיקום שלך מופיע כנקודה כחולה. לחיצה נוספת על כפתור המנהרה מחזירה את
           המפה הרגילה.
         </p>
         <p className="text-xs text-muted-foreground">

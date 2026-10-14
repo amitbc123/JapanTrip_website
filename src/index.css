@@ -536,14 +536,14 @@
   display: none;
   padding: 2px 7px;
   border-radius: 6px;
-  background: #111827;
+  background: #2b2b2b;
   color: #fff;
   font-family: var(--font-sans);
   font-size: 11px;
   font-weight: 700;
   white-space: nowrap;
-  border: 2px solid #ef4444;
-  box-shadow: 0 1px 4px rgb(0 0 0 / 0.4);
+  border: 1.5px solid #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
   cursor: pointer;
 }
 .show-tunnel-badges-0 .trip-tunnel-badge[data-size="huge"],
