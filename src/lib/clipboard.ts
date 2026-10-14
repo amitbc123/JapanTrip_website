@@ -35,9 +35,11 @@ export function copyTextWhenReady(textPromise: Promise<string>): Promise<boolean
     typeof navigator.clipboard?.write === "function" &&
     (typeof ClipboardItem.supports !== "function" || ClipboardItem.supports("text/plain"))
   if (!canWritePromise) return textPromise.then(copyText, () => false)
-  const item = new ClipboardItem({
-    "text/plain": textPromise.then((text) => new Blob([text], { type: "text/plain" })),
-  })
+  const blob = textPromise.then((text) => new Blob([text], { type: "text/plain" }))
+  // When the text never arrives (tracking stopped first), this rejection is
+  // expected — don't let it surface as an unhandled one.
+  blob.catch(() => {})
+  const item = new ClipboardItem({ "text/plain": blob })
   return navigator.clipboard.write([item]).then(
     () => true,
     // A rejected write may just mean no promise support — retry plainly,

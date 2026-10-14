@@ -551,3 +551,25 @@
 .show-tunnel-badges-2 .trip-tunnel-badge[data-size="mid"] {
   display: block;
 }
+
+/* Tunnel view: "show all trains" pill over the map while one is chosen. */
+.trip-map-show-all {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 7px 14px;
+  border-radius: 9999px;
+  background: #111827;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.35);
+  cursor: pointer;
+}
+.trip-map-show-all[hidden] {
+  display: none;
+}

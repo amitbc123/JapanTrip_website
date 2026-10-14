@@ -164,6 +164,7 @@ export function TunnelLayer() {
   const focus = useTunnelViewStore((s) => s.focus)
   const fitSelected = useTunnelViewStore((s) => s.fitSelected)
   const ridesRef = useRef(new Map<string, RideLayers>())
+  const showAllRef = useRef<HTMLButtonElement | null>(null)
   const journeyLayersRef = useRef(new Map<string, RideLayers>())
   const hotelMarkersRef = useRef(new Map<string, { marker: L.Marker; journeys: string[] }>())
 
@@ -176,6 +177,20 @@ export function TunnelLayer() {
     const journeyLayers = journeyLayersRef.current
     const halos: L.Polyline[] = []
     const hotelMarkers = hotelMarkersRef.current
+
+    // A ride picked by tapping the map stays highlighted only while its
+    // popup is open; closing it (or tapping empty map) shows all again.
+    const clearMapSelection = () => {
+      const state = useTunnelViewStore.getState()
+      if (state.selectedRide !== null && !state.fitSelected) state.selectRide(null, false)
+    }
+    const clearAnySelection = () => {
+      if (useTunnelViewStore.getState().selectedRide !== null) {
+        map.closePopup()
+        selectRide(null, false)
+      }
+    }
+    map.on("click", clearAnySelection)
 
     const openDetails = (key: string) => {
       map.closePopup()
@@ -197,15 +212,18 @@ export function TunnelLayer() {
         entry.layers.push({ layer, opacity })
       }
       const openRide = (latlng: L.LatLng) => {
+        // Open first: replacing a previous popup fires its close (which
+        // clears that selection) before this one is selected.
+        const popup = L.popup(POPUP_OPTIONS).setLatLng(latlng).setContent(ridePopup(views, openDetails)).openOn(map)
+        popup.on("remove", clearMapSelection)
         selectRide(view.key, false)
-        L.popup(POPUP_OPTIONS).setLatLng(latlng).setContent(ridePopup(views, openDetails)).openOn(map)
       }
 
       // Pass 1: white casing + the ride's coloured line along the whole ride.
       for (const segment of raw.segments) {
         const latlngs = segment.coords as L.LatLngExpression[]
         add(L.polyline(latlngs, { color: "#ffffff", weight: 9, opacity: 0.9, interactive: false }), 0.9)
-        const line = L.polyline(latlngs, { color, weight: 5, opacity: 1 })
+        const line = L.polyline(latlngs, { color, weight: 5, opacity: 1, bubblingMouseEvents: false })
         line.on("click", (e) => {
           L.DomEvent.stop(e)
           openRide(e.latlng)
@@ -226,6 +244,7 @@ export function TunnelLayer() {
           opacity: 1,
           lineCap: "butt",
           dashArray: isTunnel ? undefined : "8 5",
+          bubblingMouseEvents: false,
         })
         const core = L.polyline(latlngs, { color, weight: 4, opacity: 1, lineCap: "butt", interactive: false })
         // A wide red halo so a tunnel reads as "this whole area is
@@ -247,6 +266,7 @@ export function TunnelLayer() {
         entry.tunnels.set(rawIndex, casing)
         casing.bindPopup(() => tunnelPopup(raw, rawIndex), POPUP_OPTIONS)
         casing.on("click", () => selectRide(view.key, false))
+        casing.on("popupclose", clearMapSelection)
 
         const lengthM = raw.tunnels[rawIndex]?.lengthM ?? 0
         if (isTunnel && lengthM >= BADGE_MIN_M) {
@@ -261,8 +281,8 @@ export function TunnelLayer() {
             keyboard: false,
           }).addTo(group)
           badge.on("click", () => {
-            selectRide(view.key, false)
             casing.openPopup()
+            selectRide(view.key, false)
           })
           entry.labels.push(badge)
         }
@@ -327,6 +347,20 @@ export function TunnelLayer() {
 
     if (all.isValid()) map.fitBounds(all, { padding: [20, 20] })
 
+    // "Show all trains" button over the map while one ride/journey is
+    // highlighted (shown/hidden by the selection effect below).
+    const showAll = L.DomUtil.create("button", "trip-map-show-all", map.getContainer())
+    showAll.type = "button"
+    showAll.textContent = "↺ הצגת כל הרכבות"
+    showAll.hidden = true
+    L.DomEvent.disableClickPropagation(showAll)
+    L.DomEvent.on(showAll, "click", () => {
+      map.closePopup()
+      selectRide(null, false)
+      if (all.isValid()) map.fitBounds(all, { padding: [20, 20] })
+    })
+    showAllRef.current = showAll
+
     // Zoomed out the labels are just numbered dots (the whole country's
     // routes overlap); from city level they also show the train's name.
     const container = map.getContainer()
@@ -341,6 +375,9 @@ export function TunnelLayer() {
 
     const rides = ridesRef.current
     return () => {
+      map.off("click", clearAnySelection)
+      showAll.remove()
+      showAllRef.current = null
       map.off("zoomend", syncLabelNames)
       container.classList.remove("show-ride-names", ...BADGE_TIERS.map((_, i) => `show-tunnel-badges-${i}`))
       journeyLayers.clear()
@@ -362,6 +399,7 @@ export function TunnelLayer() {
       : ride
         ? new Set([ride.dataId])
         : null
+    if (showAllRef.current) showAllRef.current.hidden = litRides === null
     for (const [id, entry] of ridesRef.current) {
       const dim = litRides !== null && !litRides.has(id)
       for (const { layer, opacity } of entry.layers) layer.setStyle({ opacity: dim ? FADED_OPACITY : opacity })

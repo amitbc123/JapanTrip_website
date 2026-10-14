@@ -14,6 +14,7 @@ import type { CarSummaryRow, FlightSummaryRow, TrainSummaryRow } from "@/lib/rou
 import { useMapLayersStore } from "@/stores/map-layers-store"
 import { useRouteHighlightStore } from "@/stores/route-highlight-store"
 import { useRouteFlythroughStore } from "@/stores/route-flythrough-store"
+import { useLocationHelpStore, type LocationProblem } from "@/stores/location-help-store"
 import { useTunnelViewStore } from "@/stores/tunnel-view-store"
 import type { Airport, Attraction, Hotel, Leg, Recommendation, RouteStop } from "@/types/trip"
 
@@ -281,14 +282,14 @@ const MY_LOCATION_ZOOM = 16
 const MY_LOCATION_ICON_SVG =
   '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>'
 
-function geolocationErrorMessage(error: GeolocationPositionError): string {
+function locationProblem(error: GeolocationPositionError): LocationProblem {
   switch (error.code) {
     case error.PERMISSION_DENIED:
-      return "אין הרשאה למיקום. יש לאשר גישה למיקום בהגדרות הדפדפן."
+      return "denied"
     case error.TIMEOUT:
-      return "לא הצלחנו לקבל מיקום בזמן. נסו שוב."
+      return "timeout"
     default:
-      return "המיקום לא זמין כרגע. נסו שוב."
+      return "unavailable"
   }
 }
 
@@ -509,15 +510,18 @@ function MyLocationControl() {
       // Once tracking is running, a transient glitch (e.g. indoors) isn't
       // worth interrupting for — keep the last dot and wait for the next fix.
       if (hasFix && error.code !== error.PERMISSION_DENIED) return
+      const quiet = !flyOnFirstFix
       stop()
-      window.alert(geolocationErrorMessage(error))
+      // Explain exactly where to turn location on (for this phone and
+      // browser), with a retry that starts tracking the same way again.
+      useLocationHelpStore.getState().show(locationProblem(error), () => start(quiet))
     }
 
     /** `quiet`: started by the tunnel view — just show the dot, don't
      *  fly to it, follow it, or copy the coordinates. */
     function start(quiet = false) {
       if (!("geolocation" in navigator)) {
-        if (!quiet) window.alert("הדפדפן הזה לא תומך באיתור מיקום.")
+        useLocationHelpStore.getState().show("unsupported", null)
         return
       }
       hasFix = false

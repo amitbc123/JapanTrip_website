@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react"
 import { useSearchParams } from "react-router"
+import { LocationHelpDialog } from "@/components/map/LocationHelpDialog"
 import { MapControlsRow } from "@/components/map/MapControlsRow"
 import { MapLegend } from "@/components/map/MapLegend"
 import { TransportSummary } from "@/components/map/TransportSummary"
@@ -90,6 +91,7 @@ export function HomeMapPage() {
           />
         </Suspense>
       </div>
+      <LocationHelpDialog />
       {tunnelView ? (
         <Suspense fallback={null}>
           <TunnelPanel />
