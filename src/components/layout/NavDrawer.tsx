@@ -6,6 +6,7 @@ import {
   LanguagesIcon,
   MapIcon,
   PaletteIcon,
+  PartyPopperIcon,
   RefreshCwIcon,
   TicketIcon,
   Trash2Icon,
@@ -34,6 +35,7 @@ const NAV_ITEMS = [
   { to: "/hotels", label: "מלונות", icon: BedDoubleIcon },
   { to: "/attractions", label: "אטרקציות", icon: TicketIcon },
   { to: "/recommendations", label: "המלצות", icon: CompassIcon },
+  { to: "/festivals", label: "פסטיבלים מקומיים", icon: PartyPopperIcon },
   { to: "/tips", label: "מידע וטיפים", icon: InfoIcon },
   { to: "/dictionary", label: "המילון של עמרי", icon: LanguagesIcon },
 ] as const

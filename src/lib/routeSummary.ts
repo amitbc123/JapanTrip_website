@@ -22,6 +22,8 @@ export interface CarSummaryRow {
    *  the transport list interleave cars/flights/trains by actual date/time
    *  instead of grouping by transport type. */
   sortKey: string
+  /** Same format as `sortKey`, for the dropoff side. */
+  dropoffSortKey: string
 }
 
 export interface FlightSummaryRow {
@@ -52,6 +54,7 @@ export function carSummaryFromPrivate(car: CarLeg): CarSummaryRow {
     dropoffLine: `החזרה: ${translateCarDropoffLocation(car.bookingNumber, car.dropoff.location)}, ${formatHebrewDate(car.dropoff.date)} ${car.dropoff.time}`,
     coversHotelLegOrders: car.coversHotelLegOrders,
     sortKey: `${car.pickup.date}T${car.pickup.time}`,
+    dropoffSortKey: `${car.dropoff.date}T${car.dropoff.time}`,
   }
 }
 
@@ -64,6 +67,7 @@ export function carSummaryFromPublic(car: PublicCarLeg): CarSummaryRow {
     coversHotelLegOrders: car.coversHotelLegOrders,
     notes: car.notes,
     sortKey: `${car.pickupDate}T${car.pickupTime}`,
+    dropoffSortKey: `${car.dropoffDate}T${car.dropoffTime}`,
   }
 }
 

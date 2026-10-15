@@ -4,13 +4,16 @@ import { LocationHelpDialog } from "@/components/map/LocationHelpDialog"
 import { MapControlsRow } from "@/components/map/MapControlsRow"
 import { MapLegend } from "@/components/map/MapLegend"
 import { TransportSummary } from "@/components/map/TransportSummary"
+import localFestivals from "@/data/local-festivals.json"
 import recommendations from "@/data/recommendations.json"
 import routePublicRaw from "@/data/route-public.json"
+import travelTips from "@/data/travel-tips.json"
 import { useTripDataContext } from "@/data/useTripData"
 import { carSummaryFromPrivate, carSummaryFromPublic, flightSummary, trainSummary } from "@/lib/routeSummary"
 import { getCurrentHotelOrder } from "@/lib/tripProgress"
+import { buildAgenda, type LuggageForwarding } from "@/lib/upcoming"
 import { useTunnelViewStore } from "@/stores/tunnel-view-store"
-import type { Hotel, Recommendation, RoutePublicData } from "@/types/trip"
+import type { Hotel, LocalFestival, Recommendation, RoutePublicData } from "@/types/trip"
 
 const routePublic = routePublicRaw as RoutePublicData
 
@@ -70,6 +73,15 @@ export function HomeMapPage() {
   // Only known once the private trip file is loaded — route-public.json
   // deliberately carries no check-in dates.
   const currentHotelOrder = privateData ? getCurrentHotelOrder(privateData.hotels) : null
+  const agenda = buildAgenda({
+    trains: trainSummaries,
+    cars: carSummaries,
+    flights: flightSummaries,
+    hotels: privateData?.hotels,
+    attractions,
+    festivals: localFestivals as LocalFestival[],
+    luggage: travelTips.luggageForwarding as LuggageForwarding[],
+  })
 
   return (
     <div className="flex flex-col gap-4 p-3">
@@ -105,6 +117,8 @@ export function HomeMapPage() {
             flights={flightSummaries}
             trains={trainSummaries}
             travelers={privateData?.travelers}
+            agenda={agenda}
+            hasPrivateData={Boolean(privateData)}
           />
         </>
       )}

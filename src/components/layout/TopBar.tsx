@@ -7,6 +7,7 @@ const TITLES: Record<string, string> = {
   "/hotels": "מלונות",
   "/attractions": "אטרקציות",
   "/recommendations": "המלצות",
+  "/festivals": "פסטיבלים מקומיים",
   "/dictionary": "המילון של עמרי",
 }
 

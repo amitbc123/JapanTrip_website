@@ -236,3 +236,28 @@ export interface Recommendation {
   photoUrl?: string
   notes: string | null
 }
+
+export type FestivalCertainty = "high" | "medium-high" | "medium"
+
+/** A small local festival (local-festivals.json) - public research data that
+ *  lives in the repo, not in the private trip file. Coordinates are
+ *  approximate (town/shrine level) and only used for rough distances. */
+export interface LocalFestival {
+  id: string
+  startDate: string
+  endDate: string
+  dateLabel: string
+  region: string
+  name: string
+  nameOriginal: string
+  type: string | null
+  location: string
+  description: string
+  certainty: FestivalCertainty | null
+  sourceUrl: string
+  mapUrl: string
+  lat: number
+  lon: number
+  /** Borderline finds that fell just outside the 1.10-15.11 research window. */
+  outsideResearchRange: boolean
+}
