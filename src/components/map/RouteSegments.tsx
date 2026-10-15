@@ -1,7 +1,7 @@
 import { Fragment, useMemo, useEffect } from "react"
 import { Marker, Polyline } from "react-leaflet"
 import { createSegmentEmojiIcon } from "@/components/map/icons"
-import { carBookingId, flightBookingId, trainBookingId } from "@/components/map/TransportSummary"
+import { carBookingId, flightBookingId, trainBookingId } from "@/components/map/bookingIds"
 import { WaypointMarker } from "@/components/map/WaypointMarker"
 import { LEAFLET_DASH_ARRAY, lineStyleForTransport } from "@/lib/geo"
 import { MARKER_Z_TRANSPORT_ICON } from "@/lib/mapZIndex"

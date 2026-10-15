@@ -14,6 +14,9 @@ const RecommendationsPage = lazy(() =>
 const DictionaryPage = lazy(() =>
   import("@/pages/DictionaryPage").then((m) => ({ default: m.DictionaryPage }))
 )
+const FestivalsPage = lazy(() =>
+  import("@/pages/FestivalsPage").then((m) => ({ default: m.FestivalsPage }))
+)
 const TravelTipsPage = lazy(() =>
   import("@/pages/TravelTipsPage").then((m) => ({ default: m.TravelTipsPage }))
 )
@@ -48,6 +51,7 @@ export const router = createBrowserRouter(
             </PrivateDataGate>
           ),
         },
+        { path: "/festivals", element: <FestivalsPage /> },
         { path: "/tips", element: <TravelTipsPage /> },
         { path: "/dictionary", element: <DictionaryPage /> },
       ],
