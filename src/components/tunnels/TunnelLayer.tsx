@@ -2,18 +2,22 @@ import L from "leaflet"
 import { useEffect, useRef } from "react"
 import { useMap } from "react-leaflet"
 import { createAirportIcon, createHotelIcon } from "@/components/map/icons"
+import { MODE_SOURCE_LABEL, useTravelMode } from "@/lib/travelMode"
 import {
   ITAYA_NOTE,
   JOURNEYS,
+  NEARBY_ROAD_TUNNELS,
   RAW_RIDES,
   RIDES,
   formatDuration,
   formatLength,
   journeyOf,
+  journeysFor,
+  type NearbyTunnel,
   type RawRide,
   type RideView,
 } from "@/lib/tunnelRides"
-import { useTunnelViewStore } from "@/stores/tunnel-view-store"
+import { type TravelMode, useTunnelViewStore } from "@/stores/tunnel-view-store"
 
 const FADED_OPACITY = 0.12
 const TUNNEL_COLOR = "#2b2b2b"
@@ -55,7 +59,9 @@ function ridePopup(rides: RideView[], onDetails: (key: string) => void): HTMLEle
     addLine(
       el,
       "text-xs font-medium text-muted-foreground",
-      `מסע ${journey.number} · ${journey.title}${journey.rides.length > 1 ? ` · רכבת ${part} מתוך ${journey.rides.length}` : ""}`
+      journey.mode === "car"
+        ? `יום נהיגה ${journey.number} · ${journey.title}`
+        : `מסע ${journey.number} · ${journey.title}${journey.rides.length > 1 ? ` · רכבת ${part} מתוך ${journey.rides.length}` : ""}`
     )
   }
   for (const ride of rides) {
@@ -106,19 +112,41 @@ function tunnelPopup(raw: RawRide, rawIndex: number): HTMLElement {
     addLine(el, "font-semibold text-amber-700", "קטע מקורה (לא מנהרה)")
     addLine(el, "text-xs text-muted-foreground", "גגון נגד שלג או קירוי - חשוך חלקית, עם פתחים לאור יום")
   } else {
-    addLine(el, "font-semibold", `🚇 ${t.name ?? "מנהרה"}`)
-    if (t.nameJa) addLine(el, "text-xs text-muted-foreground", t.nameJa, "ltr")
+    addLine(el, "font-semibold", `🚇 ${t.name ?? t.nameJa ?? "מנהרה"}`)
+    if (t.name && t.nameJa) addLine(el, "text-xs text-muted-foreground", t.nameJa, "ltr")
     addLine(el, "text-xs text-muted-foreground", `מנהרה ${real.indexOf(t) + 1} מתוך ${real.length} בנסיעה`)
   }
+  if (t.road) addLine(el, "text-xs text-muted-foreground", `כביש: ${t.road}`, "auto")
   addLine(el, "text-sm", `אורך: ${formatLength(t.lengthM)}`)
   addLine(el, "text-sm", `זמן בפנים: ${formatDuration(info.minutes)} (הערכה, לפי ${t.speedKmh} קמ"ש)`)
   for (const ride of rides) {
     const own = ride.tunnels.find((x) => x.rawIndex === rawIndex)!
-    addLine(el, "text-xs", `${ride.shortLabel}: ק"מ ${own.fromBoardingKm.toFixed(1)} מהעלייה לרכבת`)
+    addLine(
+      el,
+      "text-xs",
+      ride.mode === "car"
+        ? `ק"מ ${own.fromBoardingKm.toFixed(1)} מתחילת הנסיעה`
+        : `${ride.shortLabel}: ק"מ ${own.fromBoardingKm.toFixed(1)} מהעלייה לרכבת`
+    )
   }
+  if (t.note) addLine(el, "text-xs text-amber-800", t.note)
   if (info.inItayaPass) addLine(el, "text-xs text-emerald-700", ITAYA_NOTE)
   return el
 }
+
+function nearbyPopup(t: NearbyTunnel): HTMLElement {
+  const el = popupBox()
+  addLine(el, "font-semibold", `🚇 ${t.name ?? t.nameJa ?? "מנהרה"}`)
+  if (t.name && t.nameJa) addLine(el, "text-xs text-muted-foreground", t.nameJa, "ltr")
+  addLine(el, "text-xs text-muted-foreground", "לא על המסלול המתוכנן, אבל קרובה אליו (למקרה של עיקוף או טיול יום)")
+  if (t.road) addLine(el, "text-xs text-muted-foreground", `כביש: ${t.road}`, "auto")
+  addLine(el, "text-sm", `אורך: ${formatLength(t.lengthM)}`)
+  addLine(el, "text-sm", `זמן בפנים: ${formatDuration((t.lengthM / 1000 / t.speedKmh) * 60)} (הערכה, לפי ${t.speedKmh} קמ"ש)`)
+  if (t.note) addLine(el, "text-xs text-amber-800", t.note)
+  return el
+}
+
+const MODE_LABEL: Record<TravelMode, string> = { train: "🚆 ברכבת", car: "🚗 ברכב" }
 
 /** Point at `fraction` of the polyline's length. */
 function pointAlong(coords: [number, number][], fraction: number): L.LatLng {
@@ -170,11 +198,40 @@ export function TunnelLayer() {
   const fitAllNonce = useTunnelViewStore((s) => s.fitAllNonce)
   const journeyLayersRef = useRef(new Map<string, RideLayers>())
   const hotelMarkersRef = useRef(new Map<string, { marker: L.Marker; journeys: string[] }>())
+  const { mode, source } = useTravelMode()
+  const modePillRef = useRef<HTMLButtonElement | null>(null)
+
+  // Leaving the tunnel view puts the map back exactly where it was.
+  useEffect(() => {
+    const savedCenter = map.getCenter()
+    const savedZoom = map.getZoom()
+    return () => {
+      map.setView(savedCenter, savedZoom, { animate: false })
+    }
+  }, [map])
+
+  // Which mode we're in (and how it was decided), tappable to switch.
+  useEffect(() => {
+    const pill = L.DomUtil.create("button", "trip-map-mode-pill", map.getContainer())
+    pill.type = "button"
+    L.DomEvent.disableClickPropagation(pill)
+    modePillRef.current = pill
+    return () => {
+      pill.remove()
+      modePillRef.current = null
+    }
+  }, [map])
+
+  useEffect(() => {
+    const pill = modePillRef.current
+    if (!pill) return
+    pill.textContent = `${MODE_LABEL[mode]} · ${MODE_SOURCE_LABEL[source]} ⇄`
+    pill.title = mode === "car" ? "מעבר למנהרות של הרכבות" : "מעבר למנהרות של הכבישים"
+    pill.onclick = () => useTunnelViewStore.getState().setManualMode(mode === "car" ? "train" : "car")
+  }, [mode, source])
 
   useEffect(() => {
     const { selectRide, showRideDetails } = useTunnelViewStore.getState()
-    const savedCenter = map.getCenter()
-    const savedZoom = map.getZoom()
     const group = L.layerGroup().addTo(map)
     const all = L.latLngBounds([])
     const journeyLayers = journeyLayersRef.current
@@ -208,7 +265,7 @@ export function TunnelLayer() {
     for (const raw of RAW_RIDES) {
       const views = ridesFor(raw.id)
       const view = views[0]
-      if (!view) continue
+      if (!view || view.mode !== mode) continue
       const color = view.color
       const entry: RideLayers = { layers: [], labels: [], portals: [], tunnels: new Map(), bounds: L.latLngBounds([]) }
       const add = (layer: L.Path, opacity: number) => {
@@ -311,10 +368,37 @@ export function TunnelLayer() {
       ridesRef.current.set(raw.id, entry)
       all.extend(entry.bounds)
     }
+    // By car: the other tunnels near our roads, thinner and without our
+    // route colour under them, for detours and day trips.
+    if (mode === "car") {
+      for (const t of NEARBY_ROAD_TUNNELS) {
+        const line = L.polyline(t.coords as L.LatLngExpression[], {
+          color: TUNNEL_COLOR,
+          weight: 6,
+          opacity: 0.55,
+          lineCap: "butt",
+          bubblingMouseEvents: false,
+        }).addTo(group)
+        line.bindPopup(() => nearbyPopup(t), POPUP_OPTIONS)
+        for (const end of [t.coords[0]!, t.coords[t.coords.length - 1]!]) {
+          L.circleMarker(end, {
+            radius: 3,
+            color: TUNNEL_COLOR,
+            weight: 2,
+            fillColor: "#ffffff",
+            fillOpacity: 1,
+            opacity: 0.7,
+            interactive: false,
+          }).addTo(portals)
+        }
+      }
+    }
+
     // Journeys: the hotels at each end and dashed links for the parts
     // that aren't one of our trains (hotel to station, bus, local train).
     const hotelsDrawn = new Set<string>()
-    for (const journey of JOURNEYS) {
+    const journeys = journeysFor(mode)
+    for (const journey of journeys) {
       const entry: RideLayers = { layers: [], labels: [], portals: [], tunnels: new Map(), bounds: L.latLngBounds([]) }
       for (const link of journey.links) {
         const line = L.polyline([link.from, link.to], {
@@ -338,9 +422,9 @@ export function TunnelLayer() {
           zIndexOffset: 1200,
           keyboard: false,
         }).addTo(group)
-        const journeysHere = JOURNEYS.filter((j) => j.from.order === end.order || j.to.order === end.order)
+        const journeysHere = journeys.filter((j) => j.from.order === end.order || j.to.order === end.order)
         marker.bindTooltip(
-          `${end.label} · ${journeysHere.map((j) => `מסע ${j.number}`).join(", ")}`,
+          `${end.label} · ${journeysHere.map((j) => `${mode === "car" ? "נסיעה" : "מסע"} ${j.number}`).join(", ")}`,
           { direction: "top", offset: [0, -14] }
         )
         hotelMarkers.set(id, { marker, journeys: journeysHere.map((j) => j.key) })
@@ -356,7 +440,7 @@ export function TunnelLayer() {
     // highlighted (shown/hidden by the selection effect below).
     const showAll = L.DomUtil.create("button", "trip-map-show-all", map.getContainer())
     showAll.type = "button"
-    showAll.textContent = "↺ הצגת כל הרכבות"
+    showAll.textContent = mode === "car" ? "↺ הצגת כל הנסיעות" : "↺ הצגת כל הרכבות"
     showAll.hidden = true
     L.DomEvent.disableClickPropagation(showAll)
     L.DomEvent.on(showAll, "click", () => {
@@ -392,9 +476,8 @@ export function TunnelLayer() {
       portals.remove()
       rides.clear()
       map.closePopup()
-      map.setView(savedCenter, savedZoom, { animate: false })
     }
-  }, [map])
+  }, [map, mode])
 
   useEffect(() => {
     if (fitAllNonce === 0) return

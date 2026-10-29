@@ -470,6 +470,7 @@ function MyLocationControl() {
       accuracyCircle = null
       beamAngle = null
       latest = null
+      useTunnelViewStore.setState({ position: null })
       rejectFirstFix?.()
       resolveFirstFix = null
       rejectFirstFix = null
@@ -481,6 +482,9 @@ function MyLocationControl() {
       const latLng: [number, number] = [position.coords.latitude, position.coords.longitude]
       const accuracy = position.coords.accuracy
       latest = formatCoordinates(latLng[0], latLng[1])
+      useTunnelViewStore.setState({
+        position: { lat: latLng[0], lon: latLng[1], speed: position.coords.speed },
+      })
       resolveFirstFix?.(latest)
       resolveFirstFix = null
       rejectFirstFix = null
@@ -643,7 +647,7 @@ function TunnelViewControl() {
     function render(active: boolean) {
       if (!button) return
       button.classList.toggle("is-active", active)
-      button.title = active ? "חזרה למפה הרגילה" : "מצב מנהרות (רק מסלולי הרכבות)"
+      button.title = active ? "חזרה למפה הרגילה" : "מצב מנהרות (רכבות ורכב)"
       button.setAttribute("aria-label", button.title)
       button.setAttribute("aria-pressed", String(active))
     }

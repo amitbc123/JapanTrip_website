@@ -1,17 +1,19 @@
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 import { useState } from "react"
 import travelTips from "@/data/travel-tips.json"
+import { MODE_SOURCE_LABEL, type ModeSource, useTravelMode } from "@/lib/travelMode"
 import {
   ITAYA_NOTE,
-  JOURNEYS,
+  NEARBY_ROAD_TUNNELS,
   formatDuration,
   formatLength,
+  journeysFor,
   type JourneyView,
   type RideView,
 } from "@/lib/tunnelRides"
-import { useTunnelViewStore } from "@/stores/tunnel-view-store"
+import { type TravelMode, useTunnelViewStore } from "@/stores/tunnel-view-store"
 
-const tunnelTips = (travelTips as { tunnelTips: string[] }).tunnelTips
+const { tunnelTips, carTunnelTips } = travelTips as { tunnelTips: string[]; carTunnelTips: string[] }
 
 /** The ride drawn as a strip from boarding (right) to arrival (left), with
  *  tunnels in black and roofed track in grey — how much of the ride is
@@ -36,9 +38,9 @@ function RideStrip({ ride }: { ride: RideView }) {
         ))}
       </div>
       <div className="flex justify-between text-[11px] text-muted-foreground">
-        <span>עלייה</span>
+        <span>{ride.mode === "car" ? "יציאה" : "עלייה"}</span>
         <span>{ride.lengthKm} ק"מ</span>
-        <span>ירידה</span>
+        <span>{ride.mode === "car" ? "הגעה" : "ירידה"}</span>
       </div>
     </div>
   )
@@ -96,7 +98,7 @@ function RideCard({ ride }: { ride: RideView }) {
           </div>
           {ride.longest && (
             <p className="text-[13px]">
-              הארוכה ביותר: <span className="font-semibold">{ride.longest.name ?? "מנהרה"}</span>,{" "}
+              הארוכה ביותר: <span className="font-semibold">{ride.longest.name ?? ride.longest.nameJa ?? "מנהרה"}</span>,{" "}
               {formatLength(ride.longest.lengthM)}, {formatDuration(ride.longest.minutes)} רצוף
             </p>
           )}
@@ -139,8 +141,11 @@ function RideCard({ ride }: { ride: RideView }) {
                         aria-hidden
                       />
                       <span>
-                        {t.kind === "covered" ? "קטע מקורה" : (t.name ?? "מנהרה")}
+                        {t.kind === "covered" ? "קטע מקורה" : (t.name ?? t.nameJa ?? "מנהרה")}
                         <span className="text-muted-foreground"> · ק"מ {t.fromBoardingKm.toFixed(1)}</span>
+                        {t.note && t.note !== ride.tunnels[i - 1]?.note && (
+                          <span className="block text-xs text-amber-800">{t.note}</span>
+                        )}
                       </span>
                     </span>
                     <span className="shrink-0 text-muted-foreground">
@@ -163,7 +168,7 @@ function RideCard({ ride }: { ride: RideView }) {
 /** The tunnel view's companion below the map (made for Omri): every train
  *  ride with how much of it runs underground, the longest stretch, and each
  *  tunnel in order. */
-function JourneyChips() {
+function JourneyChips({ mode }: { mode: TravelMode }) {
   const selected = useTunnelViewStore((s) => s.selectedRide)
   const selectRide = useTunnelViewStore((s) => s.selectRide)
   return (
@@ -176,9 +181,9 @@ function JourneyChips() {
           selected === null ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
         }`}
       >
-        כל המסעות
+        {mode === "car" ? "כל הנסיעות" : "כל המסעות"}
       </button>
-      {JOURNEYS.map((journey) => {
+      {journeysFor(mode).map((journey) => {
         const isOn = selected === journey.key || journey.rides.some((r) => r.key === selected)
         return (
           <button
@@ -223,7 +228,8 @@ function JourneyCard({ journey }: { journey: JourneyView }) {
         }`}
       >
         <span className="text-xs font-semibold text-muted-foreground">
-          מסע {journey.number} · {journey.when}
+          {journey.mode === "car" ? `נסיעה ${journey.number} ברכב` : `מסע ${journey.number}`}
+          {journey.when && ` · ${journey.when}`}
         </span>
         <span className="text-base font-bold">
           {journey.from.label} ← {journey.to.label} · {journey.title}
@@ -242,7 +248,7 @@ function JourneyCard({ journey }: { journey: JourneyView }) {
             ? "🎉 בלי מנהרות"
             : `${journey.tunnelCount} מנהרות · ${journey.undergroundKm.toFixed(1)} ק"מ בפנים · סה"כ ${formatDuration(journey.undergroundMinutes)}`}
           {journey.longest &&
-            ` · הארוכה: ${journey.longest.tunnel.name ?? "מנהרה"} (${formatDuration(journey.longest.tunnel.minutes)})`}
+            ` · הארוכה: ${journey.longest.tunnel.name ?? journey.longest.tunnel.nameJa ?? "מנהרה"} (${formatDuration(journey.longest.tunnel.minutes)})`}
         </span>
       </button>
       <ul className="flex flex-col gap-2 border-s-2 border-dashed border-border ps-3">
@@ -258,37 +264,92 @@ function JourneyCard({ journey }: { journey: JourneyView }) {
   )
 }
 
+/** Train or car: picked automatically, or by hand from here. */
+function ModeSwitch({ mode, source }: { mode: TravelMode; source: ModeSource }) {
+  const setManualMode = useTunnelViewStore((s) => s.setManualMode)
+  const manual = useTunnelViewStore((s) => s.manualMode)
+  const options: { value: TravelMode; label: string }[] = [
+    { value: "train", label: "🚆 ברכבת" },
+    { value: "car", label: "🚗 ברכב" },
+  ]
+  return (
+    <div className="flex flex-wrap items-center gap-1.5">
+      {options.map((o) => (
+        <button
+          key={o.value}
+          type="button"
+          onClick={() => setManualMode(o.value)}
+          aria-pressed={mode === o.value}
+          className={`h-8 rounded-full border px-3 text-[13px] font-medium ${
+            mode === o.value ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card"
+          }`}
+        >
+          {o.label}
+        </button>
+      ))}
+      <span className="text-xs text-muted-foreground">{MODE_SOURCE_LABEL[source]}</span>
+      {manual && (
+        <button type="button" onClick={() => setManualMode(null)} className="text-xs font-medium text-primary">
+          חזרה לזיהוי אוטומטי
+        </button>
+      )}
+    </div>
+  )
+}
+
 export function TunnelPanel() {
+  const { mode, source } = useTravelMode()
+  const journeys = journeysFor(mode)
+  const tips = mode === "car" ? carTunnelTips : tunnelTips
   return (
     <section className="flex flex-col gap-3">
-      <div className="flex flex-col gap-2 rounded-xl border border-red-600/30 bg-red-600/5 p-3">
-        <h2 className="text-base font-bold">🚇 מצב מנהרות - המסלולים המדויקים של הרכבות שלנו</h2>
-        <p className="text-[13px]">
-          הרכבות מסודרות לפי <span className="font-semibold">מסעות</span>: כל מסע הוא מעבר ממלון אחד לאחר (עם
-          המספר של המלון על המפה), וכל רכבת בו בצבע משלה. קו מנוקד = קטע שאינו אחת הרכבות (אוטובוס, רכב, הליכה).{" "}
-          <span className="font-semibold">קטע כהה ועבה</span> = מנהרה (נקודה לבנה בכל כניסה ויציאה), ותגית 🚇
-          מציינת את האורך שלה בק"מ. אפור בהיר מקווקו = קטע מקורה. המיקום שלך מופיע כנקודה כחולה. לחיצה נוספת על כפתור המנהרה מחזירה את
-          המפה הרגילה.
-        </p>
-        <p className="text-xs text-muted-foreground">
-          הזמנים הם הערכה לפי מהירות אופיינית של כל קו. נתוני המסילות והמנהרות: OpenStreetMap דרך Overture
-          Maps. מנהרות קצרות מ-100 מ' לא מוצגות.
-        </p>
-      </div>
+      <ModeSwitch mode={mode} source={source} />
+      {mode === "car" ? (
+        <div className="flex flex-col gap-2 rounded-xl border border-red-600/30 bg-red-600/5 p-3">
+          <h2 className="text-base font-bold">🚗 מצב מנהרות - הכבישים שלנו ברכב באלפים</h2>
+          <p className="text-[13px]">
+            כל נסיעה היא יום נהיגה ממלון אחד לבא (עם המספר של המלון על המפה), בצבע משלה.{" "}
+            <span className="font-semibold">קטע כהה ועבה</span> = מנהרה על המסלול (נקודה לבנה בכל כניסה ויציאה), ותגית
+            🚇 מציינת את האורך שלה בק"מ. אפור בהיר מקווקו = קטע מקורה (גגון נגד שלג).{" "}
+            <span className="font-semibold">קווים כהים דקים ושקופים יותר</span> = עוד {NEARBY_ROAD_TUNNELS.length}{" "}
+            מנהרות בכבישים שליד המסלול, למקרה של עיקוף או טיול יום. המיקום שלך מופיע כנקודה כחולה.
+          </p>
+          <p className="text-xs text-muted-foreground">
+            המסלול הוא הדרך המהירה בין המלונות, כמו שאפליקציית ניווט הייתה בוחרת (כולל כבישים מהירים). אם הניווט
+            בוחר דרך אחרת, המנהרות שלה כנראה מופיעות כקווים הדקים. הזמנים הם הערכה לפי מהירות אופיינית לכל סוג כביש.
+            נתוני הכבישים והמנהרות: OpenStreetMap דרך Overture Maps ו-HOT. מנהרות קצרות מ-100 מ' לא מוצגות.
+          </p>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2 rounded-xl border border-red-600/30 bg-red-600/5 p-3">
+          <h2 className="text-base font-bold">🚇 מצב מנהרות - המסלולים המדויקים של הרכבות שלנו</h2>
+          <p className="text-[13px]">
+            הרכבות מסודרות לפי <span className="font-semibold">מסעות</span>: כל מסע הוא מעבר ממלון אחד לאחר (עם
+            המספר של המלון על המפה), וכל רכבת בו בצבע משלה. קו מנוקד = קטע שאינו אחת הרכבות (אוטובוס, רכב, הליכה).{" "}
+            <span className="font-semibold">קטע כהה ועבה</span> = מנהרה (נקודה לבנה בכל כניסה ויציאה), ותגית 🚇
+            מציינת את האורך שלה בק"מ. אפור בהיר מקווקו = קטע מקורה. המיקום שלך מופיע כנקודה כחולה. לחיצה נוספת על כפתור המנהרה מחזירה את
+            המפה הרגילה.
+          </p>
+          <p className="text-xs text-muted-foreground">
+            הזמנים הם הערכה לפי מהירות אופיינית של כל קו. נתוני המסילות והמנהרות: OpenStreetMap דרך Overture
+            Maps. מנהרות קצרות מ-100 מ' לא מוצגות.
+          </p>
+        </div>
+      )}
 
-      <JourneyChips />
+      <JourneyChips mode={mode} />
 
       <ol className="flex flex-col gap-5">
-        {JOURNEYS.map((journey) => (
+        {journeys.map((journey) => (
           <JourneyCard key={journey.key} journey={journey} />
         ))}
       </ol>
 
-      {tunnelTips.length > 0 && (
+      {tips.length > 0 && (
         <div className="rounded-xl border border-border bg-card p-3">
           <h3 className="mb-2 text-sm font-semibold">מה שעוזר במנהרות</h3>
           <ul className="flex flex-col gap-1.5 text-[13px]">
-            {tunnelTips.map((tip) => (
+            {tips.map((tip) => (
               <li key={tip} className="flex gap-2">
                 <span className="text-muted-foreground">•</span>
                 <span>{tip}</span>
