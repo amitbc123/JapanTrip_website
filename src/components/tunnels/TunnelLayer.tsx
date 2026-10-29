@@ -31,6 +31,28 @@ const BADGE_MIN_M = 1500
 const BADGE_BIG_M = 4000
 const BADGE_HUGE_M = 10000
 const BADGE_TIERS = [7, 9, 11]
+// Tunnels are thin on a phone screen: each gets an invisible, much wider
+// tap target in its own pane above the route lines, so a tap near it
+// (not exactly on it) opens its details. Round caps make short tunnels a
+// round target too.
+const HIT_PANE = "tunnel-hit"
+const HIT_WEIGHT = 32
+
+function addHitArea(latlngs: L.LatLngExpression[], parent: L.LayerGroup, onTap: (latlng: L.LatLng) => void) {
+  const hit = L.polyline(latlngs, {
+    pane: HIT_PANE,
+    weight: HIT_WEIGHT,
+    opacity: 0,
+    lineCap: "round",
+    lineJoin: "round",
+    bubblingMouseEvents: false,
+  }).addTo(parent)
+  hit.on("click", (e) => {
+    L.DomEvent.stop(e)
+    onTap(e.latlng)
+  })
+  return hit
+}
 
 
 /** The rides drawn on a given geometry (Train 9 and 10 share one). */
@@ -232,6 +254,7 @@ export function TunnelLayer() {
 
   useEffect(() => {
     const { selectRide, showRideDetails } = useTunnelViewStore.getState()
+    if (!map.getPane(HIT_PANE)) map.createPane(HIT_PANE).style.zIndex = "450"
     const group = L.layerGroup().addTo(map)
     const all = L.latLngBounds([])
     const journeyLayers = journeyLayersRef.current
@@ -327,6 +350,10 @@ export function TunnelLayer() {
         casing.bindPopup(() => tunnelPopup(raw, rawIndex), POPUP_OPTIONS)
         casing.on("click", () => selectRide(view.key, false))
         casing.on("popupclose", clearMapSelection)
+        addHitArea(latlngs, group, (latlng) => {
+          casing.openPopup(latlng)
+          selectRide(view.key, false)
+        })
 
         const lengthM = raw.tunnels[rawIndex]?.lengthM ?? 0
         if (isTunnel && lengthM >= BADGE_MIN_M) {
@@ -380,6 +407,7 @@ export function TunnelLayer() {
           bubblingMouseEvents: false,
         }).addTo(group)
         line.bindPopup(() => nearbyPopup(t), POPUP_OPTIONS)
+        addHitArea(t.coords as L.LatLngExpression[], group, (latlng) => line.openPopup(latlng))
         for (const end of [t.coords[0]!, t.coords[t.coords.length - 1]!]) {
           L.circleMarker(end, {
             radius: 3,
