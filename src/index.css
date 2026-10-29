@@ -573,3 +573,29 @@
 .trip-map-show-all[hidden] {
   display: none;
 }
+/* Tunnel view: train or car, and how that was decided (tap to switch).
+   The "show all" pill sits just below it. */
+.trip-map-mode-pill {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  max-width: calc(100% - 130px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  border: 1px solid rgb(0 0 0 / 0.15);
+  background: #fff;
+  color: #111827;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 1px 6px rgb(0 0 0 / 0.25);
+  cursor: pointer;
+}
+.trip-map-mode-pill ~ .trip-map-show-all {
+  top: 46px;
+}

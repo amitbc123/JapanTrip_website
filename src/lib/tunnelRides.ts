@@ -1,6 +1,8 @@
+import roadData from "@/data/road-tunnels.json"
 import routePublicRaw from "@/data/route-public.json"
 import tunnelData from "@/data/train-tunnels.json"
 import { formatHebrewDate } from "@/lib/format"
+import type { TravelMode } from "@/stores/tunnel-view-store"
 import type { RoutePublicData } from "@/types/trip"
 
 export type SegmentKind = "open" | "tunnel" | "covered"
@@ -14,6 +16,9 @@ interface RawTunnel {
   end: [number, number]
   name?: string
   nameJa?: string
+  /** Road tunnels: the road it carries, and a note worth reading. */
+  road?: string | null
+  note?: string
 }
 
 export interface RawRide {
@@ -36,6 +41,7 @@ export interface TunnelInfo extends RawTunnel {
 }
 
 export interface RideView {
+  mode: TravelMode
   key: string
   dataId: string
   /** Short map label, e.g. "5 · Kagayaki". */
@@ -59,8 +65,32 @@ export interface RideView {
   longest: TunnelInfo | null
 }
 
-/** Built by scripts/build-train-tunnels.py from Overture Maps / OSM. */
-export const RAW_RIDES = tunnelData as RawRide[]
+interface RawDrive extends RawRide {
+  fromOrder: number
+  toOrder: number
+  minutes: number
+  motorwayKm: number
+}
+
+/** A road tunnel near our driving routes but not on them - shown in the car
+ *  view for detours and day trips. */
+export interface NearbyTunnel {
+  lengthM: number
+  speedKmh: number
+  coords: [number, number][]
+  road: string | null
+  name?: string
+  nameJa?: string
+  note?: string
+}
+
+const roads = roadData as unknown as { drives: RawDrive[]; nearby: NearbyTunnel[] }
+
+/** Train rides built by scripts/build-train-tunnels.py and car drives built
+ *  by scripts/build-road-tunnels.py, both from Overture Maps / OSM. */
+export const RAW_RIDES: RawRide[] = [...(tunnelData as RawRide[]), ...roads.drives]
+
+export const NEARBY_ROAD_TUNNELS = roads.nearby
 
 const routePublic = routePublicRaw as RoutePublicData
 
@@ -142,6 +172,7 @@ function buildRide(entry: (typeof RIDE_ORDER)[number]): RideView | null {
   const times = train?.departTime && train.arriveTime ? ` · ${train.departTime}-${train.arriveTime}` : ""
   const number = entry.label?.replace("Train ", "")
   return {
+    mode: "train",
     key: entry.label ?? entry.dataId,
     dataId: raw.id,
     shortLabel: train ? `${number} · ${train.trainNumber.split(" (")[0]}` : "JR ניקו",
@@ -163,7 +194,55 @@ function buildRide(entry: (typeof RIDE_ORDER)[number]): RideView | null {
   }
 }
 
-export const RIDES: RideView[] = RIDE_ORDER.map(buildRide).filter((r): r is RideView => r !== null)
+const TRAIN_RIDES: RideView[] = RIDE_ORDER.map(buildRide).filter((r): r is RideView => r !== null)
+
+const DRIVE_COLORS = ["#4a6fa5", "#5b8c5a", "#ad5f7d", "#b9774b", "#7e6ba6", "#4e8c98", "#8b7349"]
+
+function formatDriveTime(minutes: number): string {
+  const rounded = Math.round(minutes / 5) * 5
+  const hours = Math.floor(rounded / 60)
+  const rest = rounded % 60
+  if (hours === 0) return `כ-${rest} דק'`
+  const hoursLabel = hours === 1 ? "כשעה" : `כ-${hours} שעות`
+  return rest === 0 ? hoursLabel : `${hoursLabel} ו-${rest} דק'`
+}
+
+function buildDrive(raw: RawDrive, i: number): RideView {
+  const tunnels: TunnelInfo[] = raw.tunnels.map((t, rawIndex) => ({
+    ...t,
+    rawIndex,
+    fromBoardingKm: t.startKm,
+    minutes: (t.lengthM / 1000 / t.speedKmh) * 60,
+    inItayaPass: false,
+  }))
+  const real = tunnels.filter((t) => t.kind === "tunnel")
+  const undergroundKm = real.reduce((n, t) => n + t.lengthM, 0) / 1000
+  return {
+    mode: "car",
+    key: raw.id,
+    dataId: raw.id,
+    shortLabel: `${i + 1} · ${raw.to}`,
+    color: DRIVE_COLORS[i % DRIVE_COLORS.length]!,
+    labelAt: 0.5,
+    title: `נסיעה ${i + 1} ברכב · ${raw.from} ← ${raw.to}`,
+    subtitle: `${raw.lengthKm} ק"מ${raw.motorwayKm > 0 ? `, מהם ${raw.motorwayKm} בכביש מהיר` : ""}`,
+    when: `${formatDriveTime(raw.minutes)} נהיגה בלי עצירות (הערכה)`,
+    booked: true,
+    reversed: false,
+    lengthKm: raw.lengthKm,
+    tunnels,
+    tunnelCount: real.length,
+    coveredCount: tunnels.length - real.length,
+    undergroundKm,
+    undergroundPct: raw.lengthKm ? Math.round((undergroundKm / raw.lengthKm) * 100) : 0,
+    undergroundMinutes: real.reduce((n, t) => n + t.minutes, 0),
+    longest: real.reduce<TunnelInfo | null>((best, t) => (!best || t.lengthM > best.lengthM ? t : best), null),
+  }
+}
+
+const DRIVE_RIDES: RideView[] = roads.drives.map(buildDrive)
+
+export const RIDES: RideView[] = [...TRAIN_RIDES, ...DRIVE_RIDES]
 
 /** "כ-40 שניות" / "כ-5.5 דק'" — the estimates are rough, so no false
  *  precision. */
@@ -182,6 +261,7 @@ export const ITAYA_NOTE =
 /** A door-to-door move between two of our hotels (or a day trip), made of
  *  one or more of the rides above. */
 export interface JourneyView {
+  mode: TravelMode
   key: string
   number: number
   title: string
@@ -241,7 +321,7 @@ function roughMeters(a: [number, number], b: [number, number]): number {
   return Math.hypot(dLat, dLon)
 }
 
-export const JOURNEYS: JourneyView[] = JOURNEY_DEFS.map((def, i) => {
+const TRAIN_JOURNEYS: JourneyView[] = JOURNEY_DEFS.map((def, i) => {
   const rides = def.rides.map((key) => RIDES.find((r) => r.key === key)).filter((r): r is RideView => !!r)
   const fromAt = hotelAt(def.from)
   const toAt = def.to === "airport" ? NARITA : hotelAt(def.to)
@@ -263,6 +343,7 @@ export const JOURNEYS: JourneyView[] = JOURNEY_DEFS.map((def, i) => {
   }
   const all = rides.flatMap((ride) => ride.tunnels.filter((t) => t.kind === "tunnel").map((tunnel) => ({ ride, tunnel })))
   return {
+    mode: "train",
     key: `journey-${i + 1}`,
     number: i + 1,
     title: def.title,
@@ -283,6 +364,41 @@ export const JOURNEYS: JourneyView[] = JOURNEY_DEFS.map((def, i) => {
     ),
   }
 })
+
+/** Each car day is one drive from hotel to hotel. */
+const DRIVE_JOURNEYS: JourneyView[] = roads.drives.map((raw, i) => {
+  const ride = DRIVE_RIDES[i]!
+  const fromAt = hotelAt(raw.fromOrder)
+  const toAt = hotelAt(raw.toOrder)
+  return {
+    mode: "car",
+    key: `drive-journey-${i + 1}`,
+    number: i + 1,
+    title: `${raw.from} ← ${raw.to}`,
+    when: "",
+    rides: [ride],
+    from: { order: raw.fromOrder, label: `מלון ${raw.fromOrder}`, at: fromAt },
+    to: { order: raw.toOrder, label: `מלון ${raw.toOrder}`, at: toAt },
+    links: [],
+    tunnelCount: ride.tunnelCount,
+    undergroundKm: ride.undergroundKm,
+    undergroundMinutes: ride.undergroundMinutes,
+    longest: ride.longest ? { ride, tunnel: ride.longest } : null,
+  }
+})
+
+export const JOURNEYS: JourneyView[] = [...TRAIN_JOURNEYS, ...DRIVE_JOURNEYS]
+
+export function journeysFor(mode: TravelMode): JourneyView[] {
+  return JOURNEYS.filter((j) => j.mode === mode)
+}
+
+/** Every drawn point of each mode's routes, for telling train from car by
+ *  where we are. */
+export function routeLines(mode: TravelMode): [number, number][][] {
+  const ids = new Set(RIDES.filter((r) => r.mode === mode).map((r) => r.dataId))
+  return RAW_RIDES.filter((r) => ids.has(r.id)).flatMap((r) => r.segments.map((s) => s.coords))
+}
 
 export function journeyOf(rideKey: string): JourneyView | undefined {
   return JOURNEYS.find((j) => j.rides.some((r) => r.key === rideKey))
