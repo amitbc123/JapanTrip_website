@@ -974,6 +974,12 @@ function setGeo(g){
 }
 function parseLatLon(s){
   s = (s || "").trim();
+  /* degrees-minutes-seconds, e.g. 35°41'37.6"N 139°42'12.3"E */
+  const dms = /(\d{1,3})°\s*(\d{1,2})['′]\s*([\d.]+)?["″]?\s*([NS])[,\s]+(\d{1,3})°\s*(\d{1,2})['′]\s*([\d.]+)?["″]?\s*([EW])/i.exec(s);
+  if (dms) {
+    const v = (d, m2, sec, h) => (+d + +m2/60 + (+sec||0)/3600) * (/[SW]/i.test(h) ? -1 : 1);
+    return { lat: v(dms[1],dms[2],dms[3],dms[4]), lon: v(dms[5],dms[6],dms[7],dms[8]) };
+  }
   const m = /@(-?\d+\.\d+),\s*(-?\d+\.\d+)/.exec(s) || /[?&](?:q|query|ll|destination)=(-?\d+\.\d+),\s*(-?\d+\.\d+)/.exec(s) || /(-?\d{1,3}\.\d+)\s*[,\s]\s*(-?\d{1,3}\.\d+)/.exec(s);
   if (!m) return null; const lat = +m[1], lon = +m[2];
   return Math.abs(lat) <= 90 && Math.abs(lon) <= 180 ? { lat, lon } : null;
@@ -990,9 +996,11 @@ function locSheet(msg){
   openSheet(`<h3>איפה אתם עכשיו?</h3>
     ${msg ? `<div class="access" style="margin-bottom:12px">${ic("loc")}<span>${esc(msg)}</span></div>` : ""}
     ${!msg && window.isSecureContext && navigator.geolocation ? `<button class="btn pri block" data-gps="1" style="margin-bottom:14px">${ic("loc")}לנסות GPS</button>` : ""}
-    <div class="fgrp"><b>אני ליד...</b><input id="hereQ" class="search-in" type="search" placeholder="חפשו מקום, תחנה או אטרקציה" autocomplete="off" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:8px"><div id="hereL" class="list" style="gap:6px">${nearList("")}</div></div>
-    <div class="fgrp"><b>או הדביקו קואורדינטות</b><div class="row" style="display:flex;gap:8px"><input id="llIn" type="text" inputmode="decimal" placeholder="35.6938, 139.7034" style="flex:1;min-width:0;direction:ltr;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 12px"><button class="btn pri" data-llset="1">אישור</button></div>
-      <div class="access" style="margin-top:8px">${ic("pin")}<span>ב-Google Maps: לחיצה ארוכה על הנקודה הכחולה, המספרים מופיעים בחלון החיפוש. מעתיקים ומדביקים כאן.</span></div></div>
+    <div class="fgrp" style="background:var(--card);border:1px solid var(--gold);border-radius:16px;padding:12px"><b style="color:var(--gold);font-size:14px">הכנסת נ.צ</b>
+      <div style="display:flex;gap:8px"><input id="llIn" type="text" placeholder="35.6938, 139.7034" autocomplete="off" style="flex:1;min-width:0;direction:ltr;text-align:left;background:var(--sea-2);border:1px solid var(--line);border-radius:12px;padding:11px 12px;font-size:16px"><button class="btn" data-llpaste="1" type="button">הדבק</button></div>
+      <button class="btn pri block" data-llset="1" style="margin-top:8px">${ic("check")}השתמש בנ.צ</button>
+      <div class="access" style="margin-top:8px">${ic("pin")}<span>איך משיגים: פותחים Google Maps, לוחצים לחיצה ארוכה על הנקודה הכחולה או על המקום שבו אתם. נ.צ מופיע בשורת החיפוש למעלה. לוחצים עליו כדי להעתיק, ומדביקים כאן. עובד גם עם פורמט של מעלות (35°41'N) וגם עם קישור מלא של Google Maps.</span></div></div>
+    <div class="fgrp"><b>או: אני ליד...</b><input id="hereQ" class="search-in" type="search" placeholder="חפשו מקום, תחנה או אטרקציה" autocomplete="off" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:8px"><div id="hereL" class="list" style="gap:6px">${nearList("")}</div></div>
     ${me || (GEO && GEO.manual) ? `<button class="btn block" data-hotel="1">${ic("bed")}חזרה למרחקים מהמלון</button>` : ""}`);
   const q = $("#hereQ"); q.addEventListener("input", () => { $("#hereL").innerHTML = nearList(q.value); });
 }
@@ -1317,6 +1325,7 @@ document.addEventListener("click", e => {
   if (ds.useloc) { if (ST.useLoc && GEO) { ST.useLoc = false; save(); filterSheet(); renderAll(); } else { locSheet(""); } return; }
   if (ds.gps) { askLoc(); return; }
   if (ds.here) { const p = BYID[ds.here]; setGeo({ lat:p.lat, lon:p.lon, manual:true, label:p.he }); toast("המרחקים מחושבים מ" + p.he); return; }
+  if (ds.llpaste) { const inp = $("#llIn"); try { navigator.clipboard.readText().then(t => { inp.value = t; const g = parseLatLon(t); toast(g ? "הודבק. לחצו 'השתמש בנ.צ'" : "בלוח אין נ.צ"); }, () => { inp.focus(); toast("לחיצה ארוכה בשדה ואז 'הדבק'"); }); } catch(err) { inp.focus(); toast("לחיצה ארוכה בשדה ואז 'הדבק'"); } return; }
   if (ds.llset) { const g = parseLatLon($("#llIn").value); if (!g) { toast("לא זיהיתי קואורדינטות"); return; } setGeo({ ...g, manual:true, label:"הנקודה שהזנתם" }); toast("המיקום עודכן"); return; }
   if (ds.hotel) { GEO = null; ST.man = null; save(); closeSheet(); renderAll(); toast("המרחקים מהמלון"); return; }
   if (ds.reset) { ST.tog = {}; ST.sort = "dist"; ST.cats = []; ST.grp = ""; save(); closeSheet(); renderAll(); return; }
