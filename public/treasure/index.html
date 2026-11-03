@@ -1,0 +1,1355 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0B1626">
+<title>מפת האוצר - יפן 2026</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: one-column phone app. Sea-navy ground, straw-hat gold accent, Luffy red for One Piece.
+   Header with live clock + region rail, sticky search/filters, card list or radar, bottom tab bar. */
+:root{
+  --sea:#0B1626; --sea-2:#11213A; --card:#15294A; --card-2:#1B3360; --line:#26406B;
+  --ink:#EEF3FB; --muted:#9DB0CF; --dim:#6F86AB;
+  --gold:#F5C443; --gold-ink:#1A1405; --red:#E4572E; --ok:#5ED39A; --warn:#FFB454; --bad:#FF6B6B;
+  --f:"Rubik",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --r:18px; color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--sea);color:var(--ink);font-family:var(--f);font-size:15.5px;line-height:1.5}
+body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px));overflow-x:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px))}
+.en{direction:ltr;unicode-bidi:isolate;display:block;text-align:right}
+svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+[hidden]{display:none!important}
+
+/* ---------- Header ---------- */
+.hdr{position:relative;overflow:hidden;padding-top:env(safe-area-inset-top,0px);background:
+  radial-gradient(120% 90% at 100% 0%,#1E3E73 0%,transparent 60%),
+  radial-gradient(90% 70% at 0% 100%,#3B1F3A 0%,transparent 60%),var(--sea)}
+.hdr::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.22;
+  background:repeating-radial-gradient(circle at 85% -20%,transparent 0 22px,rgba(255,255,255,.07) 22px 23px)}
+.hdr-in{position:relative;z-index:1;padding-block:16px 6px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand .logo{width:40px;height:40px;border-radius:12px;background:var(--gold);color:var(--gold-ink);display:grid;place-items:center;box-shadow:0 6px 18px -6px rgba(245,196,67,.6)}
+.brand .logo svg{width:26px;height:26px;stroke-width:2}
+.brand h1{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.1}
+.brand small{display:block;color:var(--muted);font-size:12.5px;font-weight:500}
+.clock{text-align:left;direction:ltr}
+.clock b{display:block;font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.clock span{font-size:12px;color:var(--muted)}
+.now{margin-top:12px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+.now .pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:999px;padding:4px 10px;color:var(--ink)}
+.now .pill.loc{border-color:rgba(94,211,154,.5)}
+.now .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px rgba(94,211,154,.2)}
+.now button.pill{cursor:pointer}
+
+.rail{display:flex;gap:10px;overflow-x:auto;padding:14px 2px 14px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.reg{flex:0 0 auto;width:148px;height:104px;border-radius:18px;border:1px solid var(--line);background:var(--card);position:relative;overflow:hidden;text-align:right;padding:11px 13px;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:space-between}
+.reg .kanji{position:absolute;left:-6px;bottom:-22px;font-size:76px;font-weight:800;line-height:1;color:rgba(255,255,255,.06);pointer-events:none;font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif}
+.reg b{font-size:18px;font-weight:700;line-height:1.15}
+.reg .d{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.reg .n{font-size:12px;color:var(--muted)}
+.reg .badge{position:absolute;top:10px;left:10px;font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 8px;background:var(--gold);color:var(--gold-ink)}
+.reg .badge.past{background:rgba(255,255,255,.12);color:var(--muted)}
+.reg[aria-pressed="true"]{background:linear-gradient(160deg,#2A4D8F,#1A3263);border-color:var(--gold);box-shadow:0 10px 26px -14px rgba(245,196,67,.7)}
+.reg.isPast{opacity:.55}
+
+/* ---------- Toolbar ---------- */
+.bar{position:sticky;top:0;z-index:20;background:rgba(11,22,38,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.06);padding-top:env(safe-area-inset-top,0px)}
+.bar-in{padding-block:10px;display:flex;flex-direction:column;gap:9px}
+.srow{display:flex;gap:8px}
+.search{flex:1;min-width:0;position:relative}
+.search input{width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 40px 11px 12px;font-size:15.5px}
+.search input::placeholder{color:var(--dim)}
+.search svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--dim)}
+.ibtn{flex:none;width:46px;height:46px;border-radius:14px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;position:relative}
+.ibtn.on{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.ibtn .cnt{position:absolute;top:-5px;left:-5px;min-width:19px;height:19px;border-radius:10px;background:var(--red);color:#fff;font-size:11px;font-weight:700;display:grid;place-items:center;padding:0 5px}
+.chips{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 12px 6px 11px;font-size:13.5px;font-weight:500;white-space:nowrap}
+.chip .sw{width:9px;height:9px;border-radius:50%;background:var(--c,#888)}
+.chip[aria-pressed="true"]{background:var(--c,var(--gold));border-color:var(--c,var(--gold));color:#0B1626;font-weight:700}
+.chip[aria-pressed="true"] .sw{background:#0B1626}
+.chip.tog[aria-pressed="true"]{--c:var(--gold)}
+.chip small{opacity:.7;font-weight:500}
+
+/* ---------- Content ---------- */
+main{padding-block:14px 30px;display:flex;flex-direction:column;gap:16px}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:2px 2px 0}
+.sec-h h2{margin:0;font-size:19px;font-weight:700}
+.sec-h span{font-size:13px;color:var(--muted)}
+.base{display:flex;align-items:center;gap:10px;background:var(--sea-2);border:1px solid var(--line);border-radius:16px;padding:10px 12px;font-size:13.5px}
+.base .ic{width:34px;height:34px;border-radius:10px;background:rgba(245,196,67,.14);color:var(--gold);display:grid;place-items:center;flex:none}
+.base .tx{flex:1;min-width:0}
+.base .tx b{display:block;font-size:14px}
+.base .tx span{color:var(--muted);font-size:12.5px}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;border-radius:9px;padding:6px 11px;font-size:13px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--gold);color:var(--gold-ink)}
+.areas{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.areas::-webkit-scrollbar{display:none}
+.areas .chip{flex:none}
+.areas .chip{font-size:12.5px;padding:5px 11px}
+.access{font-size:13px;color:var(--muted);background:var(--sea-2);border:1px dashed var(--line);border-radius:12px;padding:8px 12px;display:flex;gap:8px;align-items:flex-start}
+.access svg{color:var(--gold);margin-top:2px}
+
+/* Suggestions strip */
+.sugg{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 6px}
+.sugg::-webkit-scrollbar{display:none}
+.sc{flex:0 0 auto;width:220px;border-radius:16px;padding:12px 13px;background:linear-gradient(155deg,var(--c2,#1B3360),var(--card));border:1px solid var(--line);text-align:right;display:flex;flex-direction:column;gap:6px;position:relative;overflow:hidden}
+.sc .k{font-size:11.5px;font-weight:700;color:var(--c,var(--gold));letter-spacing:.03em}
+.sc b{font-size:15px;line-height:1.25}
+.sc .m{font-size:12.5px;color:var(--muted)}
+
+/* Cards */
+.list{display:flex;flex-direction:column;gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;position:relative}
+.card.must{border-color:rgba(245,196,67,.45)}
+.card.visited{opacity:.62}
+.c-main{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:13px 13px 12px;text-align:right;width:100%;background:none;border:0}
+.tile{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 20%,transparent);color:var(--c);position:relative}
+.tile svg{width:25px;height:25px}
+.tile .hs{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--gold-ink);font-size:10px;font-weight:800;border-radius:6px;padding:0 5px;white-space:nowrap}
+.c-body{min-width:0;display:flex;flex-direction:column;gap:3px}
+.c-tags{display:flex;gap:6px;align-items:center;flex-wrap:wrap;font-size:11.5px;font-weight:600;color:var(--muted)}
+.c-tags .cat{color:var(--c)}
+.tag{display:inline-flex;align-items:center;gap:4px;border-radius:7px;padding:1px 7px;font-size:11px;font-weight:700}
+.tag.must{background:var(--gold);color:var(--gold-ink)}
+.tag.amit{background:rgba(94,211,154,.16);color:var(--ok)}
+.tag.sea{background:rgba(255,107,107,.14);color:var(--bad)}
+.tag.d0{background:rgba(94,211,154,.16);color:var(--ok)}
+.tag.d1{background:rgba(255,180,84,.16);color:var(--warn)}
+.tag.d2{background:rgba(255,107,107,.14);color:var(--bad)}
+.c-name{font-size:16.5px;font-weight:700;line-height:1.25;overflow-wrap:anywhere}
+.c-he{font-size:13.5px;color:var(--muted)}
+.c-desc{font-size:14px;color:#D3DDEE;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card.open .c-desc{display:block;-webkit-line-clamp:unset}
+.c-meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+.mt{display:inline-flex;align-items:center;gap:5px;background:var(--sea-2);border-radius:9px;padding:3px 8px;font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums}
+.mt svg{width:14px;height:14px;color:var(--muted)}
+.mt.far{color:var(--muted)}
+.c-more{padding:0 13px 13px;display:flex;flex-direction:column;gap:10px}
+.tip{font-size:13.5px;background:rgba(245,196,67,.08);border-right:3px solid var(--gold);border-radius:8px;padding:8px 10px;color:#F1E3B8}
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.ab{display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--sea-2);border-radius:12px;padding:9px 6px;font-size:13px;font-weight:600;text-decoration:none;color:var(--ink);min-width:0}
+.ab.pri{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.ab.on{background:rgba(94,211,154,.18);border-color:var(--ok);color:var(--ok)}
+.ab.fav.on{background:rgba(245,196,67,.18);border-color:var(--gold);color:var(--gold)}
+.qa{position:absolute;top:10px;left:10px;display:flex;gap:6px}
+.qa button{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:rgba(11,22,38,.6);display:grid;place-items:center;color:var(--muted)}
+.qa button.on{color:var(--gold);border-color:var(--gold)}
+.qa button.pl.on{color:var(--ok);border-color:var(--ok)}
+.c-main{padding-left:92px}
+.empty{text-align:center;color:var(--muted);padding:30px 14px;border:1.5px dashed var(--line);border-radius:var(--r)}
+.more-btn{align-self:center;border:1px solid var(--line);background:var(--card);border-radius:12px;padding:10px 18px;font-weight:600}
+
+/* Radar */
+.radar{background:radial-gradient(circle at 50% 50%,#13294B,#0B1626 75%);border:1px solid var(--line);border-radius:var(--r);padding:10px;position:relative}
+.radar > svg{width:100%;height:auto;display:block}
+.radar .lg svg.i{width:14px;height:14px;vertical-align:-2px}
+.radar .lg{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);padding:2px 6px}
+.rpop{position:absolute;left:12px;right:12px;bottom:12px;background:var(--card-2);border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;gap:10px;align-items:center}
+.rpop .tx{flex:1;min-width:0}
+.rpop b{display:block;font-size:14.5px}
+.rpop span{font-size:12.5px;color:var(--muted)}
+
+/* Sheets */
+.sheet-bg{position:fixed;inset:0;background:rgba(3,8,16,.6);z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+.sheet-bg.show{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:51;max-height:86vh;overflow-y:auto;background:var(--sea-2);border-top:1px solid var(--line);border-radius:22px 22px 0 0;padding:10px max(16px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));transform:translateY(105%);transition:transform .25s ease}
+.sheet.show{transform:none}
+.sheet .grab{width:42px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 12px}
+.sheet h3{margin:4px 0 12px;font-size:19px}
+.fgrp{margin-bottom:16px}
+.fgrp > b{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;font-weight:600}
+.fgrp .chips{flex-wrap:wrap}
+.chip.grp{padding:7px 14px 7px 12px;font-size:14px}
+.chip.grp svg.i{width:16px;height:16px}
+.chip.grp[aria-pressed="true"] svg.i{color:#0B1626}
+.subs{padding:8px 10px;margin-top:-2px;background:var(--sea-2);border:1px solid var(--line);border-radius:14px}
+.subs .lbl{flex:none;align-self:center;font-size:12px;color:var(--muted);font-weight:600;padding-left:4px}
+.subs .chip{font-size:12.5px;padding:4px 10px;background:var(--card)}
+.subs .chip[aria-pressed="true"]{background:var(--c,var(--gold))}
+.sheet .row{display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:14px;padding:12px 16px;font-weight:700;font-size:14.5px;text-decoration:none}
+.btn.pri{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+.btn.block{width:100%}
+
+/* Planner */
+.pl-head{display:flex;gap:8px;align-items:center}
+.pl-head select{flex:1;min-width:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 12px}
+.leg{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px}
+.leg .num{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-weight:800;background:color-mix(in srgb,var(--c) 22%,transparent);color:var(--c)}
+.leg .tx{min-width:0}
+.leg .tx b{display:block;font-size:14.5px;line-height:1.25;overflow-wrap:anywhere}
+.leg .tx span{font-size:12.5px;color:var(--muted)}
+.leg .ops{display:flex;gap:4px}
+.leg .ops button{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--sea-2);display:grid;place-items:center;color:var(--muted)}
+.hop{font-size:12px;color:var(--dim);padding:0 48px 0 0;display:flex;align-items:center;gap:6px}
+.hop svg{width:13px;height:13px}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.summary div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}
+.summary b{display:block;font-size:19px;font-variant-numeric:tabular-nums}
+.summary span{font-size:12px;color:var(--muted)}
+
+/* Cards tab */
+.allergy img{width:100%;border-radius:14px;display:block;background:#fff}
+.phr{display:flex;flex-direction:column;gap:8px}
+.ph{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px}
+.ph .jp{font-size:21px;font-weight:700;direction:ltr;text-align:right;line-height:1.35}
+.ph .ro{font-size:13px;color:var(--gold);direction:ltr;text-align:right}
+.ph .he{font-size:13.5px;color:var(--muted)}
+.big{position:fixed;inset:0;z-index:60;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px}
+.big img{max-width:100%;max-height:100%}
+.big .jpbig{color:#111;font-size:min(9vw,46px);font-weight:800;line-height:1.5;text-align:center;direction:ltr;padding:20px}
+
+/* Tab bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(17,33,58,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tabs .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);padding-left:max(6px,env(safe-area-inset-left,0px));padding-right:max(6px,env(safe-area-inset-right,0px))}
+.tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 0 10px;font-size:11.5px;font-weight:600;color:var(--dim);position:relative}
+.tabs button svg{width:23px;height:23px}
+.tabs button[aria-selected="true"]{color:var(--gold)}
+.tabs button .cnt{position:absolute;top:5px;left:calc(50% - 22px);min-width:17px;height:17px;border-radius:9px;background:var(--red);color:#fff;font-size:10.5px;display:grid;place-items:center;padding:0 4px}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--gold);color:var(--gold-ink);font-weight:700;border-radius:12px;padding:9px 16px;font-size:14px;z-index:70;opacity:0;transition:.2s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.foot{font-size:12px;color:var(--dim);text-align:center;padding:8px 0 4px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="wrap hdr-in">
+    <div class="top">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 15.5c0-1.4 4-2.5 9-2.5s9 1.1 9 2.5-4 2.5-9 2.5-9-1.1-9-2.5z"/><path d="M7 14V11a5 5 0 0 1 10 0v3"/><path d="M7 12.6c1.5.6 3.2.9 5 .9s3.5-.3 5-.9" stroke="#E4572E" stroke-width="2.4"/></svg></div>
+        <div><h1>מפת האוצר</h1><small>המדריך שלנו ליפן · 2026</small></div>
+      </div>
+      <div class="clock"><b id="clk">--:--</b><span id="clkd"></span></div>
+    </div>
+    <div class="now" id="nowline"></div>
+    <div class="rail" id="rail" role="tablist" aria-label="ערים"></div>
+  </div>
+</header>
+
+<div class="bar" id="bar">
+  <div class="wrap bar-in">
+    <div class="srow">
+      <label class="search"><input id="q" type="search" placeholder="חיפוש: ראמן, One Piece, מקדש..." autocomplete="off"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></label>
+      <button class="ibtn" id="viewBtn" aria-label="תצוגת רדאר"></button>
+      <button class="ibtn" id="fltBtn" aria-label="מסננים"></button>
+    </div>
+    <div class="chips" id="cats"></div>
+    <div class="chips subs" id="subs" hidden></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <main id="view-explore"></main>
+  <main id="view-plan" hidden></main>
+  <main id="view-saved" hidden></main>
+  <main id="view-cards" hidden></main>
+</div>
+
+<nav class="tabs"><div class="in" role="tablist">
+  <button data-tab="explore" aria-selected="true"></button>
+  <button data-tab="plan" aria-selected="false"></button>
+  <button data-tab="saved" aria-selected="false"></button>
+  <button data-tab="cards" aria-selected="false"></button>
+</div></nav>
+
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const D = [];
+// Record: [area, cats, nameEN, nameHE, lat, lon, desc, tip, price(0-3|null), flags]
+// flags: M=must, A=Amit-friendly food, X=mostly seafood, 0=no dairy usually, 1=ask about dairy, 2=contains dairy
+D.push(
+/* ===== NAGOYA ===== */
+["ngy","op shop","Mugiwara Store Nagoya","החנות הרשמית של וואן פיס בנגויה",35.1655,136.9063,"החנות הרשמית של One Piece בעיר: בגדים, פיגורות, מחזיקי מפתחות ופריטים שיוצאים רק בחנויות Mugiwara.","בניין Nagoya PARCO West, קומה 8. פתוח בערך 10:00-20:00.",2,"M"],
+["ngy","anime shop","Nagoya PARCO","קניון פארקו נגויה",35.1655,136.9060,"שלושה בניינים מחוברים עם חנויות דמויות, אופנה צעירה ופופ-אפים של אנימה שמתחלפים כל כמה שבועות.","שווה לבדוק מה הפופ-אפ בקומות העליונות של הבניין המערבי.",2,""],
+["ngy","anime shop","Donguri Republic Nagoya","חנות ג'יבלי - טקאשימאיה גייט טאואר",35.1703,136.8831,"החנות הרשמית של סטודיו ג'יבלי: טוטורו, קיקי, נו-פייס ועוד. הכי קרובה למלון.","בתוך Takashimaya Gate Tower Mall שמעל תחנת נגויה.",2,""],
+["ngy","shop street","Osu Shopping Street","רחוב הקניות אוסו",35.1594,136.9042,"רשת של מדרחובים מקורים עם חנויות יד שנייה, אלקטרוניקה, אנימה, וינטג' ואוכל רחוב. האקיהבארה של נגויה.","הכי נחמד אחר הצהריים. אפשר לשלב עם מקדש אוסו קאנון שבכניסה.",1,"M"],
+["ngy","anime shop vintage","Mandarake Nagoya","מנדרקה נגויה",35.1597,136.9035,"חנות יד שנייה ענקית לאנימה: פיגורות, מנגה, קלפים וצעצועי רטרו. אפשר למצוא פריטי One Piece ישנים במחירים טובים.","בתוך אזור אוסו.",2,""],
+["ngy","tech shop","Osu Daiichi Ameyoko Building","בניין האלקטרוניקה אוסו אמייוקו",35.1588,136.9046,"קומות של דוכני רכיבים, כבלים, מחברים וגאדג'טים. גרסה קטנה של רדיו קאיקן.","בשבילך כמהנדס: חלקים שקשה למצוא בארץ.",1,""],
+["ngy","temple","Osu Kannon","מקדש אוסו קאנון",35.1590,136.9013,"מקדש בודהיסטי אדום עם יוני ענק בחצר ושוק עתיקות ב-18 וב-28 לכל חודש.","בכניסה לרחובות אוסו.",0,""],
+["ngy","sight","Nagoya Castle","טירת נגויה",35.1856,136.8991,"טירה עם דגי הזהב (שאצ'יהוקו) על הגג וארמון הונמארו המשוחזר עם ציורי זהב מטורפים.","הטירה הראשית סגורה לשיפוץ, אבל הארמון והגנים פתוחים. כ-¥500.",1,"M"],
+["ngy","museum tech","Toyota Commemorative Museum of Industry and Technology","מוזיאון טויוטה לתעשייה וטכנולוגיה",35.1825,136.8768,"מכונות אריגה ענקיות שעובדות מול העיניים, רובוטים ופסי ייצור רכב. מוזיאון חובה לאנשי הנדסה.","10 דקות הליכה מהמלון. סגור בימי שני.",1,"M"],
+["ngy","museum tech","SCMAGLEV and Railway Park","פארק הרכבות והמגלב",35.0450,136.8510,"אולם ענק עם שינקנסנים אמיתיים, רכבת המגלב שהגיעה ל-603 קמ\"ש וסימולטורים של נהיגה ברכבת.","קו Aonami מתחנת נגויה, 24 דקות. סגור בימי שלישי.",1,"M"],
+["ngy","sight night","Mirai Tower and Oasis 21","מגדל מיראי ואואזיס 21",35.1707,136.9089,"מגדל הטלוויזיה הישן של נגויה ולידו 'ספינת החלל' של אואזיס 21 עם גג זכוכית שמים זורמים עליו. מואר יפה בלילה.","הגג של אואזיס 21 בחינם.",0,""],
+["ngy","sight","Sky Promenade Midland Square","תצפית Sky Promenade",35.1696,136.8853,"תצפית פתוחה לרוח בקומה 44-46 מעל תחנת נגויה. הכי טוב בשקיעה.","5 דקות הליכה מהמלון.",1,""],
+["ngy","temple","Atsuta Jingu","מקדש אטסוטה",35.1270,136.9083,"אחד המקדשים החשובים ביפן, שומר על החרב הקדושה של הקיסרות. יער עצים עתיקים באמצע העיר.","תחנת Jingu-mae.",0,""],
+["ngy","park","Tokugawa Garden","גן טוקוגאווה",35.1857,136.9339,"גן יפני עם אגם, גשרים ומפלים. בתחילת נובמבר השלכת מתחילה.","",1,""],
+["ngy","animals","Port of Nagoya Public Aquarium","האקווריום של נגויה",35.0910,136.8787,"אחד האקווריומים הגדולים ביפן: לווייתני בלוגה, אורקות ומופע דולפינים.","קו Meiko עד Nagoyako.",2,""],
+["ngy","animals park","Higashiyama Zoo","גן החיות היגאשיאמה",35.1567,136.9768,"גן חיות ענק עם הגורילה המפורסמת שבאני, קואלות ומגדל תצפית.","",1,""],
+["ngy","sight","Noritake Garden","גן נוריטאקה",35.1800,136.8828,"מתחם לבנים אדומות של מפעל הפורצלן הוותיק, עם גן ומוזיאון. ממש ליד נקודת החזרת הרכב.","",0,""],
+["ngy","museum","Nagoya City Science Museum","מוזיאון המדע של נגויה",35.1652,136.8996,"הפלנטריום הגדול בעולם וחדר עם טורנדו אמיתי בגובה 9 מטר.","",1,""],
+["ngy","food","Yabaton Yabacho","יאבאטון - מיסו קאטסו",35.1627,136.9065,"המקום המפורסם לקציצת חזיר מטוגנת ברוטב מיסו אדום. המנה הכי מזוהה עם נגויה.","יש תורים בערב. לחלב: לשאול על החלב בציפוי.",2,"MA1"],
+["ngy","food","Sekai no Yamachan","סקאי נו יאמאצ'אן - כנפיים",35.1676,136.9063,"כנפי עוף פריכות בפלפל שחור וחריף, המנה של נגויה. אווירת איזקאיה רועשת.","יש סניפים ליד התחנה ובסקאה.",1,"MA0"],
+["ngy","food","Misen Yabacho","מיסן - ראמן טייוואני",35.1627,136.9045,"ראמן 'טייוואני' חריף עם בשר טחון ושום, מומצא בנגויה.","ממש חריף. אפשר לבקש פחות.",1,"A0"],
+["ngy","food","Yamamotoya Sohonke","יאמאמוטויה - מיסו אודון",35.1700,136.8840,"אודון עבה שמבושל בסיר חרס במרק מיסו, עם עוף וביצה.","",2,"A0"],
+["ngy","food","Atsuta Horaiken","אטסוטה הוראיקן - צלופח",35.1290,136.9075,"המקום ההיסטורי של הִיצוּמַבּוּשִׁי, צלופח על אורז שאוכלים בשלוש דרכים. ","תורים ארוכים. דגים.",3,"X0"],
+["ngy","food street","Kishimen Sumiyoshi","קישימן ברציף",35.1709,136.8815,"דוכן אטריות שטוחות על הרציף של תחנת נגויה. ארוחה של 5 דקות עם המקומיים.","רציפים 7-8 ו-1-2.",1,"1"],
+["ngy","food","Komeda's Coffee","קומדה קפה",35.1690,136.8850,"רשת בתי הקפה שנולדה בנגויה, מפורסמת בשירו נוואר - לחמנייה חמה עם גלידה רכה.","שירו נוואר מכיל חלב.",1,"A2"],
+["ngy","arcade night","GiGO Nagoya Osu","ארקייד GiGO אוסו",35.1595,136.9040,"ארקייד של מכונות טופי, משחקי קצב ופרינט-קורה (תמונות מצחיקות).","",1,""],
+["ngy","night","Sakae nightlife","סקאה בלילה",35.1690,136.9070,"מרכז הבילוי של נגויה: איזקאיות, ברים וקריוקי סביב פארק היסאיה אודורי.","",2,""],
+
+/* ===== KYOTO ===== */
+["kyo","op shop","Mugiwara Store Kyoto (Kiddy Land)","וואן פיס בקידי לנד קיוטו",35.0035,135.7690,"פינת Mugiwara Store רשמית בתוך Kiddy Land. 3 דקות הליכה מהמלון.","Kiddy Land Shijo Kawaramachi, קומה 1. 11:00-21:00.",2,"M"],
+["kyo","anime shop","Nintendo Kyoto and Pokemon Center Kyoto","נינטנדו קיוטו ומרכז פוקימון",35.0036,135.7685,"חנות נינטנדו הרשמית ומרכז פוקימון באותו בניין, עם פינות צילום ופריטים שיוצאים רק בקיוטו.","Kyoto Takashimaya S.C. (T8) בשיג'ו קוואראמאצ'י. ממש ליד המלון.",2,"M"],
+["kyo","anime shop","Donguri Republic Sannenzaka","חנות ג'יבלי בסאננזאקה",34.9960,135.7808,"חנות ג'יבלי רשמית בבית עץ מסורתי ברחוב העולה לקיומיזו-דרה. טוטורו ענק בכניסה.","לשלב עם קיומיזו-דרה.",2,""],
+["kyo","anime museum","Kyoto International Manga Museum","מוזיאון המנגה הבינלאומי",35.0117,135.7594,"בית ספר ישן עם 50 אלף כרכי מנגה על הקירות שאפשר לשבת ולקרוא, ותערוכות מתחלפות.","סגור בימי שלישי ורביעי.",1,"M"],
+["kyo","anime quirky","Toei Kyoto Studio Park","פארק האולפנים טואי קיוטו",35.0168,135.7084,"אולפן סרטי סמוראים פעיל עם רחובות אדו, מופעי נינג'ה, בית רדוף ותערוכות אנימה. כאן היה בסיס האוונגליון של קיוטו.","לבדוק באתר אילו תערוכות אנימה פתוחות עכשיו.",2,"M"],
+["kyo","quirky museum","Samurai and Ninja Museum Kyoto","מוזיאון הסמוראים והנינג'ה",35.0059,135.7646,"סיור קצר באנגלית על סמוראים ונינג'ות, לבישת שריון וזריקת שוריקן.","10 דקות הליכה מהמלון.",2,""],
+["kyo","temple","Fushimi Inari Taisha","פושימי אינארי",34.9671,135.7727,"אלפי שערי טוריי כתומים שמטפסים על ההר. האתר הכי מצולם ביפן.","בבוקר מוקדם או אחרי 18:00 כמעט ריק ומואר. פתוח 24 שעות.",0,"M"],
+["kyo","temple sight","Kiyomizu-dera","קיומיזו-דרה",34.9949,135.7850,"מקדש עם במת עץ ענקית מעל עמק של עצי אדר. בנובמבר יש הארה לילית של השלכת.","הארת הסתיו בערבים, לבדוק תאריכים.",1,"M"],
+["kyo","street sight","Sannenzaka and Ninenzaka","סאננזאקה וניננזאקה",34.9965,135.7810,"רחובות אבן משופעים עם בתי עץ, חנויות מזכרות, ממתקים וסטארבקס בבית טאטאמי.","",1,"M"],
+["kyo","sight night","Gion and Hanamikoji","גיון והנאמיקוג'י",35.0026,135.7752,"רובע הגיישות עם בתי תה מעץ ופנסים. בערב אפשר לראות מאיקו בדרך לעבודה.","אסור לצלם ברחובות הפרטיים, יש קנסות.",0,"M"],
+["kyo","temple","Yasaka Shrine","מקדש יאסאקה",35.0037,135.7785,"מקדש עם מאות פנסים, מואר בלילה, בקצה רחוב שיג'ו.","10 דקות מהמלון.",0,""],
+["kyo","food night street","Pontocho Alley","סמטת פונטוצ'ו",35.0050,135.7708,"סמטה צרה לאורך הנהר עם מסעדות ופנסים. בערב היא הכי יפה.","",2,""],
+["kyo","street food","Nishiki Market","שוק נישיקי",35.0050,135.7650,"'המטבח של קיוטו': 400 מטר של דוכנים. שיפודי עוף, קרוקטים, טמגויאקי, מוצ'י, ותמנונים קטנים ","עד 17:00 בערך. אסור לאכול בהליכה, אוכלים ליד הדוכן.",1,"MA"],
+["kyo","shop","Teramachi and Shinkyogoku","מדרחובות טרמאצ'י ושינקיוגוקו",35.0060,135.7680,"שני מדרחובות מקורים צמודים עם חנויות בגדים, מזכרות, גאצ'ה וארקיידים.","ליד המלון.",1,""],
+["kyo","temple sight","Kinkaku-ji","קינקאקו-ג'י - מקדש הזהב",35.0394,135.7292,"ביתן מצופה זהב מעל אגם. מושלם ביום שמש.","מגיעים באוטובוס, כדאי בפתיחה ב-9:00.",1,"M"],
+["kyo","sight","Arashiyama Bamboo Grove","יער הבמבוק בארשיאמה",35.0170,135.6713,"שביל בין עמודי במבוק ענקיים שמשמיעים רעש ברוח.","לפני 8:00 אחרת צפוף מאוד.",0,"M"],
+["kyo","animals","Iwatayama Monkey Park","פארק הקופים איוואטאיאמה",35.0094,135.6770,"טיפוס של 20 דקות לראש גבעה עם 120 קופי מקוק חופשיים ונוף על כל קיוטו. מאכילים אותם מתוך בקתה.","ליד גשר טוגטסוקיו.",1,"M"],
+["kyo","temple park","Tenryu-ji","טנריו-ג'י",35.0157,135.6738,"מקדש זן עם גן אגם מהמאה ה-14, צמוד ליער הבמבוק.","",1,""],
+["kyo","sight","Togetsukyo Bridge","גשר טוגטסוקיו",35.0129,135.6777,"הגשר הסמלי של ארשיאמה עם הרים מכוסי שלכת ברקע.","",0,""],
+["kyo","sight","Sagano Romantic Train","הרכבת הרומנטית סאגאנו",35.0161,135.6789,"רכבת עץ פתוחה שנוסעת 25 דקות לאורך נהר בתוך הרים צבעוניים. בנובמבר היא בשיא.","להזמין כרטיס מראש, נגמר מהר בעונת השלכת.",1,""],
+["kyo","temple park","Eikando","אייקנדו - מקדש השלכת",35.0149,135.7943,"נחשב המקום הכי יפה ביפן לשלכת. בנובמבר יש הארה לילית קסומה.","אמצע נובמבר הוא השיא. להגיע מוקדם.",1,"M"],
+["kyo","temple park","Tofuku-ji","טופוקו-ג'י",34.9764,135.7737,"גשר עץ מעל עמק של אלפיים עצי אדר אדומים. אחד הנופים הכי חזקים של נובמבר.","צפוף בשיא, להגיע בפתיחה.",1,"M"],
+["kyo","sight","Philosopher's Path","שביל הפילוסוף",35.0213,135.7944,"שביל הליכה של 2 ק\"מ לאורך תעלה, בין מקדשים קטנים ובתי קפה.","מחבר בין גינקאקו-ג'י לנאנזן-ג'י.",0,""],
+["kyo","temple","Ginkaku-ji","גינקאקו-ג'י - ביתן הכסף",35.0270,135.7982,"מקדש זן עם גן חול מסורק וגן טחב.","",1,""],
+["kyo","temple sight","Nanzen-ji and Aqueduct","נאנזן-ג'י ואמת המים",35.0112,135.7932,"שער עץ ענק ואמת מים מלבנים בסגנון רומי בתוך שטח המקדש. מקום צילום מעולה.","",1,""],
+["kyo","sight","Nijo Castle","טירת ניג'ו",35.0142,135.7481,"ארמון השוגון עם 'רצפות זמיר' שמצייצות כשדורכים, נגד מתנקשי נינג'ה.","",1,""],
+["kyo","temple","Sanjusangendo","סנג'וסנגנדו",34.9879,135.7718,"אולם של 120 מטר עם 1001 פסלי זהב של האלה קאנון בשורות.","אסור לצלם בפנים.",1,""],
+["kyo","temple","Heian Shrine","מקדש הייאן",35.0160,135.7824,"מקדש ענק ירוק-אדום עם שער טוריי אדום של 24 מטר.","",0,""],
+["kyo","temple park","Kitano Tenmangu","קיטאנו טנמנגו",35.0312,135.7353,"מקדש עם גן אדרים לאורך נחל שנפתח רק בעונת השלכת, עם הארה לילית.","",1,""],
+["kyo","sight","Kyoto Imperial Palace","הארמון הקיסרי",35.0254,135.7621,"ארמון הקיסרים הישן בתוך פארק ענק. כניסה חינם.","",0,""],
+["kyo","sight","Kyoto Tower","מגדל קיוטו",34.9875,135.7593,"תצפית מול תחנת קיוטו. במרתף יש אולם אוכל.","",1,""],
+["kyo","sight mall","Kyoto Station Building","בניין תחנת קיוטו",34.9858,135.7588,"בניין עתידני עם מדרגות ענק שנדלקות בלד בלילה וגשר שמיים בקומה 11.","הגשר בחינם.",0,""],
+["kyo","museum tech","Kyoto Railway Museum","מוזיאון הרכבות של קיוטו",34.9873,135.7425,"53 רכבות אמיתיות כולל שינקנסן 0, וקטר קיטור שאפשר לנסוע בו.","סגור בימי רביעי.",1,""],
+["kyo","animals","Kyoto Aquarium","אקווריום קיוטו",34.9875,135.7457,"אקווריום עם סלמנדרות ענק ביפניות ופינגווינים.","",2,""],
+["kyo","street","Fushimi Sake District","רובע הסאקה פושימי",34.9327,135.7614,"מבשלות סאקה ישנות ומוזיאון גקיקאן עם טעימות.","",1,""],
+["kyo","food","Menbakaichidai Fire Ramen","ראמן האש",35.0232,135.7505,"שופכים אש על הקערה שלך מול העיניים. חוויה מצחיקה עם הוראות בטיחות.","מקום קטן, כדאי להגיע לפני הפתיחה.",2,"MA0"],
+["kyo","food","Kyoto Gogyo","גוגיו - ראמן מיסו שרוף",35.0071,135.7639,"ראמן מיסו עם שמן 'שרוף' שחור. טעם מעושן ויוצא דופן.","",2,"A1"],
+["kyo","food","Ramen Sen no Kaze","ראמן סן נו קאזה",35.0062,135.7683,"ראמן בסגנון קיוטו עם צ'אשו רך, ליד המלון. תור קבוע.","",1,"A0"],
+["kyo","food","Ippudo Nishiki","איפודו נישיקי",35.0049,135.7637,"רשת הטונקוטסו המפורסמת. אמין ומהיר.","",1,"A0"],
+["kyo","food","Kyoto Ramen Koji","רחוב הראמן בתחנת קיוטו",34.9852,135.7588,"קומה עם 9 חנויות ראמן מכל יפן. כל אחד בוחר מה שבא לו.","קומה 10 בבניין התחנה.",1,"A0"],
+["kyo","food","Kyoto Katsugyu Pontocho","קאטסוגיו - שניצל בקר",35.0055,135.7710,"שניצל בקר נא-למחצה שצולים לבד על אבן חמה. מושלם למי שלא אוכל פירות ים.","לחלב: לשאול על חלב בציפוי וברטבים.",2,"MA1"],
+["kyo","food","Katsukura Sanjo","קאטסוקורה טונקאטסו",35.0093,135.7680,"טונקאטסו בסגנון קיוטו: טוחנים שומשום לבד בשביל הרוטב. אורז וכרוב ללא הגבלה.","",2,"MA1"],
+["kyo","food","Gyoza Hohei Gion","גיוזה הוהיי",35.0040,135.7742,"גיוזות קטנות ופריכות בטיגון. מקום מקומי זול.","",1,"A0"],
+["kyo","food","Chao Chao Gyoza Sanjo","צ'או צ'או גיוזה",35.0090,135.7716,"גיוזות שזכו בתחרויות, כולל טעמים מטורפים. ליד הנהר.","",1,"A1"],
+["kyo","food","Yakiniku Hiro Kiyamachi","יאקיניקו הירו",35.0063,135.7707,"צלייה על הגחלים של בקר וואגיו איכותי, ליד המלון.","להזמין מקום בערב.",3,"A0"],
+["kyo","food","Honke Daiichi-Asahi","הונקה דאיצ'י אסאהי",34.9884,135.7616,"ראמן חזיר-סויה ותיק ליד התחנה, פתוח מהבוקר.","",1,"A0"],
+["kyo","street","Nakamura Tokichi Kyoto Station","מאצ'ה נקאמורה טוקיצ'י",34.9855,135.7590,"פרפה מאצ'ה ענק עם ג'לי וגלידה. בית התה הוותיק מאוג'י.","מכיל חלב.",2,"A2"],
+["kyo","street","% Arabica Higashiyama","ערביקה היגאשיאמה",34.9980,135.7807,"בית הקפה המינימליסטי המפורסם של קיוטו, ליד יאסאקה.","אפשר לבקש עם חלב סויה.",1,"1"],
+["kyo","arcade night","GiGO Kyoto Kawaramachi","ארקייד GiGO קוואראמאצ'י",35.0045,135.7690,"קומות של מכונות טופי וגאצ'ה, ממש ליד המלון.","",1,""],
+["kyo","onsen","Funaoka Onsen","פונאוקה אונסן",35.0390,135.7430,"סנטו בן 100 שנה עם עיטורי עץ מטורפים, אמבטיה חשמלית וסאונה.","בערך ¥500. מגבת להביא או לקנות.",1,""],
+["kyo","vintage","Kyoto Book Off / Hard Off Teramachi","יד שנייה בטרמאצ'י",35.0070,135.7675,"חנויות יד שנייה של ספרים, משחקים ופיגורות במדרחוב טרמאצ'י.","",1,""],
+
+/* ===== NARA ===== */
+["nara","animals park","Nara Park Deer","הצבאים של נארה",34.6851,135.8430,"מאות צבאים חופשיים שמשתחווים בשביל עוגיות שיקה סנבֵּי.","הם נושכים כשנגמרות העוגיות. ¥200 לחבילה.",0,"M"],
+["nara","temple","Todai-ji","טודאי-ג'י",34.6890,135.8398,"מבנה העץ הענק עם בודהה ברונזה של 15 מטר. יש עמוד עם חור שאם עוברים בו מקבלים מזל.","",1,"M"],
+["nara","temple","Kasuga Taisha","קאסוגה טאישה",34.6814,135.8484,"מקדש עם 3000 פנסי אבן וברונזה בתוך יער.","",1,""],
+["nara","temple","Kofuku-ji","קופוקו-ג'י",34.6832,135.8317,"פגודה בת חמש קומות במרכז נארה.","",1,""],
+["nara","street","Nakatanidou","נקאטנידו - מוצ'י מהיר",34.6810,135.8290,"מכים מוצ'י במהירות מטורפת מול הקהל. מופע של 30 שניות ומוצ'י טרי.","המופע מתקיים כמה פעמים ביום כשיש קהל.",1,"MA0"],
+["nara","sight","Mount Wakakusa","הר וואקאקוסה",34.6866,135.8495,"גבעת דשא עם נוף על כל נארה, יפה בשקיעה.","",1,""],
+["nara","street","Naramachi","נאראמאצ'י",34.6770,135.8290,"רובע של בתי סוחרים ישנים, בתי קפה וחנויות קטנות.","",1,""],
+
+/* ===== UJI ===== */
+["uji","temple","Byodo-in","ביודו-אין",34.8893,135.8077,"ביתן הפניקס שמופיע על מטבע 10 ין. בניין מדהים מעל אגם.","",1,"M"],
+["uji","anime museum","Nintendo Museum","מוזיאון נינטנדו",34.8925,135.7842,"המוזיאון הרשמי של נינטנדו עם כל הקונסולות ומשחקים אינטראקטיביים ענקיים.","מוזמן ל-9.11, 10:30. להביא דרכון.",2,"M"],
+["uji","street","Byodoin Omotesando","רחוב המאצ'ה של אוג'י",34.8905,135.8070,"רחוב שכולו בתי תה ומאצ'ה: גלידות, אטריות ירוקות ודנגו.","",1,"A"],
+["uji","street","Nakamura Tokichi Honten","נקאמורה טוקיצ'י - הסניף הראשי",34.8907,135.8060,"בית התה המקורי מ-1854, פרפה מאצ'ה מפורסם.","תור ארוך בצהריים. מכיל חלב.",2,"A2"],
+["uji","temple","Ujigami Shrine","מקדש אוג'יגאמי",34.8915,135.8105,"המקדש השינטואי העתיק ביפן, ברשימת מורשת עולמית.","",0,""]
+);
+
+D.push(
+/* ===== OSAKA ===== */
+["osk","op shop","Mugiwara Store Umeda","החנות הרשמית של וואן פיס באומדה",34.7035,135.4960,"חנות One Piece רשמית ליד תחנת JR אוסקה, עם פריטים בלעדיים לאוסקה.","LUCUA, קומה 13 לפי המדריכים. לוודא באתר mugiwara-store.com. 10:00-20:00.",2,"M"],
+["osk","op shop","Mugiwara Store Abeno","החנות הרשמית של וואן פיס באבנו",34.6440,135.5130,"סניף Mugiwara בקניון Abeno Q's Mall ליד טנוג'י. פחות עמוס מאומדה.","קומה 3, 10:00-21:00. לשלב עם אבנו הרוקאס וגן החיות טנוג'י.",2,"M"],
+["osk","anime shop","Pokemon Center Osaka DX","מרכז פוקימון אוסקה DX",34.6738,135.5013,"מרכז פוקימון ענק עם בית קפה פוקימון. 5 דקות מהמלון.","Daimaru Shinsaibashi, קומה 9. לבית הקפה צריך להזמין מראש.",2,"M"],
+["osk","anime shop mall","Shinsaibashi PARCO","שינסאיבאשי פארקו",34.6735,135.5016,"קומות של חנויות דמויות ואנימה, פופ-אפים ואולם אוכל במרתף. צמוד למלון.","",2,""],
+["osk","anime shop","Nintendo Osaka and Pokemon Center Osaka","נינטנדו אוסקה",34.7020,135.4955,"החנות הרשמית של נינטנדו ומרכז פוקימון באומדה.","Daimaru Umeda, קומה 13.",2,""],
+["osk","anime shop","Donguri Republic Shinsaibashi","חנות ג'יבלי שינסאיבאשי",34.6738,135.5015,"חנות ג'יבלי הרשמית, ליד המלון.","",2,""],
+["osk","anime shop vintage","Mandarake Grand Chaos","מנדרקה גרנד כאוס",34.6720,135.4986,"חנות האנימה והאספנות הגדולה של אוסקה באמריקה-מורה: פיגורות One Piece ישנות, קלפים, משחקי רטרו וחפצים מוזרים.","10 דקות הליכה מהמלון. 12:00-20:00.",2,"M"],
+["osk","anime tech shop","Den Den Town (Nipponbashi)","דן דן טאון",34.6592,135.5063,"האקיהבארה של אוסקה: רחוב ארוך של חנויות אנימה, משחקי רטרו, פיגורות, אלקטרוניקה ומייד קפה.","15 דקות הליכה מהמלון. החנויות נפתחות בסביבות 11:00.",1,"M"],
+["osk","anime vintage","Super Potato Osaka","סופר פוטטו אוסקה",34.6595,135.5063,"חנות משחקי רטרו אגדית עם קונסולות ישנות ופינת ארקייד של פעם.","בתוך דן דן טאון.",2,""],
+["osk","tech shop","Joshin Super Kids Land","ג'ושין סופר קידס לנד",34.6580,135.5060,"בניין שלם של דגמים, גאנדאם, רכבות מודל ומשחקים.","",2,""],
+["osk","anime shop","Animate Osaka Nipponbashi","אנימייט אוסקה",34.6600,135.5062,"רשת האנימה הגדולה ביפן: מנגה, מרצ'נדייז ופופ-אפים.","",2,""],
+["osk","sight night street","Dotonbori","דוטונבורי",34.6687,135.5013,"רחוב השלטים המפורסם: תמנון ענק, סרטן זז, השלט של גליקו ואוכל רחוב בכל פינה. בלילה הוא מואר ומטורף.","5 דקות הליכה מהמלון.",1,"M"],
+["osk","shop","Shinsaibashi-suji","מדרחוב שינסאיבאשי",34.6740,135.5014,"מדרחוב מקורה של 600 מטר עם כל המותגים, דון קיחוטה וחנויות קוסמטיקה. צמוד למלון.","",2,""],
+["osk","shop quirky vintage","Amerikamura","אמריקה-מורה",34.6717,135.4975,"שכונת הנוער של אוסקה: חנויות וינטג', סטריט-ארט ואוכל רחוב.","",1,""],
+["osk","temple quirky","Namba Yasaka Shrine","מקדש נמבה יאסאקה",34.6615,135.4979,"מקדש עם ראש אריה ענק בגובה 12 מטר שפיו פתוח 'לבלוע מזל רע'. מצטלם מטורף.","",0,"M"],
+["osk","sight","Hozenji Yokocho","הוזנג'י יוקוצ'ו",34.6680,135.5034,"סמטה מרוצפת עם פסל מכוסה טחב שמתיזים עליו מים, ומסעדות קטנות.","מקסים בערב.",1,""],
+["osk","sight quirky food","Shinsekai and Tsutenkaku","שינסקאי ומגדל טסוטנקאקו",34.6525,135.5063,"שכונת רטרו משנות ה-50 עם שלטים מוגזמים, קושיקאטסו ומגדל עם פסל בילִיקֶן שמביא מזל.","",1,"M"],
+["osk","sight","Osaka Castle","טירת אוסקה",34.6873,135.5262,"טירה לבנה וזהובה על חומות ענק עם פארק גדול. בפנים מוזיאון.","בנובמבר הפארק צבעוני.",1,"M"],
+["osk","sight night","Umeda Sky Building","בניין אומדה סקאיי",34.7053,135.4906,"שני מגדלים מחוברים בגג תצפית עגול ופתוח בקומה 40. מושלם בשקיעה.","בערך ¥2000.",2,"M"],
+["osk","quirky night","HEP Five Ferris Wheel","גלגל ענק HEP Five",34.7038,135.5003,"גלגל ענק אדום שיוצא מגג קניון באמצע אומדה.","",1,""],
+["osk","sight","Abeno Harukas 300","אבנו הרוקאס",34.6459,135.5135,"התצפית הגבוהה בעיר בקומה 60, עם רצפת זכוכית.","",2,""],
+["osk","animals","Osaka Aquarium Kaiyukan","אקווריום קאיוקאן",34.6545,135.4290,"אחד האקווריומים הגדולים בעולם, עם כריש לוויתן ענק במיכל המרכזי.","להגיע מוקדם. אפשר לשלב עם גלגל הענק של טנפוזן.",2,"M"],
+["osk","animals park","Tennoji Zoo","גן החיות טנוג'י",34.6510,135.5085,"גן חיות עירוני ותיק עם היפופוטמים, פילים ואריות.","",1,""],
+["osk","anime quirky","Universal Studios Japan","יוניברסל סטודיוס",34.6654,135.4323,"פארק השעשועים עם Super Nintendo World, הארי פוטר ולפעמים אטרקציות של One Piece ואנימה.","יום שלם. כרטיסי Express ו-Nintendo World נגמרים, להזמין מראש.",3,"M"],
+["osk","quirky museum","Cup Noodles Museum Osaka Ikeda","מוזיאון הקאפ נודלס",34.8222,135.4258,"מעצבים כוס נודלס משלכם, בוחרים טעמים ותוספות ולוקחים הביתה.","45 דקות מהמלון. חינם, וכוס עצמית ב-¥500.",1,"M"],
+["osk","quirky museum","Osaka Museum of Housing and Living","מוזיאון החיים של אוסקה",34.7104,135.5115,"רחוב שלם של אוסקה מתקופת אדו בתוך בניין, עם יום ולילה מדומים.","",1,""],
+["osk","sight quirky","Tower of the Sun (Expo Park)","מגדל השמש",34.8094,135.5323,"פסל ענק ומוזר בעל שלושה פרצופים מתערוכת 1970. אפשר להיכנס פנימה.","להזמין כניסה לתוך המגדל מראש.",1,""],
+["osk","temple","Sumiyoshi Taisha","סומיושי טאישה",34.6125,135.4930,"מקדש עתיק עם גשר תלול ואדום בצורת קשת.","",0,""],
+["osk","street","Kuromon Market","שוק קורומון",34.6655,135.5065,"שוק מקורה עם פירות ים צלויים, וואגיו על האש ופירות.","בבוקר עד הצהריים. יקר וטוריסטי.",2,"X"],
+["osk","night","Tombori River Cruise","שייט טונבורי",34.6690,135.5005,"שייט של 20 דקות בתעלה של דוטונבורי מתחת לשלטים.","",1,""],
+["osk","food","Ichiran Dotonbori","איצ'יראן דוטונבורי",34.6688,135.5018,"ראמן טונקוטסו בתאים אישיים. מזמינים בטופס ובוחרים חריפות, שום ועוד.","פתוח 24 שעות. בלי חלב בדרך כלל.",1,"A0"],
+["osk","food","Kinryu Ramen","קינריו ראמן",34.6685,135.5030,"דוכן עם דרקון ענק על הגג וקימצ'י חופשי. ראמן פשוט וזול, 24 שעות.","",1,"A0"],
+["osk","food","Matsusakagyu Yakiniku M Hozenji","יאקיניקו M - בקר מטסוסאקה",34.6682,135.5031,"מנגל על השולחן עם בקר מטסוסאקה, אחד היקרים ביפן. חוויית בשר מושלמת.","להזמין מקום.",3,"MA0"],
+["osk","food","Gyukatsu Motomura Namba","גיוקאטסו מוטומורה",34.6660,135.5010,"שניצל בקר פריך שצולים לבד על אבן חמה. מנת בשר שאסור לפספס.","תורים. לשאול על חלב בציפוי.",2,"MA1"],
+["osk","food","Kushikatsu Daruma Dotonbori","קושיקאטסו דארומה",34.6685,135.5025,"שיפודי בשר וירקות מטוגנים, טובלים פעם אחת ברוטב המשותף ולא פעמיים.","ציפוי מכיל לפעמים חלב, לשאול.",1,"MA1"],
+["osk","food","Okonomiyaki Mizuno","אוקונומיאקי מיזונו",34.6686,135.5022,"פנקייק כרוב וחזיר על פלנצ'ה, מקום מישלן ותיק בדוטונבורי.","לבקש בלי פירות ים. בלי חלב: לשאול על הבצק.",2,"MA1"],
+["osk","street food","551 Horai Namba","551 הוראי - באוזי חזיר",34.6650,135.5010,"לחמניות אוויריות ממולאות חזיר עסיסי. האוכל של אוסקה לרכבת.","",1,"A1"],
+["osk","street","Takoyaki Wanaka","טאקויאקי וואנאקה",34.6656,135.5023,"כדורי תמנון, הסמל של אוסקה.","תמנון = פירות ים. בבצק לרוב אין חלב, לשאול.",1,"X1"],
+["osk","street","Rikuro Ojisan Cheesecake","עוגת הגבינה של ריקורו",34.6655,135.5010,"עוגת גבינה יפנית רכה שקופצת. יוצאת מהתנור עם פעמון.","מכיל חלב, לא מתאים בלי חלב.",1,"A2"],
+["osk","food","Tsurutontan Soemoncho","צורוטונטן אודון",34.6698,135.5040,"קערות אודון ענקיות עם עשרות סגנונות, גם קרבונרה.","",2,"A1"],
+["osk","food","Tsuruhashi Korea Town","קוריאה טאון צורוהאשי",34.6650,135.5310,"שכונה שלמה של מסעדות יאקיניקו עם מנגל גחלים ועשן בכל הרחוב.","",2,"A0"],
+["osk","arcade night","Round1 Stadium Sennichimae","ראונד 1 סנניצ'ימאה",34.6655,135.5025,"קומות של ארקייד, באולינג, קריוקי ומכונות טופי.","",1,""],
+["osk","onsen","Spa World","ספא וורלד",34.6500,135.5060,"מתחם אונסן ענק עם קומות בעיצוב של מדינות שונות, בריכות ומגלשות.","קעקועים אסורים.",2,""],
+
+/* ===== KOBE ===== */
+["kobe","food","Kobe Beef Steak Land","סטייק לנד קובה",34.6935,135.1940,"בקר קובה על פלנצ'ה מול העיניים במחיר סביר לצהריים.","ארוחות צהריים זולות יותר. בלי חלב: לבקש בלי חמאה.",3,"MA1"],
+["kobe","anime quirky","Tetsujin 28 Giant Robot","הרובוט הענק טטסוג'ין 28",34.6574,135.1460,"פסל רובוט בגובה 18 מטר מאנימה קלאסית בשכונת שין-נאגאטה. מקום צילום מעולה לחובבי רובוטים.","תחנת Shin-Nagata.",0,"M"],
+["kobe","sight night","Kobe Harborland and Meriken Park","הארבורלנד ופארק מריקן",34.6820,135.1880,"טיילת הנמל עם מגדל הנמל האדום, גלגל ענק ושלט BE KOBE.","הכי יפה בשקיעה.",0,""],
+["kobe","sight","Kobe Port Tower","מגדל הנמל של קובה",34.6826,135.1867,"מגדל אדום בצורת שעון חול עם גג תצפית פתוח.","",1,""],
+["kobe","street food","Nankinmachi Chinatown","צ'יינה טאון נאנקינמאצ'י",34.6880,135.1880,"צ'יינה טאון עם באוזי, גיוזה ושיפודים.","",1,"A1"],
+["kobe","sight","Kitano Ijinkan","קיטאנו איג'ינקאן",34.7010,135.1910,"רובע של בתי סוחרים מערביים מהמאה ה-19 על גבעה.","",1,""],
+["kobe","animals","Kobe Animal Kingdom","ממלכת החיות של קובה",34.6620,135.2160,"פארק מקורה שבו מאכילים קפיברות, קנגורו וציפורים מקרוב.","",2,""],
+["kobe","sight","Nunobiki Herb Gardens Ropeway","רכבל נונוביקי",34.7050,135.1940,"רכבל מעל העיר לגני תבלינים על ההר, עם נוף לנמל.","",2,""],
+
+/* ===== HIMEJI ===== */
+["himeji","sight","Himeji Castle","טירת הימג'י",34.8394,134.6939,"הטירה הכי יפה ושמורה ביפן, 'העגור הלבן'. מבנה עץ מקורי מהמאה ה-17.","בערך שעה בשינקנסן מאוסקה. להגיע בפתיחה ב-9:00.",1,"M"],
+["himeji","park","Koko-en Garden","גן קוקו-אן",34.8380,134.6905,"תשעה גנים יפניים ליד הטירה. בנובמבר אדום.","כרטיס משולב עם הטירה.",1,""],
+["himeji","temple","Mt Shosha Engyo-ji","הר שושה - אנגיו-ג'י",34.8890,134.6600,"מקדש על הר שצולם בו 'הסמוראי האחרון'. עולים ברכבל.","",1,""],
+
+/* ===== HIROSHIMA ===== */
+["hiro","sight museum","Peace Memorial Park","פארק זיכרון השלום",34.3925,132.4528,"פארק השלום עם הלהבה התמידית ואנדרטת הילדים עם אלפי עגורי נייר.","5 דקות מהמלון.",0,"M"],
+["hiro","sight","Atomic Bomb Dome","כיפת הפצצה האטומית",34.3955,132.4536,"שלד הבניין שנשאר אחרי הפצצה. מרגש מאוד, בעיקר בלילה.","",0,"M"],
+["hiro","museum","Hiroshima Peace Memorial Museum","מוזיאון השלום",34.3915,132.4520,"המוזיאון על הפצצה ועל האנשים. קשה אבל חובה.","בערך שעתיים. ¥200.",1,"M"],
+["hiro","sight","Orizuru Tower","מגדל אוריזורו",34.3963,132.4545,"גג תצפית מעל הכיפה ומגלשת ענק לרדת קומות.","",1,""],
+["hiro","sight","Hiroshima Castle","טירת הירושימה",34.4027,132.4594,"טירת 'העורב' עם חפיר. נבנתה מחדש.","",1,""],
+["hiro","park","Shukkeien Garden","גן שוקקיאן",34.4003,132.4677,"גן יפני עם אגם וגשרים, אדום בנובמבר.","",1,""],
+["hiro","temple park","Mitaki-dera","מיטאקי-דרה",34.4090,132.4320,"מקדש שקט ביער עם שלושה מפלים ושלכת. כמעט בלי תיירים.","",0,""],
+["hiro","shop","Hondori Shopping Arcade","מדרחוב הונדורי",34.3935,132.4590,"המדרחוב המקורה של העיר עם חנויות, אנימייט וארקיידים.","",1,""],
+["hiro","food","Okonomimura","אוקונומי-מורה",34.3920,132.4620,"בניין של 3 קומות עם 25 דוכני אוקונומיאקי בסגנון הירושימה: שכבות של כרוב, נודלס וחזיר.","לבקש בלי פירות ים.",1,"MA1"],
+["hiro","food","Nagata-ya","נגאטה-יא",34.3950,132.4530,"אוקונומיאקי של הירושימה ליד כיפת הפצצה. האהוב על התיירים.","תורים בצהריים.",1,"MA1"],
+["hiro","food","Bakudan-ya","בקודן-יא - צוקמן חריף",34.3910,132.4640,"צוקמן קר עם רוטב חריף, הסגנון של הירושימה. בוחרים רמת חריפות.","",1,"A0"],
+["hiro","night","Nagarekawa","נגארקאווה",34.3925,132.4655,"רובע הבילויים של הירושימה, ברים ואיזקאיות.","",2,""],
+["hiro","tech museum","Mazda Museum","מוזיאון מאזדה",34.3700,132.5000,"סיור כולל קו ייצור פעיל.","חייבים להזמין מראש באתר.",0,""],
+
+/* ===== MIYAJIMA ===== */
+["miya","temple sight","Itsukushima Shrine and Floating Torii","מקדש איטסוקושימה והשער הצף",34.2960,132.3198,"השער האדום שעומד במים. בגאות הוא צף, ובשפל הולכים עד אליו.","לבדוק שעות גאות ושפל. JR ומעבורת, בערך שעה מהמלון.",1,"M"],
+["miya","sight","Mount Misen Ropeway","רכבל הר מיסן",34.2865,132.3225,"רכבל להר עם נוף לים הפנימי ולאיים.","",2,"M"],
+["miya","park","Momijidani Park","פארק מומיג'ידאני",34.2925,132.3255,"עמק אדרים, בנובמבר כולו אדום.","",0,"M"],
+["miya","temple","Daisho-in","דאישו-אין",34.2930,132.3210,"מקדש עם מאות פסלי ג'יזו קטנים בכובעים סרוגים ומדרגות של גלגלי תפילה.","",0,""],
+["miya","street","Omotesando Shopping Street","רחוב הקניות של מיאג'ימה",34.2985,132.3215,"רחוב של צדפות צלויות, עוגות מומיג'י מנג'ו וכף העץ הכי גדולה בעולם.","",1,"X"],
+["miya","street","Age-Momiji Momijido","מומיג'י מטוגנות",34.2978,132.3218,"עוגיות עלה אדר מטוגנות על מקל, חמות וקריספיות.","לבצק כנראה יש חלב, לשאול.",1,"A1"],
+["miya","animals","Miyajima Deer","הצבאים של מיאג'ימה",34.2970,132.3200,"צבאים חופשיים בכל האי, יותר רגועים מאשר בנארה.","אסור להאכיל אותם כאן.",0,""]
+);
+
+D.push(
+/* ===== KUMAMOTO CITY ===== */
+["kum","op sight","Luffy Statue","פסל לופי",32.7900,130.7415,"פסל הברונזה של לופי, הראשון מעשרת הפסלים של One Piece בקומאמוטו, מול בניין הממשל המחוזי בין עצי גינקו.","חשמלית עד Shiritsutaikukan-mae ואז 10 דקות הליכה. פיגורה מיוחדת נמכרת בבניין.",0,"M"],
+["kum","op animals","Chopper Statue at Kumamoto Zoo","פסל צ'ופר בגן החיות",32.7830,130.7520,"צ'ופר עומד בכניסה לגן החיות והבוטני של קומאמוטו. שני דברים במקום אחד.","חשמלית עד Dobutsuen-iriguchi ו-10 דקות הליכה. סגור בימי שני.",1,"M"],
+["kum","op shop","Mugiwara Store Kumamoto","החנות הרשמית של וואן פיס בקומאמוטו",32.7895,130.6885,"חנות One Piece רשמית עם פריטים מיוחדים של פרויקט התקומה של קומאמוטו.","AMU Plaza Kumamoto, קומה 6, בתחנת קומאמוטו. 10:00-20:00.",2,"M"],
+["kum","sight","Kumamoto Castle","טירת קומאמוטו",32.8063,130.7058,"אחת הטירות הגדולות ביפן, שוקמה אחרי רעידת 2016. שביל מוגבה מעל החומות.","15 דקות הליכה מהמלון.",1,"M"],
+["kum","street food","Sakuranobaba Josaien","סאקורה-נו-באבה ג'וסאיאן",32.8030,130.7030,"רחוב בסגנון עיירת טירה למרגלות הטירה, עם אוכל מקומי ומזכרות.","",1,"A"],
+["kum","quirky shop","Kumamon Square","כיכר קומאמון",32.8025,130.7105,"הבית של קומאמון, הדוב השחור הכי מפורסם ביפן. מופעים קצרים ומלא מרצ'נדייז.","ממש ליד המלון. לבדוק שעות מופע.",0,"M"],
+["kum","shop","Shimotori and Kamitori Arcades","מדרחובות שימוטורי וקמיטורי",32.8015,130.7075,"שני מדרחובות מקורים עם חנויות, ארקיידים ואוכל. צמודים למלון.","",1,""],
+["kum","park","Suizenji Jojuen","גן סואיזנג'י",32.7910,130.7340,"גן עם הר פוג'י מיניאטורי ואגם של מי מעיין. קרוב לפסל לופי.","",1,""],
+["kum","food","Kokutei Ramen","קוקוטיי ראמן",32.7915,130.6880,"ראמן טונקוטסו של קומאמוטו עם שמן שום שרוף. מקום מ-1957.","",1,"MA0"],
+["kum","food","Komurasaki Ramen","קומורסאקי ראמן",32.8005,130.7090,"ראמן קומאמוטו קלאסי עם שבבי שום קלוי.","",1,"A0"],
+["kum","food quirky","Suganoya Basashi","סוגנויה - בשר סוס",32.8013,130.7080,"המאכל הכי מזוהה עם קומאמוטו: סשימי בשר סוס. שווה לנסות.","",3,"0"],
+["kum","food","Akaushi Beef Kumamoto","בקר אקאאושי",32.8010,130.7085,"בקר 'אדום' מאזור אסו, רזה וטעים, בדונבורי או על האש.","",2,"A0"],
+["kum","night","Kumamoto Shimotori nightlife","חיי הלילה של קומאמוטו",32.8000,130.7090,"איזקאיות וברים קטנים מסביב למדרחובות.","",2,""],
+
+/* ===== ONE PIECE STATUES OUTSIDE THE CITY ===== */
+["aso","op","Zoro Statue Ozu","פסל זורו",32.8790,130.8620,"זורו עם שלוש החרבות בפארק המרכזי של אוזו.","רכבת לתחנת Higo-Ozu ו-10 דקות הליכה. בערך 45 דקות מהמלון.",0,"M"],
+["aso","op","Sanji Statue Mashiki","פסל סאנג'י",32.7900,130.8110,"סאנג'י בפארק הספורט של מאשיקי, מאחורי אולם הספורט.","אוטובוס מ-Sakuramachi עד Kiyama Kamimachi ו-15 דקות הליכה.",0,"M"],
+["aso","op","Nami Statue Nishihara","פסל נאמי",32.8220,130.9260,"נאמי ליד טורבינות הרוח של טאוואראיאמה, עם נוף פתוח.","אוטובוס עד Moe no Sato ו-8 דקות הליכה. בערך 70 דקות.",0,"M"],
+["aso","op","Robin Statue Minamiaso","פסל רובין",32.8770,130.9940,"רובין במוזיאון רעידת האדמה בקמפוס הישן של טוקאי. המוזיאון בחינם.","רק ברכב, בערך שעה.",0,"M"],
+["aso","op","Usopp Statue Aso Station","פסל אוסופ",32.9460,131.0350,"אוסופ מול תחנת אסו, נקודת יציאה להר הגעש.","רכבת מקומאמוטו, 70-90 דקות.",0,"M"],
+["aso","op","Franky Statue Takamori","פסל פרנקי",32.8240,131.1220,"פרנקי בתחנת טקאמורי, עם מכתב של אודה על הקיר.","אוטובוסים נדירים, בערך שעה ו-45 דקות. עדיף ברכב.",0,"M"],
+["aso","op","Brook Statue Mifune","פסל ברוק",32.7150,130.8030,"ברוק בפארק הדינוזאורים של מיפונה, ליד מוזיאון דינוזאורים קטן.","אוטובוס, בערך 50 דקות.",0,"M"],
+["aso","op","Jinbe Statue Uto","פסל ג'ינבה",32.6890,130.5780,"ג'ינבה בפארק חוף סומיושי מול הים, נקודת שקיעה מעולה.","רכבת לתחנת Nagabeta, בערך 40 דקות.",0,"M"],
+
+/* ===== ASO AND BEYOND ===== */
+["aso","sight","Mount Aso Nakadake Crater","מכתש הר אסו",32.8840,131.0850,"מכתש פעיל עם אגם טורקיז מהביל. אחד הנופים הכי חזקים בטיול.","נסגר כשיש פעילות געשית, לבדוק באתר באותו בוקר.",1,"M"],
+["aso","sight","Kusasenri","קוסאסנרי",32.8850,131.0590,"עמק דשא עם סוסים ואגם בתוך מכתש עתיק.","",0,""],
+["aso","sight","Daikanbo","דאיקנבו",32.9790,131.0880,"תצפית על כל קלדרת אסו, אחת הגדולות בעולם.","",0,""],
+["aso","temple","Aso Shrine","מקדש אסו",32.9470,131.1160,"מקדש עתיק עם רחוב מים חיים מאחוריו.","",0,""],
+["aso","sight","Takachiho Gorge","קניון טקאצ'יהו",32.7020,131.3010,"קניון בזלת צר עם מפל ושייט בסירות משוטים. נוף אגדי.","רחוק, בערך שעתיים וחצי. יום שלם, עדיף ברכב.",1,"M"],
+["aso","onsen","Kurokawa Onsen","קורוקאווה אונסן",33.0760,131.1430,"כפר אונסן ביער. קונים 'קמיפודה' של עץ ונכנסים לשלוש בריכות.","שעתיים.",2,""]
+);
+
+D.push(
+/* ===== ONE PIECE TOKYO ===== */
+["shibuya","op shop","Mugiwara Store Shibuya (Main Store)","Mugiwara Store שיבויה - החנות הראשית",35.6597,139.7005,"החנות הראשית והגדולה של One Piece ביפן, ליד מעבר החצייה. אירועים, הגרלות ופריטים שיוצאים כאן ראשונים.","MAGNET by SHIBUYA109, קומה 6. 10:00-21:00. כשעמוס מחלקים מספרים.",2,"M"],
+["shinjuku","op shop","ONE PIECE Base Shop Shinjuku","One Piece Base Shop שינג'וקו",35.6915,139.7045,"החנות החדשה והגדולה של One Piece עם מאות פריטים בלעדיים, פיגורות Gear 5 ופריטים חדשים כל חודש. 10 דקות הליכה מהדירה בקאבוקיצ'ו.","Shinjuku Marui Main, קומה 4, 10:00-21:00. נפתח לאחרונה, לוודא פרטים לפני ההגעה.",2,"M"],
+["ginza","op shop","Mugiwara Store Tokyo Station","Mugiwara Store תחנת טוקיו",35.6800,139.7685,"סניף ב-Tokyo Character Street, עם 30 חנויות דמויות נוספות סביבו.","Tokyo Station Ichibangai B1, יציאת Yaesu. 10:00-20:30. עמוס בין 12 ל-16.",2,"M"],
+["ikebukuro","op shop","Mugiwara Store Ikebukuro","Mugiwara Store איקבוקורו",35.7290,139.7190,"סניף בסנשיין סיטי, באותה קומה עם מרכז פוקימון מגה טוקיו.","Sunshine City Alpa, קומה 2. 10:00-20:00.",2,"M"],
+["odaiba","op shop","Mugiwara Store Odaiba","Mugiwara Store אודאיבה",35.6252,139.7756,"הסניף הכי חזק בפיגורות ובאספנות, ופחות עמוס. באותו בניין יש Gundam Base.","DiverCity Tokyo Plaza, קומה 2.",2,"M"],
+["harajuku","op shop","Mugiwara Store Harajuku","Mugiwara Store הרג'וקו",35.6687,139.7055,"סניף שמתמקד בבגדים, בכניסה לבניין הראקאדו.","Harakado, קומת הכניסה. 11:00-21:00.",2,""],
+["ikebukuro","op anime shop","Jump Shop Ikebukuro","ג'אמפ שופ איקבוקורו",35.7290,139.7185,"חנות הדגל של שונן ג'אמפ: One Piece, דרגון בול, נארוטו ו-Jujutsu Kaisen. אגף One Piece גדול.","Sunshine City. עמוס בסופ\"ש.",2,"M"],
+["ginza","op anime shop","Jump Shop Jimbocho","ג'אמפ שופ ג'ימבוצ'ו",35.6960,139.7580,"ג'אמפ שופ חדש בחנות הספרים Sanseido, עם פריטים בלעדיים. שקט יחסית.","Sanseido, קומה 4. ג'ימבוצ'ו היא גם שכונת חנויות הספרים.",2,""],
+["ueno","op anime shop","Jump Shop Tokyo Dome City","ג'אמפ שופ טוקיו דום סיטי",35.7050,139.7520,"ג'אמפ שופ ליד מתחם הלונה פארק של טוקיו דום.","",2,""],
+["oizumi","op anime museum","Toei Animation Museum","מוזיאון טואי אנימיישן",35.7500,139.5850,"המוזיאון של הסטודיו שמפיק את One Piece ודרגון בול, בתוך בניין הסטודיו. סקיצות, מקור ציורים ופסלים.","תחנת Oizumi-gakuen, 30 דקות משינג'וקו. לבדוק באתר אם צריך הרשמה מראש.",0,"M"],
+
+/* ===== EVANGELION / GUNDAM / ROBOTS ===== */
+["ikebukuro","eva anime shop","EVANGELION STORE TOKYO-01","חנות אוונגליון הרשמית",35.7300,139.7110,"החנות הרשמית של אוונגליון: בגדים, פיגורות, דגמים ופריטים בלעדיים. חובה לאוהבי אוונגליון.","Ikebukuro PARCO, קומה 6 לפי NAVITIME (יש מקור שאומר קומה 2, לבדוק). 11:00-21:00.",2,"M"],
+["odaiba","eva anime","Unicorn Gundam Statue","פסל הגאנדאם בגודל אמיתי",35.6250,139.7752,"רובוט יוניקורן גאנדאם בגובה 19.7 מטר שמשנה מצב ונדלק עם מופע אורות ומוזיקה.","מופע כל ערב בכל חצי שעה. לבדוק לוח זמנים.",0,"M"],
+["odaiba","eva anime shop","The Gundam Base Tokyo","גאנדאם בייס טוקיו",35.6252,139.7756,"חנות הגאנפלה (דגמי גאנדאם) הרשמית הגדולה בעולם, עם תצוגה ופינת הרכבה.","DiverCity, קומה 7.",2,"M"],
+["odaiba","eva quirky museum","Small Worlds Tokyo","סמול וורלדס טוקיו",35.6340,139.7930,"מוזיאון מיניאטורות ענק עם האנגר של אוונגליון (נרב), סיילור מון ונמל חלל.","להקדיש שעתיים.",2,"M"],
+["kichi","eva anime","Ghibli Museum Mitaka","מוזיאון ג'יבלי מיטאקה",35.6962,139.5704,"המוזיאון של מיאזאקי עם החתולאוטובוס, רובוט ענק מ'הטירה בשמיים' על הגג וסרט קצר שמוקרן רק כאן.","כרטיסים רק מראש באתר Lawson, נפתחים ב-10 לחודש הקודם. 30 דקות משינג'וקו.",1,"M"],
+
+/* ===== GHIBLI ===== */
+["asakusa","anime shop","Donguri Republic Skytree","חנות ג'יבלי בסקאיי טרי",35.7101,139.8107,"חנות ג'יבלי רשמית בטוקיו סולמאצ'י. 15 דקות הליכה מהמלון.","",2,""],
+["ginza","anime quirky","Ghibli Clock (NTV Big Clock)","שעון ג'יבלי",35.6645,139.7605,"שעון ענק שעיצב מיאזאקי, שזז ומנגן ב-12:00, 15:00, 18:00 ו-20:00 (ובסופ\"ש גם ב-10:00).","מול מטה נטיבי בשיודומה.",0,"M"],
+["shimokita","anime street","Shiro-Hige's Cream Puff Factory","מאפיית הטוטורו",35.6380,139.6590,"המאפייה הרשמית של פחזניות בצורת טוטורו.","מכיל שמנת, לא מתאים בלי חלב. סגור בימי שני ושלישי.",1,"A2"],
+
+/* ===== AKIHABARA ===== */
+["akiba","anime tech","Akihabara Electric Town","אקיהבארה",35.6984,139.7731,"עיר האלקטרוניקה והאנימה: בניינים של פיגורות, גאצ'ה, ארקיידים, מייד קפה וחלקים אלקטרוניים.","בימי ראשון אחר הצהריים הרחוב הראשי נסגר לרכבים.",1,"M"],
+["akiba","tech","Akizuki Denshi","אקיזוקי דנשי",35.7003,139.7712,"חנות הרכיבים האגדית: ערכות, מיקרו-בקרים, חיישנים ורכיבים בשקיות זולות. גן עדן של מהנדסים.","חנות צרה ועמוסה. לבוא עם רשימה.",1,"M"],
+["akiba","tech","Akihabara Radio Center","מרכז הרדיו של אקיהבארה",35.6990,139.7714,"מבוך של דוכנים מתחת לגשר הרכבת: כבלים, מחברים, שנאים, נורות ורכיבים ישנים.","הכי אותנטי.",1,"M"],
+["akiba","tech","Tokyo Radio Department Store","חנות הכלבו של הרדיו",35.6992,139.7712,"בניין של חנויות רכיבים ומדידה.","",1,""],
+["akiba","tech","Marutsu Akihabara","מארוטסו אקיהבארה",35.7008,139.7712,"חנות רכיבים מסודרת עם מלאי גדול.","",1,""],
+["akiba","tech","Sengoku Densho","סנגוקו דנשו",35.6990,139.7713,"חנות רכיבים ותיקה בכמה קומות, כולל כלי עבודה.","",1,""],
+["akiba","tech shop","Yodobashi Akiba","יודובאשי אקיבה",35.6990,139.7745,"חנות אלקטרוניקה ענקית ב-9 קומות: מצלמות, אוזניות, גאדג'טים וצעצועים.","פטור ממס עם דרכון.",2,""],
+["akiba","anime shop","Radio Kaikan","רדיו קאיקן",35.6982,139.7716,"10 קומות של פיגורות, דגמים, קלפים ומנגה מול התחנה.","",2,"M"],
+["akiba","anime vintage","Mandarake Complex","מנדרקה קומפלקס",35.7005,139.7707,"8 קומות של אנימה יד שנייה: פיגורות, צלים, דוג'ינשי וצעצועי רטרו.","",2,"M"],
+["akiba","anime vintage","Super Potato Akihabara","סופר פוטטו אקיהבארה",35.7008,139.7708,"משחקי רטרו לכל קונסולה וארקייד של פעם בקומה העליונה.","",2,""],
+["akiba","anime shop","Animate Akihabara","אנימייט אקיהבארה",35.7001,139.7728,"מרצ'נדייז של סדרות חדשות.","",2,""],
+["akiba","quirky shop","Akihabara Gachapon Kaikan","אולם הגאצ'פון",35.7015,139.7716,"500 מכונות גאצ'ה עם קפסולות של צעצועים מוזרים.","להביא מטבעות 100 ין.",1,"M"],
+["akiba","quirky food","Maidreamin Akihabara","מייד קפה מיידרימין",35.7005,139.7715,"מייד קפה קלאסי עם קסמים על האוכל וריקודים. חוויה מוזרה ומצחיקה.","יש דמי כניסה ומינימום הזמנה.",2,"2"],
+["akiba","arcade night","GiGO Akihabara","ארקייד GiGO אקיהבארה",35.6985,139.7713,"ארקייד בכמה קומות עם מכונות טופי של פיגורות אנימה.","",1,"M"],
+["akiba","animals quirky","Akiba Fukurou Owl Cafe","בית הקפה של הינשופים",35.6990,139.7760,"בית קפה עם ינשופים רגועים. שקט ומכבד את הבעלי חיים.","להזמין מראש.",2,""],
+["akiba","food","Kyushu Jangara Akihabara","קיושו ג'אנגרה",35.6985,139.7720,"ראמן טונקוטסו בסגנון קיושו.","",1,"A0"],
+["akiba","food","Gyukatsu Motomura Akihabara","גיוקאטסו מוטומורה אקיהבארה",35.6995,139.7710,"שניצל בקר על אבן חמה.","",2,"A1"],
+
+/* ===== ASAKUSA / SKYTREE (base 1) ===== */
+["asakusa","temple","Senso-ji","סנסו-ג'י",35.7148,139.7967,"המקדש העתיק בטוקיו עם שער הפנס האדום הענק. מואר יפה בלילה. 5 דקות מהמלון.","בלילה ריק ויפה.",0,"M"],
+["asakusa","street","Nakamise Street","רחוב נאקאמיסה",35.7120,139.7966,"רחוב של 250 מטר בין השערים עם ממתקים, כופתאות ומזכרות.","",1,"MA"],
+["asakusa","quirky shop","Kappabashi Kitchen Town","קאפבאשי",35.7135,139.7880,"רחוב של כלי מטבח, סכינים ידניות ודגמי אוכל מפלסטיק שנראים אמיתיים. מזכרות מעולות.","סגור חלקית בימי ראשון.",1,"M"],
+["asakusa","quirky","Hanayashiki","הנאיאשיקי",35.7155,139.7945,"לונה פארק בן 170 שנה עם רכבת הרים איטית מצחיקה.","",2,""],
+["asakusa","sight","Tokyo Skytree","טוקיו סקאיי טרי",35.7101,139.8107,"מגדל השידור הגבוה בעולם עם תצפית בגובה 350 ו-450 מטר.","בשקיעה הכי יפה.",2,"M"],
+["asakusa","anime food","Kirby Cafe Tokyo","קירבי קפה",35.7101,139.8105,"בית קפה של קירבי עם אוכל בצורת דמויות.","הזמנה מראש חובה.",2,"A1"],
+["asakusa","animals","Sumida Aquarium","אקווריום סומידה",35.7101,139.8100,"אקווריום מעוצב עם פינגווינים ומדוזות, בסקאיי טרי.","",2,""],
+["asakusa","anime quirky sight","Tokyo Cruise Hotaluna","שייט הוטאלונה",35.7100,139.7990,"סירה עתידנית שעיצב לייג'י מאצומוטו, היוצר של גלקסי אקספרס. שייט מאסאקוסה לאודאיבה.","להזמין מראש.",2,"M"],
+["asakusa","sight","Sumida River Walk","טיילת נהר סומידה",35.7101,139.7983,"טיילת עם נוף לסקאיי טרי ול'להבה הזהובה' של אסאהי.","",0,""],
+["asakusa","food","Asakusa Gyukatsu","אסאקוסה גיוקאטסו",35.7114,139.7958,"שניצל בקר צלוי על אבן חמה, ליד המלון.","",2,"MA1"],
+["asakusa","food","Asakusa Imahan","אימהאן סוקיאקי",35.7128,139.7947,"סוקיאקי וואגיו מ-1895. חוויה מפנקת.","יקר. מתאים בלי חלב.",3,"A0"],
+["asakusa","food","Sometaro Okonomiyaki","סומטארו אוקונומיאקי",35.7120,139.7920,"מקום מטבח ישן שבו מכינים לבד אוקונומיאקי על פלנצ'ה בשולחן.","",1,"A1"],
+["asakusa","street","Asakusa Menchi","אסאקוסה מנצ'י",35.7135,139.7940,"קציצת בשר מטוגנת ועסיסית. אוכל רחוב מושלם.","",1,"A1"],
+["asakusa","street","Asakusa Kagetsudo Melonpan","מלונפן קגטסודו",35.7140,139.7960,"לחמניית מלון ענקית וחמה, יוצאת מהתנור.","מכיל חמאה.",1,"A2"],
+["asakusa","night food","Hoppy Street","רחוב הופי",35.7135,139.7935,"רחוב של איזקאיות עם שולחנות בחוץ, שיפודים ובירה.","",1,"A"],
+["asakusa","onsen","Jakotsuyu Sento","ג'קוטסויו סנטו",35.7112,139.7955,"סנטו עם מעיין אמיתי וגן פתוח. 5 דקות מהמלון.","בערך ¥550.",1,""],
+["asakusa","arcade","Asakusa Round1","ראונד 1 אסאקוסה",35.7105,139.7935,"ארקייד, באולינג וקריוקי.","",1,""],
+["asakusa","sight","Ryogoku Kokugikan and Sumo Museum","אולם הסומו ריוגוקו",35.6969,139.7934,"זירת הסומו של טוקיו עם מוזיאון קטן. אפשר לאכול צ'אנקו נאבה, ארוחת הסומו.","בנובמבר הטורניר בפוקואוקה, אז אין קרבות בטוקיו.",1,""],
+
+/* ===== UENO ===== */
+["ueno","street","Ameyoko","אמייוקו",35.7105,139.7745,"שוק של 400 דוכנים מתחת לגשר הרכבת: ממתקים, שיפודים, סניקרס ובגדים.","",1,"MA"],
+["ueno","animals","Ueno Zoo","גן החיות אואנו",35.7166,139.7713,"גן החיות הוותיק ביפן, עם פנדות.","סגור בימי שני.",1,"M"],
+["ueno","park","Ueno Park","פארק אואנו",35.7148,139.7737,"פארק ענק עם מוזיאונים, אגם ומקדשים.","",0,""],
+["ueno","museum","Tokyo National Museum","המוזיאון הלאומי",35.7188,139.7765,"האוסף הגדול ביפן של שריונות סמוראים, חרבות ואמנות.","",1,""],
+["ueno","sight street","Yanaka Ginza","יאנאקה גינזה",35.7276,139.7660,"רחוב של טוקיו הישנה עם חתולים ואוכל רחוב.","",1,""],
+
+/* ===== IKEBUKURO ===== */
+["ikebukuro","anime shop","Animate Ikebukuro Main","אנימייט איקבוקורו",35.7310,139.7175,"חנות האנימה הגדולה בעולם: 10 קומות.","",2,"M"],
+["ikebukuro","anime shop","Pokemon Center Mega Tokyo","מרכז פוקימון מגה טוקיו",35.7290,139.7190,"מרכז פוקימון הגדול ביפן.","",2,""],
+["ikebukuro","mall","Sunshine City","סנשיין סיטי",35.7290,139.7190,"מתחם ענק עם אקווריום על הגג, תצפית וחנויות אנימה.","",2,""],
+["ikebukuro","anime shop","Donguri Republic Ikebukuro","חנות ג'יבלי איקבוקורו",35.7290,139.7192,"חנות ג'יבלי בסנשיין סיטי.","",2,""],
+["ikebukuro","animals","Sunshine Aquarium","אקווריום סנשיין",35.7292,139.7194,"אקווריום על גג עם פינגווינים 'עפים' מעל הראש.","",2,""],
+["ikebukuro","anime street","Otome Road","אוטומה רואד",35.7300,139.7180,"רחוב חנויות אנימה, בעיקר למעריצות.","",1,""],
+
+/* ===== SHINJUKU (base 2) ===== */
+["shinjuku","anime quirky","Godzilla Head","ראש גודזילה",35.6950,139.7020,"ראש גודזילה בגודל אמיתי על הגג של מלון גרייסרי, דקה מהדירה.","",0,"M"],
+["shinjuku","quirky","3D Cat Billboard","החתול התלת-ממדי",35.6913,139.7020,"שלט ענק שבו חתול בתלת-ממד 'יוצא' מהמסך מעל הרחוב.","יציאה מזרחית של תחנת שינג'וקו.",0,"M"],
+["shinjuku","food night","Omoide Yokocho","אומואידה יוקוצ'ו",35.6930,139.6995,"סמטת עשן של דוכני יאקיטורי מאחרי המלחמה.","",1,"MA0"],
+["shinjuku","night","Golden Gai","גולדן גאי",35.6940,139.7045,"200 ברים זעירים בשש סמטאות, כל אחד עם נושא משלו: אנימה, פאנק, הורור.","יש דמי כניסה בחלק מהברים.",2,"M"],
+["shinjuku","night arcade food","Tokyu Kabukicho Tower","מגדל טוקיו קאבוקיצ'ו",35.6956,139.7004,"מגדל חדש עם ארקייד ענק של נמקו ואולם אוכל ניאון ('קאבוקיצ'ו יוקוצ'ו').","",2,"M"],
+["shinjuku","sight","Tokyo Metropolitan Government Building","בניין עיריית טוקיו",35.6896,139.6922,"תצפית חינם בקומה 45. בערב יש מופע הקרנה על הבניין.","",0,"M"],
+["shinjuku","park","Shinjuku Gyoen","שינג'וקו גיואן",35.6852,139.7101,"פארק ענק עם גן יפני, צרפתי ואנגלי. השלכת בסוף נובמבר.","",1,""],
+["shinjuku","shop","Don Quijote Kabukicho","דון קיחוטה קאבוקיצ'ו",35.6945,139.7025,"החנות המטורפת של הכול: ממתקים, קוסמטיקה, תחפושות. פתוחה 24 שעות.","",1,""],
+["shinjuku","tech shop","Yodobashi Camera Shinjuku West","יודובאשי שינג'וקו",35.6910,139.6975,"חנות אלקטרוניקה ענקית בכמה בניינים.","",2,""],
+["shinjuku","food","Fuunji Tsukemen","פואונג'י צוקמן",35.6870,139.6960,"צוקמן עוף-דגים סמיך ומפורסם. תור קבוע.","יש בו דגים בציר.",1,"0"],
+["shinjuku","food","Menya Musashi Shinjuku","מניה מוסאשי",35.6935,139.6975,"ראמן מחוזק עם צ'אשו עבה.","",1,"A0"],
+["shinjuku","food","Ichiran Shinjuku","איצ'יראן שינג'וקו",35.6935,139.7030,"ראמן טונקוטסו בתאים אישיים, פתוח 24 שעות. 2 דקות מהדירה.","",1,"A0"],
+["shinjuku","food","Gyukatsu Motomura Shinjuku","גיוקאטסו מוטומורה שינג'וקו",35.6905,139.7030,"שניצל בקר צלוי על אבן חמה.","",2,"MA1"],
+["shinjuku","food","Yakiniku Like Shinjuku","יאקיניקו לייק",35.6930,139.7005,"מנגל יחיד מהיר וזול. מושלם לארוחת בשר מהירה.","",1,"A0"],
+["shinjuku","onsen","Thermae-Yu","תרמה-יו",35.6955,139.7015,"אונסן עירוני גדול עם מים מובלים, סאונה ומסז'. ממש ליד הדירה.","קעקועים אסורים.",2,""],
+["shinjuku","night","Shinjuku Kabukicho","קאבוקיצ'ו",35.6945,139.7025,"שכונת הבילויים הכי פרועה בטוקיו. הדירה שלכם באמצע.","להתעלם ממגייסים ברחוב.",1,""],
+["shinjuku","vintage","Disk Union Shinjuku","דיסק יוניון שינג'וקו",35.6915,139.7040,"חנות תקליטים ו-CD יד שנייה בכמה בניינים.","",1,""],
+
+/* ===== SHIBUYA ===== */
+["shibuya","sight","Shibuya Crossing","מעבר החצייה של שיבויה",35.6595,139.7005,"מעבר החצייה העמוס בעולם. הכי טוב לצפות מלמעלה.","",0,"M"],
+["shibuya","sight night","Shibuya Sky","שיבויה סקאיי",35.6585,139.7020,"גג פתוח בגובה 230 מטר. בשקיעה זה הנוף הכי טוב בטוקיו.","להזמין מראש, שקיעה נגמרת מהר.",2,"M"],
+["shibuya","anime shop","Shibuya PARCO 6F (Nintendo, Pokemon, Capcom, Jump)","שיבויה פארקו קומה 6",35.6620,139.6985,"קומה שלמה של חנויות רשמיות: נינטנדו טוקיו, פוקימון, קאפקום וג'אמפ שופ.","",2,"M"],
+["shibuya","sight","Hachiko Statue","פסל האצ'יקו",35.6590,139.7006,"פסל הכלב הנאמן ביציאת התחנה.","",0,""],
+["shibuya","mall food","Miyashita Park and Shibuya Yokocho","מיאשיטה פארק",35.6620,139.7020,"קניון על גג עם פארק, ולמטה סמטת אוכל מכל יפן.","",1,""],
+["shibuya","shop","Don Quijote MEGA Shibuya","דון קיחוטה מגה שיבויה",35.6610,139.6980,"דון קיחוטה ענק פתוח 24 שעות.","",1,""],
+["shibuya","shop","Tower Records Shibuya","טאוור רקורדס",35.6615,139.7015,"חנות מוזיקה ב-9 קומות עם פופ-אפים של אנימה ומוזיקה יפנית.","",1,""],
+
+/* ===== HARAJUKU / OMOTESANDO ===== */
+["harajuku","street shop","Takeshita Street","רחוב טאקשיטה",35.6712,139.7035,"רחוב האופנה המטורפת: קרפים, צמר גפן מתוק ענק ובגדי ממתקים.","",1,"M"],
+["harajuku","temple park","Meiji Jingu","מקדש מייג'י",35.6764,139.6993,"מקדש בתוך יער ענק בלב העיר.","",0,""],
+["harajuku","anime shop","Kiddy Land Harajuku","קידי לנד הרג'וקו",35.6686,139.7065,"5 קומות של צעצועים ודמויות: סנריו, סנופי, פוקימון, ג'יבלי.","",2,"M"],
+["harajuku","animals quirky","Mipig Cafe Harajuku","בית הקפה של החזירונים",35.6710,139.7040,"חזירונים זעירים שמתכרבלים עליך.","להזמין מראש.",2,"M"],
+["harajuku","animals","Harry Hedgehog Cafe","בית הקפה של הקיפודים",35.6700,139.7040,"מחזיקים קיפודים קטנים ביד.","",2,""],
+["harajuku","street","Marion Crepes","מריון קרפ",35.6715,139.7040,"קרפים מגולגלים עם עשרות מילויים.","מכיל חלב.",1,"A2"],
+["harajuku","food","AFURI Harajuku","אפורי ראמן",35.6720,139.7065,"ראמן עוף-יוזו קליל ורענן.","",1,"A0"],
+["harajuku","food","Tonkatsu Maisen Aoyama","טונקאטסו מייסן",35.6680,139.7120,"טונקאטסו אגדי בבית מרחץ ישן.","",2,"MA1"],
+["harajuku","shop vintage","Cat Street","קאט סטריט",35.6670,139.7060,"רחוב קטן של חנויות סטריטוור ווינטג'.","",2,""],
+
+/* ===== ODAIBA ===== */
+["odaiba","mall","DiverCity Tokyo Plaza","דייברסיטי",35.6252,139.7756,"קניון עם הגאנדאם, Mugiwara Store, ג'יבלי וגאנדאם בייס.","",2,""],
+["odaiba","sight night","Odaiba Seaside and Rainbow Bridge","החוף של אודאיבה",35.6290,139.7740,"חוף מלאכותי עם נוף לגשר הקשת ופסל החירות.","",0,""],
+["odaiba","museum","teamLab Planets","טימלאב פלאנטס",35.6494,139.7897,"מוזיאון דיגיטלי שנכנסים בו יחפים למים עם דגי אור.","מוזמן ל-24.11, 08:00.",2,"M"],
+
+/* ===== GINZA / TOKYO ST / TSUKIJI ===== */
+["ginza","anime shop","Tokyo Character Street","רחוב הדמויות של טוקיו",35.6800,139.7685,"30 חנויות רשמיות של דמויות במרתף התחנה.","",2,"M"],
+["ginza","food","Tokyo Ramen Street","רחוב הראמן של טוקיו",35.6795,139.7690,"8 חנויות ראמן מובחרות במרתף התחנה.","",1,"MA0"],
+["ginza","shop","Uniqlo Ginza","יוניקלו גינזה",35.6715,139.7650,"חנות הדגל של יוניקלו, 12 קומות.","",1,""],
+["ginza","shop","Itoya Ginza","איטויה גינזה",35.6730,139.7680,"חנות כלי כתיבה ענקית ב-12 קומות.","",2,""],
+["ginza","street","Tsukiji Outer Market","שוק צוקיג'י",35.6655,139.7705,"השוק הישן עם סושי, צדפות וטמגויאקי על מקל.","בבוקר עד הצהריים.",2,"X"],
+["ginza","food quirky","Tsukishima Monja Street","רחוב המונג'ה",35.6630,139.7820,"70 מסעדות של מונג'איאקי, פנקייק נוזלי שמכינים על פלנצ'ה. אפשר להזמין עם בשר.","",1,"A1"],
+["ginza","anime shop","Pokemon Center Tokyo DX and Cafe","מרכז פוקימון טוקיו DX",35.6826,139.7740,"מרכז פוקימון עם בית קפה.","בית הקפה בהזמנה מראש.",2,""],
+
+/* ===== ROPPONGI / TOKYO TOWER ===== */
+["roppongi","sight","Tokyo Tower","מגדל טוקיו",35.6586,139.7454,"המגדל האדום הקלאסי.","",2,""],
+["roppongi","museum","teamLab Borderless","טימלאב בורדרלס",35.6620,139.7434,"עולם אור דיגיטלי בלי גבולות בין חדרים.","מוזמן ל-26.11, 11:00.",2,"M"],
+["roppongi","sight","Tokyo City View Roppongi Hills","תצפית רופונגי הילס",35.6604,139.7292,"תצפית עם נוף ישיר למגדל טוקיו.","",2,""],
+
+/* ===== NAKANO / KOENJI ===== */
+["nakano","anime vintage","Nakano Broadway","נקאנו ברודוויי",35.7088,139.6660,"קניון ישן עם 4 קומות של חנויות אספנות אנימה, מנדרקה ופיגורות. 10 דקות ברכבת מהדירה.","החנויות נפתחות בסביבות 12:00.",1,"M"],
+["nakano","vintage","Koenji Vintage Streets","הווינטג' של קואנג'י",35.7050,139.6495,"שכונה עם מאות חנויות בגדים יד שנייה וברים קטנים.","",1,""],
+
+/* ===== SHIMOKITAZAWA / KICHIJOJI ===== */
+["shimokita","vintage","Shimokitazawa","שימוקיטאזאווה",35.6613,139.6680,"שכונת הווינטג' והתרבות האלטרנטיבית של טוקיו.","",1,"M"],
+["kichi","park","Inokashira Park","פארק אינוקשירה",35.7000,139.5730,"פארק עם אגם וסירות, בדרך למוזיאון ג'יבלי.","",0,""]
+);
+
+D.push(
+/* ===== KAMAKURA / ENOSHIMA ===== */
+["kamakura","temple sight","Great Buddha of Kamakura","הבודהה הגדול של קמקורה",35.3167,139.5358,"בודהה ברונזה בגובה 13 מטר באוויר הפתוח. אפשר להיכנס לתוכו.","שעה ו-10 דקות משינג'וקו.",1,"M"],
+["kamakura","temple","Tsurugaoka Hachimangu","צורוגאוקה האצ'ימנגו",35.3259,139.5565,"המקדש הראשי של קמקורה בקצה שדרה ארוכה.","",0,""],
+["kamakura","street","Komachi Street","רחוב קומאצ'י",35.3215,139.5525,"רחוב של אוכל רחוב, ממתקים וחנויות.","",1,"A"],
+["kamakura","temple","Hasedera","האסדרה",35.3125,139.5330,"מקדש על צלע הר עם נוף לים ומערה.","",1,""],
+["kamakura","anime sight","Slam Dunk Railroad Crossing","מעבר הרכבת של סלאם דאנק",35.3070,139.5000,"מעבר הרכבת מפתיחת סלאם דאנק, עם הים ברקע. מקום עלייה לרגל לאנימה.","תחנת Kamakurakokomae בקו Enoden. עמוס.",0,"M"],
+["kamakura","sight","Enoshima Island","אי אנושימה",35.2995,139.4805,"אי קטן עם מקדשים, מערות ומגדלור עם נוף לפוג'י.","",1,"M"],
+["kamakura","street","Enoshima Tako Senbei","טאקו סנבי",35.3000,139.4810,"תמנון שלם נלחץ לקרקר ענק.","פירות ים.",1,"X"],
+
+/* ===== TAKAO ===== */
+["takao","park sight","Mount Takao","הר טאקאו",35.6251,139.2437,"הר עם רכבל, מקדש ונוף לפוג'י. השלכת בסוף נובמבר.","שעה משינג'וקו בקו Keio.",1,"M"],
+["takao","onsen","Keio Takaosan Onsen Gokurakuyu","אונסן טאקאוסן",35.6320,139.2700,"אונסן ליד התחנה, מושלם אחרי הטיול.","",2,""],
+
+/* ===== KAWAGUCHIKO ===== */
+["kawaguchi","sight","Chureito Pagoda","פגודת צ'ורייטו",35.5011,138.8015,"הנוף הכי מפורסם של יפן: פגודה אדומה מול הר פוג'י. 400 מדרגות.","שעתיים משינג'וקו באוטובוס.",0,"M"],
+["kawaguchi","sight","Lake Kawaguchi Maple Corridor","מסדרון האדרים",35.5166,138.7480,"שדרת אדרים מול פוג'י, פסטיבל שלכת בתחילת נובמבר.","",0,""],
+["kawaguchi","eva quirky","Fuji-Q Highland","פוג'י-קיו היילנד",35.4870,138.7800,"פארק שעשועים עם רכבות הרים קיצוניות ואטרקציות אנימה מתחלפות.","לבדוק אילו אטרקציות אנימה פתוחות.",3,""],
+
+/* ===== CHICHIBU ===== */
+["chichibu","sight night","Chichibu Night Festival","פסטיבל הלילה של צ'יצ'יבו",35.9970,139.0850,"אחד משלושת הפסטיבלים הגדולים ביפן: מרכבות ענק מוארות בפנסים נגררות בעלייה, וזיקוקים בחורף.","2-3 בדצמבר. הלילה של ה-3 הוא השיא. שעה וחצי מאיקבוקורו בקו Seibu.",1,"M"],
+["chichibu","temple","Chichibu Shrine","מקדש צ'יצ'יבו",35.9970,139.0840,"המקדש של הפסטיבל, עם פסלי עץ צבעוניים.","",0,""],
+
+/* ===== TAMA ===== */
+["tama","anime quirky","Sanrio Puroland","סנריו פורולנד",35.6250,139.4280,"פארק מקורה של הלו קיטי וכל הדמויות של סנריו, עם מופעים.","שעה משינג'וקו.",3,""],
+["tama","anime sight","Seiseki Sakuragaoka (Whisper of the Heart)","סייסקי סאקורגאוקה - לחישת הלב",35.6510,139.4470,"השכונה שהיוותה השראה לסרט של ג'יבלי, עם מפה של המקומות.","",0,""]
+);
+
+// Hard Off branches. Extra field 11 = Hard Off score 1-5 (rating + size + review notes), field 12 = Google rating, 13 = review count
+D.push(
+/* Nagoya */
+["ngy","hardoff vintage tech","Hard Off Kakuozan","הארד אוף קאקואוזן",35.1665458,136.9492873,"הדירוג הכי גבוה באזור נגויה. מבחר טוב של ציוד שמע, מצלמות ועדשות, קונסולות וצעצועי רכבות. המחירים הוגנים, אבל על קנייה מכם הם משלמים מעט.","סניף עירוני, 10:00-20:00. תחנת Kakuozan.",1,"",4,3.7,450],
+["ngy","hardoff vintage tech","Hard Off Tokushige","הארד אוף טוקושיגה",35.08899,136.9937259,"סניף גדול ומרווח בשתי קומות: House Off למטה ו-Hard Off למעלה. הכי חזק בציוד שמע איכותי, אבל פינת ה-Junk קטנה.","מחוץ למרכז, בערך 35 דקות ברכבת תחתית. 10:00-19:30.",1,"",3,3.6,372],
+["ngy","hardoff vintage tech","Hard Off Nagoya Airport Street","הארד אוף נגויה אירפורט סטריט",35.2442072,136.910552,"לפי הביקורות זה ה-Hard Off הכי טוב באזור, עם פינת Junk ענקית, כלי עבודה וכלי נגינה, ו-Off House צמוד. קשה להגיע בלי רכב.","רחוק, מתאים רק אם עוד יש לכם רכב. 10:30-19:30.",1,"",4,3.6,437],
+["ngy","hardoff vintage tech","Hard Off Owariasahi","הארד אוף אוואריאסהי",35.2148331,137.046697,"הכי קרוב לפארק ג'יבלי. קטן ויקר יחסית, ופינת ה-Junk מבולגנת. יש בו דגמי גאנדאם.","10:30-19:30.",1,"",2,3.5,304],
+["ngy","hardoff vintage tech","Hard-Off Meito","הארד אוף מייטו",35.1527092,137.0102673,"סניף בינוני עם מצלמות, טלוויזיות, משחקים, תקליטים וכלי נגינה. הצוות נחמד.","בדרך בין ג'יבלי לנגויה. 10:30-19:30.",1,"",3,3.5,265],
+["ngy","hardoff vintage tech","Hard Off Miyoshi","הארד אוף מיושי",35.0918038,137.0822525,"הרבה משחקים, פריטים רגילים זולים ופריטים נדירים יקרים. פינת ה-Junk דלה.","רחוק, רק ברכב.",1,"",2,3.6,685],
+
+/* Kyoto */
+["kyo","hardoff vintage tech","Hard Off Kyoto Fujinomori","הארד אוף קיוטו פוג'ינומורי",34.9579485,135.7680342,"סניף חדש ונקי עם הדירוג הגבוה בקיוטו. מבחר ענק של חלקי מחשב (כרטיסים גרפיים, מעבדים, לוחות אם), מחשבים ניידים וקונסולות רטרו מסודרות. מומלץ במיוחד בשבילך.","ליד תחנת Fujinomori בקו Keihan, 3 תחנות מפושימי אינארי. 11:00-20:00.",1,"M",5,4.5,30],
+["kyo","hardoff vintage tech","Hard Off Kyoto Katsura","הארד אוף קיוטו קטסורה",34.9916316,135.7049463,"הסניף המוכר בקיוטו: טלפונים, קונסולות, גיטרות וצעצועים. לפי הביקורות המחירים טובים, אבל הסניף קטן.","מערב קיוטו ליד תחנת Katsura, אפשר לשלב עם ארשיאמה. 10:00-20:00.",1,"",3,3.7,502],
+["kyo","vintage","Bookoff Super Bazaar Fushimi","בוק אוף סופר בזאר פושימי",34.9306335,135.7453765,"חנות יד שנייה ענקית: מנגה, משחקים, פיגורות, אלקטרוניקה, בגדים ונעליים. המחירים זולים מבמרכז.","רחוק מתחנה, מונית קצרה. 10:00-22:00.",1,"",3,3.6,652],
+
+/* Osaka */
+["osk","hardoff vintage tech","Hard Off Osaka Taisho","הארד אוף אוסקה טאישו",34.64701,135.4714,"הסניף הכי קרוב למלון. נקי ומסודר עם מחשבים ניידים זולים וקונסולות רטרו במצב טוב. לפי הביקורות פינת ה-Junk פחות טובה.","בערך 20-25 דקות. 10:30-19:30.",1,"M",4,3.7,104],
+["osk","hardoff vintage tech","Hard Off Kadoma","הארד אוף קדומה",34.7326994,135.5937002,"סניף גדול משולב עם Off House. המון בגדים, אלקטרוניקה ומשחקים, ולפעמים מציאות מטורפות כמו קונסולות ב-110 ין. אחד האהובים באזור אוסקה.","בערך 35 דקות ברכבת, תחנת Kadoma-shi.",1,"M",5,3.7,650],
+["osk","hardoff vintage tech","Hard Off Minamisettsu","הארד אוף מינאמיסטסו",34.7641325,135.5698473,"סניף ענק עם מצלמות פילם ישנות בפינת ה-Junk, ציוד שמע ומבחר גדול ומסודר.","צפון אוסקה, ליד תחנת Minami-Settsu.",1,"",4,3.7,655],
+["osk","hardoff vintage tech","Hard Off Sakai Shinkanaoka","הארד אוף סאקאי",34.5638144,135.5137289,"מתחם שלם של Book Off, Off House ו-Hard Off. המבחר הכי גדול של גיימבוי באוסקה, וגם בגדי וינטג'. המחירים גבוהים.","דרומה, בערך 30 דקות ברכבת התחתית.",1,"",4,3.3,412],
+["osk","hardoff vintage tech","Hard Off Higashi-Osaka Wakae","הארד אוף וואקאה",34.6548038,135.597604,"סניף קטן וצפוף בקלטות משחקים, חלקן בקופסאות מקוריות ונדירות. פינת Junk גדולה.","",1,"",3,3.7,38],
+["osk","hardoff vintage tech","Hard Off Yao Kayafuri","הארד אוף יאו",34.638442,135.6041594,"קטן אבל עם מבחר טוב ומחירים טובים.","רחוק, מזרח אוסקה.",1,"",2,3.7,74],
+
+/* Kobe */
+["kobe","hardoff vintage tech","Hard Off Kobe Nada","הארד אוף קובה נאדה",34.7148836,135.2468023,"סניף עירוני בקומה 2 מעל סופרמרקט. מחשבים, ציוד שמע, משחקי רטרו ופיגורות, ופינת Junk.","הכי קרוב למרכז קובה, ליד תחנת Rokkomichi.",1,"",3,3.9,51],
+["kobe","hardoff vintage tech","Hard Off and Hobby Off Kobe Seiryodai","הארד אוף והובי אוף סיירידאי",34.6482918,135.0498787,"מתחם של Book Off, Hard Off, Off House ו-Hobby Off עם תצוגה מרשימה של צעצועי קאמן ריידר, אולטרמן ורובוטים.","מערב קובה, רחוק.",1,"",3,3.4,163],
+
+/* Hiroshima */
+["hiro","hardoff vintage tech","Hard Off Hiroshima Nukushina","הארד אוף הירושימה נוקושינה",34.4078478,132.5062044,"'חנות האלקטרוניקה המשומשת הכי טובה בעיר' לפי הביקורות. כלי נגינה, משחקים, כלי עבודה, מחשבים וחלקים.","מזרח העיר, ליד תחנת Yaga. 10:00-20:00.",1,"M",4,3.9,149],
+["hiro","hardoff vintage tech","Hard Off and Hobby Off Hiroshima Yagi","הארד אוף והובי אוף יאגי",34.4753495,132.4913682,"נחשב ה-Hobby Off הכי טוב ביפן לפיגורות: מבחר ענק של פיגורות נדירות, גאנדאם, משחקים וקונסולות במחירים טובים.","צפון העיר, 25 דקות ברכבת JR Kabe Line.",1,"M",5,3.5,94],
+["hiro","hardoff vintage tech","Hard Off Hiroshima Saka","הארד אוף סאקה",34.3400875,132.5091563,"שתי קומות. בקומה העליונה גיקים ומשחקים, ויש דברים זולים מאוד.","בדרום-מזרח, בדרך לקורה.",1,"",3,3.8,94],
+
+/* Kumamoto */
+["kum","hardoff vintage tech","Hard Off Minamikumamoto","הארד אוף מינאמיקומאמוטו",32.7855634,130.7033517,"הכי קרוב למלון, בערך 15 דקות הליכה. מגוון של כל דבר, אבל הסניף לא גדול.","10:00-20:00. יש דיווחים שלא תמיד נותנים פטור ממס.",1,"",3,3.4,427],
+["kum","hardoff vintage tech","Hard Off Off House Kumamoto Kita","הארד אוף קומאמוטו קיטה",32.8291561,130.7113356,"סניף גדול משולב עם Off House ומבחר פיגורות טוב.","צפון העיר, אוטובוס או מונית.",1,"",4,3.5,522],
+["kum","hardoff vintage tech","Hard Off Kumamoto Obiyama","הארד אוף אוביאמה",32.8010088,130.7550134,"סניף חדש ונקי, מסודר מאוד. מעט משחקי רטרו.","מזרח העיר.",1,"",2,3.3,98],
+
+/* Tokyo */
+["akiba","hardoff vintage tech","Hard Off Akihabara 1st","הארד אוף אקיהבארה 1",35.7005462,139.7705561,"חמש קומות ומרתף של מגברים, קונסולות, פמיקום ואוזניות, ופינת Junk שהיא 'גן עדן של אלקטרוניקה'. המחירים בטוקיו גבוהים, אבל המבחר מטורף.","Sotokanda 3-11-2. 11:00-20:00.",2,"M",4,3.6,1045],
+["akiba","hardoff vintage tech","Hard Off and Hobby Off Akihabara 2nd","הארד אוף והובי אוף אקיהבארה 2",35.7021416,139.7706236,"קטן, אבל מוצאים בו פריטי רטרו נדירים וקלפי Magic זולים. מחירים יקרים.","5 דקות מהסניף הראשון.",2,"",3,3.7,186],
+["ueno","hardoff vintage tech","Hard Off and Hobby Off Ueno Okachimachi","הארד אוף והובי אוף אואנו",35.7087067,139.774101,"חמש קומות עם הכי הרבה משחקי רטרו וקונסולות מכל ה-Hard Off בטוקיו, אבל גם הכי יקר. הכי קרוב למלון באסאקוסה.","15 דקות ברכבת מאסאקוסה. 11:00-20:00.",2,"M",4,3.5,479],
+["kichi","hardoff vintage tech","Hard Off Kichijoji","הארד אוף קיצ'יג'וג'י",35.7067884,139.5807711,"שלוש קומות: קונסולות ורטרו, קומה שלמה של כלי נגינה (4.2), ואולם אודיו לחובבי Hi-Fi עם מערכות האזנה (4.1). אחד המיוחדים בטוקיו.","ליד תחנת Kichijoji. לשלב עם מוזיאון ג'יבלי.",2,"M",5,3.7,394],
+["nakano","hardoff vintage tech","Hard Off Koenji","הארד אוף קואנג'י",35.7067251,139.6498732,"שלוש קומות, בעיקר כלי נגינה וציוד שמע, וגם קצת משחקים. ליד תחנת Koenji, שכונת וינטג' מגניבה.","10 דקות ברכבת משינג'וקו.",2,"",3,3.6,206]
+);
+
+D.push(
+/* ===== KUMAMOTO EXTRAS (Oda's home island) ===== */
+["kum","op quirky","One Piece Manhole Covers","מכסי הביוב של וואן פיס",32.7902,130.7418,"ליד כל אחד מעשרת הפסלים יש מכסה ביוב מעוצב עם הדמות. צלמו את כולם, זה חלק מהמסע של מעריצי הפרויקט.","הראשון ליד פסל לופי.",0,""],
+["kum","op","One Piece Kumamoto Revival Project Route","מסלול פרויקט התקומה של וואן פיס",32.7900,130.7415,"אודה, היוצר של One Piece, נולד בקומאמוטו. אחרי רעידת האדמה של 2016 הוצבו 10 פסלים של כנופיית כובעי הקש בעיירות שנפגעו. אפשר לקנות ליד כל פסל פיגורה מיוחדת.","עם רכב אפשר לעשות את כולם ביום וחצי. בלי רכב: לופי וצ'ופר בעיר, וג'ינבה, זורו, סאנג'י וברוק בתחבורה ציבורית.",0,"M"],
+["kum","mall","Sakura Machi Kumamoto","סאקורה מאצ'י קומאמוטו",32.8000,130.7040,"קניון ותחנת האוטובוסים המרכזית, עם גג ירוק ופסל קומאמון ענק. מכאן יוצאים האוטובוסים לפסלים.","",1,""],
+["kum","mall","AMU Plaza Kumamoto","אמו פלאזה קומאמוטו",32.7895,130.6885,"קניון בתחנת הרכבת, עם Mugiwara Store, מסעדות וגן מקורה.","",2,""],
+["kum","food","Keika Ramen","קייקה ראמן",32.8020,130.7080,"ראמן קומאמוטו מ-1955, עם שמן שום וחזיר מבושל.","",1,"A0"],
+["kum","food","Kouran-tei Taipien","קוראן-טיי טאיפיין",32.8013,130.7078,"טאיפיין: מרק אטריות זכוכית עם ירקות ופרוסות עוף, המנה הכי 'קומאמוטית'.","",1,"A0"],
+["kum","sight","Mount Kinpo","הר קינפו",32.8150,130.6450,"תצפית על קומאמוטו ועל הר אסו מרחוק.","",0,""],
+["kum","sight","Hosokawa Gyobu-tei","אחוזת הוסוקאווה",32.8090,130.7030,"אחוזת סמוראים עם גן, ליד הטירה.","",1,""],
+
+/* ===== TOKYO EXTRAS ===== */
+["shinjuku","food","Shogun Burger Shinjuku","שוגון בורגר",35.6940,139.7020,"המבורגר וואגיו עסיסי בקאבוקיצ'ו, דקה מהדירה.","בלי חלב: לבקש בלי גבינה ובלי חמאה בלחמנייה.",2,"MA1"],
+["ueno","food","Fire House Hongo","פייר האוס",35.7085,139.7605,"אחד ההמבורגרים האגדיים של טוקיו, בסגנון אמריקאי.","",2,"A1"],
+["shibuya","food","Pizzeria Seirinkan","פיצריה סייריננקן",35.6430,139.6990,"פיצה נפוליטנית מפורסמת בנאקאמגורו.","פיצה מרינרה בלי גבינה.",2,"A1"],
+["harajuku","street","Totti Candy Factory","טוטי קנדי",35.6713,139.7035,"צמר גפן מתוק בצבעי קשת בגודל של ראש.","",1,"A0"],
+["harajuku","street","A Happy Pancake Omotesando","הפי פנקייק",35.6660,139.7100,"פנקייקים יפניים אווריריים שרועדים.","מכיל חלב.",2,"A2"],
+["asakusa","street","Asakusa Kibi Dango Azuma","קיבי דנגו אזומה",35.7120,139.7965,"כדורי דנגו חמים בקמח סויה. קטן ומתוק.","בלי חלב.",1,"A0"],
+["akiba","quirky","Street Kart Akihabara","גו-קארט ברחובות",35.6973,139.7743,"נוסעים בגו-קארט בתחפושות ברחובות טוקיו.","חובה רישיון נהיגה בינלאומי.",3,"M"],
+["shinjuku","arcade","Taito Station Shinjuku","טאיטו סטיישן שינג'וקו",35.6935,139.7010,"ארקייד בכמה קומות ליד הדירה, עם מכונות טופי ומשחקי קצב.","",1,""],
+["ikebukuro","arcade","GiGO Ikebukuro","GiGO איקבוקורו",35.7300,139.7140,"ארקייד גדול עם פרס של פיגורות.","",1,""],
+["shibuya","arcade","Round1 Shibuya","ראונד 1 שיבויה",35.6605,139.6990,"ארקייד, באולינג, קריוקי ובאטינג.","",1,""],
+["ueno","onsen","Spa LaQua","ספא לאקווה",35.7060,139.7530,"מתחם ספא ענק עם אונסן אמיתי, סאונות ומרפסת שמש, ליד טוקיו דום.","בערך ¥3000. קעקועים אסורים.",2,""],
+["asakusa","onsen","Daikokuyu","דאיקוקויו",35.7140,139.8170,"סנטו עם אמבט פתוח על הגג ונוף לסקאיי טרי. פתוח עד מאוחר.","",1,"M"],
+["shibuya","night","Nonbei Yokocho","נונביי יוקוצ'ו",35.6595,139.7020,"סמטת ברים זעירים ליד התחנה, 'סמטת השיכורים'.","",2,""],
+["shibuya","night","Ebisu Yokocho","אביסו יוקוצ'ו",35.6475,139.7110,"שוק מקורה עם דוכני אוכל ושתייה. אווירה מעולה בערב.","",2,"A"],
+["shibuya","night quirky","Karaoke Kan Shibuya","קריוקי קאן שיבויה",35.6600,139.6985,"קריוקי עם חדרים פרטיים, החדר מ'אבודים בטוקיו'.","",1,""],
+["roppongi","quirky food","Ninja Akasaka","מסעדת נינג'ה",35.6745,139.7380,"מסעדה בתוך 'כפר נינג'ות' עם מבוך, שירות של נינג'ות וקוסמים.","להזמין מראש.",3,"A1"],
+["shinjuku","quirky food","Zauo Shinjuku","זאואו - דגים שתופסים לבד",35.6905,139.7000,"יושבים על סירה בתוך המסעדה, דגים דג והמטבח מכין אותו. ","",2,"X0"],
+["shibuya","anime vintage","Mandarake Shibuya","מנדרקה שיבויה",35.6610,139.6985,"קומת מרתף ענקית של אספנות אנימה יד שנייה.","",2,""],
+["harajuku","vintage","2nd Street Harajuku","סקנד סטריט הרג'וקו",35.6690,139.7050,"חנות יד שנייה של מותגים ובגדי וינטג'.","",2,""],
+["akiba","anime shop","Kotobukiya Akihabara","קוטובוקיה אקיהבארה",35.6995,139.7725,"החנות של חברת הפיגורות והדגמים קוטובוקיה.","",2,""],
+["harajuku","animals","Mameshiba Cafe Harajuku","בית הקפה של השיבות",35.6705,139.7035,"כלבי שיבה אינו קטנים שאפשר לשחק איתם.","",2,""],
+["ikebukuro","animals","Cat Cafe MoCHA Ikebukuro","בית הקפה של החתולים MoCHA",35.7305,139.7130,"חתולים מגזעים מיוחדים בחלל גדול.","",2,""],
+["shimokita","temple quirky","Gotokuji","גוטוקו-ג'י - מקדש החתולים",35.6489,139.6474,"אלפי פסלי חתול מזל לבנים (מאנקי-נקו) עם יד מורמת.","",0,"M"],
+["ginza","sight","Imperial Palace East Gardens","הגנים המזרחיים של הארמון",35.6852,139.7528,"גן חינם בתוך חומות הארמון הקיסרי.","סגור בימי שני ושישי.",0,""],
+["ginza","sight","Tokyo Station Marunouchi","תחנת טוקיו מרונואוצ'י",35.6812,139.7671,"בניין לבנים אדומות מ-1914. מקסים בלילה.","",0,""],
+["shibuya","shop","Shibuya Hands and Loft","האנדס ולופט שיבויה",35.6620,139.6975,"חנויות של כל דבר מגניב: גאדג'טים, כלי כתיבה וחפצים מוזרים.","",2,""]
+);
+
+const CARD_IMG = "";
+</script>
+<script>
+"use strict";
+/* ================= Static definitions ================= */
+const TZ = "Asia/Tokyo";
+const P = d => d; // date helper marker
+const REGIONS = [
+  { k:"ngy", he:"נגויה", kanji:"名古屋", from:"2026-11-03", to:"2026-11-05", areas:["ngy"],
+    bases:[{ k:"ngy", he:"Nikko Style Nagoya", lat:35.1668, lon:136.8870, from:"2026-11-03", to:"2026-11-05" }] },
+  { k:"kyo", he:"קיוטו", kanji:"京都", from:"2026-11-05", to:"2026-11-13", areas:["kyo","nara","uji"],
+    bases:[{ k:"kyo", he:"GOOD NATURE HOTEL KYOTO", lat:35.00253, lon:135.7691, from:"2026-11-05", to:"2026-11-13" }] },
+  { k:"osk", he:"אוסקה", kanji:"大阪", from:"2026-11-13", to:"2026-11-17", areas:["osk","kobe","himeji"],
+    bases:[{ k:"osk", he:"Candeo Hotels Osaka Shinsaibashi", lat:34.6706, lon:135.5007, from:"2026-11-13", to:"2026-11-17" }] },
+  { k:"hiro", he:"הירושימה", kanji:"広島", from:"2026-11-17", to:"2026-11-19", areas:["hiro","miya"],
+    bases:[{ k:"hiro", he:"The Knot Hiroshima", lat:34.3894, lon:132.45533, from:"2026-11-17", to:"2026-11-19" }] },
+  { k:"kum", he:"קומאמוטו", kanji:"熊本", from:"2026-11-19", to:"2026-11-22", areas:["kum","aso"],
+    bases:[{ k:"kum", he:"Candeo Hotels Kumamoto Shinshigai", lat:32.79858, lon:130.70613, from:"2026-11-19", to:"2026-11-22" }] },
+  { k:"tky", he:"טוקיו", kanji:"東京", from:"2026-11-22", to:"2026-12-06",
+    areas:["asakusa","ueno","akiba","ikebukuro","shinjuku","shibuya","harajuku","ginza","odaiba","roppongi","nakano","shimokita","kichi","oizumi","kamakura","takao","kawaguchi","chichibu","tama"],
+    bases:[{ k:"asa", he:"the Moto Hotel Asakusa", lat:35.71613, lon:139.79795, from:"2026-11-22", to:"2026-11-29" },
+           { k:"shj", he:"Stay Kabukicho B", lat:35.69702, lon:139.7021, from:"2026-11-29", to:"2026-12-06" }] }
+];
+const AREAS = {
+  ngy:{he:"נגויה"}, kyo:{he:"קיוטו"}, nara:{he:"נארה", trip:"קינטטסו מתחנת קיוטו, 35-50 דקות. כרטיס בערך ¥760."},
+  uji:{he:"אוג'י", trip:"JR Nara Line מתחנת קיוטו, 20-30 דקות."}, osk:{he:"אוסקה"},
+  kobe:{he:"קובה", trip:"מנמבה בקו Hanshin, או JR מאומדה. 30-45 דקות."},
+  himeji:{he:"הימג'י", trip:"שינקנסן מ-Shin-Osaka, 30 דקות, או JR Special Rapid, 60 דקות."},
+  hiro:{he:"הירושימה"}, miya:{he:"מיאג'ימה", trip:"JR לתחנת Miyajimaguchi ואז מעבורת JR (מכוסה ב-JR Pass). בערך שעה."},
+  kum:{he:"קומאמוטו"}, aso:{he:"אסו והפסלים", trip:"רוב המקומות רחוקים. רכב שכור מהעיר הכי משתלם. אוטובוסים יוצאים מ-Sakura Machi."},
+  asakusa:{he:"אסאקוסה וסקאיי טרי"}, ueno:{he:"אואנו"}, akiba:{he:"אקיהבארה"}, ikebukuro:{he:"איקבוקורו"},
+  shinjuku:{he:"שינג'וקו"}, shibuya:{he:"שיבויה ואביסו"}, harajuku:{he:"הרג'וקו ואומוטסנדו"}, ginza:{he:"גינזה ותחנת טוקיו"},
+  odaiba:{he:"אודאיבה"}, roppongi:{he:"רופונגי ומגדל טוקיו"}, nakano:{he:"נקאנו וקואנג'י"}, shimokita:{he:"שימוקיטאזאווה וסטאגאיה"},
+  kichi:{he:"קיצ'יג'וג'י ומיטאקה"}, oizumi:{he:"אואיזומי (טואי)"},
+  kamakura:{he:"קמקורה ואנושימה", trip:"JR Shonan-Shinjuku Line משינג'וקו, בערך שעה. Enoden מחבר בין המקומות."},
+  takao:{he:"הר טאקאו", trip:"קו Keio משינג'וקו לתחנת Takaosanguchi, בערך שעה, ¥500."},
+  kawaguchi:{he:"קוואגוצ'יקו ופוג'י", trip:"אוטובוס ישיר מ-Busta Shinjuku, כשעתיים. להזמין מקום."},
+  chichibu:{he:"צ'יצ'יבו", trip:"Seibu Limited Express 'Laview' מאיקבוקורו, 80 דקות."},
+  tama:{he:"טאמה (סנריו)", trip:"קו Keio משינג'וקו, 35-45 דקות."}
+};
+const CATS = {
+  op:{he:"One Piece", c:"#E4572E", c2:"#4A1E14", i:"hat"},
+  eva:{he:"רובוטים, אוונגליון וג'יבלי", c:"#9B7BFF", c2:"#2E2160", i:"robot"},
+  anime:{he:"אנימה ומנגה", c:"#FF7DB8", c2:"#4A1D35", i:"star"},
+  hardoff:{he:"Hard Off", c:"#FFD23F", c2:"#4A3B0B", i:"tag"},
+  vintage:{he:"וינטג' ויד שנייה", c:"#D9A97A", c2:"#3E2A18", i:"hanger"},
+  tech:{he:"אלקטרוניקה", c:"#3FD0D4", c2:"#0F3D40", i:"chip"},
+  food:{he:"מסעדות", c:"#FF9248", c2:"#4A2610", i:"bowl"},
+  street:{he:"אוכל רחוב ושווקים", c:"#F6B25E", c2:"#4A3215", i:"skewer"},
+  shop:{he:"קניות", c:"#5DADEC", c2:"#163453", i:"bag"},
+  mall:{he:"קניונים", c:"#7FC8D0", c2:"#163E43", i:"building"},
+  sight:{he:"נופים ויופי", c:"#57D3F5", c2:"#0F3A4A", i:"mount"},
+  temple:{he:"מקדשים", c:"#F07F65", c2:"#4A1F16", i:"torii"},
+  park:{he:"פארקים וטבע", c:"#6FD37E", c2:"#173D1E", i:"leaf"},
+  animals:{he:"בעלי חיים", c:"#B3D865", c2:"#2E3D12", i:"paw"},
+  museum:{he:"מוזיאונים", c:"#C5A3D9", c2:"#352542", i:"frame"},
+  quirky:{he:"מוזר ומגניב", c:"#FF73E0", c2:"#4A1844", i:"spark"},
+  night:{he:"לילה וברים", c:"#A897FF", c2:"#2A2357", i:"moon"},
+  arcade:{he:"ארקיידים וגאצ'ה", c:"#2EF2CF", c2:"#0D4239", i:"joy"},
+  onsen:{he:"אונסן וסנטו", c:"#9EE6F5", c2:"#173F4A", i:"onsen"}
+};
+const CAT_ORDER = ["op","eva","anime","hardoff","vintage","tech","food","street","shop","mall","sight","temple","park","animals","museum","quirky","night","arcade","onsen"];
+/* Broad topics shown first; each opens finer sub-filters */
+const GROUPS = [
+  { k:"food",  he:"אוכל",         c:"#FF9248", i:"bowl",     cats:["food","street"] },
+  { k:"anime", he:"אנימה",        c:"#FF7DB8", i:"star",     cats:["op","eva","anime"] },
+  { k:"shop",  he:"קניות",        c:"#5DADEC", i:"bag",      cats:["hardoff","vintage","tech","mall","shop"] },
+  { k:"see",   he:"אטרקציות",     c:"#57D3F5", i:"mount",    cats:["sight","temple","museum","quirky"] },
+  { k:"nat",   he:"טבע וחיות",    c:"#6FD37E", i:"leaf",     cats:["park","animals"] },
+  { k:"fun",   he:"בילוי ולילה",  c:"#A897FF", i:"moon",     cats:["night","arcade","onsen"] }
+];
+const SUBLBL = { food:"מסעדות", street:"אוכל רחוב ושווקים", op:"One Piece", eva:"רובוטים, אוונגליון וג'יבלי", anime:"אנימה ומנגה", hardoff:"Hard Off", vintage:"וינטג' ויד שנייה", tech:"אלקטרוניקה", mall:"קניונים", shop:"חנויות ורחובות", sight:"נופים", temple:"מקדשים", museum:"מוזיאונים", quirky:"מוזר ומגניב", park:"פארקים", animals:"בעלי חיים", night:"ברים ולילה", arcade:"ארקיידים", onsen:"אונסן" };
+const grpCats = () => { const g = GROUPS.find(x => x.k === ST.grp); return g ? (ST.cats.length ? ST.cats : g.cats) : []; };
+const ICON = {
+  hat:'<path d="M3 15.5c0-1.4 4-2.5 9-2.5s9 1.1 9 2.5-4 2.5-9 2.5-9-1.1-9-2.5z"/><path d="M7 14V11a5 5 0 0 1 10 0v3"/><path d="M7 12.6c1.5.6 3.2.9 5 .9s3.5-.3 5-.9"/>',
+  robot:'<rect x="6" y="8" width="12" height="10" rx="2"/><path d="M12 4v4M9 13h.01M15 13h.01M3 12v3M21 12v3M10 21h4"/>',
+  star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
+  tag:'<path d="M20 12 12 20 4 12V4h8z"/><circle cx="8.5" cy="8.5" r="1.5"/>',
+  hanger:'<path d="M12 7a2 2 0 1 1 2-2c0 1-2 1.5-2 3"/><path d="m12 8-9 7h18z"/>',
+  chip:'<rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/>',
+  bowl:'<path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M8 7c0-1.5 1-2 1-3.5M12 7c0-1.5 1-2 1-3.5M16 7c0-1.5 1-2 1-3.5"/>',
+  skewer:'<path d="m4 20 16-16"/><circle cx="9" cy="15" r="2.3"/><circle cx="13" cy="11" r="2.3"/><circle cx="17" cy="7" r="2.3"/>',
+  bag:'<path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 0 1 6 0"/>',
+  building:'<rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/>',
+  mount:'<path d="m3 19 6-10 4 6 3-4 5 8z"/><circle cx="17" cy="6" r="2"/>',
+  torii:'<path d="M3 5c3 1 15 1 18 0M5 9h14M7 6v15M17 6v15"/>',
+  leaf:'<path d="M5 19c0-9 6-14 15-14 0 9-5 15-14 15"/><path d="M5 19 13 11"/>',
+  paw:'<circle cx="7" cy="9" r="1.8"/><circle cx="11" cy="6" r="1.8"/><circle cx="15" cy="6" r="1.8"/><circle cx="18" cy="10" r="1.8"/><path d="M8 17c0-3 2-5 4-5s4 2 4 5-2 3-4 3-4 0-4-3z"/>',
+  frame:'<path d="M3 21h18M5 21V10M19 21V10M9 21v-7M15 21v-7M2 10 12 3l10 7z"/>',
+  spark:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  moon:'<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+  joy:'<rect x="3" y="8" width="18" height="10" rx="5"/><path d="M8 11v4M6 13h4M15 12h.01M17 14h.01"/>',
+  onsen:'<path d="M4 15c0 3 3.6 5 8 5s8-2 8-5"/><path d="M8 11c-1-1.5 1-2.5 0-4M12 11c-1-1.5 1-2.5 0-4M16 11c-1-1.5 1-2.5 0-4"/>',
+  pin:'<path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  walk:'<circle cx="13" cy="4.5" r="1.8"/><path d="m10 21 2-6 3 3v3M8 12l2-4 4 1 2 3 3 1"/>',
+  train:'<rect x="6" y="3" width="12" height="13" rx="3"/><path d="M6 11h12M9 20l-2 1.5M15 20l2 1.5M9 16l-1 4M15 16l1 4"/>',
+  ruler:'<path d="m3 17 14-14 4 4L7 21z"/><path d="m7 13 2 2M10 10l2 2M13 7l2 2"/>',
+  nav:'<path d="m3 11 18-8-8 18-2-8z"/>',
+  route:'<circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h7"/>',
+  img:'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="m21 16-5-5-9 8"/>',
+  heart:'<path d="M12 20s-7.5-4.6-9-9.3C2 7.4 4.2 5 7 5c2 0 3.4 1.2 5 3 1.6-1.8 3-3 5-3 2.8 0 5 2.4 4 5.7-1.5 4.7-9 9.3-9 9.3z"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  compass:'<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+  list:'<path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>',
+  radar:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12 18 6"/>',
+  filter:'<path d="M3 5h18l-7 8v6l-4 2v-8z"/>',
+  cal:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  card:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/>',
+  up:'<path d="m6 15 6-6 6 6"/>', down:'<path d="m6 9 6 6 6-6"/>', x:'<path d="M6 6l12 12M18 6 6 18"/>',
+  wand:'<path d="m4 20 12-12M14 4l1 2 2 1-2 1-1 2-1-2-2-1 2-1zM19 11l.7 1.3L21 13l-1.3.7L19 15l-.7-1.3L17 13l1.3-.7z"/>',
+  copy:'<rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/>',
+  loc:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7.5"/>',
+  bed:'<path d="M3 18V7"/><path d="M3 14h18v4"/><path d="M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="2"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+};
+const ic = (n, cls="i") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[n]||""}</svg>`;
+
+/* ================= Data normalize ================= */
+const PL = D.map((r, i) => {
+  const flags = r[9] || "";
+  const reg = REGIONS.find(g => g.areas.includes(r[0]));
+  return {
+    id: "p" + i + "_" + r[2].replace(/[^A-Za-z0-9]/g, "").slice(0, 14),
+    area: r[0], reg: reg ? reg.k : null, cats: r[1].split(" ").filter(Boolean), en: r[2], he: r[3], lat: r[4], lon: r[5],
+    desc: r[6] || "", tip: r[7] || "", price: r[8], must: flags.includes("M"), amit: flags.includes("A"), sea: flags.includes("X"),
+    dairy: flags.includes("2") ? 2 : flags.includes("1") ? 1 : flags.includes("0") ? 0 : null,
+    hs: r[10] || null, gr: r[11] || null, grc: r[12] || null
+  };
+}).filter(p => p.reg);
+const BYID = Object.fromEntries(PL.map(p => [p.id, p]));
+const isFood = p => p.cats.includes("food") || p.cats.includes("street");
+
+/* ================= Storage ================= */
+const SK = "mapatotzar_v1";
+let ST = { fav:{}, vis:{}, plans:{}, reg:null, base:{}, cats:[], tog:{}, sort:"dist", view:"list", area:{}, useLoc:true };
+try { const s = JSON.parse(localStorage.getItem(SK) || "null"); if (s) ST = Object.assign(ST, s); } catch(e) {}
+function save(){ try { localStorage.setItem(SK, JSON.stringify(ST)); } catch(e) {} }
+
+/* ================= Time / geo ================= */
+function now(){
+  const p = {}; new Intl.DateTimeFormat("en-CA",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).forEach(x=>p[x.type]=x.value);
+  return { date:`${p.year}-${p.month}-${p.day}`, h:+p.hour, m:+p.minute, hm:`${p.hour}:${p.minute}` };
+}
+const addDays = (d,n)=>{ const t=new Date(d+"T00:00:00Z"); t.setUTCDate(t.getUTCDate()+n); return t.toISOString().slice(0,10); };
+const fmtD = (d,o)=> new Intl.DateTimeFormat("he-IL",{timeZone:"UTC",...o}).format(new Date(d+"T00:00:00Z"));
+const dShort = d => fmtD(d,{day:"numeric",month:"numeric"});
+const dLong = d => fmtD(d,{weekday:"long",day:"numeric",month:"long"});
+function km(a,b,c,d){ const R=6371,t=Math.PI/180,x=(c-a)*t,y=(d-b)*t,s=Math.sin(x/2)**2+Math.cos(a*t)*Math.cos(c*t)*Math.sin(y/2)**2; return 2*R*Math.asin(Math.sqrt(s)); }
+function bearing(a,b,c,d){ const t=Math.PI/180; const y=Math.sin((d-b)*t)*Math.cos(c*t), x=Math.cos(a*t)*Math.sin(c*t)-Math.sin(a*t)*Math.cos(c*t)*Math.cos((d-b)*t); return Math.atan2(y,x); }
+function walkMin(k){ return Math.round(k*1.25/4.8*60); }
+function transitMin(k){ return k<=25 ? Math.round(8 + k*1.35/20*60) : Math.round(15 + k/50*60); }
+function fmtMin(m){ if (m < 60) return m + " דק׳"; const h=Math.floor(m/60), r=m%60; return r ? `${h}:${String(r).padStart(2,"0")} ש׳` : `${h} ש׳`; }
+function fmtKm(k){ return k < 1 ? Math.round(k*1000/10)*10 + " מ׳" : (k<10 ? k.toFixed(1) : Math.round(k)) + " ק״מ"; }
+
+let GEO = null; // {lat,lon,acc,t}
+function regionForDate(d){ return REGIONS.find(r => d >= r.from && d < r.to) || (d >= "2026-12-06" ? REGIONS[5] : REGIONS[0]); }
+function baseForDate(r, d){ return r.bases.find(b => d >= b.from && d < b.to) || r.bases[r.bases.length-1]; }
+function regionNearGeo(){ if (!GEO) return null; let best=null,bd=1e9; REGIONS.forEach(r=>r.bases.forEach(b=>{ const k=km(GEO.lat,GEO.lon,b.lat,b.lon); if(k<bd){bd=k;best=r;} })); return bd < 90 ? best : null; }
+function curRegion(){ return REGIONS.find(r => r.k === ST.reg) || regionForDate(now().date); }
+function curBase(){ const r = curRegion(); const k = ST.base[r.k]; return r.bases.find(b=>b.k===k) || baseForDate(r, now().date); }
+/* origin = live location if inside the region, else the hotel */
+function origin(){
+  const r = curRegion(), b = curBase();
+  if (ST.useLoc && GEO && r.bases.some(x => km(GEO.lat,GEO.lon,x.lat,x.lon) < 60)) return { lat:GEO.lat, lon:GEO.lon, he:"המיקום שלך", me:true };
+  return { lat:b.lat, lon:b.lon, he:b.he, me:false };
+}
+function distOf(p, o){ return km(o.lat,o.lon,p.lat,p.lon); }
+
+/* ================= UI helpers ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cityEn = p => ({ngy:"Nagoya",kyo:"Kyoto",nara:"Nara",uji:"Uji",osk:"Osaka",kobe:"Kobe",himeji:"Himeji",hiro:"Hiroshima",miya:"Miyajima",kum:"Kumamoto",aso:"Kumamoto",kamakura:"Kamakura",takao:"Hachioji",kawaguchi:"Fujikawaguchiko",chichibu:"Chichibu",tama:"Tama"})[p.area] || "Tokyo";
+const mapsUrl = p => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.en + ", " + cityEn(p));
+const dirUrl = (p, o, mode) => "https://www.google.com/maps/dir/?api=1&origin=" + o.lat + "," + o.lon + "&destination=" + encodeURIComponent(p.en + ", " + cityEn(p)) + "&travelmode=" + mode;
+const imgUrl = p => "https://www.google.com/search?tbm=isch&q=" + encodeURIComponent(p.en + " " + cityEn(p));
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove("show"),1600); }
+const priceTx = v => v==null ? "" : v===0 ? "חינם" : "¥".repeat(v);
+
+/* ================= Header ================= */
+function renderHeader(){
+  const n = now();
+  $("#clk").textContent = n.hm;
+  $("#clkd").textContent = dLong(n.date) + " · שעון יפן";
+  const r = curRegion(), o = origin();
+  const partOfDay = n.h<11 ? "בוקר" : n.h<15 ? "צהריים" : n.h<18 ? "אחר הצהריים" : n.h<22 ? "ערב" : "לילה";
+  $("#nowline").innerHTML =
+    `<span class="pill">${ic("clock")}${partOfDay} ב${esc(regionForDate(n.date).he)}</span>` +
+    (o.me ? `<button class="pill loc" id="locBtn"><span class="dot"></span>${GEO && GEO.manual ? "מרחקים מ: " + esc(GEO.label) : "מרחקים מהמיקום שלך"}</button>`
+          : `<button class="pill" id="locBtn">${ic("loc")}${GEO ? "מרחקים מהמלון" : "איפה אני?"}</button>`);
+  const lb = $("#locBtn"); if (lb) lb.onclick = () => locSheet("");
+  const today = n.date;
+  $("#rail").innerHTML = REGIONS.map(g => {
+    const past = today >= g.to, live = today >= g.from && today < g.to;
+    const cnt = PL.filter(p => p.reg === g.k).length;
+    return `<button class="reg ${past?"isPast":""}" role="tab" data-reg="${g.k}" aria-pressed="${g.k===r.k}"><span class="kanji">${g.kanji}</span>${live?`<span class="badge">עכשיו</span>`:past?`<span class="badge past">היינו</span>`:""}<b>${g.he}</b><span class="d">${dShort(g.from)} - ${dShort(g.to)}</span><span class="n">${cnt} מקומות</span></button>`;
+  }).join("");
+}
+function askLoc(){
+  const fail = () => { locSheet("הטלפון לא נותן מיקום לקובץ שנפתח ממנו (זו הגבלה של הדפדפן על קבצים מקומיים). אפשר לבחור את המיקום ידנית:"); };
+  if (!navigator.geolocation || !window.isSecureContext) { fail(); return; }
+  ST.useLoc = true; save();
+  try {
+    navigator.geolocation.getCurrentPosition(pos => {
+      setGeo({ lat:pos.coords.latitude, lon:pos.coords.longitude }); toast("המיקום עודכן");
+    }, fail, { enableHighAccuracy:true, timeout:12000, maximumAge:120000 });
+  } catch(e) { fail(); }
+}
+/* manual location: kept for 6 hours */
+function setGeo(g){
+  GEO = g; ST.useLoc = true;
+  ST.man = g.manual ? { ...g, t: Date.now() } : null; save();
+  const near = regionNearGeo(); if (near) ST.reg = near.k;
+  closeSheet(); renderAll();
+}
+function parseLatLon(s){
+  s = (s || "").trim();
+  const m = /@(-?\d+\.\d+),\s*(-?\d+\.\d+)/.exec(s) || /[?&](?:q|query|ll|destination)=(-?\d+\.\d+),\s*(-?\d+\.\d+)/.exec(s) || /(-?\d{1,3}\.\d+)\s*[,\s]\s*(-?\d{1,3}\.\d+)/.exec(s);
+  if (!m) return null; const lat = +m[1], lon = +m[2];
+  return Math.abs(lat) <= 90 && Math.abs(lon) <= 180 ? { lat, lon } : null;
+}
+function nearList(q){
+  const r = curRegion(), b = curBase(); q = (q || "").trim().toLowerCase();
+  let L = PL.filter(p => p.reg === r.k);
+  if (q) L = L.filter(p => (p.en + " " + p.he).toLowerCase().includes(q));
+  else L = L.filter(p => p.must || p.cats.some(c => ["sight","temple","mall","shop"].includes(c))).sort((a,c) => km(b.lat,b.lon,a.lat,a.lon) - km(b.lat,b.lon,c.lat,c.lon));
+  return L.slice(0, 14).map(p => `<button class="leg" style="--c:${CATS[p.cats[0]].c};text-align:right;width:100%" data-here="${p.id}"><span class="num">${ic(CATS[p.cats[0]].i)}</span><span class="tx"><b class="en">${esc(p.en)}</b><span>${esc(p.he)}</span></span><span></span></button>`).join("") || `<div class="empty" style="padding:14px">לא נמצא. נסו שם אחר.</div>`;
+}
+function locSheet(msg){
+  const me = GEO && origin().me;
+  openSheet(`<h3>איפה אתם עכשיו?</h3>
+    ${msg ? `<div class="access" style="margin-bottom:12px">${ic("loc")}<span>${esc(msg)}</span></div>` : ""}
+    ${!msg && window.isSecureContext && navigator.geolocation ? `<button class="btn pri block" data-gps="1" style="margin-bottom:14px">${ic("loc")}לנסות GPS</button>` : ""}
+    <div class="fgrp"><b>אני ליד...</b><input id="hereQ" class="search-in" type="search" placeholder="חפשו מקום, תחנה או אטרקציה" autocomplete="off" style="width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:8px"><div id="hereL" class="list" style="gap:6px">${nearList("")}</div></div>
+    <div class="fgrp"><b>או הדביקו קואורדינטות</b><div class="row" style="display:flex;gap:8px"><input id="llIn" type="text" inputmode="decimal" placeholder="35.6938, 139.7034" style="flex:1;min-width:0;direction:ltr;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 12px"><button class="btn pri" data-llset="1">אישור</button></div>
+      <div class="access" style="margin-top:8px">${ic("pin")}<span>ב-Google Maps: לחיצה ארוכה על הנקודה הכחולה, המספרים מופיעים בחלון החיפוש. מעתיקים ומדביקים כאן.</span></div></div>
+    ${me || (GEO && GEO.manual) ? `<button class="btn block" data-hotel="1">${ic("bed")}חזרה למרחקים מהמלון</button>` : ""}`);
+  const q = $("#hereQ"); q.addEventListener("input", () => { $("#hereL").innerHTML = nearList(q.value); });
+}
+let regionManual = false;
+
+/* ================= Filters ================= */
+function catChips(){
+  const r = curRegion(), sel = new Set(ST.cats);
+  const inReg = PL.filter(p => p.reg === r.k);
+  const counts = {}; inReg.forEach(p => p.cats.forEach(c => counts[c]=(counts[c]||0)+1));
+  const gCount = g => inReg.filter(p => p.cats.some(c => g.cats.includes(c))).length;
+  const all = `<button class="chip grp tog" data-grp="" aria-pressed="${!ST.grp}">הכל <small>${inReg.length}</small></button>`;
+  $("#cats").innerHTML = all + GROUPS.filter(g => gCount(g)).map(g =>
+    `<button class="chip grp" style="--c:${g.c}" data-grp="${g.k}" aria-pressed="${ST.grp===g.k}">${ic(g.i)}${g.he} <small>${gCount(g)}</small></button>`).join("");
+  const g = GROUPS.find(x => x.k === ST.grp), sb = $("#subs");
+  if (g) {
+    const subs = g.cats.filter(c => counts[c]);
+    sb.hidden = subs.length < 2;
+    sb.innerHTML = `<span class="lbl">סינון:</span><button class="chip tog" data-cat="" aria-pressed="${sel.size===0}">הכל</button>` + subs.map(c =>
+      `<button class="chip" style="--c:${CATS[c].c}" data-cat="${c}" aria-pressed="${sel.has(c)}"><span class="sw"></span>${SUBLBL[c]} <small>${counts[c]}</small></button>`).join("");
+  } else { sb.hidden = true; sb.innerHTML = ""; }
+  const nf = Object.values(ST.tog).filter(Boolean).length + (ST.sort!=="dist"?1:0);
+  $("#fltBtn").innerHTML = ic("filter") + (nf ? `<span class="cnt">${nf}</span>` : "");
+  $("#fltBtn").classList.toggle("on", nf > 0);
+  $("#viewBtn").innerHTML = ic(ST.view === "radar" ? "list" : "radar");
+  $("#viewBtn").setAttribute("aria-label", ST.view === "radar" ? "תצוגת רשימה" : "תצוגת רדאר");
+}
+function filtered(){
+  const r = curRegion(), o = origin(), q = $("#q").value.trim().toLowerCase(), sel = new Set(grpCats()), area = ST.area[r.k] || "";
+  let list = PL.filter(p => p.reg === r.k);
+  if (area) list = list.filter(p => p.area === area);
+  if (sel.size) list = list.filter(p => p.cats.some(c => sel.has(c)));
+  if (q) list = list.filter(p => (p.en+" "+p.he+" "+p.desc+" "+p.tip+" "+p.cats.map(c=>CATS[c]?.he).join(" ")).toLowerCase().includes(q));
+  const t = ST.tog;
+  if (t.must) list = list.filter(p => p.must);
+  if (t.amit) list = list.filter(p => !isFood(p) || (p.amit && !p.sea));
+  if (t.omri) list = list.filter(p => !isFood(p) || p.dairy === 0 || p.dairy === 1);
+  if (t.near) list = list.filter(p => distOf(p,o) <= 1.6);
+  if (t.mid) list = list.filter(p => distOf(p,o) <= 8);
+  if (t.hidevis) list = list.filter(p => !ST.vis[p.id]);
+  list.forEach(p => p._d = distOf(p, o));
+  if (ST.sort === "dist") list.sort((a,b) => a._d - b._d);
+  else if (ST.sort === "must") list.sort((a,b) => (b.must - a.must) || ((b.hs||0)-(a.hs||0)) || a._d - b._d);
+  else if (ST.sort === "hs") list.sort((a,b) => (b.hs||0)-(a.hs||0) || a._d - b._d);
+  else list.sort((a,b) => a.en.localeCompare(b.en));
+  return list;
+}
+
+/* ================= Card ================= */
+function metaRow(p, o){
+  const d = p._d ?? distOf(p,o), A = AREAS[p.area];
+  let h = `<span class="mt">${ic("ruler")}${fmtKm(d)}</span>`;
+  if (A && A.trip && d > 20) return h + `<span class="mt far">${ic("train")}טיול יום</span>`;
+  if (d <= 4) h += `<span class="mt">${ic("walk")}${fmtMin(walkMin(d))}</span>`;
+  if (d > 0.9) h += `<span class="mt">${ic("train")}${fmtMin(transitMin(d))}</span>`;
+  if (p.price != null) h += `<span class="mt">${priceTx(p.price)}</span>`;
+  return h;
+}
+function tags(p){
+  let h = "";
+  if (p.must) h += `<span class="tag must">חובה</span>`;
+  if (p.hs) h += `<span class="tag must">${"★".repeat(p.hs)}${"☆".repeat(5-p.hs)}</span>`;
+  if (isFood(p)) {
+    if (p.sea) h += `<span class="tag sea">פירות ים</span>`; else if (p.amit) h += `<span class="tag amit">בלי פירות ים</span>`;
+    if (p.dairy === 0) h += `<span class="tag d0">בלי חלב בד״כ</span>`;
+    if (p.dairy === 1) h += `<span class="tag d1">חלב: לשאול</span>`;
+    if (p.dairy === 2) h += `<span class="tag d2">מכיל חלב</span>`;
+  }
+  return h;
+}
+function card(p, o, open){
+  const c = CATS[p.cats[0]] || CATS.sight, A = AREAS[p.area];
+  const fav = !!ST.fav[p.id], vis = !!ST.vis[p.id], pd = planDate(), inPlan = (ST.plans[pd]||[]).includes(p.id);
+  const trip = A && A.trip && (p._d ?? distOf(p,o)) > 20 ? `<div class="access">${ic("train")}<span>${esc(A.trip)}</span></div>` : "";
+  const gr = p.gr ? `<div class="mt" style="align-self:flex-start">Google ${p.gr} · ${p.grc} ביקורות</div>` : "";
+  return `<article class="card ${p.must?"must":""} ${vis?"visited":""} ${open?"open":""}" id="c-${p.id}" style="--c:${c.c}">
+    <button class="c-main" data-open="${p.id}" aria-expanded="${!!open}">
+      <span class="tile">${ic(c.i)}</span>
+      <span class="c-body">
+        <span class="c-tags"><span class="cat">${p.cats.map(k=>CATS[k]?.he).filter(Boolean).slice(0,2).join(" · ")}</span><span>· ${esc(AREAS[p.area]?.he||"")}</span></span>
+        <span class="c-name en">${esc(p.en)}</span>
+        <span class="c-he">${esc(p.he)}</span>
+        <span class="c-tags" style="margin-top:4px">${tags(p)}</span>
+        <span class="c-desc">${esc(p.desc)}</span>
+        <span class="c-meta">${metaRow(p,o)}</span>
+      </span>
+    </button>
+    <div class="qa"><button class="${fav?"on":""}" data-fav="${p.id}" aria-label="שמור">${ic("heart")}</button><button class="pl ${inPlan?"on":""}" data-plan="${p.id}" aria-label="הוסף לתוכנית">${ic(inPlan?"check":"plus")}</button></div>
+    ${open ? `<div class="c-more">
+      ${p.tip ? `<div class="tip">${esc(p.tip)}</div>` : ""}
+      ${trip}${gr}
+      <div class="acts">
+        <a class="ab pri" href="${mapsUrl(p)}" target="_blank" rel="noopener">${ic("pin")}מפה</a>
+        <a class="ab" href="${dirUrl(p,o,(p._d??distOf(p,o))<=2.2?"walking":"transit")}" target="_blank" rel="noopener">${ic("route")}מסלול</a>
+        <a class="ab" href="${imgUrl(p)}" target="_blank" rel="noopener">${ic("img")}תמונות</a>
+        <button class="ab fav ${fav?"on":""}" data-fav="${p.id}">${ic("heart")}${fav?"שמור":"לשמור"}</button>
+        <button class="ab ${inPlan?"on":""}" data-plan="${p.id}">${ic(inPlan?"check":"cal")}${inPlan?"בתוכנית":"לתוכנית"}</button>
+        <button class="ab ${vis?"on":""}" data-vis="${p.id}">${ic("check")}${vis?"ביקרנו":"ביקרנו?"}</button>
+      </div></div>` : ""}
+  </article>`;
+}
+
+/* ================= Explore ================= */
+let OPEN = null, LIMIT = 60, RSEL = null;
+function suggestions(o){
+  const n = now(), r = curRegion();
+  if (!(n.date >= r.from && n.date < r.to)) return "";
+  const h = n.h;
+  const want = h < 11 ? ["temple","sight","park","street"] : h < 14 ? ["food","street"] : h < 17 ? ["op","anime","hardoff","shop","museum","eva"] : h < 21 ? ["food","sight","night","arcade"] : ["night","arcade","onsen","food"];
+  const label = h < 11 ? "בוקר טוב: מה לעשות עכשיו" : h < 14 ? "זמן צהריים: אוכל קרוב" : h < 17 ? "אחר הצהריים: קניות ואנימה" : h < 21 ? "ערב: אוכל, נוף ולילה" : "לילה: מה עוד פתוח";
+  const pool = PL.filter(p => p.reg === r.k && !ST.vis[p.id] && p.cats.some(c => want.includes(c)) && (!isFood(p) || !p.sea))
+    .map(p => ({p, d:distOf(p,o)})).filter(x => x.d < 6)
+    .sort((a,b) => (b.p.must - a.p.must)*1.5 + (a.d - b.d)).slice(0, 8);
+  if (!pool.length) return "";
+  return `<section><div class="sec-h"><h2>${label}</h2><span>${o.me?"לידך":"ליד המלון"}</span></div>
+    <div class="sugg">${pool.map(({p,d}) => { const c=CATS[p.cats[0]]; return `<button class="sc" style="--c:${c.c};--c2:${c.c2}" data-jump="${p.id}"><span class="k">${c.he}${p.must?" · חובה":""}</span><b class="en">${esc(p.en)}</b><span class="m">${esc(p.he)}</span><span class="m">${fmtKm(d)} · ${d<=4?ic("walk")+" "+fmtMin(walkMin(d)):ic("train")+" "+fmtMin(transitMin(d))}</span></button>`; }).join("")}</div></section>`;
+}
+function renderExplore(){
+  const r = curRegion(), o = origin(), list = filtered(), el = $("#view-explore");
+  const area = ST.area[r.k] || "";
+  const regAreas = r.areas.filter(a => PL.some(p => p.area === a));
+  let h = "";
+  // origin box
+  const b = curBase();
+  h += `<div class="base"><span class="ic">${ic(o.me?"loc":"bed")}</span><span class="tx"><b>${o.me?"המיקום שלך":"המלון: <span dir=\"ltr\">"+esc(b.he)+"</span>"}</b><span>${o.me?"המרחקים מחושבים ממך עכשיו":"המרחקים מחושבים מהמלון. "+dShort(b.from)+" - "+dShort(b.to)}</span></span>${r.bases.length>1 && !o.me ? `<span class="seg">${r.bases.map(x=>`<button data-base="${x.k}" aria-pressed="${x.k===b.k}">${x.k==="asa"?"אסאקוסה":"שינג'וקו"}</button>`).join("")}</span>` : ""}</div>`;
+  if (!$("#q").value && !ST.grp) h += suggestions(o);
+  if (regAreas.length > 1) h += `<div class="areas"><button class="chip tog" data-area="" aria-pressed="${!area}">כל האזורים</button>${regAreas.map(a=>`<button class="chip tog" data-area="${a}" aria-pressed="${area===a}">${AREAS[a].he}${AREAS[a].trip?" · טיול יום":""}</button>`).join("")}</div>`;
+  if (area && AREAS[area].trip) h += `<div class="access">${ic("train")}<span>${esc(AREAS[area].trip)}</span></div>`;
+  h += `<div class="sec-h"><h2>${ST.view==="radar"?"הרדאר":"כל המקומות"}</h2><span>${list.length} תוצאות · ${({dist:"לפי מרחק",must:"מומלצים קודם",hs:"דירוג Hard Off",name:"לפי שם"})[ST.sort]}</span></div>`;
+  if (!list.length) h += `<div class="empty">לא נמצאו מקומות. נסו להסיר מסנן או לבחור אזור אחר.</div>`;
+  else if (ST.view === "radar") h += radar(list, o);
+  else h += `<div class="list">${list.slice(0, LIMIT).map(p => card(p, o, OPEN === p.id)).join("")}</div>${list.length > LIMIT ? `<button class="more-btn" data-more="1">הצג עוד ${Math.min(60, list.length-LIMIT)}</button>` : ""}`;
+  h += `<div class="foot">זמני ההגעה הם הערכה לפי מרחק. למסלול מדויק לחצו על "מסלול".</div>`;
+  el.innerHTML = h;
+}
+function radar(list, o){
+  const S = 360, C = S/2, R = C - 18;
+  const maxD = Math.max(1.5, ...list.map(p => p._d).filter(d => d < 30));
+  const sc = d => R * Math.sqrt(Math.min(d, maxD)/maxD);
+  const rings = [1,3,10,30].filter(x => x < maxD);
+  let svg = `<svg viewBox="0 0 ${S} ${S}" role="img" aria-label="מפת רדאר של המקומות סביב ${o.me?"המיקום שלך":"המלון"}">`;
+  svg += `<circle cx="${C}" cy="${C}" r="${R}" fill="none" stroke="#26406B"/>`;
+  rings.forEach(x => { const rr = sc(x); svg += `<circle cx="${C}" cy="${C}" r="${rr}" fill="none" stroke="#1E355C" stroke-dasharray="3 4"/><text x="${C+3}" y="${C-rr-3}" fill="#6F86AB" font-size="10" font-family="Rubik,sans-serif">${x<1?x*1000+"m":x+"km"}</text>`; });
+  svg += `<text x="${C}" y="12" text-anchor="middle" fill="#6F86AB" font-size="11" font-family="Rubik,sans-serif">N</text>`;
+  list.forEach(p => {
+    const a = bearing(o.lat,o.lon,p.lat,p.lon), rr = sc(p._d), x = C + rr*Math.sin(a), y = C - rr*Math.cos(a), c = CATS[p.cats[0]].c;
+    const sel = RSEL === p.id;
+    svg += `<g data-rsel="${p.id}" style="cursor:pointer"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${sel?9:p.must?6.5:5}" fill="${c}" stroke="${sel?"#fff":"#0B1626"}" stroke-width="${sel?2.5:1.5}"/>${p._d>maxD?`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="none" stroke="${c}" stroke-dasharray="2 2"/>`:""}<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="14" fill="transparent"/></g>`;
+  });
+  svg += `<circle cx="${C}" cy="${C}" r="8" fill="#F5C443" stroke="#0B1626" stroke-width="2"/></svg>`;
+  const s = RSEL && BYID[RSEL];
+  const pop = s ? `<div class="rpop" style="--c:${CATS[s.cats[0]].c}"><span class="tile" style="width:42px;height:42px;border-radius:12px">${ic(CATS[s.cats[0]].i)}</span><span class="tx"><b class="en">${esc(s.en)}</b><span>${esc(s.he)} · ${fmtKm(distOf(s,o))}</span></span><button class="ab pri" data-jump="${s.id}">פרטים</button></div>` : "";
+  return `<div class="radar"><div class="lg"><span>${o.me?"את/ה במרכז":"המלון במרכז"}</span><span>הקצה = ${fmtKm(maxD)}</span></div>${svg}${pop}</div>`;
+}
+
+/* ================= Planner ================= */
+function tripDates(){ const out=[]; for(let d=now().date < "2026-11-03" ? "2026-11-03" : now().date; d<="2026-12-06"; d=addDays(d,1)) out.push(d); return out; }
+let PLAN_DATE = null;
+function planDate(){ const ds = tripDates(); if (!PLAN_DATE || !ds.includes(PLAN_DATE)) PLAN_DATE = ds[0]; return PLAN_DATE; }
+function planOrigin(d){ const r = regionForDate(d), b = baseForDate(r, d); return { lat:b.lat, lon:b.lon, he:b.he, r }; }
+function nn(ids, o){ const rest = ids.map(i=>BYID[i]).filter(Boolean), out=[]; let cur=o; while(rest.length){ let bi=0,bd=1e9; rest.forEach((p,i)=>{const d=km(cur.lat,cur.lon,p.lat,p.lon); if(d<bd){bd=d;bi=i;}}); const p=rest.splice(bi,1)[0]; out.push(p.id); cur=p; } return out; }
+function renderPlan(){
+  const d = planDate(), o = planOrigin(d), ids = (ST.plans[d] || []).filter(i => BYID[i]), el = $("#view-plan");
+  let h = `<div class="sec-h"><h2>התוכנית שלי</h2><span>נשמר בטלפון</span></div>
+    <div class="pl-head"><select id="pdate" aria-label="בחר יום">${tripDates().map(x=>`<option value="${x}" ${x===d?"selected":""}>${dLong(x)} · ${regionForDate(x).he}</option>`).join("")}</select></div>
+    <div class="base"><span class="ic">${ic("bed")}</span><span class="tx"><b dir="ltr" style="text-align:right">${esc(o.he)}</b><span>יוצאים מהמלון ב${o.r.he}</span></span></div>`;
+  if (!ids.length) {
+    h += `<div class="empty">אין עדיין מקומות ליום הזה.<br>לחצו על ＋ בכרטיס של מקום, או תנו לי לבנות יום אוטומטית.</div>`;
+  } else {
+    let tot = 0, cur = o, legs = "";
+    ids.forEach((id, i) => { const p = BYID[id], k = km(cur.lat,cur.lon,p.lat,p.lon); tot += k;
+      legs += `<div class="hop">${ic(k<=2?"walk":"train")}${fmtKm(k)} · ${k<=2?fmtMin(walkMin(k))+" הליכה":fmtMin(transitMin(k))+" בתחבורה"}</div>`;
+      legs += `<div class="leg" style="--c:${CATS[p.cats[0]].c}"><span class="num">${i+1}</span><span class="tx"><b class="en">${esc(p.en)}</b><span>${esc(p.he)}</span></span><span class="ops"><button data-mv="${id}|-1" aria-label="למעלה">${ic("up")}</button><button data-mv="${id}|1" aria-label="למטה">${ic("down")}</button><button data-rm="${id}" aria-label="הסר">${ic("x")}</button></span></div>`;
+      cur = p; });
+    const pts = ids.map(i => BYID[i]);
+    h += `<div class="summary"><div><b>${ids.length}</b><span>עצירות</span></div><div><b>${fmtKm(tot)}</b><span>סה״כ בקו ישר</span></div><div><b>${fmtMin(Math.round(tot<=6?walkMin(tot):transitMin(tot)))}</b><span>זמן תנועה משוער</span></div></div>`;
+    h += planMap(o, pts);
+    h += `<div class="sec-h"><h2 style="font-size:16px">כל היום ב-Google Maps</h2><span>${routeLinks(o, pts).length > 1 ? "מחולק לחלקים, לפתוח לפי הסדר" : "קישור אחד"}</span></div>`;
+    h += `<div style="display:flex;flex-direction:column;gap:8px">${routeLinks(o, pts).map((L,i,a)=>`<a class="btn ${i===0?"pri":""} block" href="${L.url}" target="_blank" rel="noopener">${ic("nav")}${a.length>1?`חלק ${i+1}: עצירות ${L.from}-${L.to}`:"פתח את כל המסלול"}</a>`).join("")}</div>`;
+    h += `<div class="list" style="gap:6px">${legs}</div>`;
+    h += `<div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-opt="1">${ic("route")}סדר מסלול קצר</button><button class="btn" data-copyplan="1">${ic("copy")}העתק לוואטסאפ</button><button class="btn" data-clear="1">${ic("x")}נקה</button></div>`;
+  }
+  h += `<button class="btn pri block" data-auto="1">${ic("wand")}בנה לי יום לפי עניין ומרחק</button>`;
+  el.innerHTML = h;
+}
+/* Google Maps mobile accepts at most 3 waypoints per link, so chain links of up to 4 stops */
+function routeLinks(o, pts){
+  const q = p => encodeURIComponent(p.en + ", " + cityEn(p)), out = [];
+  let start = `${o.lat},${o.lon}`, i = 0;
+  while (i < pts.length) {
+    const chunk = pts.slice(i, i + 4), dest = chunk[chunk.length - 1], wps = chunk.slice(0, -1).map(q).join("|");
+    const mode = chunk.every((p, j) => { const prev = j ? chunk[j-1] : (i ? pts[i-1] : o); return km(prev.lat,prev.lon,p.lat,p.lon) <= 2.2; }) ? "walking" : "transit";
+    out.push({ from: i + 1, to: i + chunk.length, url: `https://www.google.com/maps/dir/?api=1&origin=${start}&destination=${q(dest)}${wps ? "&waypoints=" + wps : ""}&travelmode=${wps && mode === "transit" ? "driving" : mode}` });
+    start = q(dest); i += 4;
+  }
+  return out;
+}
+function planMap(o, pts){
+  const all = [o, ...pts], W = 360, H = 240, pad = 26;
+  let la0 = Math.min(...all.map(p=>p.lat)), la1 = Math.max(...all.map(p=>p.lat)), lo0 = Math.min(...all.map(p=>p.lon)), lo1 = Math.max(...all.map(p=>p.lon));
+  const kx = Math.cos(((la0+la1)/2)*Math.PI/180);
+  let sx = (lo1-lo0)*kx || 0.01, sy = (la1-la0) || 0.01; const s = Math.min((W-2*pad)/sx, (H-2*pad)/sy);
+  const ox = (W - sx*s)/2, oy = (H - sy*s)/2;
+  const X = p => ox + (p.lon-lo0)*kx*s, Y = p => H - (oy + (p.lat-la0)*s);
+  let svg = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="מפת התוכנית">`;
+  svg += `<polyline points="${all.map(p=>X(p).toFixed(1)+","+Y(p).toFixed(1)).join(" ")}" fill="none" stroke="#F5C443" stroke-width="2.2" stroke-dasharray="6 5" stroke-linejoin="round" opacity=".8"/>`;
+  svg += `<rect x="${(X(o)-9).toFixed(1)}" y="${(Y(o)-9).toFixed(1)}" width="18" height="18" rx="5" fill="#F5C443" stroke="#0B1626" stroke-width="2"/>`;
+  pts.forEach((p,i) => { const c = CATS[p.cats[0]].c; svg += `<circle cx="${X(p).toFixed(1)}" cy="${Y(p).toFixed(1)}" r="11" fill="${c}" stroke="#0B1626" stroke-width="2"/><text x="${X(p).toFixed(1)}" y="${(Y(p)+4).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="800" fill="#0B1626" font-family="Rubik,sans-serif">${i+1}</text>`; });
+  svg += `</svg>`;
+  return `<div class="radar"><div class="lg"><span>${ic("bed")} ריבוע צהוב = המלון</span><span>צפון למעלה</span></div>${svg}</div>`;
+}
+function autoSheet(){
+  const d = planDate(), r = regionForDate(d);
+  openSheet(`<h3>בניית יום ב${r.he}</h3>
+    <div class="fgrp"><b>מה מעניין אתכם היום?</b><div class="chips" id="aCats">${GROUPS.filter(g=>g.k!=="food"&&PL.some(p=>p.reg===r.k&&p.cats.some(c=>g.cats.includes(c)))).map(g=>`<button class="chip grp" style="--c:${g.c}" data-ac="${g.cats.join(",")}" aria-pressed="${["anime","shop","see"].includes(g.k)}">${ic(g.i)}${g.he}</button>`).join("")}</div></div>
+    <div class="fgrp"><b>כמה רחוק מהמלון?</b><div class="chips"><button class="chip tog" data-ar="1.6" aria-pressed="false">ברגל (עד 20 דק׳)</button><button class="chip tog" data-ar="6" aria-pressed="true">בעיר</button><button class="chip tog" data-ar="60" aria-pressed="false">גם טיולי יום</button></div></div>
+    <div class="fgrp"><b>כמה עצירות?</b><div class="chips">${[3,4,5,6,8].map(n=>`<button class="chip tog" data-an="${n}" aria-pressed="${n===5}">${n}</button>`).join("")}</div></div>
+    <div class="fgrp"><b>אוכל</b><div class="chips"><button class="chip tog" data-afood="1" aria-pressed="true">לשלב ארוחה בלי פירות ים ובלי חלב</button></div></div>
+    <button class="btn pri block" data-dobuild="1">${ic("wand")}בנה את היום</button>`);
+}
+function doBuild(){
+  const sh = $("#sheet"), d = planDate(), r = regionForDate(d), b = baseForDate(r, d);
+  const cats = [...sh.querySelectorAll("[data-ac][aria-pressed=true]")].flatMap(x=>x.dataset.ac.split(","));
+  const rad = +sh.querySelector("[data-ar][aria-pressed=true]").dataset.ar, n = +sh.querySelector("[data-an][aria-pressed=true]").dataset.an;
+  const food = sh.querySelector("[data-afood]").getAttribute("aria-pressed")==="true";
+  const used = new Set(ST.plans[d]||[]);
+  let pool = PL.filter(p => p.reg===r.k && !ST.vis[p.id] && !used.has(p.id) && km(b.lat,b.lon,p.lat,p.lon) <= rad);
+  const nonFood = pool.filter(p => !isFood(p) && (!cats.length || p.cats.some(c=>cats.includes(c))));
+  const score = p => (p.must?4:0) + (p.hs||0)*0.6 + (p.cats.includes("op")?1.5:0) - km(b.lat,b.lon,p.lat,p.lon)*0.25 + Math.random()*0.8;
+  let pick = nonFood.sort((a,b2)=>score(b2)-score(a)).slice(0, food ? n-1 : n);
+  if (food) {
+    const cx = pick.length ? { lat: pick.reduce((s,p)=>s+p.lat,0)/pick.length, lon: pick.reduce((s,p)=>s+p.lon,0)/pick.length } : b;
+    const f = pool.filter(p => isFood(p) && p.amit && !p.sea && p.dairy !== 2).sort((a,b2)=> (km(cx.lat,cx.lon,a.lat,a.lon)-(a.must?1:0)) - (km(cx.lat,cx.lon,b2.lat,b2.lon)-(b2.must?1:0)))[0];
+    if (f) pick.push(f);
+  }
+  if (!pick.length) { toast("לא נמצאו מקומות מתאימים. הרחיבו מרחק"); return; }
+  ST.plans[d] = nn([...(ST.plans[d]||[]), ...pick.map(p=>p.id)], b); save();
+  closeSheet(); renderPlan(); toast("היום נבנה");
+}
+
+/* ================= Saved ================= */
+function renderSaved(){
+  const el = $("#view-saved"), favs = PL.filter(p => ST.fav[p.id]), visN = Object.keys(ST.vis).length;
+  let h = `<div class="sec-h"><h2>השמורים שלנו</h2><span>${favs.length} שמורים · ${visN} ביקרנו</span></div>`;
+  if (!favs.length) h += `<div class="empty">עוד לא שמרתם מקומות.<br>לחצו על הלב בכרטיס כדי לשמור.</div>`;
+  REGIONS.forEach(r => { const L = favs.filter(p => p.reg === r.k); if (!L.length) return; const b = baseForDate(r, r.from), o = {lat:b.lat,lon:b.lon};
+    L.forEach(p=>p._d=distOf(p,o)); L.sort((a,b2)=>a._d-b2._d);
+    h += `<div class="sec-h" style="margin-top:6px"><h2 style="font-size:16px">${r.he}</h2><span>${L.length}</span></div><div class="list">${L.map(p=>card(p,o,OPEN===p.id)).join("")}</div>`; });
+  el.innerHTML = h;
+}
+
+/* ================= Cards (allergy + phrases) ================= */
+const PHRASES = [
+  ["乳製品は入っていますか？","Nyūseihin wa haitte imasu ka?","יש בזה מוצרי חלב?"],
+  ["乳製品なしでお願いします。","Nyūseihin nashi de onegaishimasu.","בלי מוצרי חלב, בבקשה."],
+  ["バターとチーズは抜いてください。","Batā to chīzu wa nuite kudasai.","בלי חמאה ובלי גבינה, בבקשה."],
+  ["魚介類が苦手です。肉の料理はありますか？","Gyokairui ga nigate desu. Niku no ryōri wa arimasu ka?","אני לא אוכל פירות ים. יש מנה עם בשר?"],
+  ["3人です。","San-nin desu.","אנחנו שלושה."],
+  ["英語のメニューはありますか？","Eigo no menyū wa arimasu ka?","יש תפריט באנגלית?"],
+  ["お会計お願いします。","O-kaikei onegaishimasu.","חשבון, בבקשה."],
+  ["免税できますか？","Menzei dekimasu ka?","אפשר פטור ממס? (בחנויות, עם דרכון)"],
+  ["ジャンク品を試してもいいですか？","Janku-hin o tameshite mo ii desu ka?","אפשר לבדוק את מוצר ה-Junk? (ב-Hard Off)"],
+  ["ここに行きたいです。","Koko ni ikitai desu.","אני רוצה להגיע לכאן. (להראות מפה)"]
+];
+function renderCards(){
+  $("#view-cards").innerHTML = `<div class="sec-h"><h2>כרטיס "בלי פירות ים"</h2><span>להראות למלצר</span></div>
+    <button class="ph" data-big="jp" data-jp="私は魚介類（魚・エビ・イカ・タコ・貝）が食べられません。肉の料理をお願いします。" style="text-align:right;width:100%"><div class="jp">私は魚介類（魚・エビ・イカ・タコ・貝）が食べられません。肉の料理をお願いします。</div><div class="he">אני לא אוכל פירות ים: דגים, שרימפס, דיונון, תמנון וצדפות. אשמח למנה עם בשר.</div></button>
+    <div class="sec-h"><h2>משפטים שימושיים</h2><span>לחצו להגדלה</span></div>
+    <div class="phr">${PHRASES.map(p=>`<button class="ph" data-big="jp" data-jp="${esc(p[0])}" style="text-align:right;width:100%"><div class="jp">${esc(p[0])}</div><div class="ro">${esc(p[1])}</div><div class="he">${esc(p[2])}</div></button>`).join("")}</div>
+    <div class="foot">${PL.length} מקומות במאגר · הנתונים נשמרים בטלפון</div>`;
+}
+
+/* ================= Sheets ================= */
+function openSheet(html){ $("#sheet").innerHTML = `<div class="grab"></div>` + html; $("#sheet").classList.add("show"); $("#sheetBg").classList.add("show"); }
+function closeSheet(){ $("#sheet").classList.remove("show"); $("#sheetBg").classList.remove("show"); }
+function filterSheet(){
+  const t = ST.tog;
+  const tg = (k, l) => `<button class="chip tog" data-tog="${k}" aria-pressed="${!!t[k]}">${l}</button>`;
+  openSheet(`<h3>סינון ומיון</h3>
+    <div class="fgrp"><b>הצג רק</b><div class="chips">${tg("must","מקומות חובה")}${tg("hidevis","שעוד לא ביקרנו")}</div></div>
+    <div class="fgrp"><b>מרחק ${origin().me?"ממך":"מהמלון"}</b><div class="chips">${tg("near","ברגל, עד 20 דק׳")}${tg("mid","עד 8 ק״מ")}</div></div>
+    <div class="fgrp"><b>אוכל</b><div class="chips">${tg("amit","בלי פירות ים")}${tg("omri","בלי חלב (או לשאול)")}</div></div>
+    <div class="fgrp"><b>מיון</b><div class="chips">${[["dist","הכי קרוב"],["must","מומלצים קודם"],["hs","דירוג Hard Off"],["name","לפי שם"]].map(([k,l])=>`<button class="chip tog" data-sort="${k}" aria-pressed="${ST.sort===k}">${l}</button>`).join("")}</div></div>
+    <div class="fgrp"><b>מיקום</b><div class="chips"><button class="chip tog" data-useloc="1" aria-pressed="${ST.useLoc && !!GEO}">לחשב מרחקים מהמיקום שלי</button></div></div>
+    <div class="row"><button class="btn block" data-reset="1">איפוס</button><button class="btn pri block" data-close="1">הצג תוצאות</button></div>`);
+}
+
+/* ================= Tabs / render ================= */
+let TAB = "explore";
+function renderTabs(){
+  const pc = (ST.plans[planDate()]||[]).length, fc = Object.keys(ST.fav).length;
+  const T = { explore:["compass","גילוי"], plan:["cal","התוכנית",pc], saved:["heart","שמורים",fc], cards:["card","כרטיסים"] };
+  document.querySelectorAll(".tabs button").forEach(b => { const [i,l,c] = T[b.dataset.tab]; b.innerHTML = ic(i) + l + (c ? `<span class="cnt">${c}</span>` : ""); b.setAttribute("aria-selected", String(b.dataset.tab === TAB)); });
+  ["explore","plan","saved","cards"].forEach(k => $("#view-"+k).hidden = k !== TAB);
+  $("#bar").hidden = TAB !== "explore";
+}
+function renderAll(){
+  renderHeader(); catChips(); renderTabs();
+  if (TAB === "explore") renderExplore(); else if (TAB === "plan") renderPlan(); else if (TAB === "saved") renderSaved(); else renderCards();
+}
+
+/* ================= Events ================= */
+document.addEventListener("click", e => {
+  const t = e.target.closest("button,a,g[data-rsel]"); if (!t) return;
+  const ds = t.dataset;
+  if (ds.reg) { ST.reg = ds.reg; regionManual = true; ST.cats = []; ST.grp = ""; OPEN = null; RSEL = null; LIMIT = 60; save(); renderAll(); window.scrollTo({top:0}); return; }
+  if (ds.grp !== undefined) { ST.grp = ST.grp === ds.grp ? "" : ds.grp; ST.cats = []; LIMIT = 60; save(); catChips(); renderExplore(); return; }
+  if (ds.cat !== undefined) { if (!ds.cat) ST.cats = []; else { const s = new Set(ST.cats); s.has(ds.cat) ? s.delete(ds.cat) : s.add(ds.cat); ST.cats = [...s]; } LIMIT = 60; save(); catChips(); renderExplore(); return; }
+  if (ds.area !== undefined) { ST.area[curRegion().k] = ds.area; save(); renderExplore(); return; }
+  if (ds.base) { ST.base[curRegion().k] = ds.base; save(); renderExplore(); return; }
+  if (ds.open) { OPEN = OPEN === ds.open ? null : ds.open; const p = BYID[ds.open]; const el = document.getElementById("c-"+ds.open); if (el) el.outerHTML = card(p, origin(), OPEN === ds.open); return; }
+  if (ds.fav) { ST.fav[ds.fav] ? delete ST.fav[ds.fav] : ST.fav[ds.fav] = 1; save(); toast(ST.fav[ds.fav] ? "נשמר" : "הוסר מהשמורים"); rerenderCard(ds.fav); renderTabs(); if (TAB==="saved") renderSaved(); return; }
+  if (ds.vis) { ST.vis[ds.vis] ? delete ST.vis[ds.vis] : ST.vis[ds.vis] = 1; save(); rerenderCard(ds.vis); return; }
+  if (ds.plan) { const d = planDate(), L = ST.plans[d] || (ST.plans[d] = []); const i = L.indexOf(ds.plan); if (i >= 0) { L.splice(i,1); toast("הוסר מהתוכנית"); } else { L.push(ds.plan); toast("נוסף לתוכנית של " + dShort(d)); } save(); rerenderCard(ds.plan); renderTabs(); return; }
+  if (ds.more) { LIMIT += 60; renderExplore(); return; }
+  if (ds.jump) { const p = BYID[ds.jump]; ST.view = "list"; OPEN = p.id; ST.area[curRegion().k] = ""; ST.cats = []; ST.grp = ""; $("#q").value = ""; save(); catChips(); const list = filtered(); const idx = list.findIndex(x=>x.id===p.id); if (idx >= LIMIT) LIMIT = idx + 10; renderExplore(); requestAnimationFrame(()=>{ const el = document.getElementById("c-"+p.id); if (el) el.scrollIntoView({behavior:"smooth",block:"center"}); }); return; }
+  if (ds.rsel) { RSEL = ds.rsel; renderExplore(); return; }
+  if (t.id === "viewBtn") { ST.view = ST.view === "radar" ? "list" : "radar"; save(); catChips(); renderExplore(); return; }
+  if (t.id === "fltBtn") { filterSheet(); return; }
+  if (ds.tog) { ST.tog[ds.tog] = !ST.tog[ds.tog]; if (ds.tog==="near"&&ST.tog.near) ST.tog.mid=false; if (ds.tog==="mid"&&ST.tog.mid) ST.tog.near=false; save(); filterSheet(); catChips(); renderExplore(); return; }
+  if (ds.sort) { ST.sort = ds.sort; save(); filterSheet(); catChips(); renderExplore(); return; }
+  if (ds.useloc) { if (ST.useLoc && GEO) { ST.useLoc = false; save(); filterSheet(); renderAll(); } else { locSheet(""); } return; }
+  if (ds.gps) { askLoc(); return; }
+  if (ds.here) { const p = BYID[ds.here]; setGeo({ lat:p.lat, lon:p.lon, manual:true, label:p.he }); toast("המרחקים מחושבים מ" + p.he); return; }
+  if (ds.llset) { const g = parseLatLon($("#llIn").value); if (!g) { toast("לא זיהיתי קואורדינטות"); return; } setGeo({ ...g, manual:true, label:"הנקודה שהזנתם" }); toast("המיקום עודכן"); return; }
+  if (ds.hotel) { GEO = null; ST.man = null; save(); closeSheet(); renderAll(); toast("המרחקים מהמלון"); return; }
+  if (ds.reset) { ST.tog = {}; ST.sort = "dist"; ST.cats = []; ST.grp = ""; save(); closeSheet(); renderAll(); return; }
+  if (ds.close) { closeSheet(); return; }
+  if (ds.tab) { TAB = ds.tab; OPEN = null; renderAll(); window.scrollTo({top:0}); return; }
+  if (ds.mv) { const [id, dir] = ds.mv.split("|"), L = ST.plans[planDate()], i = L.indexOf(id), j = i + +dir; if (j>=0 && j<L.length) { [L[i],L[j]]=[L[j],L[i]]; save(); renderPlan(); } return; }
+  if (ds.rm) { const L = ST.plans[planDate()]; L.splice(L.indexOf(ds.rm),1); save(); renderPlan(); renderTabs(); return; }
+  if (ds.opt) { const d = planDate(); ST.plans[d] = nn(ST.plans[d], planOrigin(d)); save(); renderPlan(); toast("המסלול סודר"); return; }
+  if (ds.clear) { ST.plans[planDate()] = []; save(); renderPlan(); renderTabs(); return; }
+  if (ds.auto) { autoSheet(); return; }
+  if (ds.ac) { t.setAttribute("aria-pressed", String(t.getAttribute("aria-pressed")!=="true")); return; }
+  if (ds.ar || ds.an) { const k = ds.ar ? "ar" : "an"; t.parentElement.querySelectorAll(`[data-${k}]`).forEach(x=>x.setAttribute("aria-pressed", String(x===t))); return; }
+  if (ds.afood) { t.setAttribute("aria-pressed", String(t.getAttribute("aria-pressed")!=="true")); return; }
+  if (ds.dobuild) { doBuild(); return; }
+  if (ds.copyplan) { const d = planDate(), L = ST.plans[d].map(i=>BYID[i]); const txt = `התוכנית ל${dLong(d)} (${regionForDate(d).he}):\n` + L.map((p,i)=>`${i+1}. ${p.en} - ${p.he}\n${mapsUrl(p)}`).join("\n"); try { navigator.clipboard.writeText(txt).then(()=>toast("הועתק. אפשר להדביק בוואטסאפ"),()=>toast("לא הצלחתי להעתיק")); } catch(err) { toast("לא הצלחתי להעתיק"); } return; }
+  if (ds.big) { const div = document.createElement("div"); div.className = "big"; div.innerHTML = ds.big === "img" ? `<img src="${CARD_IMG}" alt="">` : `<div class="jpbig">${esc(ds.jp)}</div>`; div.onclick = () => div.remove(); document.body.appendChild(div); return; }
+});
+function rerenderCard(id){ const el = document.getElementById("c-"+id); if (!el) return; const p = BYID[id], o = TAB==="saved" ? (()=>{const r=REGIONS.find(r=>r.k===p.reg), b=baseForDate(r,r.from); return {lat:b.lat,lon:b.lon};})() : origin(); el.outerHTML = card(p, o, OPEN === id); }
+$("#sheetBg").onclick = closeSheet;
+document.addEventListener("change", e => { if (e.target.id === "pdate") { PLAN_DATE = e.target.value; renderPlan(); renderTabs(); } });
+let qT; $("#q").addEventListener("input", () => { clearTimeout(qT); qT = setTimeout(() => { LIMIT = 60; renderExplore(); }, 150); });
+
+/* ================= Boot ================= */
+if (!ST.reg || (regionForDate(now().date).k !== ST.reg && now().date >= regionForDate(now().date).from)) ST.reg = regionForDate(now().date).k;
+renderAll();
+setInterval(() => renderHeader(), 30000);
+if (ST.man && Date.now() - ST.man.t < 6 * 3600e3) { GEO = ST.man; const near = regionNearGeo(); if (near) ST.reg = near.k; renderAll(); }
+else if (ST.useLoc && navigator.geolocation && window.isSecureContext) {
+  try {
+    navigator.geolocation.getCurrentPosition(pos => { GEO = { lat:pos.coords.latitude, lon:pos.coords.longitude }; const near = regionNearGeo(); if (near) ST.reg = near.k; renderAll(); }, () => {}, { enableHighAccuracy:true, timeout:10000, maximumAge:300000 });
+    navigator.geolocation.watchPosition(pos => { const g = { lat:pos.coords.latitude, lon:pos.coords.longitude }; if (!GEO || km(GEO.lat,GEO.lon,g.lat,g.lon) > 0.15) { GEO = g; if (TAB==="explore" && !OPEN) { renderHeader(); renderExplore(); } } }, () => {}, { enableHighAccuracy:false, maximumAge:60000 });
+  } catch(e) {}
+}
+</script>
+</body>
+</html>
