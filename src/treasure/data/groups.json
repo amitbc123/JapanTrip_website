@@ -1,0 +1,87 @@
+[
+ {
+  "key": "special",
+  "he": "רק כאן",
+  "color": "#F5C443",
+  "icon": "crown",
+  "cats": [
+   "special"
+  ]
+ },
+ {
+  "key": "food",
+  "he": "אוכל",
+  "color": "#FF9248",
+  "icon": "bowl",
+  "cats": [
+   "food",
+   "street"
+  ]
+ },
+ {
+  "key": "anime",
+  "he": "אנימה",
+  "color": "#FF7DB8",
+  "icon": "star",
+  "cats": [
+   "op",
+   "eva",
+   "anime"
+  ]
+ },
+ {
+  "key": "shop",
+  "he": "קניות",
+  "color": "#5DADEC",
+  "icon": "bag",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech",
+   "mall",
+   "shop"
+  ]
+ },
+ {
+  "key": "see",
+  "he": "אטרקציות",
+  "color": "#57D3F5",
+  "icon": "mount",
+  "cats": [
+   "sight",
+   "temple",
+   "museum",
+   "quirky"
+  ]
+ },
+ {
+  "key": "nat",
+  "he": "טבע וחיות",
+  "color": "#6FD37E",
+  "icon": "leaf",
+  "cats": [
+   "park",
+   "animals"
+  ]
+ },
+ {
+  "key": "fun",
+  "he": "בילוי ולילה",
+  "color": "#A897FF",
+  "icon": "moon",
+  "cats": [
+   "night",
+   "arcade",
+   "onsen"
+  ]
+ },
+ {
+  "key": "manhole",
+  "he": "מכסי ביוב",
+  "color": "#C9D3E6",
+  "icon": "manhole",
+  "cats": [
+   "manhole"
+  ]
+ }
+]

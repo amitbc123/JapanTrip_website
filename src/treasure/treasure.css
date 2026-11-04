@@ -1,0 +1,255 @@
+@import "tailwindcss";
+@import "@fontsource-variable/assistant";
+@import "leaflet/dist/leaflet.css";
+
+@source "./";
+
+/* Treasure Map identity: deep sea-navy ground, straw-hat gold accent, Luffy
+   red for One Piece. Dark is the home look; light follows the phone. */
+:root {
+  color-scheme: dark;
+  --sea: #0b1626;
+  --sea-2: #11213a;
+  --card: #15294a;
+  --card-2: #1b3360;
+  --line: #26406b;
+  --ink: #eef3fb;
+  --muted: #9db0cf;
+  --dim: #6f86ab;
+  --gold: #f5c443;
+  --gold-ink: #1a1405;
+  --red: #e4572e;
+  --ok: #5ed39a;
+  --warn: #ffb454;
+  --bad: #ff6b6b;
+  --shadow: 0 6px 24px rgb(0 0 0 / 0.35);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --sea: #eef2f8;
+    --sea-2: #e2e9f3;
+    --card: #ffffff;
+    --card-2: #f2f6fc;
+    --line: #cfd9e8;
+    --ink: #0e1d33;
+    --muted: #46597a;
+    --dim: #6a7d9c;
+    --gold: #a77a00;
+    --gold-ink: #ffffff;
+    --red: #c2410c;
+    --ok: #127a4a;
+    --warn: #a35d00;
+    --bad: #c62828;
+    --shadow: 0 6px 20px rgb(14 29 51 / 0.12);
+  }
+}
+
+@theme inline {
+  --font-sans: "Assistant Variable", system-ui, sans-serif;
+  --color-sea: var(--sea);
+  --color-sea-2: var(--sea-2);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-red: var(--red);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-bad: var(--bad);
+}
+
+html,
+body {
+  background: var(--sea);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Region cards: kanji watermark. */
+.kanji-mark {
+  position: absolute;
+  inset-inline-end: -6px;
+  bottom: -14px;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+/* Category icon tile. */
+.tile {
+  background: color-mix(in srgb, var(--c) 18%, var(--card));
+  color: var(--c);
+}
+@media (prefers-color-scheme: light) {
+  .tile {
+    background: color-mix(in srgb, var(--c) 22%, white);
+    color: color-mix(in srgb, var(--c) 60%, black);
+  }
+}
+
+.chip[aria-pressed="true"] {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--gold-ink);
+}
+.chip-cat[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--c) 28%, var(--card));
+  border-color: var(--c);
+  color: var(--ink);
+}
+
+/* Map: pins, clusters, me. */
+.tm-pin {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  background: var(--c);
+  border: 2px solid #0b1626;
+  color: #0b1626;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.4);
+}
+.tm-pin svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.tm-pin.is-must {
+  outline: 2px solid #f5c443;
+  outline-offset: 1px;
+}
+.tm-pin.is-picked {
+  transform: scale(1.3);
+  border-color: #fff;
+}
+.tm-pin.is-visited {
+  opacity: 0.55;
+}
+.tm-num {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: var(--c);
+  border: 2px solid #0b1626;
+  color: #0b1626;
+  font-weight: 800;
+  font-size: 13px;
+}
+.tm-cluster {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  background: #15294a;
+  border: 2px solid #f5c443;
+  color: #f5c443;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.45);
+}
+.tm-hotel {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #f5c443;
+  border: 2px solid #0b1626;
+  color: #1a1405;
+}
+.tm-me {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+.tm-me-core {
+  position: absolute;
+  inset: 2px;
+  border-radius: 9999px;
+  background: #2f7bf5;
+  border: 3px solid #fff;
+  box-shadow: 0 0 0 2px rgb(47 123 245 / 0.35);
+}
+.tm-me-cone {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 9999px;
+  background: conic-gradient(from -30deg, rgb(47 123 245 / 0.45), rgb(47 123 245 / 0) 60deg, transparent 0);
+  transform: rotate(var(--heading, 0deg));
+  transition: transform 0.25s ease-out;
+  display: none;
+}
+.tm-me.has-heading .tm-me-cone {
+  display: block;
+}
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--sea-2);
+}
+.leaflet-control-attribution {
+  font-size: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes tm-shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--card) 0, var(--card-2) 50%, var(--card) 100%);
+  background-size: 400px 100%;
+  animation: tm-shimmer 1.2s linear infinite;
+}

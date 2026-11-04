@@ -1,0 +1,52 @@
+[
+ {
+  "jp": "乳製品は入っていますか？",
+  "romaji": "Nyūseihin wa haitte imasu ka?",
+  "he": "יש בזה מוצרי חלב?"
+ },
+ {
+  "jp": "乳製品なしでお願いします。",
+  "romaji": "Nyūseihin nashi de onegaishimasu.",
+  "he": "בלי מוצרי חלב, בבקשה."
+ },
+ {
+  "jp": "バターとチーズは抜いてください。",
+  "romaji": "Batā to chīzu wa nuite kudasai.",
+  "he": "בלי חמאה ובלי גבינה, בבקשה."
+ },
+ {
+  "jp": "魚介類が苦手です。肉の料理はありますか？",
+  "romaji": "Gyokairui ga nigate desu. Niku no ryōri wa arimasu ka?",
+  "he": "אני לא אוכל פירות ים. יש מנה עם בשר?"
+ },
+ {
+  "jp": "3人です。",
+  "romaji": "San-nin desu.",
+  "he": "אנחנו שלושה."
+ },
+ {
+  "jp": "英語のメニューはありますか？",
+  "romaji": "Eigo no menyū wa arimasu ka?",
+  "he": "יש תפריט באנגלית?"
+ },
+ {
+  "jp": "お会計お願いします。",
+  "romaji": "O-kaikei onegaishimasu.",
+  "he": "חשבון, בבקשה."
+ },
+ {
+  "jp": "免税できますか？",
+  "romaji": "Menzei dekimasu ka?",
+  "he": "אפשר פטור ממס? (בחנויות, עם דרכון)"
+ },
+ {
+  "jp": "ジャンク品を試してもいいですか？",
+  "romaji": "Janku-hin o tameshite mo ii desu ka?",
+  "he": "אפשר לבדוק את מוצר ה-Junk? (ב-Hard Off)"
+ },
+ {
+  "jp": "ここに行きたいです。",
+  "romaji": "Koko ni ikitai desu.",
+  "he": "אני רוצה להגיע לכאן. (להראות מפה)"
+ }
+]

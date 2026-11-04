@@ -35,7 +35,9 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
-        // the standalone treasure-map page must not be replaced by the SPA shell
+        // /treasure/ is a separate site with its own service worker: never
+        // precache it here or answer its navigations with this SPA's shell.
+        globIgnores: ['treasure/**'],
         navigateFallbackDenylist: [/\/treasure\//],
         maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
         runtimeCaching: [
