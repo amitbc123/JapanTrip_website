@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build -c vite.treasure.config.ts",
+    "dev:treasure": "vite -c vite.treasure.config.ts",
+    "migrate:treasure": "node scripts/migrate-treasure.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

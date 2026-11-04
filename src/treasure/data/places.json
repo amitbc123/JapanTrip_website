@@ -1,0 +1,8350 @@
+[
+ {
+  "id": "mugiwara-store-nagoya-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Nagoya",
+  "he": "החנות הרשמית של וואן פיס בנגויה",
+  "lat": 35.1655,
+  "lon": 136.9063,
+  "desc": "החנות הרשמית של One Piece בעיר: בגדים, פיגורות, מחזיקי מפתחות ופריטים שיוצאים רק בחנויות Mugiwara.",
+  "tip": "בניין Nagoya PARCO West, קומה 8. פתוח בערך 10:00-20:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nagoya-parco-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Nagoya PARCO",
+  "he": "קניון פארקו נגויה",
+  "lat": 35.1655,
+  "lon": 136.906,
+  "desc": "שלושה בניינים מחוברים עם חנויות דמויות, אופנה צעירה ופופ-אפים של אנימה שמתחלפים כל כמה שבועות.",
+  "tip": "שווה לבדוק מה הפופ-אפ בקומות העליונות של הבניין המערבי.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "donguri-republic-nagoya-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Donguri Republic Nagoya",
+  "he": "חנות ג'יבלי - טקאשימאיה גייט טאואר",
+  "lat": 35.1703,
+  "lon": 136.8831,
+  "desc": "החנות הרשמית של סטודיו ג'יבלי: טוטורו, קיקי, נו-פייס ועוד. הכי קרובה למלון.",
+  "tip": "בתוך Takashimaya Gate Tower Mall שמעל תחנת נגויה.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "osu-shopping-street-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "shop",
+   "street"
+  ],
+  "en": "Osu Shopping Street",
+  "he": "רחוב הקניות אוסו",
+  "lat": 35.1594,
+  "lon": 136.9042,
+  "desc": "רשת של מדרחובים מקורים עם חנויות יד שנייה, אלקטרוניקה, אנימה, וינטג' ואוכל רחוב. האקיהבארה של נגויה.",
+  "tip": "הכי נחמד אחר הצהריים. אפשר לשלב עם מקדש אוסו קאנון שבכניסה.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mandarake-nagoya-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "anime",
+   "shop",
+   "vintage"
+  ],
+  "en": "Mandarake Nagoya",
+  "he": "מנדרקה נגויה",
+  "lat": 35.1597,
+  "lon": 136.9035,
+  "desc": "חנות יד שנייה ענקית לאנימה: פיגורות, מנגה, קלפים וצעצועי רטרו. אפשר למצוא פריטי One Piece ישנים במחירים טובים.",
+  "tip": "בתוך אזור אוסו.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "osu-daiichi-ameyoko-building-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "tech",
+   "shop"
+  ],
+  "en": "Osu Daiichi Ameyoko Building",
+  "he": "בניין האלקטרוניקה אוסו אמייוקו",
+  "lat": 35.1588,
+  "lon": 136.9046,
+  "desc": "קומות של דוכני רכיבים, כבלים, מחברים וגאדג'טים. גרסה קטנה של רדיו קאיקן.",
+  "tip": "בשבילך כמהנדס: חלקים שקשה למצוא בארץ.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "osu-kannon-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "temple"
+  ],
+  "en": "Osu Kannon",
+  "he": "מקדש אוסו קאנון",
+  "lat": 35.159,
+  "lon": 136.9013,
+  "desc": "מקדש בודהיסטי אדום עם יוני ענק בחצר ושוק עתיקות ב-18 וב-28 לכל חודש.",
+  "tip": "בכניסה לרחובות אוסו.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nagoya-castle-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "sight"
+  ],
+  "en": "Nagoya Castle",
+  "he": "טירת נגויה",
+  "lat": 35.1856,
+  "lon": 136.8991,
+  "desc": "טירה עם דגי הזהב (שאצ'יהוקו) על הגג וארמון הונמארו המשוחזר עם ציורי זהב מטורפים.",
+  "tip": "הטירה הראשית סגורה לשיפוץ, אבל הארמון והגנים פתוחים. כ-¥500.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "toyota-commemorative-museum-of-industry-and-technology-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "museum",
+   "tech"
+  ],
+  "en": "Toyota Commemorative Museum of Industry and Technology",
+  "he": "מוזיאון טויוטה לתעשייה וטכנולוגיה",
+  "lat": 35.1825,
+  "lon": 136.8768,
+  "desc": "מכונות אריגה ענקיות שעובדות מול העיניים, רובוטים ופסי ייצור רכב. מוזיאון חובה לאנשי הנדסה.",
+  "tip": "10 דקות הליכה מהמלון. סגור בימי שני.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "scmaglev-and-railway-park-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "museum",
+   "tech"
+  ],
+  "en": "SCMAGLEV and Railway Park",
+  "he": "פארק הרכבות והמגלב",
+  "lat": 35.045,
+  "lon": 136.851,
+  "desc": "אולם ענק עם שינקנסנים אמיתיים, רכבת המגלב שהגיעה ל-603 קמ\"ש וסימולטורים של נהיגה ברכבת.",
+  "tip": "קו Aonami מתחנת נגויה, 24 דקות. סגור בימי שלישי.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mirai-tower-and-oasis-21-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "sight",
+   "night"
+  ],
+  "en": "Mirai Tower and Oasis 21",
+  "he": "מגדל מיראי ואואזיס 21",
+  "lat": 35.1707,
+  "lon": 136.9089,
+  "desc": "מגדל הטלוויזיה הישן של נגויה ולידו 'ספינת החלל' של אואזיס 21 עם גג זכוכית שמים זורמים עליו. מואר יפה בלילה.",
+  "tip": "הגג של אואזיס 21 בחינם.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sky-promenade-midland-square-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "sight"
+  ],
+  "en": "Sky Promenade Midland Square",
+  "he": "תצפית Sky Promenade",
+  "lat": 35.1696,
+  "lon": 136.8853,
+  "desc": "תצפית פתוחה לרוח בקומה 44-46 מעל תחנת נגויה. הכי טוב בשקיעה.",
+  "tip": "5 דקות הליכה מהמלון.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "atsuta-jingu-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "temple"
+  ],
+  "en": "Atsuta Jingu",
+  "he": "מקדש אטסוטה",
+  "lat": 35.127,
+  "lon": 136.9083,
+  "desc": "אחד המקדשים החשובים ביפן, שומר על החרב הקדושה של הקיסרות. יער עצים עתיקים באמצע העיר.",
+  "tip": "תחנת Jingu-mae.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokugawa-garden-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "park"
+  ],
+  "en": "Tokugawa Garden",
+  "he": "גן טוקוגאווה",
+  "lat": 35.1857,
+  "lon": 136.9339,
+  "desc": "גן יפני עם אגם, גשרים ומפלים. בתחילת נובמבר השלכת מתחילה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "port-of-nagoya-public-aquarium-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "animals"
+  ],
+  "en": "Port of Nagoya Public Aquarium",
+  "he": "האקווריום של נגויה",
+  "lat": 35.091,
+  "lon": 136.8787,
+  "desc": "אחד האקווריומים הגדולים ביפן: לווייתני בלוגה, אורקות ומופע דולפינים.",
+  "tip": "קו Meiko עד Nagoyako.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "higashiyama-zoo-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "animals",
+   "park"
+  ],
+  "en": "Higashiyama Zoo",
+  "he": "גן החיות היגאשיאמה",
+  "lat": 35.1567,
+  "lon": 136.9768,
+  "desc": "גן חיות ענק עם הגורילה המפורסמת שבאני, קואלות ומגדל תצפית.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "noritake-garden-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "sight"
+  ],
+  "en": "Noritake Garden",
+  "he": "גן נוריטאקה",
+  "lat": 35.18,
+  "lon": 136.8828,
+  "desc": "מתחם לבנים אדומות של מפעל הפורצלן הוותיק, עם גן ומוזיאון. ממש ליד נקודת החזרת הרכב.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nagoya-city-science-museum-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "museum"
+  ],
+  "en": "Nagoya City Science Museum",
+  "he": "מוזיאון המדע של נגויה",
+  "lat": 35.1652,
+  "lon": 136.8996,
+  "desc": "הפלנטריום הגדול בעולם וחדר עם טורנדו אמיתי בגובה 9 מטר.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "yabaton-yabacho-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "food"
+  ],
+  "en": "Yabaton Yabacho",
+  "he": "יאבאטון - מיסו קאטסו",
+  "lat": 35.1627,
+  "lon": 136.9065,
+  "desc": "המקום המפורסם לקציצת חזיר מטוגנת ברוטב מיסו אדום. המנה הכי מזוהה עם נגויה.",
+  "tip": "יש תורים בערב. לחלב: לשאול על החלב בציפוי.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "sekai-no-yamachan-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "food"
+  ],
+  "en": "Sekai no Yamachan",
+  "he": "סקאי נו יאמאצ'אן - כנפיים",
+  "lat": 35.1676,
+  "lon": 136.9063,
+  "desc": "כנפי עוף פריכות בפלפל שחור וחריף, המנה של נגויה. אווירת איזקאיה רועשת.",
+  "tip": "יש סניפים ליד התחנה ובסקאה.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "misen-yabacho-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "food"
+  ],
+  "en": "Misen Yabacho",
+  "he": "מיסן - ראמן טייוואני",
+  "lat": 35.1627,
+  "lon": 136.9045,
+  "desc": "ראמן 'טייוואני' חריף עם בשר טחון ושום, מומצא בנגויה.",
+  "tip": "ממש חריף. אפשר לבקש פחות.",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "yamamotoya-sohonke-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "food"
+  ],
+  "en": "Yamamotoya Sohonke",
+  "he": "יאמאמוטויה - מיסו אודון",
+  "lat": 35.17,
+  "lon": 136.884,
+  "desc": "אודון עבה שמבושל בסיר חרס במרק מיסו, עם עוף וביצה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "atsuta-horaiken-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "food"
+  ],
+  "en": "Atsuta Horaiken",
+  "he": "אטסוטה הוראיקן - צלופח",
+  "lat": 35.129,
+  "lon": 136.9075,
+  "desc": "המקום ההיסטורי של הִיצוּמַבּוּשִׁי, צלופח על אורז שאוכלים בשלוש דרכים. ",
+  "tip": "תורים ארוכים. דגים.",
+  "price": 3,
+  "mustSee": false,
+  "special": true,
+  "seafood": "mostly",
+  "dairy": "free"
+ },
+ {
+  "id": "kishimen-sumiyoshi-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "food",
+   "street"
+  ],
+  "en": "Kishimen Sumiyoshi",
+  "he": "קישימן ברציף",
+  "lat": 35.1709,
+  "lon": 136.8815,
+  "desc": "דוכן אטריות שטוחות על הרציף של תחנת נגויה. ארוחה של 5 דקות עם המקומיים.",
+  "tip": "רציפים 7-8 ו-1-2.",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": null,
+  "dairy": "ask"
+ },
+ {
+  "id": "komeda-s-coffee-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "food"
+  ],
+  "en": "Komeda's Coffee",
+  "he": "קומדה קפה",
+  "lat": 35.169,
+  "lon": 136.885,
+  "desc": "רשת בתי הקפה שנולדה בנגויה, מפורסמת בשירו נוואר - לחמנייה חמה עם גלידה רכה.",
+  "tip": "שירו נוואר מכיל חלב.",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "contains"
+ },
+ {
+  "id": "gigo-nagoya-osu-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "arcade",
+   "night"
+  ],
+  "en": "GiGO Nagoya Osu",
+  "he": "ארקייד GiGO אוסו",
+  "lat": 35.1595,
+  "lon": 136.904,
+  "desc": "ארקייד של מכונות טופי, משחקי קצב ופרינט-קורה (תמונות מצחיקות).",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sakae-nightlife-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "night"
+  ],
+  "en": "Sakae nightlife",
+  "he": "סקאה בלילה",
+  "lat": 35.169,
+  "lon": 136.907,
+  "desc": "מרכז הבילוי של נגויה: איזקאיות, ברים וקריוקי סביב פארק היסאיה אודורי.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mugiwara-store-kyoto-kiddy-land-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Kyoto (Kiddy Land)",
+  "he": "וואן פיס בקידי לנד קיוטו",
+  "lat": 35.0035,
+  "lon": 135.769,
+  "desc": "פינת Mugiwara Store רשמית בתוך Kiddy Land. 3 דקות הליכה מהמלון.",
+  "tip": "Kiddy Land Shijo Kawaramachi, קומה 1. 11:00-21:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nintendo-kyoto-and-pokemon-center-kyoto-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Nintendo Kyoto and Pokemon Center Kyoto",
+  "he": "נינטנדו קיוטו ומרכז פוקימון",
+  "lat": 35.0036,
+  "lon": 135.7685,
+  "desc": "חנות נינטנדו הרשמית ומרכז פוקימון באותו בניין, עם פינות צילום ופריטים שיוצאים רק בקיוטו.",
+  "tip": "Kyoto Takashimaya S.C. (T8) בשיג'ו קוואראמאצ'י. ממש ליד המלון.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "donguri-republic-sannenzaka-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Donguri Republic Sannenzaka",
+  "he": "חנות ג'יבלי בסאננזאקה",
+  "lat": 34.996,
+  "lon": 135.7808,
+  "desc": "חנות ג'יבלי רשמית בבית עץ מסורתי ברחוב העולה לקיומיזו-דרה. טוטורו ענק בכניסה.",
+  "tip": "לשלב עם קיומיזו-דרה.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kyoto-international-manga-museum-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "anime",
+   "museum"
+  ],
+  "en": "Kyoto International Manga Museum",
+  "he": "מוזיאון המנגה הבינלאומי",
+  "lat": 35.0117,
+  "lon": 135.7594,
+  "desc": "בית ספר ישן עם 50 אלף כרכי מנגה על הקירות שאפשר לשבת ולקרוא, ותערוכות מתחלפות.",
+  "tip": "סגור בימי שלישי ורביעי.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "toei-kyoto-studio-park-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "anime",
+   "quirky"
+  ],
+  "en": "Toei Kyoto Studio Park",
+  "he": "פארק האולפנים טואי קיוטו",
+  "lat": 35.0168,
+  "lon": 135.7084,
+  "desc": "אולפן סרטי סמוראים פעיל עם רחובות אדו, מופעי נינג'ה, בית רדוף ותערוכות אנימה. כאן היה בסיס האוונגליון של קיוטו.",
+  "tip": "לבדוק באתר אילו תערוכות אנימה פתוחות עכשיו.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "samurai-and-ninja-museum-kyoto-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "quirky",
+   "museum"
+  ],
+  "en": "Samurai and Ninja Museum Kyoto",
+  "he": "מוזיאון הסמוראים והנינג'ה",
+  "lat": 35.0059,
+  "lon": 135.7646,
+  "desc": "סיור קצר באנגלית על סמוראים ונינג'ות, לבישת שריון וזריקת שוריקן.",
+  "tip": "10 דקות הליכה מהמלון.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "fushimi-inari-taisha-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Fushimi Inari Taisha",
+  "he": "פושימי אינארי",
+  "lat": 34.9671,
+  "lon": 135.7727,
+  "desc": "אלפי שערי טוריי כתומים שמטפסים על ההר. האתר הכי מצולם ביפן.",
+  "tip": "בבוקר מוקדם או אחרי 18:00 כמעט ריק ומואר. פתוח 24 שעות.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kiyomizu-dera-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple",
+   "sight"
+  ],
+  "en": "Kiyomizu-dera",
+  "he": "קיומיזו-דרה",
+  "lat": 34.9949,
+  "lon": 135.785,
+  "desc": "מקדש עם במת עץ ענקית מעל עמק של עצי אדר. בנובמבר יש הארה לילית של השלכת.",
+  "tip": "הארת הסתיו בערבים, לבדוק תאריכים.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sannenzaka-and-ninenzaka-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "street",
+   "sight"
+  ],
+  "en": "Sannenzaka and Ninenzaka",
+  "he": "סאננזאקה וניננזאקה",
+  "lat": 34.9965,
+  "lon": 135.781,
+  "desc": "רחובות אבן משופעים עם בתי עץ, חנויות מזכרות, ממתקים וסטארבקס בבית טאטאמי.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "gion-and-hanamikoji-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "sight",
+   "night"
+  ],
+  "en": "Gion and Hanamikoji",
+  "he": "גיון והנאמיקוג'י",
+  "lat": 35.0026,
+  "lon": 135.7752,
+  "desc": "רובע הגיישות עם בתי תה מעץ ופנסים. בערב אפשר לראות מאיקו בדרך לעבודה.",
+  "tip": "אסור לצלם ברחובות הפרטיים, יש קנסות.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "yasaka-shrine-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Yasaka Shrine",
+  "he": "מקדש יאסאקה",
+  "lat": 35.0037,
+  "lon": 135.7785,
+  "desc": "מקדש עם מאות פנסים, מואר בלילה, בקצה רחוב שיג'ו.",
+  "tip": "10 דקות מהמלון.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "pontocho-alley-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food",
+   "night",
+   "street"
+  ],
+  "en": "Pontocho Alley",
+  "he": "סמטת פונטוצ'ו",
+  "lat": 35.005,
+  "lon": 135.7708,
+  "desc": "סמטה צרה לאורך הנהר עם מסעדות ופנסים. בערב היא הכי יפה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nishiki-market-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "street",
+   "food"
+  ],
+  "en": "Nishiki Market",
+  "he": "שוק נישיקי",
+  "lat": 35.005,
+  "lon": 135.765,
+  "desc": "'המטבח של קיוטו': 400 מטר של דוכנים. שיפודי עוף, קרוקטים, טמגויאקי, מוצ'י, ותמנונים קטנים ",
+  "tip": "עד 17:00 בערך. אסור לאכול בהליכה, אוכלים ליד הדוכן.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": null
+ },
+ {
+  "id": "teramachi-and-shinkyogoku-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "shop"
+  ],
+  "en": "Teramachi and Shinkyogoku",
+  "he": "מדרחובות טרמאצ'י ושינקיוגוקו",
+  "lat": 35.006,
+  "lon": 135.768,
+  "desc": "שני מדרחובות מקורים צמודים עם חנויות בגדים, מזכרות, גאצ'ה וארקיידים.",
+  "tip": "ליד המלון.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kinkaku-ji-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple",
+   "sight"
+  ],
+  "en": "Kinkaku-ji",
+  "he": "קינקאקו-ג'י - מקדש הזהב",
+  "lat": 35.0394,
+  "lon": 135.7292,
+  "desc": "ביתן מצופה זהב מעל אגם. מושלם ביום שמש.",
+  "tip": "מגיעים באוטובוס, כדאי בפתיחה ב-9:00.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "arashiyama-bamboo-grove-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "sight"
+  ],
+  "en": "Arashiyama Bamboo Grove",
+  "he": "יער הבמבוק בארשיאמה",
+  "lat": 35.017,
+  "lon": 135.6713,
+  "desc": "שביל בין עמודי במבוק ענקיים שמשמיעים רעש ברוח.",
+  "tip": "לפני 8:00 אחרת צפוף מאוד.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "iwatayama-monkey-park-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "animals"
+  ],
+  "en": "Iwatayama Monkey Park",
+  "he": "פארק הקופים איוואטאיאמה",
+  "lat": 35.0094,
+  "lon": 135.677,
+  "desc": "טיפוס של 20 דקות לראש גבעה עם 120 קופי מקוק חופשיים ונוף על כל קיוטו. מאכילים אותם מתוך בקתה.",
+  "tip": "ליד גשר טוגטסוקיו.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tenryu-ji-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple",
+   "park"
+  ],
+  "en": "Tenryu-ji",
+  "he": "טנריו-ג'י",
+  "lat": 35.0157,
+  "lon": 135.6738,
+  "desc": "מקדש זן עם גן אגם מהמאה ה-14, צמוד ליער הבמבוק.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "togetsukyo-bridge-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "sight"
+  ],
+  "en": "Togetsukyo Bridge",
+  "he": "גשר טוגטסוקיו",
+  "lat": 35.0129,
+  "lon": 135.6777,
+  "desc": "הגשר הסמלי של ארשיאמה עם הרים מכוסי שלכת ברקע.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sagano-romantic-train-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "sight"
+  ],
+  "en": "Sagano Romantic Train",
+  "he": "הרכבת הרומנטית סאגאנו",
+  "lat": 35.0161,
+  "lon": 135.6789,
+  "desc": "רכבת עץ פתוחה שנוסעת 25 דקות לאורך נהר בתוך הרים צבעוניים. בנובמבר היא בשיא.",
+  "tip": "להזמין כרטיס מראש, נגמר מהר בעונת השלכת.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "eikando-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple",
+   "park"
+  ],
+  "en": "Eikando",
+  "he": "אייקנדו - מקדש השלכת",
+  "lat": 35.0149,
+  "lon": 135.7943,
+  "desc": "נחשב המקום הכי יפה ביפן לשלכת. בנובמבר יש הארה לילית קסומה.",
+  "tip": "אמצע נובמבר הוא השיא. להגיע מוקדם.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tofuku-ji-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple",
+   "park"
+  ],
+  "en": "Tofuku-ji",
+  "he": "טופוקו-ג'י",
+  "lat": 34.9764,
+  "lon": 135.7737,
+  "desc": "גשר עץ מעל עמק של אלפיים עצי אדר אדומים. אחד הנופים הכי חזקים של נובמבר.",
+  "tip": "צפוף בשיא, להגיע בפתיחה.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "philosopher-s-path-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "sight"
+  ],
+  "en": "Philosopher's Path",
+  "he": "שביל הפילוסוף",
+  "lat": 35.0213,
+  "lon": 135.7944,
+  "desc": "שביל הליכה של 2 ק\"מ לאורך תעלה, בין מקדשים קטנים ובתי קפה.",
+  "tip": "מחבר בין גינקאקו-ג'י לנאנזן-ג'י.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ginkaku-ji-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Ginkaku-ji",
+  "he": "גינקאקו-ג'י - ביתן הכסף",
+  "lat": 35.027,
+  "lon": 135.7982,
+  "desc": "מקדש זן עם גן חול מסורק וגן טחב.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nanzen-ji-and-aqueduct-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple",
+   "sight"
+  ],
+  "en": "Nanzen-ji and Aqueduct",
+  "he": "נאנזן-ג'י ואמת המים",
+  "lat": 35.0112,
+  "lon": 135.7932,
+  "desc": "שער עץ ענק ואמת מים מלבנים בסגנון רומי בתוך שטח המקדש. מקום צילום מעולה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nijo-castle-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "sight"
+  ],
+  "en": "Nijo Castle",
+  "he": "טירת ניג'ו",
+  "lat": 35.0142,
+  "lon": 135.7481,
+  "desc": "ארמון השוגון עם 'רצפות זמיר' שמצייצות כשדורכים, נגד מתנקשי נינג'ה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sanjusangendo-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Sanjusangendo",
+  "he": "סנג'וסנגנדו",
+  "lat": 34.9879,
+  "lon": 135.7718,
+  "desc": "אולם של 120 מטר עם 1001 פסלי זהב של האלה קאנון בשורות.",
+  "tip": "אסור לצלם בפנים.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "heian-shrine-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Heian Shrine",
+  "he": "מקדש הייאן",
+  "lat": 35.016,
+  "lon": 135.7824,
+  "desc": "מקדש ענק ירוק-אדום עם שער טוריי אדום של 24 מטר.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kitano-tenmangu-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "temple",
+   "park"
+  ],
+  "en": "Kitano Tenmangu",
+  "he": "קיטאנו טנמנגו",
+  "lat": 35.0312,
+  "lon": 135.7353,
+  "desc": "מקדש עם גן אדרים לאורך נחל שנפתח רק בעונת השלכת, עם הארה לילית.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kyoto-imperial-palace-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "sight"
+  ],
+  "en": "Kyoto Imperial Palace",
+  "he": "הארמון הקיסרי",
+  "lat": 35.0254,
+  "lon": 135.7621,
+  "desc": "ארמון הקיסרים הישן בתוך פארק ענק. כניסה חינם.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kyoto-tower-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "sight"
+  ],
+  "en": "Kyoto Tower",
+  "he": "מגדל קיוטו",
+  "lat": 34.9875,
+  "lon": 135.7593,
+  "desc": "תצפית מול תחנת קיוטו. במרתף יש אולם אוכל.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kyoto-station-building-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "sight",
+   "mall"
+  ],
+  "en": "Kyoto Station Building",
+  "he": "בניין תחנת קיוטו",
+  "lat": 34.9858,
+  "lon": 135.7588,
+  "desc": "בניין עתידני עם מדרגות ענק שנדלקות בלד בלילה וגשר שמיים בקומה 11.",
+  "tip": "הגשר בחינם.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kyoto-railway-museum-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "museum",
+   "tech"
+  ],
+  "en": "Kyoto Railway Museum",
+  "he": "מוזיאון הרכבות של קיוטו",
+  "lat": 34.9873,
+  "lon": 135.7425,
+  "desc": "53 רכבות אמיתיות כולל שינקנסן 0, וקטר קיטור שאפשר לנסוע בו.",
+  "tip": "סגור בימי רביעי.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kyoto-aquarium-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "animals"
+  ],
+  "en": "Kyoto Aquarium",
+  "he": "אקווריום קיוטו",
+  "lat": 34.9875,
+  "lon": 135.7457,
+  "desc": "אקווריום עם סלמנדרות ענק ביפניות ופינגווינים.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "fushimi-sake-district-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "street"
+  ],
+  "en": "Fushimi Sake District",
+  "he": "רובע הסאקה פושימי",
+  "lat": 34.9327,
+  "lon": 135.7614,
+  "desc": "מבשלות סאקה ישנות ומוזיאון גקיקאן עם טעימות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "menbakaichidai-fire-ramen-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Menbakaichidai Fire Ramen",
+  "he": "ראמן האש",
+  "lat": 35.0232,
+  "lon": 135.7505,
+  "desc": "שופכים אש על הקערה שלך מול העיניים. חוויה מצחיקה עם הוראות בטיחות.",
+  "tip": "מקום קטן, כדאי להגיע לפני הפתיחה.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "kyoto-gogyo-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Kyoto Gogyo",
+  "he": "גוגיו - ראמן מיסו שרוף",
+  "lat": 35.0071,
+  "lon": 135.7639,
+  "desc": "ראמן מיסו עם שמן 'שרוף' שחור. טעם מעושן ויוצא דופן.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "ramen-sen-no-kaze-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Ramen Sen no Kaze",
+  "he": "ראמן סן נו קאזה",
+  "lat": 35.0062,
+  "lon": 135.7683,
+  "desc": "ראמן בסגנון קיוטו עם צ'אשו רך, ליד המלון. תור קבוע.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "ippudo-nishiki-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Ippudo Nishiki",
+  "he": "איפודו נישיקי",
+  "lat": 35.0049,
+  "lon": 135.7637,
+  "desc": "רשת הטונקוטסו המפורסמת. אמין ומהיר.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "kyoto-ramen-koji-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Kyoto Ramen Koji",
+  "he": "רחוב הראמן בתחנת קיוטו",
+  "lat": 34.9852,
+  "lon": 135.7588,
+  "desc": "קומה עם 9 חנויות ראמן מכל יפן. כל אחד בוחר מה שבא לו.",
+  "tip": "קומה 10 בבניין התחנה.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "kyoto-katsugyu-pontocho-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Kyoto Katsugyu Pontocho",
+  "he": "קאטסוגיו - שניצל בקר",
+  "lat": 35.0055,
+  "lon": 135.771,
+  "desc": "שניצל בקר נא-למחצה שצולים לבד על אבן חמה. מושלם למי שלא אוכל פירות ים.",
+  "tip": "לחלב: לשאול על חלב בציפוי וברטבים.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "katsukura-sanjo-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Katsukura Sanjo",
+  "he": "קאטסוקורה טונקאטסו",
+  "lat": 35.0093,
+  "lon": 135.768,
+  "desc": "טונקאטסו בסגנון קיוטו: טוחנים שומשום לבד בשביל הרוטב. אורז וכרוב ללא הגבלה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "gyoza-hohei-gion-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Gyoza Hohei Gion",
+  "he": "גיוזה הוהיי",
+  "lat": 35.004,
+  "lon": 135.7742,
+  "desc": "גיוזות קטנות ופריכות בטיגון. מקום מקומי זול.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "chao-chao-gyoza-sanjo-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Chao Chao Gyoza Sanjo",
+  "he": "צ'או צ'או גיוזה",
+  "lat": 35.009,
+  "lon": 135.7716,
+  "desc": "גיוזות שזכו בתחרויות, כולל טעמים מטורפים. ליד הנהר.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "yakiniku-hiro-kiyamachi-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Yakiniku Hiro Kiyamachi",
+  "he": "יאקיניקו הירו",
+  "lat": 35.0063,
+  "lon": 135.7707,
+  "desc": "צלייה על הגחלים של בקר וואגיו איכותי, ליד המלון.",
+  "tip": "להזמין מקום בערב.",
+  "price": 3,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "honke-daiichi-asahi-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "food"
+  ],
+  "en": "Honke Daiichi-Asahi",
+  "he": "הונקה דאיצ'י אסאהי",
+  "lat": 34.9884,
+  "lon": 135.7616,
+  "desc": "ראמן חזיר-סויה ותיק ליד התחנה, פתוח מהבוקר.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "nakamura-tokichi-kyoto-station-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "street"
+  ],
+  "en": "Nakamura Tokichi Kyoto Station",
+  "he": "מאצ'ה נקאמורה טוקיצ'י",
+  "lat": 34.9855,
+  "lon": 135.759,
+  "desc": "פרפה מאצ'ה ענק עם ג'לי וגלידה. בית התה הוותיק מאוג'י.",
+  "tip": "מכיל חלב.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "contains"
+ },
+ {
+  "id": "arabica-higashiyama-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "street"
+  ],
+  "en": "% Arabica Higashiyama",
+  "he": "ערביקה היגאשיאמה",
+  "lat": 34.998,
+  "lon": 135.7807,
+  "desc": "בית הקפה המינימליסטי המפורסם של קיוטו, ליד יאסאקה.",
+  "tip": "אפשר לבקש עם חלב סויה.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": "ask"
+ },
+ {
+  "id": "gigo-kyoto-kawaramachi-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "arcade",
+   "night"
+  ],
+  "en": "GiGO Kyoto Kawaramachi",
+  "he": "ארקייד GiGO קוואראמאצ'י",
+  "lat": 35.0045,
+  "lon": 135.769,
+  "desc": "קומות של מכונות טופי וגאצ'ה, ממש ליד המלון.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "funaoka-onsen-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "onsen"
+  ],
+  "en": "Funaoka Onsen",
+  "he": "פונאוקה אונסן",
+  "lat": 35.039,
+  "lon": 135.743,
+  "desc": "סנטו בן 100 שנה עם עיטורי עץ מטורפים, אמבטיה חשמלית וסאונה.",
+  "tip": "בערך ¥500. מגבת להביא או לקנות.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kyoto-book-off-hard-off-teramachi-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "vintage"
+  ],
+  "en": "Kyoto Book Off / Hard Off Teramachi",
+  "he": "יד שנייה בטרמאצ'י",
+  "lat": 35.007,
+  "lon": 135.7675,
+  "desc": "חנויות יד שנייה של ספרים, משחקים ופיגורות במדרחוב טרמאצ'י.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nara-park-deer-nara",
+  "area": "nara",
+  "region": "kyo",
+  "cats": [
+   "animals",
+   "park"
+  ],
+  "en": "Nara Park Deer",
+  "he": "הצבאים של נארה",
+  "lat": 34.6851,
+  "lon": 135.843,
+  "desc": "מאות צבאים חופשיים שמשתחווים בשביל עוגיות שיקה סנבֵּי.",
+  "tip": "הם נושכים כשנגמרות העוגיות. ¥200 לחבילה.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "todai-ji-nara",
+  "area": "nara",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Todai-ji",
+  "he": "טודאי-ג'י",
+  "lat": 34.689,
+  "lon": 135.8398,
+  "desc": "מבנה העץ הענק עם בודהה ברונזה של 15 מטר. יש עמוד עם חור שאם עוברים בו מקבלים מזל.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kasuga-taisha-nara",
+  "area": "nara",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Kasuga Taisha",
+  "he": "קאסוגה טאישה",
+  "lat": 34.6814,
+  "lon": 135.8484,
+  "desc": "מקדש עם 3000 פנסי אבן וברונזה בתוך יער.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kofuku-ji-nara",
+  "area": "nara",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Kofuku-ji",
+  "he": "קופוקו-ג'י",
+  "lat": 34.6832,
+  "lon": 135.8317,
+  "desc": "פגודה בת חמש קומות במרכז נארה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nakatanidou-nara",
+  "area": "nara",
+  "region": "kyo",
+  "cats": [
+   "street"
+  ],
+  "en": "Nakatanidou",
+  "he": "נקאטנידו - מוצ'י מהיר",
+  "lat": 34.681,
+  "lon": 135.829,
+  "desc": "מכים מוצ'י במהירות מטורפת מול הקהל. מופע של 30 שניות ומוצ'י טרי.",
+  "tip": "המופע מתקיים כמה פעמים ביום כשיש קהל.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "mount-wakakusa-nara",
+  "area": "nara",
+  "region": "kyo",
+  "cats": [
+   "sight"
+  ],
+  "en": "Mount Wakakusa",
+  "he": "הר וואקאקוסה",
+  "lat": 34.6866,
+  "lon": 135.8495,
+  "desc": "גבעת דשא עם נוף על כל נארה, יפה בשקיעה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "naramachi-nara",
+  "area": "nara",
+  "region": "kyo",
+  "cats": [
+   "street"
+  ],
+  "en": "Naramachi",
+  "he": "נאראמאצ'י",
+  "lat": 34.677,
+  "lon": 135.829,
+  "desc": "רובע של בתי סוחרים ישנים, בתי קפה וחנויות קטנות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "byodo-in-uji",
+  "area": "uji",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Byodo-in",
+  "he": "ביודו-אין",
+  "lat": 34.8893,
+  "lon": 135.8077,
+  "desc": "ביתן הפניקס שמופיע על מטבע 10 ין. בניין מדהים מעל אגם.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nintendo-museum-uji",
+  "area": "uji",
+  "region": "kyo",
+  "cats": [
+   "anime",
+   "museum"
+  ],
+  "en": "Nintendo Museum",
+  "he": "מוזיאון נינטנדו",
+  "lat": 34.8925,
+  "lon": 135.7842,
+  "desc": "המוזיאון הרשמי של נינטנדו עם כל הקונסולות ומשחקים אינטראקטיביים ענקיים.",
+  "tip": "מוזמן ל-9.11, 10:30. להביא דרכון.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "byodoin-omotesando-uji",
+  "area": "uji",
+  "region": "kyo",
+  "cats": [
+   "street"
+  ],
+  "en": "Byodoin Omotesando",
+  "he": "רחוב המאצ'ה של אוג'י",
+  "lat": 34.8905,
+  "lon": 135.807,
+  "desc": "רחוב שכולו בתי תה ומאצ'ה: גלידות, אטריות ירוקות ודנגו.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": null
+ },
+ {
+  "id": "nakamura-tokichi-honten-uji",
+  "area": "uji",
+  "region": "kyo",
+  "cats": [
+   "street"
+  ],
+  "en": "Nakamura Tokichi Honten",
+  "he": "נקאמורה טוקיצ'י - הסניף הראשי",
+  "lat": 34.8907,
+  "lon": 135.806,
+  "desc": "בית התה המקורי מ-1854, פרפה מאצ'ה מפורסם.",
+  "tip": "תור ארוך בצהריים. מכיל חלב.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "contains"
+ },
+ {
+  "id": "ujigami-shrine-uji",
+  "area": "uji",
+  "region": "kyo",
+  "cats": [
+   "temple"
+  ],
+  "en": "Ujigami Shrine",
+  "he": "מקדש אוג'יגאמי",
+  "lat": 34.8915,
+  "lon": 135.8105,
+  "desc": "המקדש השינטואי העתיק ביפן, ברשימת מורשת עולמית.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mugiwara-store-umeda-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Umeda",
+  "he": "החנות הרשמית של וואן פיס באומדה",
+  "lat": 34.7035,
+  "lon": 135.496,
+  "desc": "חנות One Piece רשמית ליד תחנת JR אוסקה, עם פריטים בלעדיים לאוסקה.",
+  "tip": "LUCUA, קומה 13 לפי המדריכים. לוודא באתר mugiwara-store.com. 10:00-20:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mugiwara-store-abeno-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Abeno",
+  "he": "החנות הרשמית של וואן פיס באבנו",
+  "lat": 34.644,
+  "lon": 135.513,
+  "desc": "סניף Mugiwara בקניון Abeno Q's Mall ליד טנוג'י. פחות עמוס מאומדה.",
+  "tip": "קומה 3, 10:00-21:00. לשלב עם אבנו הרוקאס וגן החיות טנוג'י.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "pokemon-center-osaka-dx-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Pokemon Center Osaka DX",
+  "he": "מרכז פוקימון אוסקה DX",
+  "lat": 34.6738,
+  "lon": 135.5013,
+  "desc": "מרכז פוקימון ענק עם בית קפה פוקימון. 5 דקות מהמלון.",
+  "tip": "Daimaru Shinsaibashi, קומה 9. לבית הקפה צריך להזמין מראש.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shinsaibashi-parco-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "shop",
+   "mall"
+  ],
+  "en": "Shinsaibashi PARCO",
+  "he": "שינסאיבאשי פארקו",
+  "lat": 34.6735,
+  "lon": 135.5016,
+  "desc": "קומות של חנויות דמויות ואנימה, פופ-אפים ואולם אוכל במרתף. צמוד למלון.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nintendo-osaka-and-pokemon-center-osaka-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Nintendo Osaka and Pokemon Center Osaka",
+  "he": "נינטנדו אוסקה",
+  "lat": 34.702,
+  "lon": 135.4955,
+  "desc": "החנות הרשמית של נינטנדו ומרכז פוקימון באומדה.",
+  "tip": "Daimaru Umeda, קומה 13.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "donguri-republic-shinsaibashi-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Donguri Republic Shinsaibashi",
+  "he": "חנות ג'יבלי שינסאיבאשי",
+  "lat": 34.6738,
+  "lon": 135.5015,
+  "desc": "חנות ג'יבלי הרשמית, ליד המלון.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mandarake-grand-chaos-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "shop",
+   "vintage"
+  ],
+  "en": "Mandarake Grand Chaos",
+  "he": "מנדרקה גרנד כאוס",
+  "lat": 34.672,
+  "lon": 135.4986,
+  "desc": "חנות האנימה והאספנות הגדולה של אוסקה באמריקה-מורה: פיגורות One Piece ישנות, קלפים, משחקי רטרו וחפצים מוזרים.",
+  "tip": "10 דקות הליכה מהמלון. 12:00-20:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "den-den-town-nipponbashi-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "tech",
+   "shop"
+  ],
+  "en": "Den Den Town (Nipponbashi)",
+  "he": "דן דן טאון",
+  "lat": 34.6592,
+  "lon": 135.5063,
+  "desc": "האקיהבארה של אוסקה: רחוב ארוך של חנויות אנימה, משחקי רטרו, פיגורות, אלקטרוניקה ומייד קפה.",
+  "tip": "15 דקות הליכה מהמלון. החנויות נפתחות בסביבות 11:00.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "super-potato-osaka-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "vintage"
+  ],
+  "en": "Super Potato Osaka",
+  "he": "סופר פוטטו אוסקה",
+  "lat": 34.6595,
+  "lon": 135.5063,
+  "desc": "חנות משחקי רטרו אגדית עם קונסולות ישנות ופינת ארקייד של פעם.",
+  "tip": "בתוך דן דן טאון.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "joshin-super-kids-land-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "tech",
+   "shop"
+  ],
+  "en": "Joshin Super Kids Land",
+  "he": "ג'ושין סופר קידס לנד",
+  "lat": 34.658,
+  "lon": 135.506,
+  "desc": "בניין שלם של דגמים, גאנדאם, רכבות מודל ומשחקים.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "animate-osaka-nipponbashi-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Animate Osaka Nipponbashi",
+  "he": "אנימייט אוסקה",
+  "lat": 34.66,
+  "lon": 135.5062,
+  "desc": "רשת האנימה הגדולה ביפן: מנגה, מרצ'נדייז ופופ-אפים.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "dotonbori-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "sight",
+   "night",
+   "street"
+  ],
+  "en": "Dotonbori",
+  "he": "דוטונבורי",
+  "lat": 34.6687,
+  "lon": 135.5013,
+  "desc": "רחוב השלטים המפורסם: תמנון ענק, סרטן זז, השלט של גליקו ואוכל רחוב בכל פינה. בלילה הוא מואר ומטורף.",
+  "tip": "5 דקות הליכה מהמלון.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shinsaibashi-suji-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "shop"
+  ],
+  "en": "Shinsaibashi-suji",
+  "he": "מדרחוב שינסאיבאשי",
+  "lat": 34.674,
+  "lon": 135.5014,
+  "desc": "מדרחוב מקורה של 600 מטר עם כל המותגים, דון קיחוטה וחנויות קוסמטיקה. צמוד למלון.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "amerikamura-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "shop",
+   "quirky",
+   "vintage"
+  ],
+  "en": "Amerikamura",
+  "he": "אמריקה-מורה",
+  "lat": 34.6717,
+  "lon": 135.4975,
+  "desc": "שכונת הנוער של אוסקה: חנויות וינטג', סטריט-ארט ואוכל רחוב.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "namba-yasaka-shrine-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "temple",
+   "quirky"
+  ],
+  "en": "Namba Yasaka Shrine",
+  "he": "מקדש נמבה יאסאקה",
+  "lat": 34.6615,
+  "lon": 135.4979,
+  "desc": "מקדש עם ראש אריה ענק בגובה 12 מטר שפיו פתוח 'לבלוע מזל רע'. מצטלם מטורף.",
+  "tip": "",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hozenji-yokocho-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "sight"
+  ],
+  "en": "Hozenji Yokocho",
+  "he": "הוזנג'י יוקוצ'ו",
+  "lat": 34.668,
+  "lon": 135.5034,
+  "desc": "סמטה מרוצפת עם פסל מכוסה טחב שמתיזים עליו מים, ומסעדות קטנות.",
+  "tip": "מקסים בערב.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shinsekai-and-tsutenkaku-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "sight",
+   "quirky",
+   "food"
+  ],
+  "en": "Shinsekai and Tsutenkaku",
+  "he": "שינסקאי ומגדל טסוטנקאקו",
+  "lat": 34.6525,
+  "lon": 135.5063,
+  "desc": "שכונת רטרו משנות ה-50 עם שלטים מוגזמים, קושיקאטסו ומגדל עם פסל בילִיקֶן שמביא מזל.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "osaka-castle-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "sight"
+  ],
+  "en": "Osaka Castle",
+  "he": "טירת אוסקה",
+  "lat": 34.6873,
+  "lon": 135.5262,
+  "desc": "טירה לבנה וזהובה על חומות ענק עם פארק גדול. בפנים מוזיאון.",
+  "tip": "בנובמבר הפארק צבעוני.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "umeda-sky-building-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "sight",
+   "night"
+  ],
+  "en": "Umeda Sky Building",
+  "he": "בניין אומדה סקאיי",
+  "lat": 34.7053,
+  "lon": 135.4906,
+  "desc": "שני מגדלים מחוברים בגג תצפית עגול ופתוח בקומה 40. מושלם בשקיעה.",
+  "tip": "בערך ¥2000.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hep-five-ferris-wheel-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "quirky",
+   "night"
+  ],
+  "en": "HEP Five Ferris Wheel",
+  "he": "גלגל ענק HEP Five",
+  "lat": 34.7038,
+  "lon": 135.5003,
+  "desc": "גלגל ענק אדום שיוצא מגג קניון באמצע אומדה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "abeno-harukas-300-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "sight"
+  ],
+  "en": "Abeno Harukas 300",
+  "he": "אבנו הרוקאס",
+  "lat": 34.6459,
+  "lon": 135.5135,
+  "desc": "התצפית הגבוהה בעיר בקומה 60, עם רצפת זכוכית.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "osaka-aquarium-kaiyukan-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "animals"
+  ],
+  "en": "Osaka Aquarium Kaiyukan",
+  "he": "אקווריום קאיוקאן",
+  "lat": 34.6545,
+  "lon": 135.429,
+  "desc": "אחד האקווריומים הגדולים בעולם, עם כריש לוויתן ענק במיכל המרכזי.",
+  "tip": "להגיע מוקדם. אפשר לשלב עם גלגל הענק של טנפוזן.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tennoji-zoo-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "animals",
+   "park"
+  ],
+  "en": "Tennoji Zoo",
+  "he": "גן החיות טנוג'י",
+  "lat": 34.651,
+  "lon": 135.5085,
+  "desc": "גן חיות עירוני ותיק עם היפופוטמים, פילים ואריות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "universal-studios-japan-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "quirky"
+  ],
+  "en": "Universal Studios Japan",
+  "he": "יוניברסל סטודיוס",
+  "lat": 34.6654,
+  "lon": 135.4323,
+  "desc": "פארק השעשועים עם Super Nintendo World, הארי פוטר ולפעמים אטרקציות של One Piece ואנימה.",
+  "tip": "יום שלם. כרטיסי Express ו-Nintendo World נגמרים, להזמין מראש.",
+  "price": 3,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "cup-noodles-museum-osaka-ikeda-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "quirky",
+   "museum"
+  ],
+  "en": "Cup Noodles Museum Osaka Ikeda",
+  "he": "מוזיאון הקאפ נודלס",
+  "lat": 34.8222,
+  "lon": 135.4258,
+  "desc": "מעצבים כוס נודלס משלכם, בוחרים טעמים ותוספות ולוקחים הביתה.",
+  "tip": "45 דקות מהמלון. חינם, וכוס עצמית ב-¥500.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "osaka-museum-of-housing-and-living-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "quirky",
+   "museum"
+  ],
+  "en": "Osaka Museum of Housing and Living",
+  "he": "מוזיאון החיים של אוסקה",
+  "lat": 34.7104,
+  "lon": 135.5115,
+  "desc": "רחוב שלם של אוסקה מתקופת אדו בתוך בניין, עם יום ולילה מדומים.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tower-of-the-sun-expo-park-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "sight",
+   "quirky"
+  ],
+  "en": "Tower of the Sun (Expo Park)",
+  "he": "מגדל השמש",
+  "lat": 34.8094,
+  "lon": 135.5323,
+  "desc": "פסל ענק ומוזר בעל שלושה פרצופים מתערוכת 1970. אפשר להיכנס פנימה.",
+  "tip": "להזמין כניסה לתוך המגדל מראש.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sumiyoshi-taisha-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "temple"
+  ],
+  "en": "Sumiyoshi Taisha",
+  "he": "סומיושי טאישה",
+  "lat": 34.6125,
+  "lon": 135.493,
+  "desc": "מקדש עתיק עם גשר תלול ואדום בצורת קשת.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kuromon-market-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "street"
+  ],
+  "en": "Kuromon Market",
+  "he": "שוק קורומון",
+  "lat": 34.6655,
+  "lon": 135.5065,
+  "desc": "שוק מקורה עם פירות ים צלויים, וואגיו על האש ופירות.",
+  "tip": "בבוקר עד הצהריים. יקר וטוריסטי.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "mostly",
+  "dairy": null
+ },
+ {
+  "id": "tombori-river-cruise-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "night"
+  ],
+  "en": "Tombori River Cruise",
+  "he": "שייט טונבורי",
+  "lat": 34.669,
+  "lon": 135.5005,
+  "desc": "שייט של 20 דקות בתעלה של דוטונבורי מתחת לשלטים.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ichiran-dotonbori-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "food"
+  ],
+  "en": "Ichiran Dotonbori",
+  "he": "איצ'יראן דוטונבורי",
+  "lat": 34.6688,
+  "lon": 135.5018,
+  "desc": "ראמן טונקוטסו בתאים אישיים. מזמינים בטופס ובוחרים חריפות, שום ועוד.",
+  "tip": "פתוח 24 שעות. בלי חלב בדרך כלל.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "kinryu-ramen-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "food"
+  ],
+  "en": "Kinryu Ramen",
+  "he": "קינריו ראמן",
+  "lat": 34.6685,
+  "lon": 135.503,
+  "desc": "דוכן עם דרקון ענק על הגג וקימצ'י חופשי. ראמן פשוט וזול, 24 שעות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "matsusakagyu-yakiniku-m-hozenji-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "food"
+  ],
+  "en": "Matsusakagyu Yakiniku M Hozenji",
+  "he": "יאקיניקו M - בקר מטסוסאקה",
+  "lat": 34.6682,
+  "lon": 135.5031,
+  "desc": "מנגל על השולחן עם בקר מטסוסאקה, אחד היקרים ביפן. חוויית בשר מושלמת.",
+  "tip": "להזמין מקום.",
+  "price": 3,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "gyukatsu-motomura-namba-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "food"
+  ],
+  "en": "Gyukatsu Motomura Namba",
+  "he": "גיוקאטסו מוטומורה",
+  "lat": 34.666,
+  "lon": 135.501,
+  "desc": "שניצל בקר פריך שצולים לבד על אבן חמה. מנת בשר שאסור לפספס.",
+  "tip": "תורים. לשאול על חלב בציפוי.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "kushikatsu-daruma-dotonbori-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "food"
+  ],
+  "en": "Kushikatsu Daruma Dotonbori",
+  "he": "קושיקאטסו דארומה",
+  "lat": 34.6685,
+  "lon": 135.5025,
+  "desc": "שיפודי בשר וירקות מטוגנים, טובלים פעם אחת ברוטב המשותף ולא פעמיים.",
+  "tip": "ציפוי מכיל לפעמים חלב, לשאול.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "okonomiyaki-mizuno-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "food"
+  ],
+  "en": "Okonomiyaki Mizuno",
+  "he": "אוקונומיאקי מיזונו",
+  "lat": 34.6686,
+  "lon": 135.5022,
+  "desc": "פנקייק כרוב וחזיר על פלנצ'ה, מקום מישלן ותיק בדוטונבורי.",
+  "tip": "לבקש בלי פירות ים. בלי חלב: לשאול על הבצק.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "551-horai-namba-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "street",
+   "food"
+  ],
+  "en": "551 Horai Namba",
+  "he": "551 הוראי - באוזי חזיר",
+  "lat": 34.665,
+  "lon": 135.501,
+  "desc": "לחמניות אוויריות ממולאות חזיר עסיסי. האוכל של אוסקה לרכבת.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "takoyaki-wanaka-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "street"
+  ],
+  "en": "Takoyaki Wanaka",
+  "he": "טאקויאקי וואנאקה",
+  "lat": 34.6656,
+  "lon": 135.5023,
+  "desc": "כדורי תמנון, הסמל של אוסקה.",
+  "tip": "תמנון = פירות ים. בבצק לרוב אין חלב, לשאול.",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "mostly",
+  "dairy": "ask"
+ },
+ {
+  "id": "rikuro-ojisan-cheesecake-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "street"
+  ],
+  "en": "Rikuro Ojisan Cheesecake",
+  "he": "עוגת הגבינה של ריקורו",
+  "lat": 34.6655,
+  "lon": 135.501,
+  "desc": "עוגת גבינה יפנית רכה שקופצת. יוצאת מהתנור עם פעמון.",
+  "tip": "מכיל חלב, לא מתאים בלי חלב.",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "contains"
+ },
+ {
+  "id": "tsurutontan-soemoncho-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "food"
+  ],
+  "en": "Tsurutontan Soemoncho",
+  "he": "צורוטונטן אודון",
+  "lat": 34.6698,
+  "lon": 135.504,
+  "desc": "קערות אודון ענקיות עם עשרות סגנונות, גם קרבונרה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "tsuruhashi-korea-town-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "food"
+  ],
+  "en": "Tsuruhashi Korea Town",
+  "he": "קוריאה טאון צורוהאשי",
+  "lat": 34.665,
+  "lon": 135.531,
+  "desc": "שכונה שלמה של מסעדות יאקיניקו עם מנגל גחלים ועשן בכל הרחוב.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "round1-stadium-sennichimae-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "arcade",
+   "night"
+  ],
+  "en": "Round1 Stadium Sennichimae",
+  "he": "ראונד 1 סנניצ'ימאה",
+  "lat": 34.6655,
+  "lon": 135.5025,
+  "desc": "קומות של ארקייד, באולינג, קריוקי ומכונות טופי.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "spa-world-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "onsen"
+  ],
+  "en": "Spa World",
+  "he": "ספא וורלד",
+  "lat": 34.65,
+  "lon": 135.506,
+  "desc": "מתחם אונסן ענק עם קומות בעיצוב של מדינות שונות, בריכות ומגלשות.",
+  "tip": "קעקועים אסורים.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kobe-beef-steak-land-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "food"
+  ],
+  "en": "Kobe Beef Steak Land",
+  "he": "סטייק לנד קובה",
+  "lat": 34.6935,
+  "lon": 135.194,
+  "desc": "בקר קובה על פלנצ'ה מול העיניים במחיר סביר לצהריים.",
+  "tip": "ארוחות צהריים זולות יותר. בלי חלב: לבקש בלי חמאה.",
+  "price": 3,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "tetsujin-28-giant-robot-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "anime",
+   "quirky"
+  ],
+  "en": "Tetsujin 28 Giant Robot",
+  "he": "הרובוט הענק טטסוג'ין 28",
+  "lat": 34.6574,
+  "lon": 135.146,
+  "desc": "פסל רובוט בגובה 18 מטר מאנימה קלאסית בשכונת שין-נאגאטה. מקום צילום מעולה לחובבי רובוטים.",
+  "tip": "תחנת Shin-Nagata.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kobe-harborland-and-meriken-park-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "sight",
+   "night"
+  ],
+  "en": "Kobe Harborland and Meriken Park",
+  "he": "הארבורלנד ופארק מריקן",
+  "lat": 34.682,
+  "lon": 135.188,
+  "desc": "טיילת הנמל עם מגדל הנמל האדום, גלגל ענק ושלט BE KOBE.",
+  "tip": "הכי יפה בשקיעה.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kobe-port-tower-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "sight"
+  ],
+  "en": "Kobe Port Tower",
+  "he": "מגדל הנמל של קובה",
+  "lat": 34.6826,
+  "lon": 135.1867,
+  "desc": "מגדל אדום בצורת שעון חול עם גג תצפית פתוח.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nankinmachi-chinatown-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "street",
+   "food"
+  ],
+  "en": "Nankinmachi Chinatown",
+  "he": "צ'יינה טאון נאנקינמאצ'י",
+  "lat": 34.688,
+  "lon": 135.188,
+  "desc": "צ'יינה טאון עם באוזי, גיוזה ושיפודים.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "kitano-ijinkan-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "sight"
+  ],
+  "en": "Kitano Ijinkan",
+  "he": "קיטאנו איג'ינקאן",
+  "lat": 34.701,
+  "lon": 135.191,
+  "desc": "רובע של בתי סוחרים מערביים מהמאה ה-19 על גבעה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kobe-animal-kingdom-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "animals"
+  ],
+  "en": "Kobe Animal Kingdom",
+  "he": "ממלכת החיות של קובה",
+  "lat": 34.662,
+  "lon": 135.216,
+  "desc": "פארק מקורה שבו מאכילים קפיברות, קנגורו וציפורים מקרוב.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nunobiki-herb-gardens-ropeway-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "sight"
+  ],
+  "en": "Nunobiki Herb Gardens Ropeway",
+  "he": "רכבל נונוביקי",
+  "lat": 34.705,
+  "lon": 135.194,
+  "desc": "רכבל מעל העיר לגני תבלינים על ההר, עם נוף לנמל.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "himeji-castle-himeji",
+  "area": "himeji",
+  "region": "osk",
+  "cats": [
+   "sight"
+  ],
+  "en": "Himeji Castle",
+  "he": "טירת הימג'י",
+  "lat": 34.8394,
+  "lon": 134.6939,
+  "desc": "הטירה הכי יפה ושמורה ביפן, 'העגור הלבן'. מבנה עץ מקורי מהמאה ה-17.",
+  "tip": "בערך שעה בשינקנסן מאוסקה. להגיע בפתיחה ב-9:00.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "koko-en-garden-himeji",
+  "area": "himeji",
+  "region": "osk",
+  "cats": [
+   "park"
+  ],
+  "en": "Koko-en Garden",
+  "he": "גן קוקו-אן",
+  "lat": 34.838,
+  "lon": 134.6905,
+  "desc": "תשעה גנים יפניים ליד הטירה. בנובמבר אדום.",
+  "tip": "כרטיס משולב עם הטירה.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mt-shosha-engyo-ji-himeji",
+  "area": "himeji",
+  "region": "osk",
+  "cats": [
+   "temple"
+  ],
+  "en": "Mt Shosha Engyo-ji",
+  "he": "הר שושה - אנגיו-ג'י",
+  "lat": 34.889,
+  "lon": 134.66,
+  "desc": "מקדש על הר שצולם בו 'הסמוראי האחרון'. עולים ברכבל.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "peace-memorial-park-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "sight",
+   "museum"
+  ],
+  "en": "Peace Memorial Park",
+  "he": "פארק זיכרון השלום",
+  "lat": 34.3925,
+  "lon": 132.4528,
+  "desc": "פארק השלום עם הלהבה התמידית ואנדרטת הילדים עם אלפי עגורי נייר.",
+  "tip": "5 דקות מהמלון.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "atomic-bomb-dome-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "sight"
+  ],
+  "en": "Atomic Bomb Dome",
+  "he": "כיפת הפצצה האטומית",
+  "lat": 34.3955,
+  "lon": 132.4536,
+  "desc": "שלד הבניין שנשאר אחרי הפצצה. מרגש מאוד, בעיקר בלילה.",
+  "tip": "",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hiroshima-peace-memorial-museum-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "museum"
+  ],
+  "en": "Hiroshima Peace Memorial Museum",
+  "he": "מוזיאון השלום",
+  "lat": 34.3915,
+  "lon": 132.452,
+  "desc": "המוזיאון על הפצצה ועל האנשים. קשה אבל חובה.",
+  "tip": "בערך שעתיים. ¥200.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "orizuru-tower-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "sight"
+  ],
+  "en": "Orizuru Tower",
+  "he": "מגדל אוריזורו",
+  "lat": 34.3963,
+  "lon": 132.4545,
+  "desc": "גג תצפית מעל הכיפה ומגלשת ענק לרדת קומות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hiroshima-castle-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "sight"
+  ],
+  "en": "Hiroshima Castle",
+  "he": "טירת הירושימה",
+  "lat": 34.4027,
+  "lon": 132.4594,
+  "desc": "טירת 'העורב' עם חפיר. נבנתה מחדש.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shukkeien-garden-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "park"
+  ],
+  "en": "Shukkeien Garden",
+  "he": "גן שוקקיאן",
+  "lat": 34.4003,
+  "lon": 132.4677,
+  "desc": "גן יפני עם אגם וגשרים, אדום בנובמבר.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mitaki-dera-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "temple",
+   "park"
+  ],
+  "en": "Mitaki-dera",
+  "he": "מיטאקי-דרה",
+  "lat": 34.409,
+  "lon": 132.432,
+  "desc": "מקדש שקט ביער עם שלושה מפלים ושלכת. כמעט בלי תיירים.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hondori-shopping-arcade-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "shop"
+  ],
+  "en": "Hondori Shopping Arcade",
+  "he": "מדרחוב הונדורי",
+  "lat": 34.3935,
+  "lon": 132.459,
+  "desc": "המדרחוב המקורה של העיר עם חנויות, אנימייט וארקיידים.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "okonomimura-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "food"
+  ],
+  "en": "Okonomimura",
+  "he": "אוקונומי-מורה",
+  "lat": 34.392,
+  "lon": 132.462,
+  "desc": "בניין של 3 קומות עם 25 דוכני אוקונומיאקי בסגנון הירושימה: שכבות של כרוב, נודלס וחזיר.",
+  "tip": "לבקש בלי פירות ים.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "nagata-ya-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "food"
+  ],
+  "en": "Nagata-ya",
+  "he": "נגאטה-יא",
+  "lat": 34.395,
+  "lon": 132.453,
+  "desc": "אוקונומיאקי של הירושימה ליד כיפת הפצצה. האהוב על התיירים.",
+  "tip": "תורים בצהריים.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "bakudan-ya-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "food"
+  ],
+  "en": "Bakudan-ya",
+  "he": "בקודן-יא - צוקמן חריף",
+  "lat": 34.391,
+  "lon": 132.464,
+  "desc": "צוקמן קר עם רוטב חריף, הסגנון של הירושימה. בוחרים רמת חריפות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "nagarekawa-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "night"
+  ],
+  "en": "Nagarekawa",
+  "he": "נגארקאווה",
+  "lat": 34.3925,
+  "lon": 132.4655,
+  "desc": "רובע הבילויים של הירושימה, ברים ואיזקאיות.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mazda-museum-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "tech",
+   "museum"
+  ],
+  "en": "Mazda Museum",
+  "he": "מוזיאון מאזדה",
+  "lat": 34.37,
+  "lon": 132.5,
+  "desc": "סיור כולל קו ייצור פעיל.",
+  "tip": "חייבים להזמין מראש באתר.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "itsukushima-shrine-and-floating-torii-miya",
+  "area": "miya",
+  "region": "hiro",
+  "cats": [
+   "temple",
+   "sight"
+  ],
+  "en": "Itsukushima Shrine and Floating Torii",
+  "he": "מקדש איטסוקושימה והשער הצף",
+  "lat": 34.296,
+  "lon": 132.3198,
+  "desc": "השער האדום שעומד במים. בגאות הוא צף, ובשפל הולכים עד אליו.",
+  "tip": "לבדוק שעות גאות ושפל. JR ומעבורת, בערך שעה מהמלון.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mount-misen-ropeway-miya",
+  "area": "miya",
+  "region": "hiro",
+  "cats": [
+   "sight"
+  ],
+  "en": "Mount Misen Ropeway",
+  "he": "רכבל הר מיסן",
+  "lat": 34.2865,
+  "lon": 132.3225,
+  "desc": "רכבל להר עם נוף לים הפנימי ולאיים.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "momijidani-park-miya",
+  "area": "miya",
+  "region": "hiro",
+  "cats": [
+   "park"
+  ],
+  "en": "Momijidani Park",
+  "he": "פארק מומיג'ידאני",
+  "lat": 34.2925,
+  "lon": 132.3255,
+  "desc": "עמק אדרים, בנובמבר כולו אדום.",
+  "tip": "",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "daisho-in-miya",
+  "area": "miya",
+  "region": "hiro",
+  "cats": [
+   "temple"
+  ],
+  "en": "Daisho-in",
+  "he": "דאישו-אין",
+  "lat": 34.293,
+  "lon": 132.321,
+  "desc": "מקדש עם מאות פסלי ג'יזו קטנים בכובעים סרוגים ומדרגות של גלגלי תפילה.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "omotesando-shopping-street-miya",
+  "area": "miya",
+  "region": "hiro",
+  "cats": [
+   "street"
+  ],
+  "en": "Omotesando Shopping Street",
+  "he": "רחוב הקניות של מיאג'ימה",
+  "lat": 34.2985,
+  "lon": 132.3215,
+  "desc": "רחוב של צדפות צלויות, עוגות מומיג'י מנג'ו וכף העץ הכי גדולה בעולם.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "mostly",
+  "dairy": null
+ },
+ {
+  "id": "age-momiji-momijido-miya",
+  "area": "miya",
+  "region": "hiro",
+  "cats": [
+   "street"
+  ],
+  "en": "Age-Momiji Momijido",
+  "he": "מומיג'י מטוגנות",
+  "lat": 34.2978,
+  "lon": 132.3218,
+  "desc": "עוגיות עלה אדר מטוגנות על מקל, חמות וקריספיות.",
+  "tip": "לבצק כנראה יש חלב, לשאול.",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "miyajima-deer-miya",
+  "area": "miya",
+  "region": "hiro",
+  "cats": [
+   "animals"
+  ],
+  "en": "Miyajima Deer",
+  "he": "הצבאים של מיאג'ימה",
+  "lat": 34.297,
+  "lon": 132.32,
+  "desc": "צבאים חופשיים בכל האי, יותר רגועים מאשר בנארה.",
+  "tip": "אסור להאכיל אותם כאן.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "luffy-statue-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "op",
+   "sight"
+  ],
+  "en": "Luffy Statue",
+  "he": "פסל לופי",
+  "lat": 32.79,
+  "lon": 130.7415,
+  "desc": "פסל הברונזה של לופי, הראשון מעשרת הפסלים של One Piece בקומאמוטו, מול בניין הממשל המחוזי בין עצי גינקו.",
+  "tip": "חשמלית עד Shiritsutaikukan-mae ואז 10 דקות הליכה. פיגורה מיוחדת נמכרת בבניין.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "chopper-statue-at-kumamoto-zoo-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "op",
+   "animals"
+  ],
+  "en": "Chopper Statue at Kumamoto Zoo",
+  "he": "פסל צ'ופר בגן החיות",
+  "lat": 32.783,
+  "lon": 130.752,
+  "desc": "צ'ופר עומד בכניסה לגן החיות והבוטני של קומאמוטו. שני דברים במקום אחד.",
+  "tip": "חשמלית עד Dobutsuen-iriguchi ו-10 דקות הליכה. סגור בימי שני.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mugiwara-store-kumamoto-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Kumamoto",
+  "he": "החנות הרשמית של וואן פיס בקומאמוטו",
+  "lat": 32.7895,
+  "lon": 130.6885,
+  "desc": "חנות One Piece רשמית עם פריטים מיוחדים של פרויקט התקומה של קומאמוטו.",
+  "tip": "AMU Plaza Kumamoto, קומה 6, בתחנת קומאמוטו. 10:00-20:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kumamoto-castle-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "sight"
+  ],
+  "en": "Kumamoto Castle",
+  "he": "טירת קומאמוטו",
+  "lat": 32.8063,
+  "lon": 130.7058,
+  "desc": "אחת הטירות הגדולות ביפן, שוקמה אחרי רעידת 2016. שביל מוגבה מעל החומות.",
+  "tip": "15 דקות הליכה מהמלון.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sakuranobaba-josaien-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "street",
+   "food"
+  ],
+  "en": "Sakuranobaba Josaien",
+  "he": "סאקורה-נו-באבה ג'וסאיאן",
+  "lat": 32.803,
+  "lon": 130.703,
+  "desc": "רחוב בסגנון עיירת טירה למרגלות הטירה, עם אוכל מקומי ומזכרות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": null
+ },
+ {
+  "id": "kumamon-square-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "quirky",
+   "shop"
+  ],
+  "en": "Kumamon Square",
+  "he": "כיכר קומאמון",
+  "lat": 32.8025,
+  "lon": 130.7105,
+  "desc": "הבית של קומאמון, הדוב השחור הכי מפורסם ביפן. מופעים קצרים ומלא מרצ'נדייז.",
+  "tip": "ממש ליד המלון. לבדוק שעות מופע.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shimotori-and-kamitori-arcades-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "shop"
+  ],
+  "en": "Shimotori and Kamitori Arcades",
+  "he": "מדרחובות שימוטורי וקמיטורי",
+  "lat": 32.8015,
+  "lon": 130.7075,
+  "desc": "שני מדרחובות מקורים עם חנויות, ארקיידים ואוכל. צמודים למלון.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "suizenji-jojuen-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "park"
+  ],
+  "en": "Suizenji Jojuen",
+  "he": "גן סואיזנג'י",
+  "lat": 32.791,
+  "lon": 130.734,
+  "desc": "גן עם הר פוג'י מיניאטורי ואגם של מי מעיין. קרוב לפסל לופי.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kokutei-ramen-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "food"
+  ],
+  "en": "Kokutei Ramen",
+  "he": "קוקוטיי ראמן",
+  "lat": 32.7915,
+  "lon": 130.688,
+  "desc": "ראמן טונקוטסו של קומאמוטו עם שמן שום שרוף. מקום מ-1957.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "komurasaki-ramen-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "food"
+  ],
+  "en": "Komurasaki Ramen",
+  "he": "קומורסאקי ראמן",
+  "lat": 32.8005,
+  "lon": 130.709,
+  "desc": "ראמן קומאמוטו קלאסי עם שבבי שום קלוי.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "suganoya-basashi-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "food",
+   "quirky"
+  ],
+  "en": "Suganoya Basashi",
+  "he": "סוגנויה - בשר סוס",
+  "lat": 32.8013,
+  "lon": 130.708,
+  "desc": "המאכל הכי מזוהה עם קומאמוטו: סשימי בשר סוס. שווה לנסות.",
+  "tip": "",
+  "price": 3,
+  "mustSee": false,
+  "special": true,
+  "seafood": null,
+  "dairy": "free"
+ },
+ {
+  "id": "akaushi-beef-kumamoto-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "food"
+  ],
+  "en": "Akaushi Beef Kumamoto",
+  "he": "בקר אקאאושי",
+  "lat": 32.801,
+  "lon": 130.7085,
+  "desc": "בקר 'אדום' מאזור אסו, רזה וטעים, בדונבורי או על האש.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "kumamoto-shimotori-nightlife-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "night"
+  ],
+  "en": "Kumamoto Shimotori nightlife",
+  "he": "חיי הלילה של קומאמוטו",
+  "lat": 32.8,
+  "lon": 130.709,
+  "desc": "איזקאיות וברים קטנים מסביב למדרחובות.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "zoro-statue-ozu-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "op"
+  ],
+  "en": "Zoro Statue Ozu",
+  "he": "פסל זורו",
+  "lat": 32.879,
+  "lon": 130.862,
+  "desc": "זורו עם שלוש החרבות בפארק המרכזי של אוזו.",
+  "tip": "רכבת לתחנת Higo-Ozu ו-10 דקות הליכה. בערך 45 דקות מהמלון.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sanji-statue-mashiki-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "op"
+  ],
+  "en": "Sanji Statue Mashiki",
+  "he": "פסל סאנג'י",
+  "lat": 32.79,
+  "lon": 130.811,
+  "desc": "סאנג'י בפארק הספורט של מאשיקי, מאחורי אולם הספורט.",
+  "tip": "אוטובוס מ-Sakuramachi עד Kiyama Kamimachi ו-15 דקות הליכה.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nami-statue-nishihara-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "op"
+  ],
+  "en": "Nami Statue Nishihara",
+  "he": "פסל נאמי",
+  "lat": 32.822,
+  "lon": 130.926,
+  "desc": "נאמי ליד טורבינות הרוח של טאוואראיאמה, עם נוף פתוח.",
+  "tip": "אוטובוס עד Moe no Sato ו-8 דקות הליכה. בערך 70 דקות.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "robin-statue-minamiaso-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "op"
+  ],
+  "en": "Robin Statue Minamiaso",
+  "he": "פסל רובין",
+  "lat": 32.877,
+  "lon": 130.994,
+  "desc": "רובין במוזיאון רעידת האדמה בקמפוס הישן של טוקאי. המוזיאון בחינם.",
+  "tip": "רק ברכב, בערך שעה.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "usopp-statue-aso-station-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "op"
+  ],
+  "en": "Usopp Statue Aso Station",
+  "he": "פסל אוסופ",
+  "lat": 32.946,
+  "lon": 131.035,
+  "desc": "אוסופ מול תחנת אסו, נקודת יציאה להר הגעש.",
+  "tip": "רכבת מקומאמוטו, 70-90 דקות.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "franky-statue-takamori-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "op"
+  ],
+  "en": "Franky Statue Takamori",
+  "he": "פסל פרנקי",
+  "lat": 32.824,
+  "lon": 131.122,
+  "desc": "פרנקי בתחנת טקאמורי, עם מכתב של אודה על הקיר.",
+  "tip": "אוטובוסים נדירים, בערך שעה ו-45 דקות. עדיף ברכב.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "brook-statue-mifune-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "op"
+  ],
+  "en": "Brook Statue Mifune",
+  "he": "פסל ברוק",
+  "lat": 32.715,
+  "lon": 130.803,
+  "desc": "ברוק בפארק הדינוזאורים של מיפונה, ליד מוזיאון דינוזאורים קטן.",
+  "tip": "אוטובוס, בערך 50 דקות.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "jinbe-statue-uto-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "op"
+  ],
+  "en": "Jinbe Statue Uto",
+  "he": "פסל ג'ינבה",
+  "lat": 32.689,
+  "lon": 130.578,
+  "desc": "ג'ינבה בפארק חוף סומיושי מול הים, נקודת שקיעה מעולה.",
+  "tip": "רכבת לתחנת Nagabeta, בערך 40 דקות.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mount-aso-nakadake-crater-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "sight"
+  ],
+  "en": "Mount Aso Nakadake Crater",
+  "he": "מכתש הר אסו",
+  "lat": 32.884,
+  "lon": 131.085,
+  "desc": "מכתש פעיל עם אגם טורקיז מהביל. אחד הנופים הכי חזקים בטיול.",
+  "tip": "נסגר כשיש פעילות געשית, לבדוק באתר באותו בוקר.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kusasenri-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "sight"
+  ],
+  "en": "Kusasenri",
+  "he": "קוסאסנרי",
+  "lat": 32.885,
+  "lon": 131.059,
+  "desc": "עמק דשא עם סוסים ואגם בתוך מכתש עתיק.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "daikanbo-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "sight"
+  ],
+  "en": "Daikanbo",
+  "he": "דאיקנבו",
+  "lat": 32.979,
+  "lon": 131.088,
+  "desc": "תצפית על כל קלדרת אסו, אחת הגדולות בעולם.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "aso-shrine-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "temple"
+  ],
+  "en": "Aso Shrine",
+  "he": "מקדש אסו",
+  "lat": 32.947,
+  "lon": 131.116,
+  "desc": "מקדש עתיק עם רחוב מים חיים מאחוריו.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "takachiho-gorge-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "sight"
+  ],
+  "en": "Takachiho Gorge",
+  "he": "קניון טקאצ'יהו",
+  "lat": 32.702,
+  "lon": 131.301,
+  "desc": "קניון בזלת צר עם מפל ושייט בסירות משוטים. נוף אגדי.",
+  "tip": "רחוק, בערך שעתיים וחצי. יום שלם, עדיף ברכב.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kurokawa-onsen-aso",
+  "area": "aso",
+  "region": "kum",
+  "cats": [
+   "onsen"
+  ],
+  "en": "Kurokawa Onsen",
+  "he": "קורוקאווה אונסן",
+  "lat": 33.076,
+  "lon": 131.143,
+  "desc": "כפר אונסן ביער. קונים 'קמיפודה' של עץ ונכנסים לשלוש בריכות.",
+  "tip": "שעתיים.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mugiwara-store-shibuya-main-store-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Shibuya (Main Store)",
+  "he": "Mugiwara Store שיבויה - החנות הראשית",
+  "lat": 35.6597,
+  "lon": 139.7005,
+  "desc": "החנות הראשית והגדולה של One Piece ביפן, ליד מעבר החצייה. אירועים, הגרלות ופריטים שיוצאים כאן ראשונים.",
+  "tip": "MAGNET by SHIBUYA109, קומה 6. 10:00-21:00. כשעמוס מחלקים מספרים.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "one-piece-base-shop-shinjuku-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "ONE PIECE Base Shop Shinjuku",
+  "he": "One Piece Base Shop שינג'וקו",
+  "lat": 35.6915,
+  "lon": 139.7045,
+  "desc": "החנות החדשה והגדולה של One Piece עם מאות פריטים בלעדיים, פיגורות Gear 5 ופריטים חדשים כל חודש. 10 דקות הליכה מהדירה בקאבוקיצ'ו.",
+  "tip": "Shinjuku Marui Main, קומה 4, 10:00-21:00. נפתח לאחרונה, לוודא פרטים לפני ההגעה.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mugiwara-store-tokyo-station-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Tokyo Station",
+  "he": "Mugiwara Store תחנת טוקיו",
+  "lat": 35.68,
+  "lon": 139.7685,
+  "desc": "סניף ב-Tokyo Character Street, עם 30 חנויות דמויות נוספות סביבו.",
+  "tip": "Tokyo Station Ichibangai B1, יציאת Yaesu. 10:00-20:30. עמוס בין 12 ל-16.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mugiwara-store-ikebukuro-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Ikebukuro",
+  "he": "Mugiwara Store איקבוקורו",
+  "lat": 35.729,
+  "lon": 139.719,
+  "desc": "סניף בסנשיין סיטי, באותה קומה עם מרכז פוקימון מגה טוקיו.",
+  "tip": "Sunshine City Alpa, קומה 2. 10:00-20:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mugiwara-store-odaiba-odaiba",
+  "area": "odaiba",
+  "region": "tky",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Odaiba",
+  "he": "Mugiwara Store אודאיבה",
+  "lat": 35.6252,
+  "lon": 139.7756,
+  "desc": "הסניף הכי חזק בפיגורות ובאספנות, ופחות עמוס. באותו בניין יש Gundam Base.",
+  "tip": "DiverCity Tokyo Plaza, קומה 2.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mugiwara-store-harajuku-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "op",
+   "shop"
+  ],
+  "en": "Mugiwara Store Harajuku",
+  "he": "Mugiwara Store הרג'וקו",
+  "lat": 35.6687,
+  "lon": 139.7055,
+  "desc": "סניף שמתמקד בבגדים, בכניסה לבניין הראקאדו.",
+  "tip": "Harakado, קומת הכניסה. 11:00-21:00.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "jump-shop-ikebukuro-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "op",
+   "anime",
+   "shop"
+  ],
+  "en": "Jump Shop Ikebukuro",
+  "he": "ג'אמפ שופ איקבוקורו",
+  "lat": 35.729,
+  "lon": 139.7185,
+  "desc": "חנות הדגל של שונן ג'אמפ: One Piece, דרגון בול, נארוטו ו-Jujutsu Kaisen. אגף One Piece גדול.",
+  "tip": "Sunshine City. עמוס בסופ\"ש.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "jump-shop-jimbocho-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "op",
+   "anime",
+   "shop"
+  ],
+  "en": "Jump Shop Jimbocho",
+  "he": "ג'אמפ שופ ג'ימבוצ'ו",
+  "lat": 35.696,
+  "lon": 139.758,
+  "desc": "ג'אמפ שופ חדש בחנות הספרים Sanseido, עם פריטים בלעדיים. שקט יחסית.",
+  "tip": "Sanseido, קומה 4. ג'ימבוצ'ו היא גם שכונת חנויות הספרים.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "jump-shop-tokyo-dome-city-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "op",
+   "anime",
+   "shop"
+  ],
+  "en": "Jump Shop Tokyo Dome City",
+  "he": "ג'אמפ שופ טוקיו דום סיטי",
+  "lat": 35.705,
+  "lon": 139.752,
+  "desc": "ג'אמפ שופ ליד מתחם הלונה פארק של טוקיו דום.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "toei-animation-museum-oizumi",
+  "area": "oizumi",
+  "region": "tky",
+  "cats": [
+   "op",
+   "anime",
+   "museum"
+  ],
+  "en": "Toei Animation Museum",
+  "he": "מוזיאון טואי אנימיישן",
+  "lat": 35.75,
+  "lon": 139.585,
+  "desc": "המוזיאון של הסטודיו שמפיק את One Piece ודרגון בול, בתוך בניין הסטודיו. סקיצות, מקור ציורים ופסלים.",
+  "tip": "תחנת Oizumi-gakuen, 30 דקות משינג'וקו. לבדוק באתר אם צריך הרשמה מראש.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "evangelion-store-tokyo-01-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "eva",
+   "anime",
+   "shop"
+  ],
+  "en": "EVANGELION STORE TOKYO-01",
+  "he": "חנות אוונגליון הרשמית",
+  "lat": 35.73,
+  "lon": 139.711,
+  "desc": "החנות הרשמית של אוונגליון: בגדים, פיגורות, דגמים ופריטים בלעדיים. חובה לאוהבי אוונגליון.",
+  "tip": "Ikebukuro PARCO, קומה 6 לפי NAVITIME (יש מקור שאומר קומה 2, לבדוק). 11:00-21:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "unicorn-gundam-statue-odaiba",
+  "area": "odaiba",
+  "region": "tky",
+  "cats": [
+   "eva",
+   "anime"
+  ],
+  "en": "Unicorn Gundam Statue",
+  "he": "פסל הגאנדאם בגודל אמיתי",
+  "lat": 35.625,
+  "lon": 139.7752,
+  "desc": "רובוט יוניקורן גאנדאם בגובה 19.7 מטר שמשנה מצב ונדלק עם מופע אורות ומוזיקה.",
+  "tip": "מופע כל ערב בכל חצי שעה. לבדוק לוח זמנים.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "the-gundam-base-tokyo-odaiba",
+  "area": "odaiba",
+  "region": "tky",
+  "cats": [
+   "eva",
+   "anime",
+   "shop"
+  ],
+  "en": "The Gundam Base Tokyo",
+  "he": "גאנדאם בייס טוקיו",
+  "lat": 35.6252,
+  "lon": 139.7756,
+  "desc": "חנות הגאנפלה (דגמי גאנדאם) הרשמית הגדולה בעולם, עם תצוגה ופינת הרכבה.",
+  "tip": "DiverCity, קומה 7.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "small-worlds-tokyo-odaiba",
+  "area": "odaiba",
+  "region": "tky",
+  "cats": [
+   "eva",
+   "quirky",
+   "museum"
+  ],
+  "en": "Small Worlds Tokyo",
+  "he": "סמול וורלדס טוקיו",
+  "lat": 35.634,
+  "lon": 139.793,
+  "desc": "מוזיאון מיניאטורות ענק עם האנגר של אוונגליון (נרב), סיילור מון ונמל חלל.",
+  "tip": "להקדיש שעתיים.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ghibli-museum-mitaka-kichi",
+  "area": "kichi",
+  "region": "tky",
+  "cats": [
+   "eva",
+   "anime"
+  ],
+  "en": "Ghibli Museum Mitaka",
+  "he": "מוזיאון ג'יבלי מיטאקה",
+  "lat": 35.6962,
+  "lon": 139.5704,
+  "desc": "המוזיאון של מיאזאקי עם החתולאוטובוס, רובוט ענק מ'הטירה בשמיים' על הגג וסרט קצר שמוקרן רק כאן.",
+  "tip": "כרטיסים רק מראש באתר Lawson, נפתחים ב-10 לחודש הקודם. 30 דקות משינג'וקו.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "donguri-republic-skytree-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Donguri Republic Skytree",
+  "he": "חנות ג'יבלי בסקאיי טרי",
+  "lat": 35.7101,
+  "lon": 139.8107,
+  "desc": "חנות ג'יבלי רשמית בטוקיו סולמאצ'י. 15 דקות הליכה מהמלון.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ghibli-clock-ntv-big-clock-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "quirky"
+  ],
+  "en": "Ghibli Clock (NTV Big Clock)",
+  "he": "שעון ג'יבלי",
+  "lat": 35.6645,
+  "lon": 139.7605,
+  "desc": "שעון ענק שעיצב מיאזאקי, שזז ומנגן ב-12:00, 15:00, 18:00 ו-20:00 (ובסופ\"ש גם ב-10:00).",
+  "tip": "מול מטה נטיבי בשיודומה.",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shiro-hige-s-cream-puff-factory-shimokita",
+  "area": "shimokita",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "street"
+  ],
+  "en": "Shiro-Hige's Cream Puff Factory",
+  "he": "מאפיית הטוטורו",
+  "lat": 35.638,
+  "lon": 139.659,
+  "desc": "המאפייה הרשמית של פחזניות בצורת טוטורו.",
+  "tip": "מכיל שמנת, לא מתאים בלי חלב. סגור בימי שני ושלישי.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "contains"
+ },
+ {
+  "id": "akihabara-electric-town-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "tech"
+  ],
+  "en": "Akihabara Electric Town",
+  "he": "אקיהבארה",
+  "lat": 35.6984,
+  "lon": 139.7731,
+  "desc": "עיר האלקטרוניקה והאנימה: בניינים של פיגורות, גאצ'ה, ארקיידים, מייד קפה וחלקים אלקטרוניים.",
+  "tip": "בימי ראשון אחר הצהריים הרחוב הראשי נסגר לרכבים.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "akizuki-denshi-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "tech"
+  ],
+  "en": "Akizuki Denshi",
+  "he": "אקיזוקי דנשי",
+  "lat": 35.7003,
+  "lon": 139.7712,
+  "desc": "חנות הרכיבים האגדית: ערכות, מיקרו-בקרים, חיישנים ורכיבים בשקיות זולות. גן עדן של מהנדסים.",
+  "tip": "חנות צרה ועמוסה. לבוא עם רשימה.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "akihabara-radio-center-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "tech"
+  ],
+  "en": "Akihabara Radio Center",
+  "he": "מרכז הרדיו של אקיהבארה",
+  "lat": 35.699,
+  "lon": 139.7714,
+  "desc": "מבוך של דוכנים מתחת לגשר הרכבת: כבלים, מחברים, שנאים, נורות ורכיבים ישנים.",
+  "tip": "הכי אותנטי.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-radio-department-store-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "tech"
+  ],
+  "en": "Tokyo Radio Department Store",
+  "he": "חנות הכלבו של הרדיו",
+  "lat": 35.6992,
+  "lon": 139.7712,
+  "desc": "בניין של חנויות רכיבים ומדידה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "marutsu-akihabara-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "tech"
+  ],
+  "en": "Marutsu Akihabara",
+  "he": "מארוטסו אקיהבארה",
+  "lat": 35.7008,
+  "lon": 139.7712,
+  "desc": "חנות רכיבים מסודרת עם מלאי גדול.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sengoku-densho-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "tech"
+  ],
+  "en": "Sengoku Densho",
+  "he": "סנגוקו דנשו",
+  "lat": 35.699,
+  "lon": 139.7713,
+  "desc": "חנות רכיבים ותיקה בכמה קומות, כולל כלי עבודה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "yodobashi-akiba-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "tech",
+   "shop"
+  ],
+  "en": "Yodobashi Akiba",
+  "he": "יודובאשי אקיבה",
+  "lat": 35.699,
+  "lon": 139.7745,
+  "desc": "חנות אלקטרוניקה ענקית ב-9 קומות: מצלמות, אוזניות, גאדג'טים וצעצועים.",
+  "tip": "פטור ממס עם דרכון.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "radio-kaikan-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Radio Kaikan",
+  "he": "רדיו קאיקן",
+  "lat": 35.6982,
+  "lon": 139.7716,
+  "desc": "10 קומות של פיגורות, דגמים, קלפים ומנגה מול התחנה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mandarake-complex-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "vintage"
+  ],
+  "en": "Mandarake Complex",
+  "he": "מנדרקה קומפלקס",
+  "lat": 35.7005,
+  "lon": 139.7707,
+  "desc": "8 קומות של אנימה יד שנייה: פיגורות, צלים, דוג'ינשי וצעצועי רטרו.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "super-potato-akihabara-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "vintage"
+  ],
+  "en": "Super Potato Akihabara",
+  "he": "סופר פוטטו אקיהבארה",
+  "lat": 35.7008,
+  "lon": 139.7708,
+  "desc": "משחקי רטרו לכל קונסולה וארקייד של פעם בקומה העליונה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "animate-akihabara-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Animate Akihabara",
+  "he": "אנימייט אקיהבארה",
+  "lat": 35.7001,
+  "lon": 139.7728,
+  "desc": "מרצ'נדייז של סדרות חדשות.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "akihabara-gachapon-kaikan-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "quirky",
+   "shop"
+  ],
+  "en": "Akihabara Gachapon Kaikan",
+  "he": "אולם הגאצ'פון",
+  "lat": 35.7015,
+  "lon": 139.7716,
+  "desc": "500 מכונות גאצ'ה עם קפסולות של צעצועים מוזרים.",
+  "tip": "להביא מטבעות 100 ין.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "maidreamin-akihabara-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "quirky",
+   "food"
+  ],
+  "en": "Maidreamin Akihabara",
+  "he": "מייד קפה מיידרימין",
+  "lat": 35.7005,
+  "lon": 139.7715,
+  "desc": "מייד קפה קלאסי עם קסמים על האוכל וריקודים. חוויה מוזרה ומצחיקה.",
+  "tip": "יש דמי כניסה ומינימום הזמנה.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": "contains"
+ },
+ {
+  "id": "gigo-akihabara-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "arcade",
+   "night"
+  ],
+  "en": "GiGO Akihabara",
+  "he": "ארקייד GiGO אקיהבארה",
+  "lat": 35.6985,
+  "lon": 139.7713,
+  "desc": "ארקייד בכמה קומות עם מכונות טופי של פיגורות אנימה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "akiba-fukurou-owl-cafe-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "animals",
+   "quirky"
+  ],
+  "en": "Akiba Fukurou Owl Cafe",
+  "he": "בית הקפה של הינשופים",
+  "lat": 35.699,
+  "lon": 139.776,
+  "desc": "בית קפה עם ינשופים רגועים. שקט ומכבד את הבעלי חיים.",
+  "tip": "להזמין מראש.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kyushu-jangara-akihabara-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Kyushu Jangara Akihabara",
+  "he": "קיושו ג'אנגרה",
+  "lat": 35.6985,
+  "lon": 139.772,
+  "desc": "ראמן טונקוטסו בסגנון קיושו.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "gyukatsu-motomura-akihabara-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Gyukatsu Motomura Akihabara",
+  "he": "גיוקאטסו מוטומורה אקיהבארה",
+  "lat": 35.6995,
+  "lon": 139.771,
+  "desc": "שניצל בקר על אבן חמה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "senso-ji-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "temple"
+  ],
+  "en": "Senso-ji",
+  "he": "סנסו-ג'י",
+  "lat": 35.7148,
+  "lon": 139.7967,
+  "desc": "המקדש העתיק בטוקיו עם שער הפנס האדום הענק. מואר יפה בלילה. 5 דקות מהמלון.",
+  "tip": "בלילה ריק ויפה.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nakamise-street-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Nakamise Street",
+  "he": "רחוב נאקאמיסה",
+  "lat": 35.712,
+  "lon": 139.7966,
+  "desc": "רחוב של 250 מטר בין השערים עם ממתקים, כופתאות ומזכרות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": null
+ },
+ {
+  "id": "kappabashi-kitchen-town-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "quirky",
+   "shop"
+  ],
+  "en": "Kappabashi Kitchen Town",
+  "he": "קאפבאשי",
+  "lat": 35.7135,
+  "lon": 139.788,
+  "desc": "רחוב של כלי מטבח, סכינים ידניות ודגמי אוכל מפלסטיק שנראים אמיתיים. מזכרות מעולות.",
+  "tip": "סגור חלקית בימי ראשון.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hanayashiki-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "quirky"
+  ],
+  "en": "Hanayashiki",
+  "he": "הנאיאשיקי",
+  "lat": 35.7155,
+  "lon": 139.7945,
+  "desc": "לונה פארק בן 170 שנה עם רכבת הרים איטית מצחיקה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-skytree-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Tokyo Skytree",
+  "he": "טוקיו סקאיי טרי",
+  "lat": 35.7101,
+  "lon": 139.8107,
+  "desc": "מגדל השידור הגבוה בעולם עם תצפית בגובה 350 ו-450 מטר.",
+  "tip": "בשקיעה הכי יפה.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kirby-cafe-tokyo-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "food"
+  ],
+  "en": "Kirby Cafe Tokyo",
+  "he": "קירבי קפה",
+  "lat": 35.7101,
+  "lon": 139.8105,
+  "desc": "בית קפה של קירבי עם אוכל בצורת דמויות.",
+  "tip": "הזמנה מראש חובה.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "sumida-aquarium-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "animals"
+  ],
+  "en": "Sumida Aquarium",
+  "he": "אקווריום סומידה",
+  "lat": 35.7101,
+  "lon": 139.81,
+  "desc": "אקווריום מעוצב עם פינגווינים ומדוזות, בסקאיי טרי.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-cruise-hotaluna-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "quirky",
+   "sight"
+  ],
+  "en": "Tokyo Cruise Hotaluna",
+  "he": "שייט הוטאלונה",
+  "lat": 35.71,
+  "lon": 139.799,
+  "desc": "סירה עתידנית שעיצב לייג'י מאצומוטו, היוצר של גלקסי אקספרס. שייט מאסאקוסה לאודאיבה.",
+  "tip": "להזמין מראש.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sumida-river-walk-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Sumida River Walk",
+  "he": "טיילת נהר סומידה",
+  "lat": 35.7101,
+  "lon": 139.7983,
+  "desc": "טיילת עם נוף לסקאיי טרי ול'להבה הזהובה' של אסאהי.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "asakusa-gyukatsu-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Asakusa Gyukatsu",
+  "he": "אסאקוסה גיוקאטסו",
+  "lat": 35.7114,
+  "lon": 139.7958,
+  "desc": "שניצל בקר צלוי על אבן חמה, ליד המלון.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "asakusa-imahan-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Asakusa Imahan",
+  "he": "אימהאן סוקיאקי",
+  "lat": 35.7128,
+  "lon": 139.7947,
+  "desc": "סוקיאקי וואגיו מ-1895. חוויה מפנקת.",
+  "tip": "יקר. מתאים בלי חלב.",
+  "price": 3,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "sometaro-okonomiyaki-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Sometaro Okonomiyaki",
+  "he": "סומטארו אוקונומיאקי",
+  "lat": 35.712,
+  "lon": 139.792,
+  "desc": "מקום מטבח ישן שבו מכינים לבד אוקונומיאקי על פלנצ'ה בשולחן.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "asakusa-menchi-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Asakusa Menchi",
+  "he": "אסאקוסה מנצ'י",
+  "lat": 35.7135,
+  "lon": 139.794,
+  "desc": "קציצת בשר מטוגנת ועסיסית. אוכל רחוב מושלם.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "asakusa-kagetsudo-melonpan-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Asakusa Kagetsudo Melonpan",
+  "he": "מלונפן קגטסודו",
+  "lat": 35.714,
+  "lon": 139.796,
+  "desc": "לחמניית מלון ענקית וחמה, יוצאת מהתנור.",
+  "tip": "מכיל חמאה.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "contains"
+ },
+ {
+  "id": "hoppy-street-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "night",
+   "food"
+  ],
+  "en": "Hoppy Street",
+  "he": "רחוב הופי",
+  "lat": 35.7135,
+  "lon": 139.7935,
+  "desc": "רחוב של איזקאיות עם שולחנות בחוץ, שיפודים ובירה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": null
+ },
+ {
+  "id": "jakotsuyu-sento-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "onsen"
+  ],
+  "en": "Jakotsuyu Sento",
+  "he": "ג'קוטסויו סנטו",
+  "lat": 35.7112,
+  "lon": 139.7955,
+  "desc": "סנטו עם מעיין אמיתי וגן פתוח. 5 דקות מהמלון.",
+  "tip": "בערך ¥550.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "asakusa-round1-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "arcade"
+  ],
+  "en": "Asakusa Round1",
+  "he": "ראונד 1 אסאקוסה",
+  "lat": 35.7105,
+  "lon": 139.7935,
+  "desc": "ארקייד, באולינג וקריוקי.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ryogoku-kokugikan-and-sumo-museum-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Ryogoku Kokugikan and Sumo Museum",
+  "he": "אולם הסומו ריוגוקו",
+  "lat": 35.6969,
+  "lon": 139.7934,
+  "desc": "זירת הסומו של טוקיו עם מוזיאון קטן. אפשר לאכול צ'אנקו נאבה, ארוחת הסומו.",
+  "tip": "בנובמבר הטורניר בפוקואוקה, אז אין קרבות בטוקיו.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ameyoko-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Ameyoko",
+  "he": "אמייוקו",
+  "lat": 35.7105,
+  "lon": 139.7745,
+  "desc": "שוק של 400 דוכנים מתחת לגשר הרכבת: ממתקים, שיפודים, סניקרס ובגדים.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": null
+ },
+ {
+  "id": "ueno-zoo-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "animals"
+  ],
+  "en": "Ueno Zoo",
+  "he": "גן החיות אואנו",
+  "lat": 35.7166,
+  "lon": 139.7713,
+  "desc": "גן החיות הוותיק ביפן, עם פנדות.",
+  "tip": "סגור בימי שני.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ueno-park-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "park"
+  ],
+  "en": "Ueno Park",
+  "he": "פארק אואנו",
+  "lat": 35.7148,
+  "lon": 139.7737,
+  "desc": "פארק ענק עם מוזיאונים, אגם ומקדשים.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-national-museum-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "museum"
+  ],
+  "en": "Tokyo National Museum",
+  "he": "המוזיאון הלאומי",
+  "lat": 35.7188,
+  "lon": 139.7765,
+  "desc": "האוסף הגדול ביפן של שריונות סמוראים, חרבות ואמנות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "yanaka-ginza-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "sight",
+   "street"
+  ],
+  "en": "Yanaka Ginza",
+  "he": "יאנאקה גינזה",
+  "lat": 35.7276,
+  "lon": 139.766,
+  "desc": "רחוב של טוקיו הישנה עם חתולים ואוכל רחוב.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "animate-ikebukuro-main-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Animate Ikebukuro Main",
+  "he": "אנימייט איקבוקורו",
+  "lat": 35.731,
+  "lon": 139.7175,
+  "desc": "חנות האנימה הגדולה בעולם: 10 קומות.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "pokemon-center-mega-tokyo-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Pokemon Center Mega Tokyo",
+  "he": "מרכז פוקימון מגה טוקיו",
+  "lat": 35.729,
+  "lon": 139.719,
+  "desc": "מרכז פוקימון הגדול ביפן.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sunshine-city-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "mall"
+  ],
+  "en": "Sunshine City",
+  "he": "סנשיין סיטי",
+  "lat": 35.729,
+  "lon": 139.719,
+  "desc": "מתחם ענק עם אקווריום על הגג, תצפית וחנויות אנימה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "donguri-republic-ikebukuro-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Donguri Republic Ikebukuro",
+  "he": "חנות ג'יבלי איקבוקורו",
+  "lat": 35.729,
+  "lon": 139.7192,
+  "desc": "חנות ג'יבלי בסנשיין סיטי.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sunshine-aquarium-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "animals"
+  ],
+  "en": "Sunshine Aquarium",
+  "he": "אקווריום סנשיין",
+  "lat": 35.7292,
+  "lon": 139.7194,
+  "desc": "אקווריום על גג עם פינגווינים 'עפים' מעל הראש.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "otome-road-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "street"
+  ],
+  "en": "Otome Road",
+  "he": "אוטומה רואד",
+  "lat": 35.73,
+  "lon": 139.718,
+  "desc": "רחוב חנויות אנימה, בעיקר למעריצות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "godzilla-head-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "quirky"
+  ],
+  "en": "Godzilla Head",
+  "he": "ראש גודזילה",
+  "lat": 35.695,
+  "lon": 139.702,
+  "desc": "ראש גודזילה בגודל אמיתי על הגג של מלון גרייסרי, דקה מהדירה.",
+  "tip": "",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "3d-cat-billboard-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "quirky"
+  ],
+  "en": "3D Cat Billboard",
+  "he": "החתול התלת-ממדי",
+  "lat": 35.6913,
+  "lon": 139.702,
+  "desc": "שלט ענק שבו חתול בתלת-ממד 'יוצא' מהמסך מעל הרחוב.",
+  "tip": "יציאה מזרחית של תחנת שינג'וקו.",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "omoide-yokocho-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "food",
+   "night"
+  ],
+  "en": "Omoide Yokocho",
+  "he": "אומואידה יוקוצ'ו",
+  "lat": 35.693,
+  "lon": 139.6995,
+  "desc": "סמטת עשן של דוכני יאקיטורי מאחרי המלחמה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "golden-gai-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "night"
+  ],
+  "en": "Golden Gai",
+  "he": "גולדן גאי",
+  "lat": 35.694,
+  "lon": 139.7045,
+  "desc": "200 ברים זעירים בשש סמטאות, כל אחד עם נושא משלו: אנימה, פאנק, הורור.",
+  "tip": "יש דמי כניסה בחלק מהברים.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyu-kabukicho-tower-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "night",
+   "arcade",
+   "food"
+  ],
+  "en": "Tokyu Kabukicho Tower",
+  "he": "מגדל טוקיו קאבוקיצ'ו",
+  "lat": 35.6956,
+  "lon": 139.7004,
+  "desc": "מגדל חדש עם ארקייד ענק של נמקו ואולם אוכל ניאון ('קאבוקיצ'ו יוקוצ'ו').",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-metropolitan-government-building-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Tokyo Metropolitan Government Building",
+  "he": "בניין עיריית טוקיו",
+  "lat": 35.6896,
+  "lon": 139.6922,
+  "desc": "תצפית חינם בקומה 45. בערב יש מופע הקרנה על הבניין.",
+  "tip": "",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shinjuku-gyoen-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "park"
+  ],
+  "en": "Shinjuku Gyoen",
+  "he": "שינג'וקו גיואן",
+  "lat": 35.6852,
+  "lon": 139.7101,
+  "desc": "פארק ענק עם גן יפני, צרפתי ואנגלי. השלכת בסוף נובמבר.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "don-quijote-kabukicho-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "shop"
+  ],
+  "en": "Don Quijote Kabukicho",
+  "he": "דון קיחוטה קאבוקיצ'ו",
+  "lat": 35.6945,
+  "lon": 139.7025,
+  "desc": "החנות המטורפת של הכול: ממתקים, קוסמטיקה, תחפושות. פתוחה 24 שעות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "yodobashi-camera-shinjuku-west-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "tech",
+   "shop"
+  ],
+  "en": "Yodobashi Camera Shinjuku West",
+  "he": "יודובאשי שינג'וקו",
+  "lat": 35.691,
+  "lon": 139.6975,
+  "desc": "חנות אלקטרוניקה ענקית בכמה בניינים.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "fuunji-tsukemen-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Fuunji Tsukemen",
+  "he": "פואונג'י צוקמן",
+  "lat": 35.687,
+  "lon": 139.696,
+  "desc": "צוקמן עוף-דגים סמיך ומפורסם. תור קבוע.",
+  "tip": "יש בו דגים בציר.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": "free"
+ },
+ {
+  "id": "menya-musashi-shinjuku-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Menya Musashi Shinjuku",
+  "he": "מניה מוסאשי",
+  "lat": 35.6935,
+  "lon": 139.6975,
+  "desc": "ראמן מחוזק עם צ'אשו עבה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "ichiran-shinjuku-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Ichiran Shinjuku",
+  "he": "איצ'יראן שינג'וקו",
+  "lat": 35.6935,
+  "lon": 139.703,
+  "desc": "ראמן טונקוטסו בתאים אישיים, פתוח 24 שעות. 2 דקות מהדירה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "gyukatsu-motomura-shinjuku-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Gyukatsu Motomura Shinjuku",
+  "he": "גיוקאטסו מוטומורה שינג'וקו",
+  "lat": 35.6905,
+  "lon": 139.703,
+  "desc": "שניצל בקר צלוי על אבן חמה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "yakiniku-like-shinjuku-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Yakiniku Like Shinjuku",
+  "he": "יאקיניקו לייק",
+  "lat": 35.693,
+  "lon": 139.7005,
+  "desc": "מנגל יחיד מהיר וזול. מושלם לארוחת בשר מהירה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "thermae-yu-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "onsen"
+  ],
+  "en": "Thermae-Yu",
+  "he": "תרמה-יו",
+  "lat": 35.6955,
+  "lon": 139.7015,
+  "desc": "אונסן עירוני גדול עם מים מובלים, סאונה ומסז'. ממש ליד הדירה.",
+  "tip": "קעקועים אסורים.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shinjuku-kabukicho-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "night"
+  ],
+  "en": "Shinjuku Kabukicho",
+  "he": "קאבוקיצ'ו",
+  "lat": 35.6945,
+  "lon": 139.7025,
+  "desc": "שכונת הבילויים הכי פרועה בטוקיו. הדירה שלכם באמצע.",
+  "tip": "להתעלם ממגייסים ברחוב.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "disk-union-shinjuku-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "vintage"
+  ],
+  "en": "Disk Union Shinjuku",
+  "he": "דיסק יוניון שינג'וקו",
+  "lat": 35.6915,
+  "lon": 139.704,
+  "desc": "חנות תקליטים ו-CD יד שנייה בכמה בניינים.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shibuya-crossing-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Shibuya Crossing",
+  "he": "מעבר החצייה של שיבויה",
+  "lat": 35.6595,
+  "lon": 139.7005,
+  "desc": "מעבר החצייה העמוס בעולם. הכי טוב לצפות מלמעלה.",
+  "tip": "",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shibuya-sky-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "sight",
+   "night"
+  ],
+  "en": "Shibuya Sky",
+  "he": "שיבויה סקאיי",
+  "lat": 35.6585,
+  "lon": 139.702,
+  "desc": "גג פתוח בגובה 230 מטר. בשקיעה זה הנוף הכי טוב בטוקיו.",
+  "tip": "להזמין מראש, שקיעה נגמרת מהר.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shibuya-parco-6f-nintendo-pokemon-capcom-jump-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Shibuya PARCO 6F (Nintendo, Pokemon, Capcom, Jump)",
+  "he": "שיבויה פארקו קומה 6",
+  "lat": 35.662,
+  "lon": 139.6985,
+  "desc": "קומה שלמה של חנויות רשמיות: נינטנדו טוקיו, פוקימון, קאפקום וג'אמפ שופ.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hachiko-statue-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Hachiko Statue",
+  "he": "פסל האצ'יקו",
+  "lat": 35.659,
+  "lon": 139.7006,
+  "desc": "פסל הכלב הנאמן ביציאת התחנה.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "miyashita-park-and-shibuya-yokocho-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "mall",
+   "food"
+  ],
+  "en": "Miyashita Park and Shibuya Yokocho",
+  "he": "מיאשיטה פארק",
+  "lat": 35.662,
+  "lon": 139.702,
+  "desc": "קניון על גג עם פארק, ולמטה סמטת אוכל מכל יפן.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "don-quijote-mega-shibuya-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "shop"
+  ],
+  "en": "Don Quijote MEGA Shibuya",
+  "he": "דון קיחוטה מגה שיבויה",
+  "lat": 35.661,
+  "lon": 139.698,
+  "desc": "דון קיחוטה ענק פתוח 24 שעות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tower-records-shibuya-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "shop"
+  ],
+  "en": "Tower Records Shibuya",
+  "he": "טאוור רקורדס",
+  "lat": 35.6615,
+  "lon": 139.7015,
+  "desc": "חנות מוזיקה ב-9 קומות עם פופ-אפים של אנימה ומוזיקה יפנית.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "takeshita-street-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "street",
+   "shop"
+  ],
+  "en": "Takeshita Street",
+  "he": "רחוב טאקשיטה",
+  "lat": 35.6712,
+  "lon": 139.7035,
+  "desc": "רחוב האופנה המטורפת: קרפים, צמר גפן מתוק ענק ובגדי ממתקים.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "meiji-jingu-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "temple",
+   "park"
+  ],
+  "en": "Meiji Jingu",
+  "he": "מקדש מייג'י",
+  "lat": 35.6764,
+  "lon": 139.6993,
+  "desc": "מקדש בתוך יער ענק בלב העיר.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kiddy-land-harajuku-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Kiddy Land Harajuku",
+  "he": "קידי לנד הרג'וקו",
+  "lat": 35.6686,
+  "lon": 139.7065,
+  "desc": "5 קומות של צעצועים ודמויות: סנריו, סנופי, פוקימון, ג'יבלי.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mipig-cafe-harajuku-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "animals",
+   "quirky"
+  ],
+  "en": "Mipig Cafe Harajuku",
+  "he": "בית הקפה של החזירונים",
+  "lat": 35.671,
+  "lon": 139.704,
+  "desc": "חזירונים זעירים שמתכרבלים עליך.",
+  "tip": "להזמין מראש.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "harry-hedgehog-cafe-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "animals"
+  ],
+  "en": "Harry Hedgehog Cafe",
+  "he": "בית הקפה של הקיפודים",
+  "lat": 35.67,
+  "lon": 139.704,
+  "desc": "מחזיקים קיפודים קטנים ביד.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "marion-crepes-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Marion Crepes",
+  "he": "מריון קרפ",
+  "lat": 35.6715,
+  "lon": 139.704,
+  "desc": "קרפים מגולגלים עם עשרות מילויים.",
+  "tip": "מכיל חלב.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "contains"
+ },
+ {
+  "id": "afuri-harajuku-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "AFURI Harajuku",
+  "he": "אפורי ראמן",
+  "lat": 35.672,
+  "lon": 139.7065,
+  "desc": "ראמן עוף-יוזו קליל ורענן.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "tonkatsu-maisen-aoyama-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Tonkatsu Maisen Aoyama",
+  "he": "טונקאטסו מייסן",
+  "lat": 35.668,
+  "lon": 139.712,
+  "desc": "טונקאטסו אגדי בבית מרחץ ישן.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "cat-street-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "shop",
+   "vintage"
+  ],
+  "en": "Cat Street",
+  "he": "קאט סטריט",
+  "lat": 35.667,
+  "lon": 139.706,
+  "desc": "רחוב קטן של חנויות סטריטוור ווינטג'.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "divercity-tokyo-plaza-odaiba",
+  "area": "odaiba",
+  "region": "tky",
+  "cats": [
+   "mall"
+  ],
+  "en": "DiverCity Tokyo Plaza",
+  "he": "דייברסיטי",
+  "lat": 35.6252,
+  "lon": 139.7756,
+  "desc": "קניון עם הגאנדאם, Mugiwara Store, ג'יבלי וגאנדאם בייס.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "odaiba-seaside-and-rainbow-bridge-odaiba",
+  "area": "odaiba",
+  "region": "tky",
+  "cats": [
+   "sight",
+   "night"
+  ],
+  "en": "Odaiba Seaside and Rainbow Bridge",
+  "he": "החוף של אודאיבה",
+  "lat": 35.629,
+  "lon": 139.774,
+  "desc": "חוף מלאכותי עם נוף לגשר הקשת ופסל החירות.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "teamlab-planets-odaiba",
+  "area": "odaiba",
+  "region": "tky",
+  "cats": [
+   "museum"
+  ],
+  "en": "teamLab Planets",
+  "he": "טימלאב פלאנטס",
+  "lat": 35.6494,
+  "lon": 139.7897,
+  "desc": "מוזיאון דיגיטלי שנכנסים בו יחפים למים עם דגי אור.",
+  "tip": "מוזמן ל-24.11, 08:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-character-street-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Tokyo Character Street",
+  "he": "רחוב הדמויות של טוקיו",
+  "lat": 35.68,
+  "lon": 139.7685,
+  "desc": "30 חנויות רשמיות של דמויות במרתף התחנה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-ramen-street-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Tokyo Ramen Street",
+  "he": "רחוב הראמן של טוקיו",
+  "lat": 35.6795,
+  "lon": 139.769,
+  "desc": "8 חנויות ראמן מובחרות במרתף התחנה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "uniqlo-ginza-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "shop"
+  ],
+  "en": "Uniqlo Ginza",
+  "he": "יוניקלו גינזה",
+  "lat": 35.6715,
+  "lon": 139.765,
+  "desc": "חנות הדגל של יוניקלו, 12 קומות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "itoya-ginza-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "shop"
+  ],
+  "en": "Itoya Ginza",
+  "he": "איטויה גינזה",
+  "lat": 35.673,
+  "lon": 139.768,
+  "desc": "חנות כלי כתיבה ענקית ב-12 קומות.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tsukiji-outer-market-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Tsukiji Outer Market",
+  "he": "שוק צוקיג'י",
+  "lat": 35.6655,
+  "lon": 139.7705,
+  "desc": "השוק הישן עם סושי, צדפות וטמגויאקי על מקל.",
+  "tip": "בבוקר עד הצהריים.",
+  "price": 2,
+  "mustSee": false,
+  "special": true,
+  "seafood": "mostly",
+  "dairy": null
+ },
+ {
+  "id": "tsukishima-monja-street-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "food",
+   "quirky"
+  ],
+  "en": "Tsukishima Monja Street",
+  "he": "רחוב המונג'ה",
+  "lat": 35.663,
+  "lon": 139.782,
+  "desc": "70 מסעדות של מונג'איאקי, פנקייק נוזלי שמכינים על פלנצ'ה. אפשר להזמין עם בשר.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "pokemon-center-tokyo-dx-and-cafe-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Pokemon Center Tokyo DX and Cafe",
+  "he": "מרכז פוקימון טוקיו DX",
+  "lat": 35.6826,
+  "lon": 139.774,
+  "desc": "מרכז פוקימון עם בית קפה.",
+  "tip": "בית הקפה בהזמנה מראש.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-tower-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Tokyo Tower",
+  "he": "מגדל טוקיו",
+  "lat": 35.6586,
+  "lon": 139.7454,
+  "desc": "המגדל האדום הקלאסי.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "teamlab-borderless-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "museum"
+  ],
+  "en": "teamLab Borderless",
+  "he": "טימלאב בורדרלס",
+  "lat": 35.662,
+  "lon": 139.7434,
+  "desc": "עולם אור דיגיטלי בלי גבולות בין חדרים.",
+  "tip": "מוזמן ל-26.11, 11:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-city-view-roppongi-hills-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Tokyo City View Roppongi Hills",
+  "he": "תצפית רופונגי הילס",
+  "lat": 35.6604,
+  "lon": 139.7292,
+  "desc": "תצפית עם נוף ישיר למגדל טוקיו.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nakano-broadway-nakano",
+  "area": "nakano",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "vintage"
+  ],
+  "en": "Nakano Broadway",
+  "he": "נקאנו ברודוויי",
+  "lat": 35.7088,
+  "lon": 139.666,
+  "desc": "קניון ישן עם 4 קומות של חנויות אספנות אנימה, מנדרקה ופיגורות. 10 דקות ברכבת מהדירה.",
+  "tip": "החנויות נפתחות בסביבות 12:00.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "koenji-vintage-streets-nakano",
+  "area": "nakano",
+  "region": "tky",
+  "cats": [
+   "vintage"
+  ],
+  "en": "Koenji Vintage Streets",
+  "he": "הווינטג' של קואנג'י",
+  "lat": 35.705,
+  "lon": 139.6495,
+  "desc": "שכונה עם מאות חנויות בגדים יד שנייה וברים קטנים.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shimokitazawa-shimokita",
+  "area": "shimokita",
+  "region": "tky",
+  "cats": [
+   "vintage"
+  ],
+  "en": "Shimokitazawa",
+  "he": "שימוקיטאזאווה",
+  "lat": 35.6613,
+  "lon": 139.668,
+  "desc": "שכונת הווינטג' והתרבות האלטרנטיבית של טוקיו.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "inokashira-park-kichi",
+  "area": "kichi",
+  "region": "tky",
+  "cats": [
+   "park"
+  ],
+  "en": "Inokashira Park",
+  "he": "פארק אינוקשירה",
+  "lat": 35.7,
+  "lon": 139.573,
+  "desc": "פארק עם אגם וסירות, בדרך למוזיאון ג'יבלי.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "great-buddha-of-kamakura-kamakura",
+  "area": "kamakura",
+  "region": "tky",
+  "cats": [
+   "temple",
+   "sight"
+  ],
+  "en": "Great Buddha of Kamakura",
+  "he": "הבודהה הגדול של קמקורה",
+  "lat": 35.3167,
+  "lon": 139.5358,
+  "desc": "בודהה ברונזה בגובה 13 מטר באוויר הפתוח. אפשר להיכנס לתוכו.",
+  "tip": "שעה ו-10 דקות משינג'וקו.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tsurugaoka-hachimangu-kamakura",
+  "area": "kamakura",
+  "region": "tky",
+  "cats": [
+   "temple"
+  ],
+  "en": "Tsurugaoka Hachimangu",
+  "he": "צורוגאוקה האצ'ימנגו",
+  "lat": 35.3259,
+  "lon": 139.5565,
+  "desc": "המקדש הראשי של קמקורה בקצה שדרה ארוכה.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "komachi-street-kamakura",
+  "area": "kamakura",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Komachi Street",
+  "he": "רחוב קומאצ'י",
+  "lat": 35.3215,
+  "lon": 139.5525,
+  "desc": "רחוב של אוכל רחוב, ממתקים וחנויות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": null
+ },
+ {
+  "id": "hasedera-kamakura",
+  "area": "kamakura",
+  "region": "tky",
+  "cats": [
+   "temple"
+  ],
+  "en": "Hasedera",
+  "he": "האסדרה",
+  "lat": 35.3125,
+  "lon": 139.533,
+  "desc": "מקדש על צלע הר עם נוף לים ומערה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "slam-dunk-railroad-crossing-kamakura",
+  "area": "kamakura",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "sight"
+  ],
+  "en": "Slam Dunk Railroad Crossing",
+  "he": "מעבר הרכבת של סלאם דאנק",
+  "lat": 35.307,
+  "lon": 139.5,
+  "desc": "מעבר הרכבת מפתיחת סלאם דאנק, עם הים ברקע. מקום עלייה לרגל לאנימה.",
+  "tip": "תחנת Kamakurakokomae בקו Enoden. עמוס.",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "enoshima-island-kamakura",
+  "area": "kamakura",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Enoshima Island",
+  "he": "אי אנושימה",
+  "lat": 35.2995,
+  "lon": 139.4805,
+  "desc": "אי קטן עם מקדשים, מערות ומגדלור עם נוף לפוג'י.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "enoshima-tako-senbei-kamakura",
+  "area": "kamakura",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Enoshima Tako Senbei",
+  "he": "טאקו סנבי",
+  "lat": 35.3,
+  "lon": 139.481,
+  "desc": "תמנון שלם נלחץ לקרקר ענק.",
+  "tip": "פירות ים.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "mostly",
+  "dairy": null
+ },
+ {
+  "id": "mount-takao-takao",
+  "area": "takao",
+  "region": "tky",
+  "cats": [
+   "park",
+   "sight"
+  ],
+  "en": "Mount Takao",
+  "he": "הר טאקאו",
+  "lat": 35.6251,
+  "lon": 139.2437,
+  "desc": "הר עם רכבל, מקדש ונוף לפוג'י. השלכת בסוף נובמבר.",
+  "tip": "שעה משינג'וקו בקו Keio.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "keio-takaosan-onsen-gokurakuyu-takao",
+  "area": "takao",
+  "region": "tky",
+  "cats": [
+   "onsen"
+  ],
+  "en": "Keio Takaosan Onsen Gokurakuyu",
+  "he": "אונסן טאקאוסן",
+  "lat": 35.632,
+  "lon": 139.27,
+  "desc": "אונסן ליד התחנה, מושלם אחרי הטיול.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "chureito-pagoda-kawaguchi",
+  "area": "kawaguchi",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Chureito Pagoda",
+  "he": "פגודת צ'ורייטו",
+  "lat": 35.5011,
+  "lon": 138.8015,
+  "desc": "הנוף הכי מפורסם של יפן: פגודה אדומה מול הר פוג'י. 400 מדרגות.",
+  "tip": "שעתיים משינג'וקו באוטובוס.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "lake-kawaguchi-maple-corridor-kawaguchi",
+  "area": "kawaguchi",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Lake Kawaguchi Maple Corridor",
+  "he": "מסדרון האדרים",
+  "lat": 35.5166,
+  "lon": 138.748,
+  "desc": "שדרת אדרים מול פוג'י, פסטיבל שלכת בתחילת נובמבר.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "fuji-q-highland-kawaguchi",
+  "area": "kawaguchi",
+  "region": "tky",
+  "cats": [
+   "eva",
+   "quirky"
+  ],
+  "en": "Fuji-Q Highland",
+  "he": "פוג'י-קיו היילנד",
+  "lat": 35.487,
+  "lon": 138.78,
+  "desc": "פארק שעשועים עם רכבות הרים קיצוניות ואטרקציות אנימה מתחלפות.",
+  "tip": "לבדוק אילו אטרקציות אנימה פתוחות.",
+  "price": 3,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "chichibu-night-festival-chichibu",
+  "area": "chichibu",
+  "region": "tky",
+  "cats": [
+   "sight",
+   "night"
+  ],
+  "en": "Chichibu Night Festival",
+  "he": "פסטיבל הלילה של צ'יצ'יבו",
+  "lat": 35.997,
+  "lon": 139.085,
+  "desc": "אחד משלושת הפסטיבלים הגדולים ביפן: מרכבות ענק מוארות בפנסים נגררות בעלייה, וזיקוקים בחורף.",
+  "tip": "2-3 בדצמבר. הלילה של ה-3 הוא השיא. שעה וחצי מאיקבוקורו בקו Seibu.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "chichibu-shrine-chichibu",
+  "area": "chichibu",
+  "region": "tky",
+  "cats": [
+   "temple"
+  ],
+  "en": "Chichibu Shrine",
+  "he": "מקדש צ'יצ'יבו",
+  "lat": 35.997,
+  "lon": 139.084,
+  "desc": "המקדש של הפסטיבל, עם פסלי עץ צבעוניים.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sanrio-puroland-tama",
+  "area": "tama",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "quirky"
+  ],
+  "en": "Sanrio Puroland",
+  "he": "סנריו פורולנד",
+  "lat": 35.625,
+  "lon": 139.428,
+  "desc": "פארק מקורה של הלו קיטי וכל הדמויות של סנריו, עם מופעים.",
+  "tip": "שעה משינג'וקו.",
+  "price": 3,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "seiseki-sakuragaoka-whisper-of-the-heart-tama",
+  "area": "tama",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "sight"
+  ],
+  "en": "Seiseki Sakuragaoka (Whisper of the Heart)",
+  "he": "סייסקי סאקורגאוקה - לחישת הלב",
+  "lat": 35.651,
+  "lon": 139.447,
+  "desc": "השכונה שהיוותה השראה לסרט של ג'יבלי, עם מפה של המקומות.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hard-off-kakuozan-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Kakuozan",
+  "he": "הארד אוף קאקואוזן",
+  "lat": 35.1665458,
+  "lon": 136.9492873,
+  "desc": "הדירוג הכי גבוה באזור נגויה. מבחר טוב של ציוד שמע, מצלמות ועדשות, קונסולות וצעצועי רכבות. המחירים הוגנים, אבל על קנייה מכם הם משלמים מעט.",
+  "tip": "סניף עירוני, 10:00-20:00. תחנת Kakuozan.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 4,
+   "googleRating": 3.7,
+   "reviewCount": 450
+  }
+ },
+ {
+  "id": "hard-off-tokushige-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Tokushige",
+  "he": "הארד אוף טוקושיגה",
+  "lat": 35.08899,
+  "lon": 136.9937259,
+  "desc": "סניף גדול ומרווח בשתי קומות: House Off למטה ו-Hard Off למעלה. הכי חזק בציוד שמע איכותי, אבל פינת ה-Junk קטנה.",
+  "tip": "מחוץ למרכז, בערך 35 דקות ברכבת תחתית. 10:00-19:30.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.6,
+   "reviewCount": 372
+  }
+ },
+ {
+  "id": "hard-off-nagoya-airport-street-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Nagoya Airport Street",
+  "he": "הארד אוף נגויה אירפורט סטריט",
+  "lat": 35.2442072,
+  "lon": 136.910552,
+  "desc": "לפי הביקורות זה ה-Hard Off הכי טוב באזור, עם פינת Junk ענקית, כלי עבודה וכלי נגינה, ו-Off House צמוד. קשה להגיע בלי רכב.",
+  "tip": "רחוק, מתאים רק אם עוד יש לכם רכב. 10:30-19:30.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 4,
+   "googleRating": 3.6,
+   "reviewCount": 437
+  }
+ },
+ {
+  "id": "hard-off-owariasahi-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Owariasahi",
+  "he": "הארד אוף אוואריאסהי",
+  "lat": 35.2148331,
+  "lon": 137.046697,
+  "desc": "הכי קרוב לפארק ג'יבלי. קטן ויקר יחסית, ופינת ה-Junk מבולגנת. יש בו דגמי גאנדאם.",
+  "tip": "10:30-19:30.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 2,
+   "googleRating": 3.5,
+   "reviewCount": 304
+  }
+ },
+ {
+  "id": "hard-off-meito-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard-Off Meito",
+  "he": "הארד אוף מייטו",
+  "lat": 35.1527092,
+  "lon": 137.0102673,
+  "desc": "סניף בינוני עם מצלמות, טלוויזיות, משחקים, תקליטים וכלי נגינה. הצוות נחמד.",
+  "tip": "בדרך בין ג'יבלי לנגויה. 10:30-19:30.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.5,
+   "reviewCount": 265
+  }
+ },
+ {
+  "id": "hard-off-miyoshi-ngy",
+  "area": "ngy",
+  "region": "ngy",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Miyoshi",
+  "he": "הארד אוף מיושי",
+  "lat": 35.0918038,
+  "lon": 137.0822525,
+  "desc": "הרבה משחקים, פריטים רגילים זולים ופריטים נדירים יקרים. פינת ה-Junk דלה.",
+  "tip": "רחוק, רק ברכב.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 2,
+   "googleRating": 3.6,
+   "reviewCount": 685
+  }
+ },
+ {
+  "id": "hard-off-kyoto-fujinomori-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Kyoto Fujinomori",
+  "he": "הארד אוף קיוטו פוג'ינומורי",
+  "lat": 34.9579485,
+  "lon": 135.7680342,
+  "desc": "סניף חדש ונקי עם הדירוג הגבוה בקיוטו. מבחר ענק של חלקי מחשב (כרטיסים גרפיים, מעבדים, לוחות אם), מחשבים ניידים וקונסולות רטרו מסודרות. מומלץ במיוחד בשבילך.",
+  "tip": "ליד תחנת Fujinomori בקו Keihan, 3 תחנות מפושימי אינארי. 11:00-20:00.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 5,
+   "googleRating": 4.5,
+   "reviewCount": 30
+  }
+ },
+ {
+  "id": "hard-off-kyoto-katsura-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Kyoto Katsura",
+  "he": "הארד אוף קיוטו קטסורה",
+  "lat": 34.9916316,
+  "lon": 135.7049463,
+  "desc": "הסניף המוכר בקיוטו: טלפונים, קונסולות, גיטרות וצעצועים. לפי הביקורות המחירים טובים, אבל הסניף קטן.",
+  "tip": "מערב קיוטו ליד תחנת Katsura, אפשר לשלב עם ארשיאמה. 10:00-20:00.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.7,
+   "reviewCount": 502
+  }
+ },
+ {
+  "id": "bookoff-super-bazaar-fushimi-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "vintage"
+  ],
+  "en": "Bookoff Super Bazaar Fushimi",
+  "he": "בוק אוף סופר בזאר פושימי",
+  "lat": 34.9306335,
+  "lon": 135.7453765,
+  "desc": "חנות יד שנייה ענקית: מנגה, משחקים, פיגורות, אלקטרוניקה, בגדים ונעליים. המחירים זולים מבמרכז.",
+  "tip": "רחוק מתחנה, מונית קצרה. 10:00-22:00.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.6,
+   "reviewCount": 652
+  }
+ },
+ {
+  "id": "hard-off-osaka-taisho-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Osaka Taisho",
+  "he": "הארד אוף אוסקה טאישו",
+  "lat": 34.64701,
+  "lon": 135.4714,
+  "desc": "הסניף הכי קרוב למלון. נקי ומסודר עם מחשבים ניידים זולים וקונסולות רטרו במצב טוב. לפי הביקורות פינת ה-Junk פחות טובה.",
+  "tip": "בערך 20-25 דקות. 10:30-19:30.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 4,
+   "googleRating": 3.7,
+   "reviewCount": 104
+  }
+ },
+ {
+  "id": "hard-off-kadoma-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Kadoma",
+  "he": "הארד אוף קדומה",
+  "lat": 34.7326994,
+  "lon": 135.5937002,
+  "desc": "סניף גדול משולב עם Off House. המון בגדים, אלקטרוניקה ומשחקים, ולפעמים מציאות מטורפות כמו קונסולות ב-110 ין. אחד האהובים באזור אוסקה.",
+  "tip": "בערך 35 דקות ברכבת, תחנת Kadoma-shi.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 5,
+   "googleRating": 3.7,
+   "reviewCount": 650
+  }
+ },
+ {
+  "id": "hard-off-minamisettsu-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Minamisettsu",
+  "he": "הארד אוף מינאמיסטסו",
+  "lat": 34.7641325,
+  "lon": 135.5698473,
+  "desc": "סניף ענק עם מצלמות פילם ישנות בפינת ה-Junk, ציוד שמע ומבחר גדול ומסודר.",
+  "tip": "צפון אוסקה, ליד תחנת Minami-Settsu.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 4,
+   "googleRating": 3.7,
+   "reviewCount": 655
+  }
+ },
+ {
+  "id": "hard-off-sakai-shinkanaoka-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Sakai Shinkanaoka",
+  "he": "הארד אוף סאקאי",
+  "lat": 34.5638144,
+  "lon": 135.5137289,
+  "desc": "מתחם שלם של Book Off, Off House ו-Hard Off. המבחר הכי גדול של גיימבוי באוסקה, וגם בגדי וינטג'. המחירים גבוהים.",
+  "tip": "דרומה, בערך 30 דקות ברכבת התחתית.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 4,
+   "googleRating": 3.3,
+   "reviewCount": 412
+  }
+ },
+ {
+  "id": "hard-off-higashi-osaka-wakae-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Higashi-Osaka Wakae",
+  "he": "הארד אוף וואקאה",
+  "lat": 34.6548038,
+  "lon": 135.597604,
+  "desc": "סניף קטן וצפוף בקלטות משחקים, חלקן בקופסאות מקוריות ונדירות. פינת Junk גדולה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.7,
+   "reviewCount": 38
+  }
+ },
+ {
+  "id": "hard-off-yao-kayafuri-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Yao Kayafuri",
+  "he": "הארד אוף יאו",
+  "lat": 34.638442,
+  "lon": 135.6041594,
+  "desc": "קטן אבל עם מבחר טוב ומחירים טובים.",
+  "tip": "רחוק, מזרח אוסקה.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 2,
+   "googleRating": 3.7,
+   "reviewCount": 74
+  }
+ },
+ {
+  "id": "hard-off-kobe-nada-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Kobe Nada",
+  "he": "הארד אוף קובה נאדה",
+  "lat": 34.7148836,
+  "lon": 135.2468023,
+  "desc": "סניף עירוני בקומה 2 מעל סופרמרקט. מחשבים, ציוד שמע, משחקי רטרו ופיגורות, ופינת Junk.",
+  "tip": "הכי קרוב למרכז קובה, ליד תחנת Rokkomichi.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.9,
+   "reviewCount": 51
+  }
+ },
+ {
+  "id": "hard-off-and-hobby-off-kobe-seiryodai-kobe",
+  "area": "kobe",
+  "region": "osk",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off and Hobby Off Kobe Seiryodai",
+  "he": "הארד אוף והובי אוף סיירידאי",
+  "lat": 34.6482918,
+  "lon": 135.0498787,
+  "desc": "מתחם של Book Off, Hard Off, Off House ו-Hobby Off עם תצוגה מרשימה של צעצועי קאמן ריידר, אולטרמן ורובוטים.",
+  "tip": "מערב קובה, רחוק.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.4,
+   "reviewCount": 163
+  }
+ },
+ {
+  "id": "hard-off-hiroshima-nukushina-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Hiroshima Nukushina",
+  "he": "הארד אוף הירושימה נוקושינה",
+  "lat": 34.4078478,
+  "lon": 132.5062044,
+  "desc": "'חנות האלקטרוניקה המשומשת הכי טובה בעיר' לפי הביקורות. כלי נגינה, משחקים, כלי עבודה, מחשבים וחלקים.",
+  "tip": "מזרח העיר, ליד תחנת Yaga. 10:00-20:00.",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 4,
+   "googleRating": 3.9,
+   "reviewCount": 149
+  }
+ },
+ {
+  "id": "hard-off-and-hobby-off-hiroshima-yagi-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off and Hobby Off Hiroshima Yagi",
+  "he": "הארד אוף והובי אוף יאגי",
+  "lat": 34.4753495,
+  "lon": 132.4913682,
+  "desc": "נחשב ה-Hobby Off הכי טוב ביפן לפיגורות: מבחר ענק של פיגורות נדירות, גאנדאם, משחקים וקונסולות במחירים טובים.",
+  "tip": "צפון העיר, 25 דקות ברכבת JR Kabe Line.",
+  "price": 1,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 5,
+   "googleRating": 3.5,
+   "reviewCount": 94
+  }
+ },
+ {
+  "id": "hard-off-hiroshima-saka-hiro",
+  "area": "hiro",
+  "region": "hiro",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Hiroshima Saka",
+  "he": "הארד אוף סאקה",
+  "lat": 34.3400875,
+  "lon": 132.5091563,
+  "desc": "שתי קומות. בקומה העליונה גיקים ומשחקים, ויש דברים זולים מאוד.",
+  "tip": "בדרום-מזרח, בדרך לקורה.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.8,
+   "reviewCount": 94
+  }
+ },
+ {
+  "id": "hard-off-minamikumamoto-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Minamikumamoto",
+  "he": "הארד אוף מינאמיקומאמוטו",
+  "lat": 32.7855634,
+  "lon": 130.7033517,
+  "desc": "הכי קרוב למלון, בערך 15 דקות הליכה. מגוון של כל דבר, אבל הסניף לא גדול.",
+  "tip": "10:00-20:00. יש דיווחים שלא תמיד נותנים פטור ממס.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.4,
+   "reviewCount": 427
+  }
+ },
+ {
+  "id": "hard-off-off-house-kumamoto-kita-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Off House Kumamoto Kita",
+  "he": "הארד אוף קומאמוטו קיטה",
+  "lat": 32.8291561,
+  "lon": 130.7113356,
+  "desc": "סניף גדול משולב עם Off House ומבחר פיגורות טוב.",
+  "tip": "צפון העיר, אוטובוס או מונית.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 4,
+   "googleRating": 3.5,
+   "reviewCount": 522
+  }
+ },
+ {
+  "id": "hard-off-kumamoto-obiyama-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Kumamoto Obiyama",
+  "he": "הארד אוף אוביאמה",
+  "lat": 32.8010088,
+  "lon": 130.7550134,
+  "desc": "סניף חדש ונקי, מסודר מאוד. מעט משחקי רטרו.",
+  "tip": "מזרח העיר.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 2,
+   "googleRating": 3.3,
+   "reviewCount": 98
+  }
+ },
+ {
+  "id": "hard-off-akihabara-1st-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Akihabara 1st",
+  "he": "הארד אוף אקיהבארה 1",
+  "lat": 35.7005462,
+  "lon": 139.7705561,
+  "desc": "חמש קומות ומרתף של מגברים, קונסולות, פמיקום ואוזניות, ופינת Junk שהיא 'גן עדן של אלקטרוניקה'. המחירים בטוקיו גבוהים, אבל המבחר מטורף.",
+  "tip": "Sotokanda 3-11-2. 11:00-20:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 4,
+   "googleRating": 3.6,
+   "reviewCount": 1045
+  }
+ },
+ {
+  "id": "hard-off-and-hobby-off-akihabara-2nd-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off and Hobby Off Akihabara 2nd",
+  "he": "הארד אוף והובי אוף אקיהבארה 2",
+  "lat": 35.7021416,
+  "lon": 139.7706236,
+  "desc": "קטן, אבל מוצאים בו פריטי רטרו נדירים וקלפי Magic זולים. מחירים יקרים.",
+  "tip": "5 דקות מהסניף הראשון.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.7,
+   "reviewCount": 186
+  }
+ },
+ {
+  "id": "hard-off-and-hobby-off-ueno-okachimachi-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off and Hobby Off Ueno Okachimachi",
+  "he": "הארד אוף והובי אוף אואנו",
+  "lat": 35.7087067,
+  "lon": 139.774101,
+  "desc": "חמש קומות עם הכי הרבה משחקי רטרו וקונסולות מכל ה-Hard Off בטוקיו, אבל גם הכי יקר. הכי קרוב למלון באסאקוסה.",
+  "tip": "15 דקות ברכבת מאסאקוסה. 11:00-20:00.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 4,
+   "googleRating": 3.5,
+   "reviewCount": 479
+  }
+ },
+ {
+  "id": "hard-off-kichijoji-kichi",
+  "area": "kichi",
+  "region": "tky",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Kichijoji",
+  "he": "הארד אוף קיצ'יג'וג'י",
+  "lat": 35.7067884,
+  "lon": 139.5807711,
+  "desc": "שלוש קומות: קונסולות ורטרו, קומה שלמה של כלי נגינה (4.2), ואולם אודיו לחובבי Hi-Fi עם מערכות האזנה (4.1). אחד המיוחדים בטוקיו.",
+  "tip": "ליד תחנת Kichijoji. לשלב עם מוזיאון ג'יבלי.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 5,
+   "googleRating": 3.7,
+   "reviewCount": 394
+  }
+ },
+ {
+  "id": "hard-off-koenji-nakano",
+  "area": "nakano",
+  "region": "tky",
+  "cats": [
+   "hardoff",
+   "vintage",
+   "tech"
+  ],
+  "en": "Hard Off Koenji",
+  "he": "הארד אוף קואנג'י",
+  "lat": 35.7067251,
+  "lon": 139.6498732,
+  "desc": "שלוש קומות, בעיקר כלי נגינה וציוד שמע, וגם קצת משחקים. ליד תחנת Koenji, שכונת וינטג' מגניבה.",
+  "tip": "10 דקות ברכבת משינג'וקו.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null,
+  "hardOff": {
+   "score": 3,
+   "googleRating": 3.6,
+   "reviewCount": 206
+  }
+ },
+ {
+  "id": "one-piece-kumamoto-revival-project-route-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "op"
+  ],
+  "en": "One Piece Kumamoto Revival Project Route",
+  "he": "מסלול פרויקט התקומה של וואן פיס",
+  "lat": 32.79,
+  "lon": 130.7415,
+  "desc": "אודה, היוצר של One Piece, נולד בקומאמוטו. אחרי רעידת האדמה של 2016 הוצבו 10 פסלים של כנופיית כובעי הקש בעיירות שנפגעו. ",
+  "tip": "עם רכב אפשר לעשות את כולם ביום וחצי. בלי רכב: לופי וצ'ופר בעיר, וג'ינבה, זורו, סאנג'י וברוק בתחבורה ציבורית.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sakura-machi-kumamoto-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "mall"
+  ],
+  "en": "Sakura Machi Kumamoto",
+  "he": "סאקורה מאצ'י קומאמוטו",
+  "lat": 32.8,
+  "lon": 130.704,
+  "desc": "קניון ותחנת האוטובוסים המרכזית, עם גג ירוק ופסל קומאמון ענק. מכאן יוצאים האוטובוסים לפסלים.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "amu-plaza-kumamoto-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "mall"
+  ],
+  "en": "AMU Plaza Kumamoto",
+  "he": "אמו פלאזה קומאמוטו",
+  "lat": 32.7895,
+  "lon": 130.6885,
+  "desc": "קניון בתחנת הרכבת, עם Mugiwara Store, מסעדות וגן מקורה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "keika-ramen-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "food"
+  ],
+  "en": "Keika Ramen",
+  "he": "קייקה ראמן",
+  "lat": 32.802,
+  "lon": 130.708,
+  "desc": "ראמן קומאמוטו מ-1955, עם שמן שום וחזיר מבושל.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "kouran-tei-taipien-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "food"
+  ],
+  "en": "Kouran-tei Taipien",
+  "he": "קוראן-טיי טאיפיין",
+  "lat": 32.8013,
+  "lon": 130.7078,
+  "desc": "טאיפיין: מרק אטריות זכוכית עם ירקות ופרוסות עוף, המנה הכי 'קומאמוטית'.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": true,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "mount-kinpo-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "sight"
+  ],
+  "en": "Mount Kinpo",
+  "he": "הר קינפו",
+  "lat": 32.815,
+  "lon": 130.645,
+  "desc": "תצפית על קומאמוטו ועל הר אסו מרחוק.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hosokawa-gyobu-tei-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "sight"
+  ],
+  "en": "Hosokawa Gyobu-tei",
+  "he": "אחוזת הוסוקאווה",
+  "lat": 32.809,
+  "lon": 130.703,
+  "desc": "אחוזת סמוראים עם גן, ליד הטירה.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shogun-burger-shinjuku-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Shogun Burger Shinjuku",
+  "he": "שוגון בורגר",
+  "lat": 35.694,
+  "lon": 139.702,
+  "desc": "המבורגר וואגיו עסיסי בקאבוקיצ'ו, דקה מהדירה.",
+  "tip": "בלי חלב: לבקש בלי גבינה ובלי חמאה בלחמנייה.",
+  "price": 2,
+  "mustSee": true,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "fire-house-hongo-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Fire House Hongo",
+  "he": "פייר האוס",
+  "lat": 35.7085,
+  "lon": 139.7605,
+  "desc": "אחד ההמבורגרים האגדיים של טוקיו, בסגנון אמריקאי.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "pizzeria-seirinkan-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "food"
+  ],
+  "en": "Pizzeria Seirinkan",
+  "he": "פיצריה סייריננקן",
+  "lat": 35.643,
+  "lon": 139.699,
+  "desc": "פיצה נפוליטנית מפורסמת בנאקאמגורו.",
+  "tip": "פיצה מרינרה בלי גבינה.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "totti-candy-factory-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Totti Candy Factory",
+  "he": "טוטי קנדי",
+  "lat": 35.6713,
+  "lon": 139.7035,
+  "desc": "צמר גפן מתוק בצבעי קשת בגודל של ראש.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "a-happy-pancake-omotesando-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "A Happy Pancake Omotesando",
+  "he": "הפי פנקייק",
+  "lat": 35.666,
+  "lon": 139.71,
+  "desc": "פנקייקים יפניים אווריריים שרועדים.",
+  "tip": "מכיל חלב.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "contains"
+ },
+ {
+  "id": "asakusa-kibi-dango-azuma-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "street"
+  ],
+  "en": "Asakusa Kibi Dango Azuma",
+  "he": "קיבי דנגו אזומה",
+  "lat": 35.712,
+  "lon": 139.7965,
+  "desc": "כדורי דנגו חמים בקמח סויה. קטן ומתוק.",
+  "tip": "בלי חלב.",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "free"
+ },
+ {
+  "id": "street-kart-akihabara-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "quirky"
+  ],
+  "en": "Street Kart Akihabara",
+  "he": "גו-קארט ברחובות",
+  "lat": 35.6973,
+  "lon": 139.7743,
+  "desc": "נוסעים בגו-קארט בתחפושות ברחובות טוקיו.",
+  "tip": "חובה רישיון נהיגה בינלאומי.",
+  "price": 3,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "taito-station-shinjuku-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "arcade"
+  ],
+  "en": "Taito Station Shinjuku",
+  "he": "טאיטו סטיישן שינג'וקו",
+  "lat": 35.6935,
+  "lon": 139.701,
+  "desc": "ארקייד בכמה קומות ליד הדירה, עם מכונות טופי ומשחקי קצב.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "gigo-ikebukuro-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "arcade"
+  ],
+  "en": "GiGO Ikebukuro",
+  "he": "GiGO איקבוקורו",
+  "lat": 35.73,
+  "lon": 139.714,
+  "desc": "ארקייד גדול עם פרס של פיגורות.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "round1-shibuya-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "arcade"
+  ],
+  "en": "Round1 Shibuya",
+  "he": "ראונד 1 שיבויה",
+  "lat": 35.6605,
+  "lon": 139.699,
+  "desc": "ארקייד, באולינג, קריוקי ובאטינג.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "spa-laqua-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "onsen"
+  ],
+  "en": "Spa LaQua",
+  "he": "ספא לאקווה",
+  "lat": 35.706,
+  "lon": 139.753,
+  "desc": "מתחם ספא ענק עם אונסן אמיתי, סאונות ומרפסת שמש, ליד טוקיו דום.",
+  "tip": "בערך ¥3000. קעקועים אסורים.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "daikokuyu-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "onsen"
+  ],
+  "en": "Daikokuyu",
+  "he": "דאיקוקויו",
+  "lat": 35.714,
+  "lon": 139.817,
+  "desc": "סנטו עם אמבט פתוח על הגג ונוף לסקאיי טרי. פתוח עד מאוחר.",
+  "tip": "",
+  "price": 1,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "nonbei-yokocho-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "night"
+  ],
+  "en": "Nonbei Yokocho",
+  "he": "נונביי יוקוצ'ו",
+  "lat": 35.6595,
+  "lon": 139.702,
+  "desc": "סמטת ברים זעירים ליד התחנה, 'סמטת השיכורים'.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ebisu-yokocho-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "night"
+  ],
+  "en": "Ebisu Yokocho",
+  "he": "אביסו יוקוצ'ו",
+  "lat": 35.6475,
+  "lon": 139.711,
+  "desc": "שוק מקורה עם דוכני אוכל ושתייה. אווירה מעולה בערב.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": null
+ },
+ {
+  "id": "karaoke-kan-shibuya-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "night",
+   "quirky"
+  ],
+  "en": "Karaoke Kan Shibuya",
+  "he": "קריוקי קאן שיבויה",
+  "lat": 35.66,
+  "lon": 139.6985,
+  "desc": "קריוקי עם חדרים פרטיים, החדר מ'אבודים בטוקיו'.",
+  "tip": "",
+  "price": 1,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ninja-akasaka-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "quirky",
+   "food"
+  ],
+  "en": "Ninja Akasaka",
+  "he": "מסעדת נינג'ה",
+  "lat": 35.6745,
+  "lon": 139.738,
+  "desc": "מסעדה בתוך 'כפר נינג'ות' עם מבוך, שירות של נינג'ות וקוסמים.",
+  "tip": "להזמין מראש.",
+  "price": 3,
+  "mustSee": false,
+  "special": false,
+  "seafood": "none",
+  "dairy": "ask"
+ },
+ {
+  "id": "zauo-shinjuku-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "quirky",
+   "food"
+  ],
+  "en": "Zauo Shinjuku",
+  "he": "זאואו - דגים שתופסים לבד",
+  "lat": 35.6905,
+  "lon": 139.7,
+  "desc": "יושבים על סירה בתוך המסעדה, דגים דג והמטבח מכין אותו. ",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": "mostly",
+  "dairy": "free"
+ },
+ {
+  "id": "mandarake-shibuya-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "vintage"
+  ],
+  "en": "Mandarake Shibuya",
+  "he": "מנדרקה שיבויה",
+  "lat": 35.661,
+  "lon": 139.6985,
+  "desc": "קומת מרתף ענקית של אספנות אנימה יד שנייה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "2nd-street-harajuku-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "vintage"
+  ],
+  "en": "2nd Street Harajuku",
+  "he": "סקנד סטריט הרג'וקו",
+  "lat": 35.669,
+  "lon": 139.705,
+  "desc": "חנות יד שנייה של מותגים ובגדי וינטג'.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "kotobukiya-akihabara-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "anime",
+   "shop"
+  ],
+  "en": "Kotobukiya Akihabara",
+  "he": "קוטובוקיה אקיהבארה",
+  "lat": 35.6995,
+  "lon": 139.7725,
+  "desc": "החנות של חברת הפיגורות והדגמים קוטובוקיה.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "mameshiba-cafe-harajuku-harajuku",
+  "area": "harajuku",
+  "region": "tky",
+  "cats": [
+   "animals"
+  ],
+  "en": "Mameshiba Cafe Harajuku",
+  "he": "בית הקפה של השיבות",
+  "lat": 35.6705,
+  "lon": 139.7035,
+  "desc": "כלבי שיבה אינו קטנים שאפשר לשחק איתם.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "cat-cafe-mocha-ikebukuro-ikebukuro",
+  "area": "ikebukuro",
+  "region": "tky",
+  "cats": [
+   "animals"
+  ],
+  "en": "Cat Cafe MoCHA Ikebukuro",
+  "he": "בית הקפה של החתולים MoCHA",
+  "lat": 35.7305,
+  "lon": 139.713,
+  "desc": "חתולים מגזעים מיוחדים בחלל גדול.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "gotokuji-shimokita",
+  "area": "shimokita",
+  "region": "tky",
+  "cats": [
+   "temple",
+   "quirky"
+  ],
+  "en": "Gotokuji",
+  "he": "גוטוקו-ג'י - מקדש החתולים",
+  "lat": 35.6489,
+  "lon": 139.6474,
+  "desc": "אלפי פסלי חתול מזל לבנים (מאנקי-נקו) עם יד מורמת.",
+  "tip": "",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "imperial-palace-east-gardens-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Imperial Palace East Gardens",
+  "he": "הגנים המזרחיים של הארמון",
+  "lat": 35.6852,
+  "lon": 139.7528,
+  "desc": "גן חינם בתוך חומות הארמון הקיסרי.",
+  "tip": "סגור בימי שני ושישי.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-station-marunouchi-ginza",
+  "area": "ginza",
+  "region": "tky",
+  "cats": [
+   "sight"
+  ],
+  "en": "Tokyo Station Marunouchi",
+  "he": "תחנת טוקיו מרונואוצ'י",
+  "lat": 35.6812,
+  "lon": 139.7671,
+  "desc": "בניין לבנים אדומות מ-1914. מקסים בלילה.",
+  "tip": "",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "shibuya-hands-and-loft-shibuya",
+  "area": "shibuya",
+  "region": "tky",
+  "cats": [
+   "shop"
+  ],
+  "en": "Shibuya Hands and Loft",
+  "he": "האנדס ולופט שיבויה",
+  "lat": 35.662,
+  "lon": 139.6975,
+  "desc": "חנויות של כל דבר מגניב: גאדג'טים, כלי כתיבה וחפצים מוזרים.",
+  "tip": "",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "godzilla-manhole-covers-shinjuku-toho-building-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Godzilla Manhole Covers (Shinjuku Toho Building)",
+  "he": "מכסי גודזילה בקאבוקיצ'ו",
+  "lat": 35.695,
+  "lon": 139.702,
+  "desc": "שני מכסים צבעוניים של גודזילה: אחד של Shin Godzilla (2016) ואחד של Godzilla vs. Mothra (1992). שינג'וקו בחרה בגודזילה כתודה על שהחייה את השכונה.",
+  "tip": "על המדרכה מול כניסת Shinjuku Toho Building (קאבוקיצ'ו 1-18), מתחת לראש הגודזילה. דקה מהדירה.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokyo-2020-manholes-national-stadium-shinjuku",
+  "area": "shinjuku",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Tokyo 2020 Manholes (National Stadium)",
+  "he": "מכסי אולימפיאדת טוקיו 2020",
+  "lat": 35.6815,
+  "lon": 139.7148,
+  "desc": "כמה מכסים מעוצבים של אולימפיאדת טוקיו 2020, עם סמלי ענפי הספורט, לאורך האצטדיון הלאומי.",
+  "tip": "על המדרכה הצפונית של האצטדיון הלאומי. תחנת Kokuritsu-Kyogijo בקו Oedo, או Sendagaya ב-JR.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-bronzor-and-baltoy-tokyo-national-museum-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Bronzor and Baltoy (Tokyo National Museum)",
+  "he": "פוקיפוטה: ברונזור ובאלטוי",
+  "lat": 35.717715,
+  "lon": 139.775397,
+  "desc": "מכסה פוקימון רשמי (Poké Lid) עם שני פוקימונים שנראים כמו חפצים ארכיאולוגיים, מתאים למוזיאון.",
+  "tip": "בצד שמאל של הכניסה הראשית למוזיאון הלאומי של טוקיו, בפארק אואנו.",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-tyrunt-and-wynaut-museum-of-nature-and-science-ueno",
+  "area": "ueno",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Tyrunt and Wynaut (Museum of Nature and Science)",
+  "he": "פוקיפוטה: טיירנט ו-ויינוט",
+  "lat": 35.71681,
+  "lon": 139.776399,
+  "desc": "מכסה פוקימון עם דינוזאור קטן, ליד מוזיאון המדע והטבע שיש בו שלדי דינוזאורים.",
+  "tip": "משמאל לכניסה למוזיאון הלאומי למדע וטבע. 2 דקות מהקודם.",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "astro-boy-manholes-meidai-dori-akiba",
+  "area": "akiba",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Astro Boy Manholes (Meidai-dori)",
+  "he": "מכסי אסטרו בוי",
+  "lat": 35.698,
+  "lon": 139.7612,
+  "desc": "שלושה מכסים של אסטרו בוי (Tetsuwan Atom), האנימה הקלאסית של אוסמו טזוקה, ברחוב Meidai-dori.",
+  "tip": "מתחנת Ochanomizu במורד Meidai-dori לכיוון ג'ימבוצ'ו. 10 דקות הליכה מאקיהבארה.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ryogoku-sumo-manholes-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Ryogoku Sumo Manholes",
+  "he": "מכסי הסומו של ריוגוקו",
+  "lat": 35.6965,
+  "lon": 139.793,
+  "desc": "שני מכסים עם עיצובים של סומו, כולל Sekitori-kun, הדמות הרשמית של איגוד הסומו.",
+  "tip": "ליד היציאה המערבית של תחנת Ryogoku.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "the-great-wave-manhole-hokusai-museum-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "The Great Wave Manhole (Hokusai Museum)",
+  "he": "מכסה 'הגל הגדול' של הוקוסאי",
+  "lat": 35.6966,
+  "lon": 139.799,
+  "desc": "מכסה צבעוני עם הציור 'הגל הגדול של קנגאווה' של הוקוסאי.",
+  "tip": "במעבר החצייה מול מוזיאון הוקוסאי של סומידה, ברחוב Hokusai-dori. 10 דקות מתחנת Ryogoku.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "red-fuji-manhole-asakusa",
+  "area": "asakusa",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Red Fuji Manhole",
+  "he": "מכסה 'הפוג'י האדום'",
+  "lat": 35.69478,
+  "lon": 139.79194,
+  "desc": "מכסה עם הציור 'רוח נעימה, בוקר בהיר' (הפוג'י האדום) של הוקוסאי.",
+  "tip": "ליד פסל הסומו הרחוק מתחנת Ryogoku, מעבר לכביש מאולם הסומו.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sailor-moon-manhole-sailor-moon-and-tuxedo-mask-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Sailor Moon Manhole: Sailor Moon and Tuxedo Mask",
+  "he": "מכסה סיילור מון וטוקסידו מאסק",
+  "lat": 35.65538,
+  "lon": 139.73681,
+  "desc": "המכסה המפורסם מבין שבעת מכסי סיילור מון בשכונת אזאבו-ג'ובן, שבה מתרחשת הסדרה.",
+  "tip": "מחוץ ליציאה 4 של תחנת Azabu-Juban, מול Oslo Coffee.",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sailor-moon-manhole-five-guardians-red-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Sailor Moon Manhole: Five Guardians (Red)",
+  "he": "מכסה סיילור מון: חמש הלוחמות (אדום)",
+  "lat": 35.66056,
+  "lon": 139.73465,
+  "desc": "חמש לוחמות הסיילור על רקע אדום.",
+  "tip": "מול הכניסה לבית הספר היסודי Toyo Eiwa ברופונגי.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sailor-moon-manhole-ten-guardians-purple-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Sailor Moon Manhole: Ten Guardians (Purple)",
+  "he": "מכסה סיילור מון: עשר הלוחמות (סגול)",
+  "lat": 35.66557,
+  "lon": 139.72893,
+  "desc": "עשר לוחמות הסיילור מוקפות פריחת דובדבן.",
+  "tip": "ממש מול מכונה אוטומטית, ליד רופונגי.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sailor-moon-manhole-five-guardians-green-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Sailor Moon Manhole: Five Guardians (Green)",
+  "he": "מכסה סיילור מון: חמש הלוחמות (ירוק)",
+  "lat": 35.66106,
+  "lon": 139.74587,
+  "desc": "חמש הלוחמות על רקע ירוק.",
+  "tip": "ליד הגן של תחנת המים Shiba, קרוב לשגרירות הולנד. 10 דקות ממגדל טוקיו.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sailor-moon-manhole-five-guardians-blue-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Sailor Moon Manhole: Five Guardians (Blue)",
+  "he": "מכסה סיילור מון: חמש הלוחמות (כחול)",
+  "lat": 35.65974,
+  "lon": 139.75015,
+  "desc": "חמש הלוחמות על רקע כחול.",
+  "tip": "מול ספריית Minato ליד פארק Shiba. הכי קרוב למגדל טוקיו.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sailor-moon-manhole-five-guardians-yellow-roppongi",
+  "area": "roppongi",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Sailor Moon Manhole: Five Guardians (Yellow)",
+  "he": "מכסה סיילור מון: חמש הלוחמות (צהוב)",
+  "lat": 35.64725,
+  "lon": 139.74696,
+  "desc": "רקע צהוב לכבוד סיילור ונוס (Sailor V).",
+  "tip": "בכניסה לרחוב הקניות Keio Nakadori, ליד Mita.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "sailor-moon-manhole-ten-guardians-rainbow-shinagawa",
+  "area": "shinagawa",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Sailor Moon Manhole: Ten Guardians (Rainbow)",
+  "he": "מכסה סיילור מון: עשר הלוחמות (קשת)",
+  "lat": 35.6355,
+  "lon": 139.7404,
+  "desc": "עשר הלוחמות על רקע קשת, הכי חדש מבין השבעה.",
+  "tip": "תחנת JR Takanawa Gateway: דרך שער הכרטיסים הצפוני, ממשיכים בדרך עד המדרגות למטה ופונים ימינה.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "cinnamoroll-manhole-oi-station-shinagawa",
+  "area": "shinagawa",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Cinnamoroll Manhole (Oi Station)",
+  "he": "מכסה סינמורול - תחנת אוי",
+  "lat": 35.607,
+  "lon": 139.7347,
+  "desc": "מכסה של סינמורול, הכלב הלבן של סנריו. בשינגאווה יש 8 כאלה.",
+  "tip": "יציאה מרכזית של תחנת Oimachi, בצד של Hankyu Oi Garden.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "cinnamoroll-manhole-kogaku-street-shinagawa",
+  "area": "shinagawa",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Cinnamoroll Manhole (Kogaku Street)",
+  "he": "מכסה סינמורול - רחוב קוגאקו",
+  "lat": 35.608,
+  "lon": 139.732,
+  "desc": "סינמורול ברחוב Kogaku, ליד השלט של ניקון.",
+  "tip": "5 דקות הליכה מתחנת Oimachi.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "cinnamoroll-manhole-osaki-shinagawa",
+  "area": "shinagawa",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Cinnamoroll Manhole (Osaki)",
+  "he": "מכסה סינמורול - אוסאקי",
+  "lat": 35.6197,
+  "lon": 139.7285,
+  "desc": "סינמורול ליד גשר ההולכי רגל Suzukake.",
+  "tip": "מול Osaki Center Building, ליד תחנת Osaki.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "cinnamoroll-and-monshiro-manhole-shinagawa-juku-shinagawa",
+  "area": "shinagawa",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Cinnamoroll and Monshiro Manhole (Shinagawa-juku)",
+  "he": "מכסה סינמורול - שינגאווה-ג'וקו",
+  "lat": 35.619,
+  "lon": 139.7412,
+  "desc": "סינמורול עם מונשירו, הקמע של שינגאווה, ברחוב הטוקאידו הישן.",
+  "tip": "ליד גשר Shinagawa-bashi. תחנת Kita-Shinagawa בקו Keikyu.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "ultraman-manholes-soshigaya-okura-shimokita",
+  "area": "shimokita",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Ultraman Manholes (Soshigaya-Okura)",
+  "he": "מכסי אולטרמן",
+  "lat": 35.6435,
+  "lon": 139.6105,
+  "desc": "חמישה מכסים של אולטרמן ליד התחנה, בשכונה של אולפני צובורויה שיצרו אותו. ברחוב יש גם פסל אולטרמן.",
+  "tip": "תחנת Soshigaya-Okura בקו Odakyu, 20 דקות משינג'וקו. כל המכסים במרחק הליכה קצר.",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "hello-kitty-manholes-tama-center-tama",
+  "area": "tama",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Hello Kitty Manholes (Tama Center)",
+  "he": "מכסי הלו קיטי",
+  "lat": 35.6215,
+  "lon": 139.4255,
+  "desc": "כמה מכסים של הלו קיטי ודמויות סנריו בדרך לסנריו פורולנד ובפארק טאמה צ'ואו.",
+  "tip": "מדרום לתחנת Tama Center. לשלב עם סנריו פורולנד.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lids-bulbasaur-serigaya-park-machida",
+  "area": "machida",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lids: Bulbasaur (Serigaya Park)",
+  "he": "פוקיפוטה: בולבזאור",
+  "lat": 35.548108,
+  "lon": 139.45034,
+  "desc": "הראשון מבין 6 מכסי פוקימון בפארק סריגאיה במאצ'ידה, כולם של הדור הראשון.",
+  "tip": "15 דקות הליכה מתחנת Machida. הראשון במסלול.",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lids-charmander-serigaya-park-machida",
+  "area": "machida",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lids: Charmander (Serigaya Park)",
+  "he": "פוקיפוטה: צ'רמנדר",
+  "lat": 35.548171,
+  "lon": 139.4513,
+  "desc": "צ'רמנדר, הפוקימון השני במסלול.",
+  "tip": "פארק סריגאיה.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lids-poliwag-serigaya-park-machida",
+  "area": "machida",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lids: Poliwag (Serigaya Park)",
+  "he": "פוקיפוטה: פוליוואג",
+  "lat": 35.546713,
+  "lon": 139.45398,
+  "desc": "פוליוואג בפארק.",
+  "tip": "פארק סריגאיה.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lids-caterpie-oddish-and-weedle-machida",
+  "area": "machida",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lids: Caterpie, Oddish and Weedle",
+  "he": "פוקיפוטה: קטרפי, אודיש ווידל",
+  "lat": 35.546111,
+  "lon": 139.45436,
+  "desc": "שלושה פוקימונים במכסה אחד.",
+  "tip": "פארק סריגאיה.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lids-pidgey-and-rattata-machida",
+  "area": "machida",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lids: Pidgey and Rattata",
+  "he": "פוקיפוטה: פידג'י ורטאטה",
+  "lat": 35.545645,
+  "lon": 139.45488,
+  "desc": "פידג'י ורטאטה.",
+  "tip": "פארק סריגאיה.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lids-squirtle-serigaya-park-machida",
+  "area": "machida",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lids: Squirtle (Serigaya Park)",
+  "he": "פוקיפוטה: סקווירטל",
+  "lat": 35.545302,
+  "lon": 139.45501,
+  "desc": "האחרון במסלול.",
+  "tip": "פארק סריגאיה. יש שם מדרגות ארוכות.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "the-idolm-ster-roco-manhole-machida",
+  "area": "machida",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "THE IDOLM@STER Roco Manhole",
+  "he": "מכסה רוקו - איידולמאסטר",
+  "lat": 35.544,
+  "lon": 139.4475,
+  "desc": "מכסה דמות של רוקו מ-THE IDOLM@STER Million Live.",
+  "tip": "שדרת Haramachida Odori, ליד תחנת Machida.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-pikachu-and-eevee-pokepark-kanto-tama",
+  "area": "tama",
+  "region": "tky",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Pikachu and Eevee (PokéPark Kanto)",
+  "he": "פוקיפוטה: פיקאצ'ו ואיבי",
+  "lat": 35.62637,
+  "lon": 139.521513,
+  "desc": "מכסה של פיקאצ'ו ואיבי בתוך PokéPark Kanto, פארק הפוקימון החדש ביומיאורילנד.",
+  "tip": "צריך כרטיס כניסה לפארק, להזמין מראש.",
+  "price": 2,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-pichu-cleffa-and-igglybuff-maruyama-park-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Pichu, Cleffa and Igglybuff (Maruyama Park)",
+  "he": "פוקיפוטה: פיצ'ו, קלפה ואיגליבאף",
+  "lat": 35.0035,
+  "lon": 135.7815,
+  "desc": "מכסה פוקימון בפארק מארויאמה, ליד מקדש יאסאקה.",
+  "tip": "בצד ימין כשנכנסים מהמקדש, בין בריכת הדלעת לדוכני האוכל. 15 דקות הליכה מהמלון.",
+  "price": 0,
+  "mustSee": true,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-cyndaquil-and-darmanitan-okazaki-park-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Cyndaquil and Darmanitan (Okazaki Park)",
+  "he": "פוקיפוטה: סינדקוויל ודרמניטן",
+  "lat": 35.0145,
+  "lon": 135.7826,
+  "desc": "מכסה פוקימון בפינת פארק אוקאזאקי, עם נוף לשער של מקדש הייאן.",
+  "tip": "מול מקדש הייאן. תחנת Higashiyama בקו Tozai.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-totodile-and-azumarill-umekoji-park-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Totodile and Azumarill (Umekoji Park)",
+  "he": "פוקיפוטה: טוטודייל ואזומריל",
+  "lat": 34.987,
+  "lon": 135.747,
+  "desc": "מכסה פוקימון בפארק אומקוג'י.",
+  "tip": "לפני אזור הדשא של הפארק. תחנת Umekoji-Kyotonishi, תחנה אחת מתחנת קיוטו. לשלב עם מוזיאון הרכבות.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-chikorita-and-shiftry-nishikyogoku-park-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Chikorita and Shiftry (Nishikyogoku Park)",
+  "he": "פוקיפוטה: צ'יקוריטה ושיפטרי",
+  "lat": 34.993,
+  "lon": 135.718,
+  "desc": "מכסה פוקימון בפארק הספורט נישיקיוגוקו.",
+  "tip": "תחנת Nishikyogoku בקו Hankyu.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-ho-oh-arashiyama-park-kyo",
+  "area": "kyo",
+  "region": "kyo",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Ho-Oh (Arashiyama Park)",
+  "he": "פוקיפוטה: הו-או",
+  "lat": 35.0123,
+  "lon": 135.6785,
+  "desc": "מכסה של הו-או, הפוקימון האגדי, עם גשר טוגטסוקיו ברקע. הכי יפה מבין המכסים של קיוטו.",
+  "tip": "בשביל ההליכה ליד בתי הקפה בפארק ארשיאמה, ליד הגשר.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-raikou-hanazono-rugby-stadium-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Raikou (Hanazono Rugby Stadium)",
+  "he": "פוקיפוטה: ראיקו",
+  "lat": 34.664,
+  "lon": 135.617,
+  "desc": "מכסה של ראיקו, הפוקימון האגדי, מחוץ לאצטדיון הרוגבי.",
+  "tip": "מחוץ לאחת הכניסות לאצטדיון Hanazono בהיגאשי-אוסקה. תחנת Higashi-Hanazono בקו Kintetsu Nara.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "poke-lid-yamper-and-togedemaru-higashiosaka-chuo-park-osk",
+  "area": "osk",
+  "region": "osk",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Poke Lid: Yamper and Togedemaru (Higashiosaka Chuo Park)",
+  "he": "פוקיפוטה: יאמפר וטוגדמארו",
+  "lat": 34.662,
+  "lon": 135.614,
+  "desc": "יאמפר וטוגדמארו משחקים רוגבי.",
+  "tip": "בפארק המרכזי של היגאשי-אוסקה, צמוד לאצטדיון.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "gundam-manholes-otemae-dori-himeji",
+  "area": "himeji",
+  "region": "osk",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Gundam Manholes (Otemae-dori)",
+  "he": "מכסי גאנדאם בהימג'י",
+  "lat": 34.831,
+  "lon": 134.6915,
+  "desc": "מכסים מעוצבים של גאנדאם ברחוב הראשי שמוביל מהתחנה לטירה.",
+  "tip": "Otemae-dori, בכניסות Nikai-machi ו-Nishi-Nikai-machi. בדרך מהתחנה לטירה.",
+  "price": 0,
+  "mustSee": true,
+  "special": true,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "the-idolm-ster-manhole-shinshigai-arcade-kum",
+  "area": "kum",
+  "region": "kum",
+  "cats": [
+   "manhole"
+  ],
+  "en": "THE IDOLM@STER Manhole (Shinshigai Arcade)",
+  "he": "מכסה איידולמאסטר בשינשיגאי",
+  "lat": 32.801,
+  "lon": 130.7062,
+  "desc": "מכסה דמות של Himesaki Rinami מ-Gakuen IDOLM@STER, בכניסה למדרחוב שינשיגאי.",
+  "tip": "בכניסה למדרחוב Shinshigai (Shinshigai 1-22), ממש ליד המלון.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ },
+ {
+  "id": "tokoname-poke-lids-tokoname",
+  "area": "tokoname",
+  "region": "ngy",
+  "cats": [
+   "manhole"
+  ],
+  "en": "Tokoname Poke Lids",
+  "he": "מכסי הפוקימון של טוקונאמה",
+  "lat": 34.8866,
+  "lon": 136.8374,
+  "desc": "בעיר הקרמיקה טוקונאמה יש כמה מכסי פוקימון, וגם מכסה של Maekawa Miku מ-Cinderella Girls עם הקמע Tokonyan.",
+  "tip": "30 דקות ברכבת Meitetsu מנגויה. המיקומים המדויקים במפה של data.pokefuta.com.",
+  "price": 0,
+  "mustSee": false,
+  "special": false,
+  "seafood": null,
+  "dairy": null
+ }
+]

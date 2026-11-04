@@ -1,0 +1,170 @@
+[
+ {
+  "key": "special",
+  "he": "מיוחד לעיר",
+  "sub": "מיוחד לעיר",
+  "color": "#F5C443",
+  "dark": "#4A3B0B",
+  "icon": "crown"
+ },
+ {
+  "key": "manhole",
+  "he": "מכסי ביוב מיוחדים",
+  "sub": "מכסי ביוב",
+  "color": "#C9D3E6",
+  "dark": "#2A3346",
+  "icon": "manhole"
+ },
+ {
+  "key": "op",
+  "he": "One Piece",
+  "sub": "One Piece",
+  "color": "#E4572E",
+  "dark": "#4A1E14",
+  "icon": "hat"
+ },
+ {
+  "key": "eva",
+  "he": "רובוטים, אוונגליון וג'יבלי",
+  "sub": "רובוטים, אוונגליון וג'יבלי",
+  "color": "#9B7BFF",
+  "dark": "#2E2160",
+  "icon": "robot"
+ },
+ {
+  "key": "anime",
+  "he": "אנימה ומנגה",
+  "sub": "אנימה ומנגה",
+  "color": "#FF7DB8",
+  "dark": "#4A1D35",
+  "icon": "star"
+ },
+ {
+  "key": "hardoff",
+  "he": "Hard Off",
+  "sub": "Hard Off",
+  "color": "#FFD23F",
+  "dark": "#4A3B0B",
+  "icon": "tag"
+ },
+ {
+  "key": "vintage",
+  "he": "וינטג' ויד שנייה",
+  "sub": "וינטג' ויד שנייה",
+  "color": "#D9A97A",
+  "dark": "#3E2A18",
+  "icon": "hanger"
+ },
+ {
+  "key": "tech",
+  "he": "אלקטרוניקה",
+  "sub": "אלקטרוניקה",
+  "color": "#3FD0D4",
+  "dark": "#0F3D40",
+  "icon": "chip"
+ },
+ {
+  "key": "food",
+  "he": "מסעדות",
+  "sub": "מסעדות",
+  "color": "#FF9248",
+  "dark": "#4A2610",
+  "icon": "bowl"
+ },
+ {
+  "key": "street",
+  "he": "אוכל רחוב ושווקים",
+  "sub": "אוכל רחוב ושווקים",
+  "color": "#F6B25E",
+  "dark": "#4A3215",
+  "icon": "skewer"
+ },
+ {
+  "key": "shop",
+  "he": "קניות",
+  "sub": "חנויות ורחובות",
+  "color": "#5DADEC",
+  "dark": "#163453",
+  "icon": "bag"
+ },
+ {
+  "key": "mall",
+  "he": "קניונים",
+  "sub": "קניונים",
+  "color": "#7FC8D0",
+  "dark": "#163E43",
+  "icon": "building"
+ },
+ {
+  "key": "sight",
+  "he": "נופים ויופי",
+  "sub": "נופים",
+  "color": "#57D3F5",
+  "dark": "#0F3A4A",
+  "icon": "mount"
+ },
+ {
+  "key": "temple",
+  "he": "מקדשים",
+  "sub": "מקדשים",
+  "color": "#F07F65",
+  "dark": "#4A1F16",
+  "icon": "torii"
+ },
+ {
+  "key": "park",
+  "he": "פארקים וטבע",
+  "sub": "פארקים",
+  "color": "#6FD37E",
+  "dark": "#173D1E",
+  "icon": "leaf"
+ },
+ {
+  "key": "animals",
+  "he": "בעלי חיים",
+  "sub": "בעלי חיים",
+  "color": "#B3D865",
+  "dark": "#2E3D12",
+  "icon": "paw"
+ },
+ {
+  "key": "museum",
+  "he": "מוזיאונים",
+  "sub": "מוזיאונים",
+  "color": "#C5A3D9",
+  "dark": "#352542",
+  "icon": "frame"
+ },
+ {
+  "key": "quirky",
+  "he": "מוזר ומגניב",
+  "sub": "מוזר ומגניב",
+  "color": "#FF73E0",
+  "dark": "#4A1844",
+  "icon": "spark"
+ },
+ {
+  "key": "night",
+  "he": "לילה וברים",
+  "sub": "ברים ולילה",
+  "color": "#A897FF",
+  "dark": "#2A2357",
+  "icon": "moon"
+ },
+ {
+  "key": "arcade",
+  "he": "ארקיידים וגאצ'ה",
+  "sub": "ארקיידים",
+  "color": "#2EF2CF",
+  "dark": "#0D4239",
+  "icon": "joy"
+ },
+ {
+  "key": "onsen",
+  "he": "אונסן וסנטו",
+  "sub": "אונסן",
+  "color": "#9EE6F5",
+  "dark": "#173F4A",
+  "icon": "onsen"
+ }
+]

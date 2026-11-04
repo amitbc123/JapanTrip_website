@@ -1,0 +1,157 @@
+[
+ {
+  "key": "ngy",
+  "he": "נגויה",
+  "kanji": "名古屋",
+  "from": "2026-11-03",
+  "to": "2026-11-05",
+  "areas": [
+   "ngy",
+   "tokoname"
+  ],
+  "bases": [
+   {
+    "key": "ngy",
+    "name": "Nikko Style Nagoya",
+    "lat": 35.1668,
+    "lon": 136.887,
+    "from": "2026-11-03",
+    "to": "2026-11-05"
+   }
+  ]
+ },
+ {
+  "key": "kyo",
+  "he": "קיוטו",
+  "kanji": "京都",
+  "from": "2026-11-05",
+  "to": "2026-11-13",
+  "areas": [
+   "kyo",
+   "nara",
+   "uji"
+  ],
+  "bases": [
+   {
+    "key": "kyo",
+    "name": "GOOD NATURE HOTEL KYOTO",
+    "lat": 35.00253,
+    "lon": 135.7691,
+    "from": "2026-11-05",
+    "to": "2026-11-13"
+   }
+  ]
+ },
+ {
+  "key": "osk",
+  "he": "אוסקה",
+  "kanji": "大阪",
+  "from": "2026-11-13",
+  "to": "2026-11-17",
+  "areas": [
+   "osk",
+   "kobe",
+   "himeji"
+  ],
+  "bases": [
+   {
+    "key": "osk",
+    "name": "Candeo Hotels Osaka Shinsaibashi",
+    "lat": 34.6706,
+    "lon": 135.5007,
+    "from": "2026-11-13",
+    "to": "2026-11-17"
+   }
+  ]
+ },
+ {
+  "key": "hiro",
+  "he": "הירושימה",
+  "kanji": "広島",
+  "from": "2026-11-17",
+  "to": "2026-11-19",
+  "areas": [
+   "hiro",
+   "miya"
+  ],
+  "bases": [
+   {
+    "key": "hiro",
+    "name": "The Knot Hiroshima",
+    "lat": 34.3894,
+    "lon": 132.45533,
+    "from": "2026-11-17",
+    "to": "2026-11-19"
+   }
+  ]
+ },
+ {
+  "key": "kum",
+  "he": "קומאמוטו",
+  "kanji": "熊本",
+  "from": "2026-11-19",
+  "to": "2026-11-22",
+  "areas": [
+   "kum",
+   "aso"
+  ],
+  "bases": [
+   {
+    "key": "kum",
+    "name": "Candeo Hotels Kumamoto Shinshigai",
+    "lat": 32.79858,
+    "lon": 130.70613,
+    "from": "2026-11-19",
+    "to": "2026-11-22"
+   }
+  ]
+ },
+ {
+  "key": "tky",
+  "he": "טוקיו",
+  "kanji": "東京",
+  "from": "2026-11-22",
+  "to": "2026-12-06",
+  "areas": [
+   "asakusa",
+   "ueno",
+   "akiba",
+   "ikebukuro",
+   "shinjuku",
+   "shibuya",
+   "harajuku",
+   "ginza",
+   "odaiba",
+   "roppongi",
+   "nakano",
+   "shimokita",
+   "kichi",
+   "oizumi",
+   "kamakura",
+   "takao",
+   "kawaguchi",
+   "chichibu",
+   "tama",
+   "shinagawa",
+   "machida"
+  ],
+  "bases": [
+   {
+    "key": "asa",
+    "name": "the Moto Hotel Asakusa",
+    "lat": 35.71613,
+    "lon": 139.79795,
+    "from": "2026-11-22",
+    "to": "2026-11-29"
+   },
+   {
+    "key": "shj",
+    "name": "Stay Kabukicho B",
+    "lat": 35.69702,
+    "lon": 139.7021,
+    "from": "2026-11-29",
+    "to": "2026-12-06"
+   }
+  ]
+ }
+]

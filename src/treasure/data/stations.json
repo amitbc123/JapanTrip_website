@@ -1,0 +1,1610 @@
+[
+ {
+  "name": "Nagoya",
+  "lat": 35.1709,
+  "lon": 136.8815,
+  "lines": [
+   "JR",
+   "Higashiyama",
+   "Sakura-dori",
+   "Meitetsu",
+   "Kintetsu",
+   "Aonami"
+  ]
+ },
+ {
+  "name": "Fushimi",
+  "lat": 35.169,
+  "lon": 136.8977,
+  "lines": [
+   "Higashiyama",
+   "Tsurumai"
+  ]
+ },
+ {
+  "name": "Sakae",
+  "lat": 35.1708,
+  "lon": 136.9086,
+  "lines": [
+   "Higashiyama",
+   "Meijo"
+  ]
+ },
+ {
+  "name": "Yabacho",
+  "lat": 35.1631,
+  "lon": 136.9086,
+  "lines": [
+   "Meijo"
+  ]
+ },
+ {
+  "name": "Kamimaezu",
+  "lat": 35.1576,
+  "lon": 136.9054,
+  "lines": [
+   "Meijo",
+   "Tsurumai"
+  ]
+ },
+ {
+  "name": "Osu Kannon",
+  "lat": 35.1588,
+  "lon": 136.8999,
+  "lines": [
+   "Tsurumai"
+  ]
+ },
+ {
+  "name": "Nagoyajo",
+  "lat": 35.1815,
+  "lon": 136.9064,
+  "lines": [
+   "Meijo"
+  ]
+ },
+ {
+  "name": "Sengencho",
+  "lat": 35.1797,
+  "lon": 136.8963,
+  "lines": [
+   "Tsurumai"
+  ]
+ },
+ {
+  "name": "Kakuozan",
+  "lat": 35.1647,
+  "lon": 136.9465,
+  "lines": [
+   "Higashiyama"
+  ]
+ },
+ {
+  "name": "Higashiyama-koen",
+  "lat": 35.1572,
+  "lon": 136.9719,
+  "lines": [
+   "Higashiyama"
+  ]
+ },
+ {
+  "name": "Jingu-mae",
+  "lat": 35.1276,
+  "lon": 136.9104,
+  "lines": [
+   "Meitetsu"
+  ]
+ },
+ {
+  "name": "Nagoyako",
+  "lat": 35.0909,
+  "lon": 136.8812,
+  "lines": [
+   "Meiko"
+  ]
+ },
+ {
+  "name": "Kinjofuto",
+  "lat": 35.0484,
+  "lon": 136.8507,
+  "lines": [
+   "Aonami"
+  ]
+ },
+ {
+  "name": "Kamejima",
+  "lat": 35.1792,
+  "lon": 136.879,
+  "lines": [
+   "Higashiyama"
+  ]
+ },
+ {
+  "name": "Sako",
+  "lat": 35.1841,
+  "lon": 136.8783,
+  "lines": [
+   "Meitetsu"
+  ]
+ },
+ {
+  "name": "Ai-Chikyuhaku-Kinen-Koen",
+  "lat": 35.1731,
+  "lon": 137.0886,
+  "lines": [
+   "Linimo"
+  ]
+ },
+ {
+  "name": "Fujigaoka",
+  "lat": 35.1817,
+  "lon": 137.0218,
+  "lines": [
+   "Higashiyama",
+   "Linimo"
+  ]
+ },
+ {
+  "name": "Hoshigaoka",
+  "lat": 35.1625,
+  "lon": 136.9853,
+  "lines": [
+   "Higashiyama"
+  ]
+ },
+ {
+  "name": "Tokoname",
+  "lat": 34.8866,
+  "lon": 136.8374,
+  "lines": [
+   "Meitetsu"
+  ]
+ },
+ {
+  "name": "Kyoto",
+  "lat": 34.9858,
+  "lon": 135.7588,
+  "lines": [
+   "JR",
+   "Karasuma",
+   "Kintetsu"
+  ]
+ },
+ {
+  "name": "Kyoto-Kawaramachi",
+  "lat": 35.0037,
+  "lon": 135.769,
+  "lines": [
+   "Hankyu"
+  ]
+ },
+ {
+  "name": "Gion-Shijo",
+  "lat": 35.0037,
+  "lon": 135.772,
+  "lines": [
+   "Keihan"
+  ]
+ },
+ {
+  "name": "Shijo",
+  "lat": 35.0037,
+  "lon": 135.7597,
+  "lines": [
+   "Karasuma",
+   "Hankyu"
+  ]
+ },
+ {
+  "name": "Sanjo",
+  "lat": 35.009,
+  "lon": 135.7726,
+  "lines": [
+   "Keihan",
+   "Tozai"
+  ]
+ },
+ {
+  "name": "Kyoto-Shiyakusho-mae",
+  "lat": 35.0109,
+  "lon": 135.7675,
+  "lines": [
+   "Tozai"
+  ]
+ },
+ {
+  "name": "Inari",
+  "lat": 34.9671,
+  "lon": 135.77,
+  "lines": [
+   "JR Nara"
+  ]
+ },
+ {
+  "name": "Fushimi-Inari",
+  "lat": 34.9665,
+  "lon": 135.7725,
+  "lines": [
+   "Keihan"
+  ]
+ },
+ {
+  "name": "Kiyomizu-Gojo",
+  "lat": 34.9967,
+  "lon": 135.768,
+  "lines": [
+   "Keihan"
+  ]
+ },
+ {
+  "name": "Tofukuji",
+  "lat": 34.98,
+  "lon": 135.77,
+  "lines": [
+   "JR Nara",
+   "Keihan"
+  ]
+ },
+ {
+  "name": "Shichijo",
+  "lat": 34.9895,
+  "lon": 135.768,
+  "lines": [
+   "Keihan"
+  ]
+ },
+ {
+  "name": "Saga-Arashiyama",
+  "lat": 35.0187,
+  "lon": 135.6815,
+  "lines": [
+   "JR Sagano"
+  ]
+ },
+ {
+  "name": "Arashiyama (Randen)",
+  "lat": 35.0154,
+  "lon": 135.678,
+  "lines": [
+   "Randen"
+  ]
+ },
+ {
+  "name": "Arashiyama (Hankyu)",
+  "lat": 35.0098,
+  "lon": 135.6815,
+  "lines": [
+   "Hankyu"
+  ]
+ },
+ {
+  "name": "Nijojo-mae",
+  "lat": 35.0105,
+  "lon": 135.7484,
+  "lines": [
+   "Tozai"
+  ]
+ },
+ {
+  "name": "Keage",
+  "lat": 35.0081,
+  "lon": 135.792,
+  "lines": [
+   "Tozai"
+  ]
+ },
+ {
+  "name": "Higashiyama",
+  "lat": 35.0076,
+  "lon": 135.7795,
+  "lines": [
+   "Tozai"
+  ]
+ },
+ {
+  "name": "Imadegawa",
+  "lat": 35.0302,
+  "lon": 135.7594,
+  "lines": [
+   "Karasuma"
+  ]
+ },
+ {
+  "name": "Marutamachi",
+  "lat": 35.0177,
+  "lon": 135.7596,
+  "lines": [
+   "Karasuma"
+  ]
+ },
+ {
+  "name": "Umekoji-Kyotonishi",
+  "lat": 34.9862,
+  "lon": 135.7444,
+  "lines": [
+   "JR Sagano"
+  ]
+ },
+ {
+  "name": "Kitano-Hakubaicho",
+  "lat": 35.0279,
+  "lon": 135.7322,
+  "lines": [
+   "Randen"
+  ]
+ },
+ {
+  "name": "Fujinomori",
+  "lat": 34.9573,
+  "lon": 135.77,
+  "lines": [
+   "Keihan"
+  ]
+ },
+ {
+  "name": "Katsura",
+  "lat": 34.9937,
+  "lon": 135.703,
+  "lines": [
+   "Hankyu"
+  ]
+ },
+ {
+  "name": "Fushimi-Momoyama",
+  "lat": 34.9341,
+  "lon": 135.7638,
+  "lines": [
+   "Keihan"
+  ]
+ },
+ {
+  "name": "Chushojima",
+  "lat": 34.9295,
+  "lon": 135.763,
+  "lines": [
+   "Keihan"
+  ]
+ },
+ {
+  "name": "Nishikyogoku",
+  "lat": 34.993,
+  "lon": 135.723,
+  "lines": [
+   "Hankyu"
+  ]
+ },
+ {
+  "name": "Demachiyanagi",
+  "lat": 35.03,
+  "lon": 135.773,
+  "lines": [
+   "Keihan",
+   "Eizan"
+  ]
+ },
+ {
+  "name": "Kitaoji",
+  "lat": 35.044,
+  "lon": 135.759,
+  "lines": [
+   "Karasuma"
+  ]
+ },
+ {
+  "name": "Uzumasa-Tenjingawa",
+  "lat": 35.0145,
+  "lon": 135.712,
+  "lines": [
+   "Tozai"
+  ]
+ },
+ {
+  "name": "Hanazono",
+  "lat": 35.0185,
+  "lon": 135.724,
+  "lines": [
+   "JR Sagano"
+  ]
+ },
+ {
+  "name": "Uji (JR)",
+  "lat": 34.8899,
+  "lon": 135.8001,
+  "lines": [
+   "JR Nara"
+  ]
+ },
+ {
+  "name": "Uji (Keihan)",
+  "lat": 34.8939,
+  "lon": 135.8081,
+  "lines": [
+   "Keihan Uji"
+  ]
+ },
+ {
+  "name": "Ogura",
+  "lat": 34.893,
+  "lon": 135.781,
+  "lines": [
+   "Kintetsu"
+  ]
+ },
+ {
+  "name": "Kintetsu-Nara",
+  "lat": 34.6843,
+  "lon": 135.8279,
+  "lines": [
+   "Kintetsu Nara"
+  ]
+ },
+ {
+  "name": "Nara (JR)",
+  "lat": 34.6809,
+  "lon": 135.8196,
+  "lines": [
+   "JR Nara"
+  ]
+ },
+ {
+  "name": "Namba",
+  "lat": 34.666,
+  "lon": 135.5011,
+  "lines": [
+   "Midosuji",
+   "Yotsubashi",
+   "Sennichimae",
+   "Nankai",
+   "Kintetsu"
+  ]
+ },
+ {
+  "name": "Shinsaibashi",
+  "lat": 34.6745,
+  "lon": 135.501,
+  "lines": [
+   "Midosuji",
+   "Nagahori"
+  ]
+ },
+ {
+  "name": "Nippombashi",
+  "lat": 34.6655,
+  "lon": 135.5065,
+  "lines": [
+   "Sakaisuji",
+   "Sennichimae",
+   "Kintetsu"
+  ]
+ },
+ {
+  "name": "Ebisucho",
+  "lat": 34.6528,
+  "lon": 135.5059,
+  "lines": [
+   "Sakaisuji"
+  ]
+ },
+ {
+  "name": "Dobutsuen-mae",
+  "lat": 34.6476,
+  "lon": 135.5069,
+  "lines": [
+   "Midosuji",
+   "Sakaisuji"
+  ]
+ },
+ {
+  "name": "Tennoji",
+  "lat": 34.6465,
+  "lon": 135.5133,
+  "lines": [
+   "JR Loop",
+   "Midosuji",
+   "Tanimachi"
+  ]
+ },
+ {
+  "name": "Umeda",
+  "lat": 34.7025,
+  "lon": 135.499,
+  "lines": [
+   "Midosuji",
+   "JR"
+  ]
+ },
+ {
+  "name": "Osaka (JR)",
+  "lat": 34.7024,
+  "lon": 135.4959,
+  "lines": [
+   "JR Loop",
+   "JR"
+  ]
+ },
+ {
+  "name": "Higashi-Umeda",
+  "lat": 34.7015,
+  "lon": 135.501,
+  "lines": [
+   "Tanimachi"
+  ]
+ },
+ {
+  "name": "Nishi-Umeda",
+  "lat": 34.7,
+  "lon": 135.4955,
+  "lines": [
+   "Yotsubashi"
+  ]
+ },
+ {
+  "name": "Osakajo-koen",
+  "lat": 34.688,
+  "lon": 135.5345,
+  "lines": [
+   "JR Loop"
+  ]
+ },
+ {
+  "name": "Tanimachi 4-chome",
+  "lat": 34.682,
+  "lon": 135.517,
+  "lines": [
+   "Tanimachi",
+   "Chuo"
+  ]
+ },
+ {
+  "name": "Osakako",
+  "lat": 34.6548,
+  "lon": 135.4325,
+  "lines": [
+   "Chuo"
+  ]
+ },
+ {
+  "name": "Universal City",
+  "lat": 34.6676,
+  "lon": 135.4352,
+  "lines": [
+   "JR Yumesaki"
+  ]
+ },
+ {
+  "name": "Tsuruhashi",
+  "lat": 34.6655,
+  "lon": 135.5303,
+  "lines": [
+   "JR Loop",
+   "Sennichimae",
+   "Kintetsu"
+  ]
+ },
+ {
+  "name": "Sumiyoshi-taisha",
+  "lat": 34.6127,
+  "lon": 135.4914,
+  "lines": [
+   "Nankai"
+  ]
+ },
+ {
+  "name": "Ikeda",
+  "lat": 34.8213,
+  "lon": 135.4287,
+  "lines": [
+   "Hankyu Takarazuka"
+  ]
+ },
+ {
+  "name": "Banpaku-kinen-koen",
+  "lat": 34.8094,
+  "lon": 135.5305,
+  "lines": [
+   "Monorail"
+  ]
+ },
+ {
+  "name": "Tenjimbashisuji 6",
+  "lat": 34.7104,
+  "lon": 135.5113,
+  "lines": [
+   "Sakaisuji",
+   "Tanimachi"
+  ]
+ },
+ {
+  "name": "Taisho",
+  "lat": 34.6643,
+  "lon": 135.4793,
+  "lines": [
+   "JR Loop",
+   "Nagahori"
+  ]
+ },
+ {
+  "name": "Kadoma-shi",
+  "lat": 34.7369,
+  "lon": 135.5872,
+  "lines": [
+   "Keihan"
+  ]
+ },
+ {
+  "name": "Minami-Settsu",
+  "lat": 34.7666,
+  "lon": 135.5735,
+  "lines": [
+   "Hankyu Kyoto"
+  ]
+ },
+ {
+  "name": "Shinkanaoka",
+  "lat": 34.5628,
+  "lon": 135.5133,
+  "lines": [
+   "Midosuji"
+  ]
+ },
+ {
+  "name": "Wakae-Iwata",
+  "lat": 34.6629,
+  "lon": 135.5986,
+  "lines": [
+   "Kintetsu Nara"
+  ]
+ },
+ {
+  "name": "Higashi-Hanazono",
+  "lat": 34.6655,
+  "lon": 135.611,
+  "lines": [
+   "Kintetsu Nara"
+  ]
+ },
+ {
+  "name": "Yao",
+  "lat": 34.626,
+  "lon": 135.601,
+  "lines": [
+   "Kintetsu Osaka"
+  ]
+ },
+ {
+  "name": "Shin-Osaka",
+  "lat": 34.7334,
+  "lon": 135.5001,
+  "lines": [
+   "Midosuji",
+   "JR",
+   "Shinkansen"
+  ]
+ },
+ {
+  "name": "Sannomiya",
+  "lat": 34.6946,
+  "lon": 135.1955,
+  "lines": [
+   "JR",
+   "Hankyu",
+   "Hanshin",
+   "Port Liner"
+  ]
+ },
+ {
+  "name": "Motomachi",
+  "lat": 34.6895,
+  "lon": 135.1867,
+  "lines": [
+   "JR",
+   "Hanshin"
+  ]
+ },
+ {
+  "name": "Kobe (JR)",
+  "lat": 34.6795,
+  "lon": 135.1781,
+  "lines": [
+   "JR"
+  ]
+ },
+ {
+  "name": "Shin-Nagata",
+  "lat": 34.6577,
+  "lon": 135.1447,
+  "lines": [
+   "JR",
+   "Kobe subway"
+  ]
+ },
+ {
+  "name": "Shin-Kobe",
+  "lat": 34.7067,
+  "lon": 135.1955,
+  "lines": [
+   "Shinkansen",
+   "Kobe subway"
+  ]
+ },
+ {
+  "name": "Rokkomichi",
+  "lat": 34.7141,
+  "lon": 135.2384,
+  "lines": [
+   "JR"
+  ]
+ },
+ {
+  "name": "Keisan-Kagaku-Center",
+  "lat": 34.6614,
+  "lon": 135.215,
+  "lines": [
+   "Port Liner"
+  ]
+ },
+ {
+  "name": "Seishin-Chuo",
+  "lat": 34.649,
+  "lon": 135.047,
+  "lines": [
+   "Kobe subway"
+  ]
+ },
+ {
+  "name": "Himeji",
+  "lat": 34.8265,
+  "lon": 134.6908,
+  "lines": [
+   "JR",
+   "Shinkansen",
+   "Sanyo"
+  ]
+ },
+ {
+  "name": "Hiroshima",
+  "lat": 34.3976,
+  "lon": 132.4757,
+  "lines": [
+   "JR",
+   "Shinkansen",
+   "Tram"
+  ]
+ },
+ {
+  "name": "Genbaku Dome-mae",
+  "lat": 34.3953,
+  "lon": 132.4537,
+  "lines": [
+   "Tram"
+  ]
+ },
+ {
+  "name": "Hondori",
+  "lat": 34.3933,
+  "lon": 132.459,
+  "lines": [
+   "Tram",
+   "Astram"
+  ]
+ },
+ {
+  "name": "Kamiyacho",
+  "lat": 34.3955,
+  "lon": 132.457,
+  "lines": [
+   "Tram",
+   "Astram"
+  ]
+ },
+ {
+  "name": "Hatchobori",
+  "lat": 34.394,
+  "lon": 132.466,
+  "lines": [
+   "Tram"
+  ]
+ },
+ {
+  "name": "Yokogawa",
+  "lat": 34.4114,
+  "lon": 132.4513,
+  "lines": [
+   "JR"
+  ]
+ },
+ {
+  "name": "Mukainada",
+  "lat": 34.372,
+  "lon": 132.501,
+  "lines": [
+   "JR"
+  ]
+ },
+ {
+  "name": "Yaga",
+  "lat": 34.412,
+  "lon": 132.5155,
+  "lines": [
+   "JR Geibi"
+  ]
+ },
+ {
+  "name": "Kabe line Midorii",
+  "lat": 34.474,
+  "lon": 132.492,
+  "lines": [
+   "JR Kabe",
+   "Astram"
+  ]
+ },
+ {
+  "name": "Miyajimaguchi",
+  "lat": 34.3117,
+  "lon": 132.3036,
+  "lines": [
+   "JR",
+   "Ferry"
+  ]
+ },
+ {
+  "name": "Miyajima Pier",
+  "lat": 34.2989,
+  "lon": 132.3227,
+  "lines": [
+   "Ferry"
+  ]
+ },
+ {
+  "name": "Kaitaichi",
+  "lat": 34.37,
+  "lon": 132.537,
+  "lines": [
+   "JR"
+  ]
+ },
+ {
+  "name": "Kumamoto",
+  "lat": 32.7899,
+  "lon": 130.6885,
+  "lines": [
+   "JR",
+   "Tram"
+  ]
+ },
+ {
+  "name": "Kumamotojo-Shiyakusho-mae",
+  "lat": 32.8028,
+  "lon": 130.7069,
+  "lines": [
+   "Tram"
+  ]
+ },
+ {
+  "name": "Torichosuji",
+  "lat": 32.8023,
+  "lon": 130.7092,
+  "lines": [
+   "Tram"
+  ]
+ },
+ {
+  "name": "Hanabatacho",
+  "lat": 32.8,
+  "lon": 130.7041,
+  "lines": [
+   "Tram"
+  ]
+ },
+ {
+  "name": "Suizenji-koen",
+  "lat": 32.7908,
+  "lon": 130.7333,
+  "lines": [
+   "Tram"
+  ]
+ },
+ {
+  "name": "Shiritsu-Taiikukan-mae",
+  "lat": 32.787,
+  "lon": 130.745,
+  "lines": [
+   "Tram"
+  ]
+ },
+ {
+  "name": "Dobutsuen-iriguchi",
+  "lat": 32.7855,
+  "lon": 130.755,
+  "lines": [
+   "Tram"
+  ]
+ },
+ {
+  "name": "Minami-Kumamoto",
+  "lat": 32.7868,
+  "lon": 130.7089,
+  "lines": [
+   "JR Hohi"
+  ]
+ },
+ {
+  "name": "Kami-Kumamoto",
+  "lat": 32.823,
+  "lon": 130.697,
+  "lines": [
+   "JR"
+  ]
+ },
+ {
+  "name": "Aso",
+  "lat": 32.9459,
+  "lon": 131.036,
+  "lines": [
+   "JR Hohi"
+  ]
+ },
+ {
+  "name": "Higo-Ozu",
+  "lat": 32.8783,
+  "lon": 130.8606,
+  "lines": [
+   "JR Hohi"
+  ]
+ },
+ {
+  "name": "Takamori",
+  "lat": 32.8235,
+  "lon": 131.1215,
+  "lines": [
+   "Minamiaso Railway"
+  ]
+ },
+ {
+  "name": "Nagabeta (Sumiyoshi)",
+  "lat": 32.6838,
+  "lon": 130.597,
+  "lines": [
+   "JR Misumi"
+  ]
+ },
+ {
+  "name": "Asakusa",
+  "lat": 35.711,
+  "lon": 139.7964,
+  "lines": [
+   "Ginza",
+   "Asakusa",
+   "Tobu"
+  ]
+ },
+ {
+  "name": "Tawaramachi",
+  "lat": 35.7105,
+  "lon": 139.7907,
+  "lines": [
+   "Ginza"
+  ]
+ },
+ {
+  "name": "Tokyo Skytree / Oshiage",
+  "lat": 35.7104,
+  "lon": 139.8132,
+  "lines": [
+   "Hanzomon",
+   "Asakusa",
+   "Tobu"
+  ]
+ },
+ {
+  "name": "Ueno",
+  "lat": 35.7138,
+  "lon": 139.7773,
+  "lines": [
+   "JR Yamanote",
+   "Ginza",
+   "Hibiya"
+  ]
+ },
+ {
+  "name": "Okachimachi",
+  "lat": 35.7075,
+  "lon": 139.7748,
+  "lines": [
+   "JR Yamanote"
+  ]
+ },
+ {
+  "name": "Akihabara",
+  "lat": 35.6984,
+  "lon": 139.7731,
+  "lines": [
+   "JR Yamanote",
+   "JR Sobu",
+   "Hibiya",
+   "TX"
+  ]
+ },
+ {
+  "name": "Suehirocho",
+  "lat": 35.7027,
+  "lon": 139.7716,
+  "lines": [
+   "Ginza"
+  ]
+ },
+ {
+  "name": "Ochanomizu",
+  "lat": 35.6993,
+  "lon": 139.7652,
+  "lines": [
+   "JR Chuo",
+   "Marunouchi"
+  ]
+ },
+ {
+  "name": "Ikebukuro",
+  "lat": 35.7295,
+  "lon": 139.7109,
+  "lines": [
+   "JR Yamanote",
+   "Marunouchi",
+   "Yurakucho",
+   "Fukutoshin",
+   "Seibu",
+   "Tobu"
+  ]
+ },
+ {
+  "name": "Higashi-Ikebukuro",
+  "lat": 35.7253,
+  "lon": 139.719,
+  "lines": [
+   "Yurakucho"
+  ]
+ },
+ {
+  "name": "Shinjuku",
+  "lat": 35.6896,
+  "lon": 139.7006,
+  "lines": [
+   "JR Yamanote",
+   "JR Chuo",
+   "Marunouchi",
+   "Shinjuku",
+   "Oedo",
+   "Keio",
+   "Odakyu"
+  ]
+ },
+ {
+  "name": "Seibu-Shinjuku",
+  "lat": 35.6957,
+  "lon": 139.7003,
+  "lines": [
+   "Seibu"
+  ]
+ },
+ {
+  "name": "Shinjuku-sanchome",
+  "lat": 35.6906,
+  "lon": 139.7046,
+  "lines": [
+   "Marunouchi",
+   "Fukutoshin",
+   "Shinjuku"
+  ]
+ },
+ {
+  "name": "Tochomae",
+  "lat": 35.6907,
+  "lon": 139.6928,
+  "lines": [
+   "Oedo"
+  ]
+ },
+ {
+  "name": "Shinjuku-gyoemmae",
+  "lat": 35.6857,
+  "lon": 139.7104,
+  "lines": [
+   "Marunouchi"
+  ]
+ },
+ {
+  "name": "Kokuritsu-Kyogijo",
+  "lat": 35.6797,
+  "lon": 139.7144,
+  "lines": [
+   "Oedo"
+  ]
+ },
+ {
+  "name": "Shibuya",
+  "lat": 35.658,
+  "lon": 139.7016,
+  "lines": [
+   "JR Yamanote",
+   "Ginza",
+   "Hanzomon",
+   "Fukutoshin",
+   "Keio Inokashira",
+   "Tokyu"
+  ]
+ },
+ {
+  "name": "Harajuku / Meiji-jingumae",
+  "lat": 35.6702,
+  "lon": 139.7027,
+  "lines": [
+   "JR Yamanote",
+   "Chiyoda",
+   "Fukutoshin"
+  ]
+ },
+ {
+  "name": "Omotesando",
+  "lat": 35.6652,
+  "lon": 139.7123,
+  "lines": [
+   "Ginza",
+   "Chiyoda",
+   "Hanzomon"
+  ]
+ },
+ {
+  "name": "Ebisu",
+  "lat": 35.6467,
+  "lon": 139.7101,
+  "lines": [
+   "JR Yamanote",
+   "Hibiya"
+  ]
+ },
+ {
+  "name": "Nakameguro",
+  "lat": 35.644,
+  "lon": 139.699,
+  "lines": [
+   "Hibiya",
+   "Tokyu Toyoko"
+  ]
+ },
+ {
+  "name": "Tokyo",
+  "lat": 35.6812,
+  "lon": 139.7671,
+  "lines": [
+   "JR Yamanote",
+   "JR Chuo",
+   "Marunouchi"
+  ]
+ },
+ {
+  "name": "Ginza",
+  "lat": 35.6717,
+  "lon": 139.765,
+  "lines": [
+   "Ginza",
+   "Marunouchi",
+   "Hibiya"
+  ]
+ },
+ {
+  "name": "Tsukiji-shijo",
+  "lat": 35.665,
+  "lon": 139.7663,
+  "lines": [
+   "Oedo"
+  ]
+ },
+ {
+  "name": "Tsukishima",
+  "lat": 35.664,
+  "lon": 139.784,
+  "lines": [
+   "Yurakucho",
+   "Oedo"
+  ]
+ },
+ {
+  "name": "Shiodome",
+  "lat": 35.663,
+  "lon": 139.76,
+  "lines": [
+   "Oedo",
+   "Yurikamome"
+  ]
+ },
+ {
+  "name": "Shimbashi",
+  "lat": 35.6663,
+  "lon": 139.7583,
+  "lines": [
+   "JR Yamanote",
+   "Ginza",
+   "Asakusa",
+   "Yurikamome"
+  ]
+ },
+ {
+  "name": "Daiba",
+  "lat": 35.6252,
+  "lon": 139.7716,
+  "lines": [
+   "Yurikamome"
+  ]
+ },
+ {
+  "name": "Tokyo Teleport",
+  "lat": 35.627,
+  "lon": 139.779,
+  "lines": [
+   "Rinkai"
+  ]
+ },
+ {
+  "name": "Shin-Toyosu",
+  "lat": 35.6485,
+  "lon": 139.7895,
+  "lines": [
+   "Yurikamome"
+  ]
+ },
+ {
+  "name": "Ariake",
+  "lat": 35.6347,
+  "lon": 139.7921,
+  "lines": [
+   "Yurikamome"
+  ]
+ },
+ {
+  "name": "Roppongi",
+  "lat": 35.6628,
+  "lon": 139.7313,
+  "lines": [
+   "Hibiya",
+   "Oedo"
+  ]
+ },
+ {
+  "name": "Kamiyacho",
+  "lat": 35.663,
+  "lon": 139.745,
+  "lines": [
+   "Hibiya"
+  ]
+ },
+ {
+  "name": "Akabanebashi",
+  "lat": 35.6553,
+  "lon": 139.7437,
+  "lines": [
+   "Oedo"
+  ]
+ },
+ {
+  "name": "Azabu-Juban",
+  "lat": 35.6545,
+  "lon": 139.737,
+  "lines": [
+   "Namboku",
+   "Oedo"
+  ]
+ },
+ {
+  "name": "Shibakoen",
+  "lat": 35.6585,
+  "lon": 139.7497,
+  "lines": [
+   "Mita"
+  ]
+ },
+ {
+  "name": "Tamachi / Mita",
+  "lat": 35.6458,
+  "lon": 139.7476,
+  "lines": [
+   "JR Yamanote",
+   "Mita",
+   "Asakusa"
+  ]
+ },
+ {
+  "name": "Takanawa Gateway",
+  "lat": 35.6355,
+  "lon": 139.7404,
+  "lines": [
+   "JR Yamanote"
+  ]
+ },
+ {
+  "name": "Oimachi",
+  "lat": 35.607,
+  "lon": 139.7347,
+  "lines": [
+   "JR",
+   "Rinkai",
+   "Tokyu Oimachi"
+  ]
+ },
+ {
+  "name": "Osaki",
+  "lat": 35.6197,
+  "lon": 139.7285,
+  "lines": [
+   "JR Yamanote",
+   "Rinkai"
+  ]
+ },
+ {
+  "name": "Kita-Shinagawa",
+  "lat": 35.622,
+  "lon": 139.7398,
+  "lines": [
+   "Keikyu"
+  ]
+ },
+ {
+  "name": "Akasaka-mitsuke",
+  "lat": 35.6772,
+  "lon": 139.7373,
+  "lines": [
+   "Ginza",
+   "Marunouchi"
+  ]
+ },
+ {
+  "name": "Nakano",
+  "lat": 35.7058,
+  "lon": 139.6657,
+  "lines": [
+   "JR Chuo",
+   "Tozai"
+  ]
+ },
+ {
+  "name": "Koenji",
+  "lat": 35.7052,
+  "lon": 139.6496,
+  "lines": [
+   "JR Chuo"
+  ]
+ },
+ {
+  "name": "Shimokitazawa",
+  "lat": 35.6616,
+  "lon": 139.668,
+  "lines": [
+   "Odakyu",
+   "Keio Inokashira"
+  ]
+ },
+ {
+  "name": "Setagaya-Daita",
+  "lat": 35.6589,
+  "lon": 139.6612,
+  "lines": [
+   "Odakyu"
+  ]
+ },
+ {
+  "name": "Gotokuji",
+  "lat": 35.6533,
+  "lon": 139.6467,
+  "lines": [
+   "Odakyu"
+  ]
+ },
+ {
+  "name": "Soshigaya-Okura",
+  "lat": 35.6435,
+  "lon": 139.6095,
+  "lines": [
+   "Odakyu"
+  ]
+ },
+ {
+  "name": "Kichijoji",
+  "lat": 35.7032,
+  "lon": 139.5798,
+  "lines": [
+   "JR Chuo",
+   "Keio Inokashira"
+  ]
+ },
+ {
+  "name": "Mitaka",
+  "lat": 35.7027,
+  "lon": 139.5609,
+  "lines": [
+   "JR Chuo"
+  ]
+ },
+ {
+  "name": "Oizumi-gakuen",
+  "lat": 35.7495,
+  "lon": 139.5864,
+  "lines": [
+   "Seibu Ikebukuro"
+  ]
+ },
+ {
+  "name": "Ryogoku",
+  "lat": 35.6967,
+  "lon": 139.7932,
+  "lines": [
+   "JR Sobu",
+   "Oedo"
+  ]
+ },
+ {
+  "name": "Jimbocho",
+  "lat": 35.6959,
+  "lon": 139.7577,
+  "lines": [
+   "Hanzomon",
+   "Mita",
+   "Shinjuku"
+  ]
+ },
+ {
+  "name": "Suidobashi",
+  "lat": 35.7022,
+  "lon": 139.7535,
+  "lines": [
+   "JR Chuo",
+   "Mita"
+  ]
+ },
+ {
+  "name": "Hongo-sanchome",
+  "lat": 35.7071,
+  "lon": 139.7604,
+  "lines": [
+   "Marunouchi",
+   "Oedo"
+  ]
+ },
+ {
+  "name": "Nippori",
+  "lat": 35.728,
+  "lon": 139.771,
+  "lines": [
+   "JR Yamanote",
+   "Keisei"
+  ]
+ },
+ {
+  "name": "Sendagi",
+  "lat": 35.7255,
+  "lon": 139.763,
+  "lines": [
+   "Chiyoda"
+  ]
+ },
+ {
+  "name": "Takeshiba",
+  "lat": 35.6545,
+  "lon": 139.762,
+  "lines": [
+   "Yurikamome"
+  ]
+ },
+ {
+  "name": "Kamakura",
+  "lat": 35.3192,
+  "lon": 139.5502,
+  "lines": [
+   "JR Yokosuka",
+   "Enoden"
+  ]
+ },
+ {
+  "name": "Hase",
+  "lat": 35.312,
+  "lon": 139.5363,
+  "lines": [
+   "Enoden"
+  ]
+ },
+ {
+  "name": "Kamakurakokomae",
+  "lat": 35.3065,
+  "lon": 139.5004,
+  "lines": [
+   "Enoden"
+  ]
+ },
+ {
+  "name": "Enoshima",
+  "lat": 35.3091,
+  "lon": 139.4877,
+  "lines": [
+   "Enoden"
+  ]
+ },
+ {
+  "name": "Takaosanguchi",
+  "lat": 35.6326,
+  "lon": 139.27,
+  "lines": [
+   "Keio"
+  ]
+ },
+ {
+  "name": "Kawaguchiko",
+  "lat": 35.4983,
+  "lon": 138.7686,
+  "lines": [
+   "Fujikyu"
+  ]
+ },
+ {
+  "name": "Shimoyoshida",
+  "lat": 35.4936,
+  "lon": 138.7995,
+  "lines": [
+   "Fujikyu"
+  ]
+ },
+ {
+  "name": "Fujikyu-Highland",
+  "lat": 35.485,
+  "lon": 138.779,
+  "lines": [
+   "Fujikyu"
+  ]
+ },
+ {
+  "name": "Seibu-Chichibu",
+  "lat": 35.9917,
+  "lon": 139.0832,
+  "lines": [
+   "Seibu"
+  ]
+ },
+ {
+  "name": "Chichibu",
+  "lat": 35.9945,
+  "lon": 139.085,
+  "lines": [
+   "Chichibu Railway"
+  ]
+ },
+ {
+  "name": "Tama-Center",
+  "lat": 35.6247,
+  "lon": 139.4245,
+  "lines": [
+   "Keio",
+   "Odakyu"
+  ]
+ },
+ {
+  "name": "Seiseki-Sakuragaoka",
+  "lat": 35.651,
+  "lon": 139.4467,
+  "lines": [
+   "Keio"
+  ]
+ },
+ {
+  "name": "Machida",
+  "lat": 35.542,
+  "lon": 139.4455,
+  "lines": [
+   "JR Yokohama",
+   "Odakyu"
+  ]
+ },
+ {
+  "name": "Yomiuri-Land-mae",
+  "lat": 35.625,
+  "lon": 139.518,
+  "lines": [
+   "Odakyu"
+  ]
+ }
+]
