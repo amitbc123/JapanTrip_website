@@ -140,6 +140,11 @@ main{padding-block:14px 30px;display:flex;flex-direction:column;gap:16px}
 .mt svg{width:14px;height:14px;color:var(--muted)}
 .mt.far{color:var(--muted)}
 .c-more{padding:0 13px 13px;display:flex;flex-direction:column;gap:10px}
+.how{background:var(--sea-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;font-size:13.5px}
+.how > b{display:flex;align-items:center;gap:6px;font-size:13.5px;color:var(--gold)}
+.how .hr{display:flex;gap:8px;align-items:flex-start}
+.how .hr svg{color:var(--muted);margin-top:2px}
+.how .hn{font-size:11.5px;color:var(--dim)}
 .tip{font-size:13.5px;background:rgba(245,196,67,.08);border-right:3px solid var(--gold);border-radius:8px;padding:8px 10px;color:#F1E3B8}
 .acts{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
 .ab{display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--line);background:var(--sea-2);border-radius:12px;padding:9px 6px;font-size:13px;font-weight:600;text-decoration:none;color:var(--ink);min-width:0}
@@ -719,8 +724,7 @@ D.push(
 
 D.push(
 /* ===== KUMAMOTO EXTRAS (Oda's home island) ===== */
-["kum","op quirky","One Piece Manhole Covers","מכסי הביוב של וואן פיס",32.7902,130.7418,"ליד כל אחד מעשרת הפסלים יש מכסה ביוב מעוצב עם הדמות. צלמו את כולם, זה חלק מהמסע של מעריצי הפרויקט.","הראשון ליד פסל לופי.",0,""],
-["kum","op","One Piece Kumamoto Revival Project Route","מסלול פרויקט התקומה של וואן פיס",32.7900,130.7415,"אודה, היוצר של One Piece, נולד בקומאמוטו. אחרי רעידת האדמה של 2016 הוצבו 10 פסלים של כנופיית כובעי הקש בעיירות שנפגעו. אפשר לקנות ליד כל פסל פיגורה מיוחדת.","עם רכב אפשר לעשות את כולם ביום וחצי. בלי רכב: לופי וצ'ופר בעיר, וג'ינבה, זורו, סאנג'י וברוק בתחבורה ציבורית.",0,"M"],
+["kum","op","One Piece Kumamoto Revival Project Route","מסלול פרויקט התקומה של וואן פיס",32.7900,130.7415,"אודה, היוצר של One Piece, נולד בקומאמוטו. אחרי רעידת האדמה של 2016 הוצבו 10 פסלים של כנופיית כובעי הקש בעיירות שנפגעו. ","עם רכב אפשר לעשות את כולם ביום וחצי. בלי רכב: לופי וצ'ופר בעיר, וג'ינבה, זורו, סאנג'י וברוק בתחבורה ציבורית.",0,"M"],
 ["kum","mall","Sakura Machi Kumamoto","סאקורה מאצ'י קומאמוטו",32.8000,130.7040,"קניון ותחנת האוטובוסים המרכזית, עם גג ירוק ופסל קומאמון ענק. מכאן יוצאים האוטובוסים לפסלים.","",1,""],
 ["kum","mall","AMU Plaza Kumamoto","אמו פלאזה קומאמוטו",32.7895,130.6885,"קניון בתחנת הרכבת, עם Mugiwara Store, מסעדות וגן מקורה.","",2,""],
 ["kum","food","Keika Ramen","קייקה ראמן",32.8020,130.7080,"ראמן קומאמוטו מ-1955, עם שמן שום וחזיר מבושל.","",1,"A0"],
@@ -757,6 +761,137 @@ D.push(
 ["shibuya","shop","Shibuya Hands and Loft","האנדס ולופט שיבויה",35.6620,139.6975,"חנויות של כל דבר מגניב: גאדג'טים, כלי כתיבה וחפצים מוזרים.","",2,""]
 );
 
+// Special manhole covers (cat "manhole"). Sources: data.pokefuta.com, thenavigatio.com, kura-in-japan.com, gotokyo.org, soranews24, tanaka-tokyotours
+D.push(
+/* ===== TOKYO ===== */
+["shinjuku","manhole","Godzilla Manhole Covers (Shinjuku Toho Building)","מכסי גודזילה בקאבוקיצ'ו",35.6950,139.7020,"שני מכסים צבעוניים של גודזילה: אחד של Shin Godzilla (2016) ואחד של Godzilla vs. Mothra (1992). שינג'וקו בחרה בגודזילה כתודה על שהחייה את השכונה.","על המדרכה מול כניסת Shinjuku Toho Building (קאבוקיצ'ו 1-18), מתחת לראש הגודזילה. דקה מהדירה.",0,"M"],
+["shinjuku","manhole","Tokyo 2020 Manholes (National Stadium)","מכסי אולימפיאדת טוקיו 2020",35.6815,139.7148,"כמה מכסים מעוצבים של אולימפיאדת טוקיו 2020, עם סמלי ענפי הספורט, לאורך האצטדיון הלאומי.","על המדרכה הצפונית של האצטדיון הלאומי. תחנת Kokuritsu-Kyogijo בקו Oedo, או Sendagaya ב-JR.",0,""],
+["ueno","manhole","Poke Lid: Bronzor and Baltoy (Tokyo National Museum)","פוקיפוטה: ברונזור ובאלטוי",35.717715,139.775397,"מכסה פוקימון רשמי (Poké Lid) עם שני פוקימונים שנראים כמו חפצים ארכיאולוגיים, מתאים למוזיאון.","בצד שמאל של הכניסה הראשית למוזיאון הלאומי של טוקיו, בפארק אואנו.",0,"M"],
+["ueno","manhole","Poke Lid: Tyrunt and Wynaut (Museum of Nature and Science)","פוקיפוטה: טיירנט ו-ויינוט",35.71681,139.776399,"מכסה פוקימון עם דינוזאור קטן, ליד מוזיאון המדע והטבע שיש בו שלדי דינוזאורים.","משמאל לכניסה למוזיאון הלאומי למדע וטבע. 2 דקות מהקודם.",0,"M"],
+["akiba","manhole","Astro Boy Manholes (Meidai-dori)","מכסי אסטרו בוי",35.6980,139.7612,"שלושה מכסים של אסטרו בוי (Tetsuwan Atom), האנימה הקלאסית של אוסמו טזוקה, ברחוב Meidai-dori.","מתחנת Ochanomizu במורד Meidai-dori לכיוון ג'ימבוצ'ו. 10 דקות הליכה מאקיהבארה.",0,""],
+["asakusa","manhole","Ryogoku Sumo Manholes","מכסי הסומו של ריוגוקו",35.6965,139.7930,"שני מכסים עם עיצובים של סומו, כולל Sekitori-kun, הדמות הרשמית של איגוד הסומו.","ליד היציאה המערבית של תחנת Ryogoku.",0,""],
+["asakusa","manhole","The Great Wave Manhole (Hokusai Museum)","מכסה 'הגל הגדול' של הוקוסאי",35.6966,139.7990,"מכסה צבעוני עם הציור 'הגל הגדול של קנגאווה' של הוקוסאי.","במעבר החצייה מול מוזיאון הוקוסאי של סומידה, ברחוב Hokusai-dori. 10 דקות מתחנת Ryogoku.",0,""],
+["asakusa","manhole","Red Fuji Manhole","מכסה 'הפוג'י האדום'",35.69478,139.79194,"מכסה עם הציור 'רוח נעימה, בוקר בהיר' (הפוג'י האדום) של הוקוסאי.","ליד פסל הסומו הרחוק מתחנת Ryogoku, מעבר לכביש מאולם הסומו.",0,""],
+["roppongi","manhole","Sailor Moon Manhole: Sailor Moon and Tuxedo Mask","מכסה סיילור מון וטוקסידו מאסק",35.65538,139.73681,"המכסה המפורסם מבין שבעת מכסי סיילור מון בשכונת אזאבו-ג'ובן, שבה מתרחשת הסדרה.","מחוץ ליציאה 4 של תחנת Azabu-Juban, מול Oslo Coffee.",0,"M"],
+["roppongi","manhole","Sailor Moon Manhole: Five Guardians (Red)","מכסה סיילור מון: חמש הלוחמות (אדום)",35.66056,139.73465,"חמש לוחמות הסיילור על רקע אדום.","מול הכניסה לבית הספר היסודי Toyo Eiwa ברופונגי.",0,""],
+["roppongi","manhole","Sailor Moon Manhole: Ten Guardians (Purple)","מכסה סיילור מון: עשר הלוחמות (סגול)",35.66557,139.72893,"עשר לוחמות הסיילור מוקפות פריחת דובדבן.","ממש מול מכונה אוטומטית, ליד רופונגי.",0,""],
+["roppongi","manhole","Sailor Moon Manhole: Five Guardians (Green)","מכסה סיילור מון: חמש הלוחמות (ירוק)",35.66106,139.74587,"חמש הלוחמות על רקע ירוק.","ליד הגן של תחנת המים Shiba, קרוב לשגרירות הולנד. 10 דקות ממגדל טוקיו.",0,""],
+["roppongi","manhole","Sailor Moon Manhole: Five Guardians (Blue)","מכסה סיילור מון: חמש הלוחמות (כחול)",35.65974,139.75015,"חמש הלוחמות על רקע כחול.","מול ספריית Minato ליד פארק Shiba. הכי קרוב למגדל טוקיו.",0,""],
+["roppongi","manhole","Sailor Moon Manhole: Five Guardians (Yellow)","מכסה סיילור מון: חמש הלוחמות (צהוב)",35.64725,139.74696,"רקע צהוב לכבוד סיילור ונוס (Sailor V).","בכניסה לרחוב הקניות Keio Nakadori, ליד Mita.",0,""],
+["shinagawa","manhole","Sailor Moon Manhole: Ten Guardians (Rainbow)","מכסה סיילור מון: עשר הלוחמות (קשת)",35.6355,139.7404,"עשר הלוחמות על רקע קשת, הכי חדש מבין השבעה.","תחנת JR Takanawa Gateway: דרך שער הכרטיסים הצפוני, ממשיכים בדרך עד המדרגות למטה ופונים ימינה.",0,""],
+["shinagawa","manhole","Cinnamoroll Manhole (Oi Station)","מכסה סינמורול - תחנת אוי",35.6070,139.7347,"מכסה של סינמורול, הכלב הלבן של סנריו. בשינגאווה יש 8 כאלה.","יציאה מרכזית של תחנת Oimachi, בצד של Hankyu Oi Garden.",0,""],
+["shinagawa","manhole","Cinnamoroll Manhole (Kogaku Street)","מכסה סינמורול - רחוב קוגאקו",35.6080,139.7320,"סינמורול ברחוב Kogaku, ליד השלט של ניקון.","5 דקות הליכה מתחנת Oimachi.",0,""],
+["shinagawa","manhole","Cinnamoroll Manhole (Osaki)","מכסה סינמורול - אוסאקי",35.6197,139.7285,"סינמורול ליד גשר ההולכי רגל Suzukake.","מול Osaki Center Building, ליד תחנת Osaki.",0,""],
+["shinagawa","manhole","Cinnamoroll and Monshiro Manhole (Shinagawa-juku)","מכסה סינמורול - שינגאווה-ג'וקו",35.6190,139.7412,"סינמורול עם מונשירו, הקמע של שינגאווה, ברחוב הטוקאידו הישן.","ליד גשר Shinagawa-bashi. תחנת Kita-Shinagawa בקו Keikyu.",0,""],
+["shimokita","manhole","Ultraman Manholes (Soshigaya-Okura)","מכסי אולטרמן",35.6435,139.6105,"חמישה מכסים של אולטרמן ליד התחנה, בשכונה של אולפני צובורויה שיצרו אותו. ברחוב יש גם פסל אולטרמן.","תחנת Soshigaya-Okura בקו Odakyu, 20 דקות משינג'וקו. כל המכסים במרחק הליכה קצר.",0,"M"],
+["tama","manhole","Hello Kitty Manholes (Tama Center)","מכסי הלו קיטי",35.6215,139.4255,"כמה מכסים של הלו קיטי ודמויות סנריו בדרך לסנריו פורולנד ובפארק טאמה צ'ואו.","מדרום לתחנת Tama Center. לשלב עם סנריו פורולנד.",0,""],
+["machida","manhole","Poke Lids: Bulbasaur (Serigaya Park)","פוקיפוטה: בולבזאור",35.548108,139.45034,"הראשון מבין 6 מכסי פוקימון בפארק סריגאיה במאצ'ידה, כולם של הדור הראשון.","15 דקות הליכה מתחנת Machida. הראשון במסלול.",0,"M"],
+["machida","manhole","Poke Lids: Charmander (Serigaya Park)","פוקיפוטה: צ'רמנדר",35.548171,139.4513,"צ'רמנדר, הפוקימון השני במסלול.","פארק סריגאיה.",0,""],
+["machida","manhole","Poke Lids: Poliwag (Serigaya Park)","פוקיפוטה: פוליוואג",35.546713,139.45398,"פוליוואג בפארק.","פארק סריגאיה.",0,""],
+["machida","manhole","Poke Lids: Caterpie, Oddish and Weedle","פוקיפוטה: קטרפי, אודיש ווידל",35.546111,139.45436,"שלושה פוקימונים במכסה אחד.","פארק סריגאיה.",0,""],
+["machida","manhole","Poke Lids: Pidgey and Rattata","פוקיפוטה: פידג'י ורטאטה",35.545645,139.45488,"פידג'י ורטאטה.","פארק סריגאיה.",0,""],
+["machida","manhole","Poke Lids: Squirtle (Serigaya Park)","פוקיפוטה: סקווירטל",35.545302,139.45501,"האחרון במסלול.","פארק סריגאיה. יש שם מדרגות ארוכות.",0,""],
+["machida","manhole","THE IDOLM@STER Roco Manhole","מכסה רוקו - איידולמאסטר",35.5440,139.4475,"מכסה דמות של רוקו מ-THE IDOLM@STER Million Live.","שדרת Haramachida Odori, ליד תחנת Machida.",0,""],
+["tama","manhole","Poke Lid: Pikachu and Eevee (PokéPark Kanto)","פוקיפוטה: פיקאצ'ו ואיבי",35.62637,139.521513,"מכסה של פיקאצ'ו ואיבי בתוך PokéPark Kanto, פארק הפוקימון החדש ביומיאורילנד.","צריך כרטיס כניסה לפארק, להזמין מראש.",2,""],
+
+/* ===== KYOTO ===== */
+["kyo","manhole","Poke Lid: Pichu, Cleffa and Igglybuff (Maruyama Park)","פוקיפוטה: פיצ'ו, קלפה ואיגליבאף",35.0035,135.7815,"מכסה פוקימון בפארק מארויאמה, ליד מקדש יאסאקה.","בצד ימין כשנכנסים מהמקדש, בין בריכת הדלעת לדוכני האוכל. 15 דקות הליכה מהמלון.",0,"M"],
+["kyo","manhole","Poke Lid: Cyndaquil and Darmanitan (Okazaki Park)","פוקיפוטה: סינדקוויל ודרמניטן",35.0145,135.7826,"מכסה פוקימון בפינת פארק אוקאזאקי, עם נוף לשער של מקדש הייאן.","מול מקדש הייאן. תחנת Higashiyama בקו Tozai.",0,""],
+["kyo","manhole","Poke Lid: Totodile and Azumarill (Umekoji Park)","פוקיפוטה: טוטודייל ואזומריל",34.9870,135.7470,"מכסה פוקימון בפארק אומקוג'י.","לפני אזור הדשא של הפארק. תחנת Umekoji-Kyotonishi, תחנה אחת מתחנת קיוטו. לשלב עם מוזיאון הרכבות.",0,""],
+["kyo","manhole","Poke Lid: Chikorita and Shiftry (Nishikyogoku Park)","פוקיפוטה: צ'יקוריטה ושיפטרי",34.9930,135.7180,"מכסה פוקימון בפארק הספורט נישיקיוגוקו.","תחנת Nishikyogoku בקו Hankyu.",0,""],
+["kyo","manhole","Poke Lid: Ho-Oh (Arashiyama Park)","פוקיפוטה: הו-או",35.0123,135.6785,"מכסה של הו-או, הפוקימון האגדי, עם גשר טוגטסוקיו ברקע. הכי יפה מבין המכסים של קיוטו.","בשביל ההליכה ליד בתי הקפה בפארק ארשיאמה, ליד הגשר.",0,"M"],
+
+/* ===== OSAKA / HIMEJI ===== */
+["osk","manhole","Poke Lid: Raikou (Hanazono Rugby Stadium)","פוקיפוטה: ראיקו",34.6640,135.6170,"מכסה של ראיקו, הפוקימון האגדי, מחוץ לאצטדיון הרוגבי.","מחוץ לאחת הכניסות לאצטדיון Hanazono בהיגאשי-אוסקה. תחנת Higashi-Hanazono בקו Kintetsu Nara.",0,""],
+["osk","manhole","Poke Lid: Yamper and Togedemaru (Higashiosaka Chuo Park)","פוקיפוטה: יאמפר וטוגדמארו",34.6620,135.6140,"יאמפר וטוגדמארו משחקים רוגבי.","בפארק המרכזי של היגאשי-אוסקה, צמוד לאצטדיון.",0,""],
+["himeji","manhole","Gundam Manholes (Otemae-dori)","מכסי גאנדאם בהימג'י",34.8310,134.6915,"מכסים מעוצבים של גאנדאם ברחוב הראשי שמוביל מהתחנה לטירה.","Otemae-dori, בכניסות Nikai-machi ו-Nishi-Nikai-machi. בדרך מהתחנה לטירה.",0,"M"],
+
+/* ===== KUMAMOTO ===== */
+["kum","manhole","THE IDOLM@STER Manhole (Shinshigai Arcade)","מכסה איידולמאסטר בשינשיגאי",32.8010,130.7062,"מכסה דמות של Himesaki Rinami מ-Gakuen IDOLM@STER, בכניסה למדרחוב שינשיגאי.","בכניסה למדרחוב Shinshigai (Shinshigai 1-22), ממש ליד המלון.",0,""],
+
+/* ===== NAGOYA AREA ===== */
+["tokoname","manhole","Tokoname Poke Lids","מכסי הפוקימון של טוקונאמה",34.8866,136.8374,"בעיר הקרמיקה טוקונאמה יש כמה מכסי פוקימון, וגם מכסה של Maekawa Miku מ-Cinderella Girls עם הקמע Tokonyan.","30 דקות ברכבת Meitetsu מנגויה. המיקומים המדויקים במפה של data.pokefuta.com.",0,""]
+);
+
+// Stations: [name, lat, lon, "line|line|..."] used for "how to get there"
+const STN = [
+/* Nagoya */
+["Nagoya",35.1709,136.8815,"JR|Higashiyama|Sakura-dori|Meitetsu|Kintetsu|Aonami"],["Fushimi",35.1690,136.8977,"Higashiyama|Tsurumai"],
+["Sakae",35.1708,136.9086,"Higashiyama|Meijo"],["Yabacho",35.1631,136.9086,"Meijo"],["Kamimaezu",35.1576,136.9054,"Meijo|Tsurumai"],
+["Osu Kannon",35.1588,136.8999,"Tsurumai"],["Nagoyajo",35.1815,136.9064,"Meijo"],["Sengencho",35.1797,136.8963,"Tsurumai"],
+["Kakuozan",35.1647,136.9465,"Higashiyama"],["Higashiyama-koen",35.1572,136.9719,"Higashiyama"],["Jingu-mae",35.1276,136.9104,"Meitetsu"],
+["Nagoyako",35.0909,136.8812,"Meiko"],["Kinjofuto",35.0484,136.8507,"Aonami"],["Kamejima",35.1792,136.8790,"Higashiyama"],
+["Sako",35.1841,136.8783,"Meitetsu"],["Ai-Chikyuhaku-Kinen-Koen",35.1731,137.0886,"Linimo"],["Fujigaoka",35.1817,137.0218,"Higashiyama|Linimo"],
+["Hoshigaoka",35.1625,136.9853,"Higashiyama"],["Tokoname",34.8866,136.8374,"Meitetsu"],
+/* Kyoto */
+["Kyoto",34.9858,135.7588,"JR|Karasuma|Kintetsu"],["Kyoto-Kawaramachi",35.0037,135.7690,"Hankyu"],["Gion-Shijo",35.0037,135.7720,"Keihan"],
+["Shijo",35.0037,135.7597,"Karasuma|Hankyu"],["Sanjo",35.0090,135.7726,"Keihan|Tozai"],["Kyoto-Shiyakusho-mae",35.0109,135.7675,"Tozai"],
+["Inari",34.9671,135.7700,"JR Nara"],["Fushimi-Inari",34.9665,135.7725,"Keihan"],["Kiyomizu-Gojo",34.9967,135.7680,"Keihan"],
+["Tofukuji",34.9800,135.7700,"JR Nara|Keihan"],["Shichijo",34.9895,135.7680,"Keihan"],["Saga-Arashiyama",35.0187,135.6815,"JR Sagano"],
+["Arashiyama (Randen)",35.0154,135.6780,"Randen"],["Arashiyama (Hankyu)",35.0098,135.6815,"Hankyu"],["Nijojo-mae",35.0105,135.7484,"Tozai"],
+["Keage",35.0081,135.7920,"Tozai"],["Higashiyama",35.0076,135.7795,"Tozai"],["Imadegawa",35.0302,135.7594,"Karasuma"],
+["Marutamachi",35.0177,135.7596,"Karasuma"],["Umekoji-Kyotonishi",34.9862,135.7444,"JR Sagano"],["Kitano-Hakubaicho",35.0279,135.7322,"Randen"],
+["Fujinomori",34.9573,135.7700,"Keihan"],["Katsura",34.9937,135.7030,"Hankyu"],["Fushimi-Momoyama",34.9341,135.7638,"Keihan"],
+["Chushojima",34.9295,135.7630,"Keihan"],["Nishikyogoku",34.9930,135.7230,"Hankyu"],["Demachiyanagi",35.0300,135.7730,"Keihan|Eizan"],
+["Kitaoji",35.0440,135.7590,"Karasuma"],["Uzumasa-Tenjingawa",35.0145,135.7120,"Tozai"],["Hanazono",35.0185,135.7240,"JR Sagano"],
+/* Uji / Nara */
+["Uji (JR)",34.8899,135.8001,"JR Nara"],["Uji (Keihan)",34.8939,135.8081,"Keihan Uji"],["Ogura",34.8930,135.7810,"Kintetsu"],
+["Kintetsu-Nara",34.6843,135.8279,"Kintetsu Nara"],["Nara (JR)",34.6809,135.8196,"JR Nara"],
+/* Osaka */
+["Namba",34.6660,135.5011,"Midosuji|Yotsubashi|Sennichimae|Nankai|Kintetsu"],["Shinsaibashi",34.6745,135.5010,"Midosuji|Nagahori"],
+["Nippombashi",34.6655,135.5065,"Sakaisuji|Sennichimae|Kintetsu"],["Ebisucho",34.6528,135.5059,"Sakaisuji"],["Dobutsuen-mae",34.6476,135.5069,"Midosuji|Sakaisuji"],
+["Tennoji",34.6465,135.5133,"JR Loop|Midosuji|Tanimachi"],["Umeda",34.7025,135.4990,"Midosuji|JR"],["Osaka (JR)",34.7024,135.4959,"JR Loop|JR"],
+["Higashi-Umeda",34.7015,135.5010,"Tanimachi"],["Nishi-Umeda",34.7000,135.4955,"Yotsubashi"],["Osakajo-koen",34.6880,135.5345,"JR Loop"],
+["Tanimachi 4-chome",34.6820,135.5170,"Tanimachi|Chuo"],["Osakako",34.6548,135.4325,"Chuo"],["Universal City",34.6676,135.4352,"JR Yumesaki"],
+["Tsuruhashi",34.6655,135.5303,"JR Loop|Sennichimae|Kintetsu"],["Sumiyoshi-taisha",34.6127,135.4914,"Nankai"],["Ikeda",34.8213,135.4287,"Hankyu Takarazuka"],
+["Banpaku-kinen-koen",34.8094,135.5305,"Monorail"],["Tenjimbashisuji 6",34.7104,135.5113,"Sakaisuji|Tanimachi"],["Taisho",34.6643,135.4793,"JR Loop|Nagahori"],
+["Kadoma-shi",34.7369,135.5872,"Keihan"],["Minami-Settsu",34.7666,135.5735,"Hankyu Kyoto"],["Shinkanaoka",34.5628,135.5133,"Midosuji"],
+["Wakae-Iwata",34.6629,135.5986,"Kintetsu Nara"],["Higashi-Hanazono",34.6655,135.6110,"Kintetsu Nara"],["Yao",34.6260,135.6010,"Kintetsu Osaka"],
+["Shin-Osaka",34.7334,135.5001,"Midosuji|JR|Shinkansen"],
+/* Kobe / Himeji */
+["Sannomiya",34.6946,135.1955,"JR|Hankyu|Hanshin|Port Liner"],["Motomachi",34.6895,135.1867,"JR|Hanshin"],["Kobe (JR)",34.6795,135.1781,"JR"],
+["Shin-Nagata",34.6577,135.1447,"JR|Kobe subway"],["Shin-Kobe",34.7067,135.1955,"Shinkansen|Kobe subway"],["Rokkomichi",34.7141,135.2384,"JR"],
+["Keisan-Kagaku-Center",34.6614,135.2150,"Port Liner"],["Seishin-Chuo",34.6490,135.0470,"Kobe subway"],["Himeji",34.8265,134.6908,"JR|Shinkansen|Sanyo"],
+/* Hiroshima / Miyajima */
+["Hiroshima",34.3976,132.4757,"JR|Shinkansen|Tram"],["Genbaku Dome-mae",34.3953,132.4537,"Tram"],["Hondori",34.3933,132.4590,"Tram|Astram"],
+["Kamiyacho",34.3955,132.4570,"Tram|Astram"],["Hatchobori",34.3940,132.4660,"Tram"],["Yokogawa",34.4114,132.4513,"JR"],
+["Mukainada",34.3720,132.5010,"JR"],["Yaga",34.4120,132.5155,"JR Geibi"],["Kabe line Midorii",34.4740,132.4920,"JR Kabe|Astram"],
+["Miyajimaguchi",34.3117,132.3036,"JR|Ferry"],["Miyajima Pier",34.2989,132.3227,"Ferry"],["Kaitaichi",34.3700,132.5370,"JR"],
+/* Kumamoto / Aso */
+["Kumamoto",32.7899,130.6885,"JR|Tram"],["Kumamotojo-Shiyakusho-mae",32.8028,130.7069,"Tram"],["Torichosuji",32.8023,130.7092,"Tram"],
+["Hanabatacho",32.8000,130.7041,"Tram"],["Suizenji-koen",32.7908,130.7333,"Tram"],["Shiritsu-Taiikukan-mae",32.7870,130.7450,"Tram"],
+["Dobutsuen-iriguchi",32.7855,130.7550,"Tram"],["Minami-Kumamoto",32.7868,130.7089,"JR Hohi"],["Kami-Kumamoto",32.8230,130.6970,"JR"],
+["Aso",32.9459,131.0360,"JR Hohi"],["Higo-Ozu",32.8783,130.8606,"JR Hohi"],["Takamori",32.8235,131.1215,"Minamiaso Railway"],
+["Nagabeta (Sumiyoshi)",32.6838,130.5970,"JR Misumi"],
+/* Tokyo */
+["Asakusa",35.7110,139.7964,"Ginza|Asakusa|Tobu"],["Tawaramachi",35.7105,139.7907,"Ginza"],["Tokyo Skytree / Oshiage",35.7104,139.8132,"Hanzomon|Asakusa|Tobu"],
+["Ueno",35.7138,139.7773,"JR Yamanote|Ginza|Hibiya"],["Okachimachi",35.7075,139.7748,"JR Yamanote"],["Akihabara",35.6984,139.7731,"JR Yamanote|JR Sobu|Hibiya|TX"],
+["Suehirocho",35.7027,139.7716,"Ginza"],["Ochanomizu",35.6993,139.7652,"JR Chuo|Marunouchi"],["Ikebukuro",35.7295,139.7109,"JR Yamanote|Marunouchi|Yurakucho|Fukutoshin|Seibu|Tobu"],
+["Higashi-Ikebukuro",35.7253,139.7190,"Yurakucho"],["Shinjuku",35.6896,139.7006,"JR Yamanote|JR Chuo|Marunouchi|Shinjuku|Oedo|Keio|Odakyu"],
+["Seibu-Shinjuku",35.6957,139.7003,"Seibu"],["Shinjuku-sanchome",35.6906,139.7046,"Marunouchi|Fukutoshin|Shinjuku"],["Tochomae",35.6907,139.6928,"Oedo"],
+["Shinjuku-gyoemmae",35.6857,139.7104,"Marunouchi"],["Kokuritsu-Kyogijo",35.6797,139.7144,"Oedo"],["Shibuya",35.6580,139.7016,"JR Yamanote|Ginza|Hanzomon|Fukutoshin|Keio Inokashira|Tokyu"],
+["Harajuku / Meiji-jingumae",35.6702,139.7027,"JR Yamanote|Chiyoda|Fukutoshin"],["Omotesando",35.6652,139.7123,"Ginza|Chiyoda|Hanzomon"],
+["Ebisu",35.6467,139.7101,"JR Yamanote|Hibiya"],["Nakameguro",35.6440,139.6990,"Hibiya|Tokyu Toyoko"],["Tokyo",35.6812,139.7671,"JR Yamanote|JR Chuo|Marunouchi"],
+["Ginza",35.6717,139.7650,"Ginza|Marunouchi|Hibiya"],["Tsukiji-shijo",35.6650,139.7663,"Oedo"],["Tsukishima",35.6640,139.7840,"Yurakucho|Oedo"],
+["Shiodome",35.6630,139.7600,"Oedo|Yurikamome"],["Shimbashi",35.6663,139.7583,"JR Yamanote|Ginza|Asakusa|Yurikamome"],["Daiba",35.6252,139.7716,"Yurikamome"],
+["Tokyo Teleport",35.6270,139.7790,"Rinkai"],["Shin-Toyosu",35.6485,139.7895,"Yurikamome"],["Ariake",35.6347,139.7921,"Yurikamome"],
+["Roppongi",35.6628,139.7313,"Hibiya|Oedo"],["Kamiyacho",35.6630,139.7450,"Hibiya"],["Akabanebashi",35.6553,139.7437,"Oedo"],
+["Azabu-Juban",35.6545,139.7370,"Namboku|Oedo"],["Shibakoen",35.6585,139.7497,"Mita"],["Tamachi / Mita",35.6458,139.7476,"JR Yamanote|Mita|Asakusa"],
+["Takanawa Gateway",35.6355,139.7404,"JR Yamanote"],["Oimachi",35.6070,139.7347,"JR|Rinkai|Tokyu Oimachi"],["Osaki",35.6197,139.7285,"JR Yamanote|Rinkai"],
+["Kita-Shinagawa",35.6220,139.7398,"Keikyu"],["Akasaka-mitsuke",35.6772,139.7373,"Ginza|Marunouchi"],["Nakano",35.7058,139.6657,"JR Chuo|Tozai"],
+["Koenji",35.7052,139.6496,"JR Chuo"],["Shimokitazawa",35.6616,139.6680,"Odakyu|Keio Inokashira"],["Setagaya-Daita",35.6589,139.6612,"Odakyu"],
+["Gotokuji",35.6533,139.6467,"Odakyu"],["Soshigaya-Okura",35.6435,139.6095,"Odakyu"],["Kichijoji",35.7032,139.5798,"JR Chuo|Keio Inokashira"],
+["Mitaka",35.7027,139.5609,"JR Chuo"],["Oizumi-gakuen",35.7495,139.5864,"Seibu Ikebukuro"],["Ryogoku",35.6967,139.7932,"JR Sobu|Oedo"],
+["Jimbocho",35.6959,139.7577,"Hanzomon|Mita|Shinjuku"],["Suidobashi",35.7022,139.7535,"JR Chuo|Mita"],["Hongo-sanchome",35.7071,139.7604,"Marunouchi|Oedo"],
+["Nippori",35.7280,139.7710,"JR Yamanote|Keisei"],["Sendagi",35.7255,139.7630,"Chiyoda"],["Takeshiba",35.6545,139.7620,"Yurikamome"],
+/* Day trips */
+["Kamakura",35.3192,139.5502,"JR Yokosuka|Enoden"],["Hase",35.3120,139.5363,"Enoden"],["Kamakurakokomae",35.3065,139.5004,"Enoden"],
+["Enoshima",35.3091,139.4877,"Enoden"],["Takaosanguchi",35.6326,139.2700,"Keio"],["Kawaguchiko",35.4983,138.7686,"Fujikyu"],
+["Shimoyoshida",35.4936,138.7995,"Fujikyu"],["Fujikyu-Highland",35.4850,138.7790,"Fujikyu"],["Seibu-Chichibu",35.9917,139.0832,"Seibu"],
+["Chichibu",35.9945,139.0850,"Chichibu Railway"],["Tama-Center",35.6247,139.4245,"Keio|Odakyu"],["Seiseki-Sakuragaoka",35.6510,139.4467,"Keio"],
+["Machida",35.5420,139.4455,"JR Yokohama|Odakyu"],["Yomiuri-Land-mae",35.6250,139.5180,"Odakyu"]
+];
+
 const CARD_IMG = "";
 </script>
 <script>
@@ -765,7 +900,7 @@ const CARD_IMG = "";
 const TZ = "Asia/Tokyo";
 const P = d => d; // date helper marker
 const REGIONS = [
-  { k:"ngy", he:"נגויה", kanji:"名古屋", from:"2026-11-03", to:"2026-11-05", areas:["ngy"],
+  { k:"ngy", he:"נגויה", kanji:"名古屋", from:"2026-11-03", to:"2026-11-05", areas:["ngy","tokoname"],
     bases:[{ k:"ngy", he:"Nikko Style Nagoya", lat:35.1668, lon:136.8870, from:"2026-11-03", to:"2026-11-05" }] },
   { k:"kyo", he:"קיוטו", kanji:"京都", from:"2026-11-05", to:"2026-11-13", areas:["kyo","nara","uji"],
     bases:[{ k:"kyo", he:"GOOD NATURE HOTEL KYOTO", lat:35.00253, lon:135.7691, from:"2026-11-05", to:"2026-11-13" }] },
@@ -776,7 +911,7 @@ const REGIONS = [
   { k:"kum", he:"קומאמוטו", kanji:"熊本", from:"2026-11-19", to:"2026-11-22", areas:["kum","aso"],
     bases:[{ k:"kum", he:"Candeo Hotels Kumamoto Shinshigai", lat:32.79858, lon:130.70613, from:"2026-11-19", to:"2026-11-22" }] },
   { k:"tky", he:"טוקיו", kanji:"東京", from:"2026-11-22", to:"2026-12-06",
-    areas:["asakusa","ueno","akiba","ikebukuro","shinjuku","shibuya","harajuku","ginza","odaiba","roppongi","nakano","shimokita","kichi","oizumi","kamakura","takao","kawaguchi","chichibu","tama"],
+    areas:["asakusa","ueno","akiba","ikebukuro","shinjuku","shibuya","harajuku","ginza","odaiba","roppongi","nakano","shimokita","kichi","oizumi","kamakura","takao","kawaguchi","chichibu","tama","shinagawa","machida"],
     bases:[{ k:"asa", he:"the Moto Hotel Asakusa", lat:35.71613, lon:139.79795, from:"2026-11-22", to:"2026-11-29" },
            { k:"shj", he:"Stay Kabukicho B", lat:35.69702, lon:139.7021, from:"2026-11-29", to:"2026-12-06" }] }
 ];
@@ -795,7 +930,10 @@ const AREAS = {
   takao:{he:"הר טאקאו", trip:"קו Keio משינג'וקו לתחנת Takaosanguchi, בערך שעה, ¥500."},
   kawaguchi:{he:"קוואגוצ'יקו ופוג'י", trip:"אוטובוס ישיר מ-Busta Shinjuku, כשעתיים. להזמין מקום."},
   chichibu:{he:"צ'יצ'יבו", trip:"Seibu Limited Express 'Laview' מאיקבוקורו, 80 דקות."},
-  tama:{he:"טאמה (סנריו)", trip:"קו Keio משינג'וקו, 35-45 דקות."}
+  tama:{he:"טאמה (סנריו)", trip:"קו Keio משינג'וקו, 35-45 דקות."},
+  shinagawa:{he:"שינגאווה ומינאטו"},
+  machida:{he:"מאצ'ידה", trip:"קו Odakyu משינג'וקו, Rapid Express, בערך 35 דקות."},
+  tokoname:{he:"טוקונאמה", trip:"רכבת Meitetsu Tokoname Line מתחנת נגויה, בערך 30 דקות."}
 };
 const CATS = {
   op:{he:"One Piece", c:"#E4572E", c2:"#4A1E14", i:"hat"},
@@ -816,19 +954,23 @@ const CATS = {
   quirky:{he:"מוזר ומגניב", c:"#FF73E0", c2:"#4A1844", i:"spark"},
   night:{he:"לילה וברים", c:"#A897FF", c2:"#2A2357", i:"moon"},
   arcade:{he:"ארקיידים וגאצ'ה", c:"#2EF2CF", c2:"#0D4239", i:"joy"},
-  onsen:{he:"אונסן וסנטו", c:"#9EE6F5", c2:"#173F4A", i:"onsen"}
+  onsen:{he:"אונסן וסנטו", c:"#9EE6F5", c2:"#173F4A", i:"onsen"},
+  manhole:{he:"מכסי ביוב מיוחדים", c:"#C9D3E6", c2:"#2A3346", i:"manhole"},
+  special:{he:"מיוחד לעיר", c:"#F5C443", c2:"#4A3B0B", i:"crown"}
 };
-const CAT_ORDER = ["op","eva","anime","hardoff","vintage","tech","food","street","shop","mall","sight","temple","park","animals","museum","quirky","night","arcade","onsen"];
+const CAT_ORDER = ["special","manhole","op","eva","anime","hardoff","vintage","tech","food","street","shop","mall","sight","temple","park","animals","museum","quirky","night","arcade","onsen"];
 /* Broad topics shown first; each opens finer sub-filters */
 const GROUPS = [
+  { k:"special", he:"רק כאן",     c:"#F5C443", i:"crown",    cats:["special"] },
   { k:"food",  he:"אוכל",         c:"#FF9248", i:"bowl",     cats:["food","street"] },
   { k:"anime", he:"אנימה",        c:"#FF7DB8", i:"star",     cats:["op","eva","anime"] },
   { k:"shop",  he:"קניות",        c:"#5DADEC", i:"bag",      cats:["hardoff","vintage","tech","mall","shop"] },
   { k:"see",   he:"אטרקציות",     c:"#57D3F5", i:"mount",    cats:["sight","temple","museum","quirky"] },
   { k:"nat",   he:"טבע וחיות",    c:"#6FD37E", i:"leaf",     cats:["park","animals"] },
-  { k:"fun",   he:"בילוי ולילה",  c:"#A897FF", i:"moon",     cats:["night","arcade","onsen"] }
+  { k:"fun",   he:"בילוי ולילה",  c:"#A897FF", i:"moon",     cats:["night","arcade","onsen"] },
+  { k:"manhole", he:"מכסי ביוב",   c:"#C9D3E6", i:"manhole",  cats:["manhole"] }
 ];
-const SUBLBL = { food:"מסעדות", street:"אוכל רחוב ושווקים", op:"One Piece", eva:"רובוטים, אוונגליון וג'יבלי", anime:"אנימה ומנגה", hardoff:"Hard Off", vintage:"וינטג' ויד שנייה", tech:"אלקטרוניקה", mall:"קניונים", shop:"חנויות ורחובות", sight:"נופים", temple:"מקדשים", museum:"מוזיאונים", quirky:"מוזר ומגניב", park:"פארקים", animals:"בעלי חיים", night:"ברים ולילה", arcade:"ארקיידים", onsen:"אונסן" };
+const SUBLBL = { special:"מיוחד לעיר", manhole:"מכסי ביוב", food:"מסעדות", street:"אוכל רחוב ושווקים", op:"One Piece", eva:"רובוטים, אוונגליון וג'יבלי", anime:"אנימה ומנגה", hardoff:"Hard Off", vintage:"וינטג' ויד שנייה", tech:"אלקטרוניקה", mall:"קניונים", shop:"חנויות ורחובות", sight:"נופים", temple:"מקדשים", museum:"מוזיאונים", quirky:"מוזר ומגניב", park:"פארקים", animals:"בעלי חיים", night:"ברים ולילה", arcade:"ארקיידים", onsen:"אונסן" };
 const grpCats = () => { const g = GROUPS.find(x => x.k === ST.grp); return g ? (ST.cats.length ? ST.cats : g.cats) : []; };
 const ICON = {
   hat:'<path d="M3 15.5c0-1.4 4-2.5 9-2.5s9 1.1 9 2.5-4 2.5-9 2.5-9-1.1-9-2.5z"/><path d="M7 14V11a5 5 0 0 1 10 0v3"/><path d="M7 12.6c1.5.6 3.2.9 5 .9s3.5-.3 5-.9"/>',
@@ -871,7 +1013,10 @@ const ICON = {
   copy:'<rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/>',
   loc:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="7.5"/>',
   bed:'<path d="M3 18V7"/><path d="M3 14h18v4"/><path d="M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="2"/>',
-  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  manhole:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><path d="M12 3v18M3 12h18"/>',
+  crown:'<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z"/>',
+  bus:'<rect x="4" y="4" width="16" height="13" rx="2.5"/><path d="M4 11h16M8 20v-3M16 20v-3M8 14h.01M16 14h.01"/>'
 };
 const ic = (n, cls="i") => `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[n]||""}</svg>`;
 
@@ -887,6 +1032,16 @@ const PL = D.map((r, i) => {
     hs: r[10] || null, gr: r[11] || null, grc: r[12] || null
   };
 }).filter(p => p.reg);
+/* Things this city is known for: local dishes, signature sights, only-here experiences */
+const SPECIAL = new Set([
+ "Yabaton Yabacho","Sekai no Yamachan","Misen Yabacho","Yamamotoya Sohonke","Atsuta Horaiken","Kishimen Sumiyoshi","Komeda's Coffee","Nagoya Castle","Toyota Commemorative Museum of Industry and Technology","SCMAGLEV and Railway Park","Osu Shopping Street","Mugiwara Store Nagoya",
+ "Fushimi Inari Taisha","Kiyomizu-dera","Gion and Hanamikoji","Nishiki Market","Kinkaku-ji","Arashiyama Bamboo Grove","Iwatayama Monkey Park","Kyoto International Manga Museum","Toei Kyoto Studio Park","Menbakaichidai Fire Ramen","Eikando","Nara Park Deer","Nakatanidou","Nintendo Museum","Byodo-in","Byodoin Omotesando","Poke Lid: Ho-Oh (Arashiyama Park)",
+ "Dotonbori","Shinsekai and Tsutenkaku","Kushikatsu Daruma Dotonbori","Okonomiyaki Mizuno","Takoyaki Wanaka","551 Horai Namba","Rikuro Ojisan Cheesecake","Cup Noodles Museum Osaka Ikeda","Namba Yasaka Shrine","Universal Studios Japan","Den Den Town (Nipponbashi)","Kobe Beef Steak Land","Himeji Castle","Tetsujin 28 Giant Robot","Gundam Manholes (Otemae-dori)",
+ "Okonomimura","Nagata-ya","Bakudan-ya","Peace Memorial Park","Atomic Bomb Dome","Hiroshima Peace Memorial Museum","Itsukushima Shrine and Floating Torii","Age-Momiji Momijido","Hard Off and Hobby Off Hiroshima Yagi",
+ "Luffy Statue","Chopper Statue at Kumamoto Zoo","Mugiwara Store Kumamoto","One Piece Kumamoto Revival Project Route","Zoro Statue Ozu","Sanji Statue Mashiki","Nami Statue Nishihara","Robin Statue Minamiaso","Usopp Statue Aso Station","Franky Statue Takamori","Brook Statue Mifune","Jinbe Statue Uto","Kumamon Square","Kumamoto Castle","Suganoya Basashi","Kokutei Ramen","Kouran-tei Taipien","Akaushi Beef Kumamoto","Mount Aso Nakadake Crater",
+ "Mugiwara Store Shibuya (Main Store)","ONE PIECE Base Shop Shinjuku","Toei Animation Museum","Akihabara Electric Town","Akizuki Denshi","Senso-ji","Shibuya Crossing","Tsukishima Monja Street","Ghibli Museum Mitaka","Unicorn Gundam Statue","Godzilla Head","Golden Gai","Omoide Yokocho","Tsukiji Outer Market","teamLab Planets","teamLab Borderless","Takeshita Street","Nakano Broadway","Kappabashi Kitchen Town","Godzilla Manhole Covers (Shinjuku Toho Building)","EVANGELION STORE TOKYO-01","Chichibu Night Festival","Great Buddha of Kamakura","Chureito Pagoda"
+]);
+PL.forEach(p => { if (SPECIAL.has(p.en) && !p.cats.includes("special")) p.cats.push("special"); });
 const BYID = Object.fromEntries(PL.map(p => [p.id, p]));
 const isFood = p => p.cats.includes("food") || p.cats.includes("street");
 
@@ -1014,7 +1169,7 @@ function catChips(){
   const gCount = g => inReg.filter(p => p.cats.some(c => g.cats.includes(c))).length;
   const all = `<button class="chip grp tog" data-grp="" aria-pressed="${!ST.grp}">הכל <small>${inReg.length}</small></button>`;
   $("#cats").innerHTML = all + GROUPS.filter(g => gCount(g)).map(g =>
-    `<button class="chip grp" style="--c:${g.c}" data-grp="${g.k}" aria-pressed="${ST.grp===g.k}">${ic(g.i)}${g.he} <small>${gCount(g)}</small></button>`).join("");
+    `<button class="chip grp" style="--c:${g.c}" data-grp="${g.k}" aria-pressed="${ST.grp===g.k}">${ic(g.i)}${g.k==="special"?"רק ב"+r.he:g.he} <small>${gCount(g)}</small></button>`).join("");
   const g = GROUPS.find(x => x.k === ST.grp), sb = $("#subs");
   if (g) {
     const subs = g.cats.filter(c => counts[c]);
@@ -1062,6 +1217,7 @@ function metaRow(p, o){
 function tags(p){
   let h = "";
   if (p.must) h += `<span class="tag must">חובה</span>`;
+  if (p.cats.includes("special")) { const rg = REGIONS.find(g => g.k === p.reg); h += `<span class="tag" style="background:rgba(245,196,67,.14);color:var(--gold)">${ic("crown")} מיוחד ל${rg ? rg.he : "עיר"}</span>`; }
   if (p.hs) h += `<span class="tag must">${"★".repeat(p.hs)}${"☆".repeat(5-p.hs)}</span>`;
   if (isFood(p)) {
     if (p.sea) h += `<span class="tag sea">פירות ים</span>`; else if (p.amit) h += `<span class="tag amit">בלי פירות ים</span>`;
@@ -1073,6 +1229,7 @@ function tags(p){
 }
 function card(p, o, open){
   const c = CATS[p.cats[0]] || CATS.sight, A = AREAS[p.area];
+  const how = open ? howTo(p, o) : "";
   const fav = !!ST.fav[p.id], vis = !!ST.vis[p.id], pd = planDate(), inPlan = (ST.plans[pd]||[]).includes(p.id);
   const trip = A && A.trip && (p._d ?? distOf(p,o)) > 20 ? `<div class="access">${ic("train")}<span>${esc(A.trip)}</span></div>` : "";
   const gr = p.gr ? `<div class="mt" style="align-self:flex-start">Google ${p.gr} · ${p.grc} ביקורות</div>` : "";
@@ -1091,7 +1248,7 @@ function card(p, o, open){
     <div class="qa"><button class="${fav?"on":""}" data-fav="${p.id}" aria-label="שמור">${ic("heart")}</button><button class="pl ${inPlan?"on":""}" data-plan="${p.id}" aria-label="הוסף לתוכנית">${ic(inPlan?"check":"plus")}</button></div>
     ${open ? `<div class="c-more">
       ${p.tip ? `<div class="tip">${esc(p.tip)}</div>` : ""}
-      ${trip}${gr}
+      ${how || trip}${gr}
       <div class="acts">
         <a class="ab pri" href="${mapsUrl(p)}" target="_blank" rel="noopener">${ic("pin")}מפה</a>
         <a class="ab" href="${dirUrl(p,o,(p._d??distOf(p,o))<=2.2?"walking":"transit")}" target="_blank" rel="noopener">${ic("route")}מסלול</a>
@@ -1103,20 +1260,64 @@ function card(p, o, open){
   </article>`;
 }
 
+/* ================= How to get there ================= */
+function nearestStn(lat, lon){ let b = null, bd = 1e9; for (const s of STN) { const d = km(lat, lon, s[1], s[2]); if (d < bd) { bd = d; b = s; } } return { s: b, d: bd }; }
+function howTo(p, o){
+  const d = distOf(p, o), A = AREAS[p.area], from = o.me ? "מהמיקום שלך" : "מהמלון";
+  const rows = [];
+  if (d <= 1.5) {
+    rows.push(`${ic("walk")}<span>${from}: הליכה של ${fmtMin(walkMin(d))} (${fmtKm(d)}).</span>`);
+  } else {
+    const cand = (lat, lon) => { const L = STN.map(s => ({ s, d: km(lat, lon, s[1], s[2]) })).sort((x, y) => x.d - y.d); const lim = Math.max(1.2, L[0].d + 0.5); return L.filter(x => x.d <= lim).slice(0, 6); };
+    let a = { s: null, d: 1e9 }, b = { s: null, d: 1e9 }, best = 1e9;
+    for (const x of cand(o.lat, o.lon)) for (const y of cand(p.lat, p.lon)) {
+      if (x.s === y.s) continue;
+      const shared = x.s[3].split("|").some(l => y.s[3].split("|").includes(l));
+      const sc = walkMin(x.d) + walkMin(y.d) + (shared ? 0 : 12);
+      if (sc < best) { best = sc; a = x; b = y; }
+    }
+    if (!a.s) { a = nearestStn(o.lat, o.lon); b = nearestStn(p.lat, p.lon); }
+    if (A && A.trip && d > 20) rows.push(`${ic("train")}<span>${esc(A.trip)}</span>`);
+    if (a.s && b.s && a.d < 3 && b.d < 6 && a.s !== b.s) {
+      const la = a.s[3].split("|"), lb = b.s[3].split("|"), common = la.filter(x => lb.includes(x));
+      const line = common.length ? `קו ${common.slice(0,2).join(" או ")} ישיר` : `עם החלפה (מ-${la.slice(0,2).join("/")} ל-${lb.slice(0,2).join("/")})`;
+      rows.push(`${ic("walk")}<span>הליכה ${fmtMin(walkMin(a.d))} לתחנת <b dir="ltr">${esc(a.s[0])}</b></span>`);
+      rows.push(`${ic("train")}<span>${line} עד תחנת <b dir="ltr">${esc(b.s[0])}</b></span>`);
+      rows.push(b.d <= 1.6 ? `${ic("pin")}<span>משם הליכה של ${fmtMin(walkMin(b.d))}</span>` : `${ic("bus")}<span>משם ${fmtKm(b.d)}: אוטובוס או מונית</span>`);
+    } else if (a.s && a.s === b.s && b.d <= 1.6) {
+      rows.push(`${ic("walk")}<span>הליכה של ${fmtMin(walkMin(d))}, או תחנה אחת קרובה: <b dir="ltr">${esc(a.s[0])}</b></span>`);
+    } else if (!(A && A.trip)) {
+      rows.push(`${ic("bus")}<span>אין תחנה קרובה במאגר. הכי פשוט: אוטובוס או מונית, בערך ${fmtMin(transitMin(d))}.</span>`);
+    }
+  }
+  return `<div class="how"><b>${ic("route")}איך מגיעים ${from}</b>${rows.map(r => `<div class="hr">${r}</div>`).join("")}<span class="hn">הערכה לפי מרחק. למסלול מדויק: "מסלול".</span></div>`;
+}
+
 /* ================= Explore ================= */
 let OPEN = null, LIMIT = 60, RSEL = null;
 function suggestions(o){
   const n = now(), r = curRegion();
-  if (!(n.date >= r.from && n.date < r.to)) return "";
+  if (!(n.date >= r.from && n.date < r.to) && !o.me) return "";
   const h = n.h;
   const want = h < 11 ? ["temple","sight","park","street"] : h < 14 ? ["food","street"] : h < 17 ? ["op","anime","hardoff","shop","museum","eva"] : h < 21 ? ["food","sight","night","arcade"] : ["night","arcade","onsen","food"];
   const label = h < 11 ? "בוקר טוב: מה לעשות עכשיו" : h < 14 ? "זמן צהריים: אוכל קרוב" : h < 17 ? "אחר הצהריים: קניות ואנימה" : h < 21 ? "ערב: אוכל, נוף ולילה" : "לילה: מה עוד פתוח";
   const pool = PL.filter(p => p.reg === r.k && !ST.vis[p.id] && p.cats.some(c => want.includes(c)) && (!isFood(p) || !p.sea))
-    .map(p => ({p, d:distOf(p,o)})).filter(x => x.d < 6)
-    .sort((a,b) => (b.p.must - a.p.must)*1.5 + (a.d - b.d)).slice(0, 8);
-  if (!pool.length) return "";
-  return `<section><div class="sec-h"><h2>${label}</h2><span>${o.me?"לידך":"ליד המלון"}</span></div>
-    <div class="sugg">${pool.map(({p,d}) => { const c=CATS[p.cats[0]]; return `<button class="sc" style="--c:${c.c};--c2:${c.c2}" data-jump="${p.id}"><span class="k">${c.he}${p.must?" · חובה":""}</span><b class="en">${esc(p.en)}</b><span class="m">${esc(p.he)}</span><span class="m">${fmtKm(d)} · ${d<=4?ic("walk")+" "+fmtMin(walkMin(d)):ic("train")+" "+fmtMin(transitMin(d))}</span></button>`; }).join("")}</div></section>`;
+    .map(p => ({p, d:distOf(p,o)}));
+  let near = pool.filter(x => x.d < 3);
+  if (near.length < 4) near = pool.filter(x => x.d < 8);
+  if (near.length < 4) near = pool.filter(x => x.d < 25);
+  near = near.sort((a,b) => (b.p.must - a.p.must)*1.5 + (a.d - b.d)).slice(0, 8);
+  let out = "";
+  if (o.me) {
+    const close = PL.filter(p => p.reg === r.k && !ST.vis[p.id]).map(p => ({p, d:distOf(p,o)})).sort((a,b) => a.d - b.d).slice(0, 10);
+    out += sugRow(`${GEO && GEO.manual ? "קרוב ל" + esc(GEO.label) : "קרוב אליך עכשיו"}`, "לפי מרחק", close);
+  }
+  if (near.length) out += sugRow(label, o.me ? "לידך, לפי השעה" : "ליד המלון, לפי השעה", near);
+  return out;
+}
+function sugRow(title, sub, items){
+  return `<section><div class="sec-h"><h2>${title}</h2><span>${sub}</span></div>
+    <div class="sugg">${items.map(({p,d}) => { const c=CATS[p.cats[0]]; return `<button class="sc" style="--c:${c.c};--c2:${c.c2}" data-jump="${p.id}"><span class="k">${c.he}${p.must?" · חובה":""}</span><b class="en">${esc(p.en)}</b><span class="m">${esc(p.he)}</span><span class="m">${fmtKm(d)} · ${d<=4?ic("walk")+" "+fmtMin(walkMin(d)):ic("train")+" "+fmtMin(transitMin(d))}</span></button>`; }).join("")}</div></section>`;
 }
 function renderExplore(){
   const r = curRegion(), o = origin(), list = filtered(), el = $("#view-explore");
